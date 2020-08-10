@@ -1,0 +1,20 @@
+{
+  "name": "nguyenhy",
+  "version": "1.0.0",
+  "description": "<!-- **nguyenhy/nguyenhy** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nguyenhy/nguyenhy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nguyenhy/nguyenhy/issues"
+  },
+  "homepage": "https://github.com/nguyenhy/nguyenhy#readme"
+}
