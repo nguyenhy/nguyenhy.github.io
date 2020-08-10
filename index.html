@@ -41,13 +41,18 @@
       width: 100%;
       height: 100%;
       margin: 0;
+      min-width: 320px;
+      -webkit-overflow-scrolling: touch;
+      font-family: 'Baloo Tamma 2', cursive;
     }
 
-    body {
+    .wrapper {
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Baloo Tamma 2', cursive;
+
     }
 
     div.svg {
@@ -56,6 +61,7 @@
       height: 320px;
       background-position: center;
       background-repeat: no-repeat;
+      background-size: contain;
     }
 
     h1 {
@@ -66,21 +72,38 @@
     p {
       margin: 0
     }
-    span{
+
+    span {
       float: right;
     }
-    span:before, span::after {
+
+    span:before,
+    span::after {
       content: "__";
+    }
+
+    @media screen and (max-width: 687px) {
+      .wrapper {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      div.svg {
+        width: 160px;
+        height: 160px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="svg"></div>
-  <div class="text">
-    <h1>We'll online soon</h1>
-    <p>This page is on developing phase and will be online soon</p>
-    <span> HYN team </span>
+  <div class="wrapper">
+    <div class="svg"></div>
+    <div class="text">
+      <h1>We'll online soon</h1>
+      <p>This page is on developing phase and will be online soon</p>
+      <span> HYN team </span>
+    </div>
   </div>
 </body>
 
