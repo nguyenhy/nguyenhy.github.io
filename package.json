@@ -3,8 +3,26 @@
   "version": "1.0.0",
   "description": "<!-- **nguyenhy/nguyenhy** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.",
   "main": "index.js",
+  "pwaManifest": {
+    "name": "My Awesome PWA",
+    "shortName": "My PWA",
+    "startURL": "./offline",
+    "theme": "#add8e6",
+    "generateIconOptions": {
+      "baseIcon": "./static/svg/icon.svg",
+      "sizes": [
+        32,
+        62,
+        192,
+        384,
+        512
+      ],
+      "genFavicons": true
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "NODE_ENV=dev parcel src/index.html --port 1111 --log-level 4"
   },
   "repository": {
     "type": "git",
@@ -16,5 +34,10 @@
   "bugs": {
     "url": "https://github.com/nguyenhy/nguyenhy/issues"
   },
-  "homepage": "https://github.com/nguyenhy/nguyenhy#readme"
+  "homepage": "https://github.com/nguyenhy/nguyenhy#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-pwa-manifest": "^3.0.10"
+  }
 }
