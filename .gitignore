@@ -117,3 +117,5 @@ dist
 
 # vscode plugin
 /.history
+/.vscode
+*/.DS_Store

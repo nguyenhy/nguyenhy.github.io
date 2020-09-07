@@ -22,6 +22,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "posthtml": "posthtml -i src/demo/post.html -c posthtml.json",
     "serve": "NODE_ENV=dev parcel src/index.html --port 1111 --log-level 4"
   },
   "repository": {
@@ -35,9 +36,13 @@
     "url": "https://github.com/nguyenhy/nguyenhy/issues"
   },
   "homepage": "https://github.com/nguyenhy/nguyenhy#readme",
-  "dependencies": {},
+  "dependencies": {
+    "posthtml-extend-attrs": "^1.0.0",
+    "posthtml-to-svg-tags": "0.0.0"
+  },
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
-    "parcel-plugin-pwa-manifest": "^3.0.10"
+    "parcel-plugin-pwa-manifest": "^3.0.10",
+    "posthtml-include": "^1.4.3"
   }
 }
