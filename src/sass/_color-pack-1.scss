@@ -1,0 +1,32 @@
+$list_dark_col: "3", "4"; // light or dark
+$list_darken_col: "2", "4"; // darken version of light or dark
+
+$bg_color_light: #f7f7f7;
+$bg_color_dark: #5e5e5e;
+
+$color_row: (
+    "1": #000,
+    "2": #7d7d7d,
+    "3": #5cb2ce,
+    "4": #dadada,
+    "5": #f75454,
+);
+
+@mixin row_color() {
+    @each $col_index, $col_dark_percent in $background_column {
+        .col.col-#{$col_index} {
+        }
+
+        @each $row_index, $row_color in $color_row {
+            .col.col-#{$col_index} .row.row-#{$row_index} {
+                color: $color;
+                &:hover {
+                }
+            }
+        }
+    }
+}
+
+.pack.pack-1 {
+    @include row_color;
+}

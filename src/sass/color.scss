@@ -1,0 +1,76 @@
+@use "../../node_modules/@sass-collective/sass-rem" with (
+    $baseline: 16
+);
+@use "sass:map";
+@use "sass:list";
+@use "sass:color";
+
+@import "./mixin/var";
+@import "./utilities/util";
+@import "./_color-pack-1";
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    padding-top: px2rem(20);
+}
+/* structure - template */
+.pack {
+    display: flex;
+    flex-direction: row;
+
+    &:not(:first-child) {
+        margin-top: px2rem($font_root);
+    }
+}
+.col {
+    padding: px2rem($font_root);
+    display: flex;
+    flex-direction: column;
+    &.col-1 {
+    }
+    &.col-2 {
+    }
+    &.col-3 {
+    }
+    &.col-4 {
+    }
+}
+.row {
+    padding: px2rem($font_root);
+
+    &.row-1 {
+        &::before {
+            content: "Primary";
+        }
+    }
+    &.row-2 {
+        &::before {
+            content: "Secondary";
+        }
+    }
+    &.row-3 {
+        &::before {
+            content: "Interactive";
+        }
+    }
+    &.row-4 {
+        &::before {
+            content: "Disabled";
+        }
+    }
+    &.row-5 {
+        &::before {
+            content: "Error";
+        }
+    }
+}
