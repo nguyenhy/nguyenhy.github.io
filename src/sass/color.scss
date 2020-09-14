@@ -7,6 +7,7 @@
 
 @import "./mixin/var";
 @import "./utilities/util";
+@import "./utilities/ally-color";
 @import "./_color-pack-1";
 
 html,
@@ -27,50 +28,24 @@ body {
 .pack {
     display: flex;
     flex-direction: row;
-
-    &:not(:first-child) {
-        margin-top: px2rem($font_root);
-    }
+    margin-top: px2rem($font_root);
 }
 .col {
     padding: px2rem($font_root);
     display: flex;
     flex-direction: column;
-    &.col-1 {
-    }
-    &.col-2 {
-    }
-    &.col-3 {
-    }
-    &.col-4 {
+    position: relative;
+    &::before {
+        content: attr(data-background);
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(-100%);
+        font-size: 13px;
+        width: 100%;
+        text-align: center;
     }
 }
 .row {
     padding: px2rem($font_root);
-
-    &.row-1 {
-        &::before {
-            content: "Primary";
-        }
-    }
-    &.row-2 {
-        &::before {
-            content: "Secondary";
-        }
-    }
-    &.row-3 {
-        &::before {
-            content: "Interactive";
-        }
-    }
-    &.row-4 {
-        &::before {
-            content: "Disabled";
-        }
-    }
-    &.row-5 {
-        &::before {
-            content: "Error";
-        }
-    }
 }
