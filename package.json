@@ -24,7 +24,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "posthtml": "posthtml -i src/demo/post.html -c posthtml.json",
     "build": "NODE_ENV=dev parcel build src/index.html",
-    "serve": "NODE_ENV=dev parcel src/index.html --port 1111 --log-level 4",
+    "serve": "NODE_ENV=dev parcel src/index.html --port 1111 --log-level 4 --public-url /public/dist/",
     "serve-color": "NODE_ENV=dev parcel src/color.html --port 1111 --log-level 4"
   },
   "repository": {

@@ -1,78 +1,204 @@
 main.hp-mn {
     color: #000000;
+    padding: sass-rem.rem(0px 40px);
 }
 
 section.hdr-main_sec {
     color: #000000;
+    &:not(:first-child) {
+        margin-top: sass-rem.rem(100px);
+    }
 }
 section#sec-intro {
+    display: flex;
+    height: 80vh;
+
     .sec-intro_text {
+        flex-grow: 1;
+        width: 50%;
+        color: #000000;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        padding-right: sass-rem.rem(30px);
+
         h4 {
             color: #000000;
+            font-size: 20px;
         }
         button {
-            color: #000000;
+            @include design_button;
+            width: 35%;
+            padding: sass-rem.rem(10px 12px);
+            margin-top: sass-rem.rem(40px);
         }
         div.hp-comp_social-btn {
-            color: #000000;
+            margin-top: sass-rem.rem(40px);
         }
-        color: #000000;
     }
-    color: #000000;
 
     .sec-intro_img {
+        flex-grow: 1;
+        width: 50%;
+
         .hp-comp_fly-image {
+            width: calc(100% + 20px);
+            height: calc(100% + 90px);
+            top: -90px;
+            position: relative;
             img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
         }
     }
 }
 
 section#sec-project {
-    figure {
-        color: #000000;
-        img {
-            color: #000000;
+    h4 {
+        @include section_header(13px * 5 + 10px); // "project" has 5 char, each saying about 13px in width
+        margin-bottom: sass-rem.rem(50px);
+    }
+    div {
+        display: flex;
+        flex-flow: column wrap;
+        align-content: space-between;
+        height: 620px;
+
+        &::before,
+        &::after {
+            content: "";
+            flex-basis: 100%;
+            width: 0;
+            order: 2;
         }
-        span {
-            color: #000000;
+    }
+    figure {
+        position: relative;
+        display: inline-flex;
+        flex-direction: column;
+        width: 32%;
+        margin-top: 2%;
+        border-radius: 4px;
+        overflow: hidden;
+        transform: scale(1);
+        transition: transform 200ms ease-in-out;
+
+        &:nth-child(3n + 1) {
+            order: 1;
+        }
+        &:nth-child(3n + 2) {
+            order: 2;
+        }
+        &:nth-child(3n) {
+            order: 3;
+        }
+
+        &:nth-child(1) {
+            height: 200px;
+            margin: 0;
+        }
+        &:nth-child(2) {
+            height: 225px;
+            margin: 0;
+        }
+        &:nth-child(3) {
+            height: 280px;
+            margin: 0;
+        }
+
+        &:nth-child(4) {
+            height: 360px;
+        }
+        &:nth-child(5) {
+            height: 220px;
+        }
+        &:nth-child(6) {
+            height: 250px;
+        }
+
+        img {
+            width: 100%;
+            height: calc(100% - 32px);
+            object-fit: cover;
+            display: block;
+            flex-grow: 1;
+        }
+        figcaption {
+            width: 100%;
+            color: #fff;
+            padding: 5px 0;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        &:hover {
+            transform: scale(1.1);
+            img {
+            }
+            figcaption {
+            }
         }
     }
 }
 
 section#sec-contact {
+    display: flex;
     .sec-contact_info {
-        color: #000000;
+        width: 50%;
     }
     .sec-contact_info-row {
+        display: flex;
+        align-items: center;
         i {
-            color: #000000;
+            padding: sass-rem.rem(5px);
         }
         span {
-            color: #000000;
+            margin-left: sass-rem.rem(5px);
+            flex-grow: 1;
         }
         color: #000000;
     }
     .sec-contact_form {
-        color: #000000;
+        width: 50%;
     }
 }
 // form contact
 form#hp_form-contact {
-    color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @mixin form_row {
+        padding: sass-rem.rem(5px 12px);
+        border: none;
+        border-bottom: 2px solid color.change($color: $highlight_theme, $alpha: 0.4);
+        width: 100%;
+
+        &:focus {
+            outline: none;
+            border-color: color.change($color: $highlight_theme, $alpha: 0.9);
+        }
+    }
+
     input[name="name"] {
-        color: #000000;
+        @include form_row;
     }
     input[name="email"] {
-        color: #000000;
+        @include form_row;
+        margin-top: sass-rem.rem(35px);
     }
     textarea[name="msg"] {
-        color: #000000;
+        @include form_row;
+        margin-top: sass-rem.rem(35px);
+        resize: none;
     }
     button {
+        @include design_button;
+        margin-top: sass-rem.rem(35px);
+        padding: sass-rem.rem(5px 12px);
+        width: 50%;
     }
-}
-
-.hp-comp_fly-image {
-    color: #000000;
 }

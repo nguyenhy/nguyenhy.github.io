@@ -1,0 +1,32 @@
+@mixin design_header {
+    color: $highlight_theme;
+}
+
+@mixin design_button {
+    border: 3px solid $highlight_theme;
+    border-radius: sass-rem.rem(15px);
+    color: $highlight_theme;
+    background-color: #fff;
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+        background-color: $highlight_theme;
+        color: #fff;
+    }
+}
+
+@mixin section_header($width: 100px) {
+    position: relative;
+    color: #000000;
+    font-size: 20px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        height: 4px;
+        background-color: $highlight_theme;
+        width: $width;
+    }
+}

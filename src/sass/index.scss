@@ -1,5 +1,16 @@
+@use "../../node_modules/@sass-collective/sass-rem" with (
+    $baseline: 16
+);
+@use "sass:map";
+@use "sass:list";
+@use "sass:color";
+
+@import "./mixin/var";
+@import "./mixin/design";
+
 @import "./social-button";
 @import "./structure";
-@import "./_header.scss";
-@import "./_main.scss";
-@import "./_footer.scss";
+@import "./reset";
+@import "./header";
+@import "./main";
+@import "./footer";

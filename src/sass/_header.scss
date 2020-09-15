@@ -1,12 +1,33 @@
+#hp-cont.at-top {
+    header.hp-hdr {
+        background-color: transparent;
+        box-shadow: unset;
+    }
+
+    a.hp-hdr-nav_a {
+        color: #fff;
+    }
+}
 header.hp-hdr {
-    color: #000000;
+    padding: sass-rem.rem(40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    background-color: #fff;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+    z-index: 2;
 }
 .hp-hdr_title {
-    color: #000000;
+    @include design_header;
+    flex-grow: 1;
+    font-size: sass-rem.rem(30px);
 }
 nav.hp-hdr-nav {
-    color: #000000;
 }
 a.hp-hdr-nav_a {
-    color: #000000;
+    color: #000;
+    padding: sass-rem.rem(5px);
+    font-size: sass-rem.rem(20px);
 }

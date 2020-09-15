@@ -1,9 +1,14 @@
 footer.hp-ftr {
-    color: #000;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    margin: sass-rem.rem(100px 0 50px 0);
     p {
         color: #000;
     }
     span {
-        color: #000;
+        @include design_header;
+        margin-top: sass-rem.rem(10px);
     }
 }
