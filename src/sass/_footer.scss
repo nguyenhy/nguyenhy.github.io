@@ -4,8 +4,15 @@ footer.hp-ftr {
     width: 100%;
     flex-direction: column;
     margin: sass-rem.rem(100px 0 50px 0);
+
+    &:hover {
+        .hp-comp_social-btn a.social-btn.email {
+            transform: scale(1.5);
+        }
+    }
     p {
         color: #000;
+        font-size: 11px;
     }
     span {
         @include design_header;

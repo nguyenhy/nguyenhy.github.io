@@ -39,6 +39,7 @@
   },
   "homepage": "https://github.com/nguyenhy/nguyenhy#readme",
   "dependencies": {
+    "@sass-collective/sass-breakpoint": "^1.4.0",
     "posthtml-extend-attrs": "^1.0.0",
     "posthtml-to-svg-tags": "0.0.0"
   },

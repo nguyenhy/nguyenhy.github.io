@@ -1,9 +1,12 @@
 @use "../../node_modules/@sass-collective/sass-rem" with (
     $baseline: 16
 );
+@use "../../node_modules/@sass-collective/sass-breakpoint";
 @use "sass:map";
 @use "sass:list";
 @use "sass:color";
+
+@import "../../static/hyn/variables";
 
 @import "./mixin/var";
 @import "./mixin/design";
