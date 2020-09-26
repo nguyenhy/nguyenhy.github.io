@@ -206,7 +206,7 @@ img:not([src]) {
 
 @mixin mobile {
     main.hp-mn {
-        padding: sass-rem.rem(0px 10px);
+        padding: sass-rem.rem(0px $mobile_header_side_padding);
         margin-top: sass-rem.rem(8px);
     }
 
@@ -315,7 +315,7 @@ img:not([src]) {
 
 @mixin desktop {
     main.hp-mn {
-        padding: sass-rem.rem(0px 40px);
+        padding: sass-rem.rem(0px $desktop_header_side_padding);
     }
 
     section.hdr-main_sec {
@@ -354,10 +354,12 @@ img:not([src]) {
             width: 50%;
 
             .hp-comp_fly-image {
-                width: calc(100% + 20px);
-                height: calc(100% + 90px);
-                top: -90px;
-                left: -20px;
+                $addition_width: ($desktop_header_side_padding / 2);
+                $addition_height: ($desktop_header_height - $addition_width);
+                height: calc(100% + #{$addition_height});
+                width: calc(100% + #{$addition_width});
+                left: -$addition_width;
+                top: -$addition_height;
                 &::before {
                     left: 0;
                     top: 0;
@@ -471,11 +473,16 @@ img:not([src]) {
     @include mobile;
 }
 
-@include sass-breakpoint.breakpoint($min-width: 480) {
+@include sass-breakpoint.breakpoint($min-width: 480, $max-width: 768) {
     @media screen and (orientation: landscape) {
+        // mobile rotate
         @include mobile;
     }
     @media screen and (orientation: portrait) {
         @include desktop;
     }
+}
+
+@include sass-breakpoint.breakpoint($min-width: 768) {
+    @include desktop;
 }

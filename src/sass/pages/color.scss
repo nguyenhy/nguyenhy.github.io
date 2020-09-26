@@ -1,14 +1,9 @@
-@use "../../node_modules/@sass-collective/sass-rem" with (
-    $baseline: 16
-);
-@use "sass:map";
-@use "sass:list";
-@use "sass:color";
+@import "../vendors/vendors";
 
-@import "./mixin/var";
-@import "./utilities/util";
-@import "./utilities/ally-color";
-@import "./_color-pack-1";
+@import "../utilities/var";
+@import "../utilities/util";
+@import "../vendors/ally-color";
+@import "../themes/color-pack-1";
 
 html,
 body {
@@ -29,6 +24,8 @@ body {
     display: flex;
     flex-direction: row;
     margin-top: px2rem($font_root);
+
+    @include color_pack_1;
 }
 .col {
     padding: px2rem($font_root);

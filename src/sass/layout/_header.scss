@@ -36,7 +36,8 @@ a.hp-hdr-nav_a {
 
 @mixin mobile {
     header.hp-hdr {
-        padding: sass-rem.rem(20px);
+        height: sass-rem.rem($mobile_header_height);
+        padding: sass-rem.rem(0 $mobile_header_side_padding);
     }
     .hp-hdr_title {
         font-size: sass-rem.rem(30px);
@@ -60,7 +61,8 @@ a.hp-hdr-nav_a {
         }
     }
     header.hp-hdr {
-        padding: sass-rem.rem(40px);
+        height: sass-rem.rem($desktop_header_height);
+        padding: sass-rem.rem(0 $desktop_header_side_padding);
     }
     .hp-hdr_title {
         font-size: sass-rem.rem(30px);
@@ -85,4 +87,8 @@ a.hp-hdr-nav_a {
     @media screen and (orientation: portrait) {
         @include desktop;
     }
+}
+
+@include sass-breakpoint.breakpoint($min-width: 768) {
+    @include desktop;
 }
