@@ -23,7 +23,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "posthtml": "posthtml -i src/demo/post.html -c posthtml.json",
-    "serve": "NODE_ENV=dev parcel src/index.html --port 1111 --log-level 4"
+    "build": "rm -rf .cache dist && parcel build index.html --public-url /public/dist/",
+    "serve": "rm -rf .cache dist && NODE_ENV=dev parcel index.html --port 1111 --log-level 4 --public-url /public/dist/",
+    "serve-color": "NODE_ENV=dev parcel src/color.html --port 1111 --log-level 4"
   },
   "repository": {
     "type": "git",
@@ -37,12 +39,35 @@
   },
   "homepage": "https://github.com/nguyenhy/nguyenhy#readme",
   "dependencies": {
+    "@sass-collective/sass-breakpoint": "^1.4.0",
     "posthtml-extend-attrs": "^1.0.0",
     "posthtml-to-svg-tags": "0.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@sass-collective/sass-rem": "^1.5.0",
+    "autoprefixer": "<10.0.0",
+    "cssnano": "^4.1.10",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-pwa-manifest": "^3.0.10",
-    "posthtml-include": "^1.4.3"
+    "postcss": "^8.0.7",
+    "postcss-cli": "^8.0.0",
+    "postcss-modules": "^3.2.2",
+    "posthtml-img-autosize": "^0.1.5",
+    "posthtml-include": "^1.4.3",
+    "posthtml-modules": "^0.6.2",
+    "sass": "^1.26.11",
+    "typescript": "^4.0.3"
+  },
+  "browserslist": [
+    "chrome > 30",
+    "firefox > 30",
+    "safari > 10",
+    "IE 6-11"
+  ],
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
   }
 }

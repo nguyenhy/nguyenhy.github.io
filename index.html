@@ -9,21 +9,28 @@
   <meta name="description" content="We build usefull tools for web developer">
   <meta name="keywords" content="HTML, CSS, JavaScript, Framework, hyn, build tool, gianny">
   <meta name="author" content="hyn">
-  <title>hyn | We build tools | gianny</title>
+  <title>hyn</title>
   <!-- og -->
   <meta property="og:image" content="">
   <meta property="og:description" content="We build usefull tools for web developer">
-  <meta property="og:title" content="hyn | We build tools | gianny">
+  <meta property="og:title" content="__">
   <!-- social -->
   <!-- <link rel="manifest" href=""> -->
-  <link rel="stylesheet" href="./index.scss">
-  <script src="./index.js" async></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <style>
+    html,
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+  <link rel="stylesheet" href="./src/sass/pages/index.scss">
+  <link rel="stylesheet" href="./static/hyn/style.scss">
+  <script src="http://afarkas.github.io/lazysizes/lazysizes.min.js" async=""></script>
+  <script src="./src/js/index.js" async></script>
 </head>
 
 <body>
-  <div class="wrapper">
-    <include src="./src/template/post.html"></include>
-  </div>
+  <include src="./post.html"></include>
 </body>
 
 </html>
