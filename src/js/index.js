@@ -1,3 +1,6 @@
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+
 window.addEventListener('load', function () {
 
     const $hpContainer = document.querySelector('#hp-cont');
@@ -23,31 +26,38 @@ window.addEventListener('load', function () {
                 return
             }
             const offsetTop = $section.offsetTop;
-            document.documentElement.scrollTo(0, offsetTop - headerHeight - 10);
+            document.documentElement.scrollTop = offsetTop - headerHeight - 10;
         })
     })
 
 
     const $allImage = document.querySelectorAll('img') || [];
     $allImage.forEach(function (item) {
-        item.addEventListener('error', function () {
-            item.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
-            if ($mainImage.isSameNode(item)) {
-                $hpContainer.classList.add('main-img-error')
-            }
-        })
+        if (item) {
+            item.addEventListener('error', function () {
+                item.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+                if ($hpContainer && $mainImage && $mainImage.isSameNode(item)) {
+                    $hpContainer.classList.add('main-img-error')
+                }
+            })
+        }
     })
 
     const $form = document.getElementById('hp_form-contact');
-    $form.addEventListener('submit', function (event) {
-        event.preventDefault();
-    })
+    if ($form) {
+        $form.addEventListener('submit', function (event) {
+            event.preventDefault();
+        })
+    }
 
 
 
     /* private */
 
     function _checkScrollPosition() {
+        if (!$hpContainer) {
+            return;
+        }
         const scrollTop = document.documentElement.scrollTop;
         if (scrollTop) {
             $hpContainer.classList.remove('at-top')
