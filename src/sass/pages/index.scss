@@ -14,10 +14,12 @@
 @import "../base/reset";
 @import "../components/social-button";
 
-
-
 @import "../layout/design";
 @import "../layout/structure";
 @import "../layout/header";
 @import "../layout/main";
 @import "../layout/footer";
+@import "../layout/contact-form";
+
+
+@include social_button;

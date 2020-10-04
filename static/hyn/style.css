@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'hyn';
-  src:  url('fonts/hyn.eot?vcjlp1');
-  src:  url('fonts/hyn.eot?vcjlp1#iefix') format('embedded-opentype'),
-    url('fonts/hyn.ttf?vcjlp1') format('truetype'),
-    url('fonts/hyn.woff?vcjlp1') format('woff'),
-    url('fonts/hyn.svg?vcjlp1#hyn') format('svg');
+  src:  url('fonts/hyn.eot?xumy1k');
+  src:  url('fonts/hyn.eot?xumy1k#iefix') format('embedded-opentype'),
+    url('fonts/hyn.ttf?xumy1k') format('truetype'),
+    url('fonts/hyn.woff?xumy1k') format('woff'),
+    url('fonts/hyn.svg?xumy1k#hyn') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -31,6 +31,9 @@
 .hyn-facebook:before {
   content: "\e900";
   color: #1877f2;
+}
+.hyn-github:before {
+  content: "\e907";
 }
 .hyn-instagram:before {
   content: "\e901";

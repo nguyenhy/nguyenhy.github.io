@@ -1,3 +1,12 @@
+@mixin social_button {
+    .hp-comp_social-btn {
+        @include social_button_group;
+        .social-btn {
+            @include social_button_item;
+        }
+    }
+}
+
 @mixin social_button_group {
     display: flex;
     flex-direction: row;
@@ -14,18 +23,9 @@
     }
 }
 
-
-@mixin social_button {
-    .hp-comp_social-btn {
-        @include social_button_group;
-        .social-btn {
-            @include social_button_item;
-        }
-    }
-}
 @mixin social_button_item {
     background-color: inherit;
-    color: $highlight_theme;
+    color: initial;
     margin: sass-rem.rem(5px);
     padding: sass-rem.rem(5px);
     border-radius: sass-rem.rem(4px);

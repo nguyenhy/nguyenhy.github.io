@@ -15,6 +15,7 @@
 	var icons = {
 		'hyn-corner-right-down': '&#xe908;',
 		'hyn-facebook': '&#xe900;',
+		'hyn-github': '&#xe907;',
 		'hyn-instagram': '&#xe901;',
 		'hyn-linkedin': '&#xe902;',
 		'hyn-mail-dot-ru': '&#xe906;',
