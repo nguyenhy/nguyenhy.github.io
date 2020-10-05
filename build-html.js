@@ -1,10 +1,25 @@
-const { readFileSync } = require('fs')
-
+const sourcePath = 'src/index.html';
+const outputPath = './src/index-output.html';
+const { readFileSync, writeFileSync } = require('fs')
 const posthtml = require('posthtml')
-const include = require('posthtml-include')
 
-const html = readFileSync('src/index.html')
+const posthtmlInclude = require('posthtml-include')
 
-posthtml([include({ encoding: 'utf8' })])
+const html = readFileSync(sourcePath)
+
+posthtml(
+    [
+        posthtmlInclude({
+            "root": __dirname + '/src/template',
+        })
+    ]
+)
     .process(html)
-    .then((result) => console.log(result.html))
+    .then((result) => {
+        const html = result.html || '';
+        console.log(''
+            , '\nwrite to file : ', outputPath
+            , '\nhtml :', html.length
+        )
+        writeFileSync(outputPath, result.html || '')
+    })

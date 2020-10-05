@@ -16,7 +16,7 @@ footer.hp-ftr {
         font-size: 11px;
     }
     span {
-        @include design_header;
+        color: $highlight_theme;
         margin-top: sass-rem.rem(10px);
     }
 }

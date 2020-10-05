@@ -13,7 +13,7 @@
 		el.innerHTML = '<span style="font-family: \'hyn\'">' + entity + '</span>' + html;
 	}
 	var icons = {
-		'hyn-corner-right-down': '&#xe908;',
+		'hyn-image': '&#xe908;',
 		'hyn-facebook': '&#xe900;',
 		'hyn-github': '&#xe907;',
 		'hyn-instagram': '&#xe901;',

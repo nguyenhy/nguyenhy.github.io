@@ -16,7 +16,7 @@ header.hp-hdr {
     transition: box-shadow 100ms ease-in-out;
 }
 .hp-hdr_title {
-    @include design_header;
+    color: $highlight_theme;
     flex-grow: 1;
     span {
         float: right;
@@ -74,21 +74,18 @@ a.hp-hdr-nav_a {
     }
 }
 
-@include sass-breakpoint.breakpoint($max-width: 480) {
+@include media("max-480-portrait") {
     @include mobile;
 }
 
-@include sass-breakpoint.breakpoint($min-width: 480) {
-    @media screen and (orientation: landscape) {
-        // mobile rotate
-        @include mobile;
-    }
-
-    @media screen and (orientation: portrait) {
-        @include desktop;
-    }
+@include media("max-480-landscape") {
+    @include mobile;
 }
 
-@include sass-breakpoint.breakpoint($min-width: 768) {
+@include media("min-480-portrait") {
+    @include desktop;
+}
+
+@include media("min-480-landscape") {
     @include desktop;
 }

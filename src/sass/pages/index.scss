@@ -1,7 +1,6 @@
 @use "../../../node_modules/@sass-collective/sass-rem" with (
     $baseline: 16
 );
-@use "../../../node_modules/@sass-collective/sass-breakpoint";
 @use "sass:map";
 @use "sass:list";
 @use "sass:color";
@@ -9,10 +8,15 @@
 @import "../utilities/var";
 @import "../utilities/util";
 
-
-
 @import "../base/reset";
+
+@import "../vendors/include-media";
+@import "../../../node_modules/include-media/dist/include-media";
+
 @import "../components/social-button";
+@import "../components/quote";
+@import "../components/lazysizes";
+
 
 @import "../layout/design";
 @import "../layout/structure";
@@ -22,4 +26,6 @@
 @import "../layout/contact-form";
 
 
+
 @include social_button;
+@include custom_lazysizes;
