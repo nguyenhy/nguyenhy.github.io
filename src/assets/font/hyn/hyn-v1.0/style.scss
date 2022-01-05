@@ -1,0 +1,80 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?f5pm0l');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?f5pm0l#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?f5pm0l') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?f5pm0l') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?f5pm0l##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="hyni-"], [class*=" hyni-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hyni-chevrons-up {
+  &:before {
+    content: $hyni-chevrons-up; 
+  }
+}
+.hyni-github {
+  &:before {
+    content: $hyni-github; 
+  }
+}
+.hyni-image {
+  &:before {
+    content: $hyni-image; 
+  }
+}
+.hyni-instagram {
+  &:before {
+    content: $hyni-instagram; 
+  }
+}
+.hyni-mail {
+  &:before {
+    content: $hyni-mail; 
+  }
+}
+.hyni-menu {
+  &:before {
+    content: $hyni-menu; 
+  }
+}
+.hyni-moon {
+  &:before {
+    content: $hyni-moon; 
+  }
+}
+.hyni-search {
+  &:before {
+    content: $hyni-search; 
+  }
+}
+.hyni-share-2 {
+  &:before {
+    content: $hyni-share-2; 
+  }
+}
+.hyni-twitter {
+  &:before {
+    content: $hyni-twitter; 
+  }
+}
+
