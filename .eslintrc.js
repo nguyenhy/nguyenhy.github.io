@@ -28,4 +28,7 @@ module.exports = {
       },
     },
   ],
+  ignorePatterns: [
+    'vue.config.js'
+  ]
 };
