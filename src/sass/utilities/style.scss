@@ -1,0 +1,9 @@
+@import "../variables/index.scss";
+
+@mixin transition_border_bottom {
+  border-bottom: 2px solid rgb(255 255 255 / 50%);
+  transition: border-color $duration-transition-short;
+  &:hover {
+    border-bottom: 2px solid rgb(255 255 255 / 100%);
+  }
+}
