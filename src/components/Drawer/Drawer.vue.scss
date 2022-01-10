@@ -39,6 +39,14 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.logo {
+  a {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+  }
+}
+
 .social {
   ul {
     display: inline-flex;

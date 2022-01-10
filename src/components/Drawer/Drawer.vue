@@ -4,7 +4,7 @@
     <div class="wrap">
       <div class="logo">
         <router-link to="/">
-          <span class="is-size-1">hyn</span>
+          <img src="../../assets/logo-hyn_512x512.png" alt="hyn's logo" />
         </router-link>
       </div>
       <div class="slogan">
