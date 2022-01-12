@@ -1,9 +1,14 @@
 <template>
-  <div class="drawer">
+  <div
+    class="drawer"
+    :class="{
+      hide: showContent,
+    }"
+  >
     <div class="overlay"></div>
     <div class="wrap">
       <div class="logo">
-        <router-link to="/">
+        <router-link @click.native="onNavigate('home')" :to="{ name: 'home' }">
           <img src="../../assets/logo-hyn_512x512.png" alt="hyn's logo" />
         </router-link>
       </div>
@@ -16,15 +21,28 @@
       <nav class="nav">
         <ul>
           <li>
-            <router-link class="hyn-highlight" to="/blog">Blog</router-link>
+            <router-link
+              @click.native="onNavigate('blog')"
+              class="hyn-highlight"
+              :to="{ name: 'blog' }"
+              >Blog</router-link
+            >
           </li>
           <li>
-            <router-link class="hyn-highlight" to="/showcase"
+            <router-link
+              @click.native="onNavigate('showcase')"
+              class="hyn-highlight"
+              :to="{ name: 'showcase' }"
               >Showcase</router-link
             >
           </li>
           <li>
-            <router-link class="hyn-highlight" to="/resume">Resumé</router-link>
+            <router-link
+              @click.native="onNavigate('resume')"
+              class="hyn-highlight"
+              :to="{ name: 'resume' }"
+              >Resumé</router-link
+            >
           </li>
         </ul>
       </nav>
@@ -52,3 +70,4 @@
 </template>
 
 <style lang="scss" scoped src="./Drawer.vue.scss"></style>
+<script lang="ts" src="./Drawer.vue.ts"></script>

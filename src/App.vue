@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <Drawer></Drawer>
-    <router-view />
+    <Drawer :show.sync="showContent" @navigate="onNavigate"></Drawer>
+    <div class="content">
+      <router-view :show.sync="showContent" @navigate="onNavigate" />
+    </div>
   </div>
 </template>
 
