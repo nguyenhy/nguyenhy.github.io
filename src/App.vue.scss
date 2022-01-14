@@ -5,24 +5,55 @@
   transition: 200ms;
   z-index: 2;
 
-  &.hide {
-    width: 350px;
-  }
+  @include until(640px) {
+    &.hide {
+      width: 0px;
+      opacity: 0;
+      visibility: hidden;
+    }
 
-  ::v-deep {
-    .wrap {
-      width: 350px;
+    ::v-deep {
+      .wrap {
+        width: auto;
+      }
+    }
+
+    ~ .content {
+      padding-left: 0px;
     }
   }
 
-  ~ .content {
-    padding-left: 350px;
+  @include from(640px) {
+    &.hide {
+      width: 350px;
+    }
+
+    ::v-deep {
+      .wrap {
+        width: 350px;
+      }
+    }
+
+    ~ .content {
+      padding-left: 350px;
+    }
   }
 }
 
 .content {
   z-index: 1;
   position: relative;
+
   height: 100%;
   width: 100%;
+
+  background-color: $dark;
+  .component {
+    min-height: 100%;
+    width: 100%;
+  }
+
+  .icon [class*="hyni-"] {
+    color: $light;
+  }
 }

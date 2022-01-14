@@ -8,8 +8,17 @@
     <div class="overlay"></div>
     <div class="wrap">
       <div class="logo">
-        <router-link @click.native="onNavigate('home')" :to="{ name: 'home' }">
-          <img src="../../assets/logo-hyn_512x512.png" alt="hyn's logo" />
+        <router-link
+          @click.native="onNavigate('home')"
+          :to="{ name: 'home' }"
+          accesskey="h"
+        >
+          <img
+            src="../../assets/logo-hyn_512x512.png"
+            width="100"
+            height="100"
+            alt="hyn's logo"
+          />
         </router-link>
       </div>
       <div class="slogan">
@@ -25,6 +34,8 @@
               @click.native="onNavigate('blog')"
               class="hyn-highlight"
               :to="{ name: 'blog' }"
+              aria-label="go to blog page"
+              accesskey="b"
               >Blog</router-link
             >
           </li>
@@ -33,6 +44,8 @@
               @click.native="onNavigate('showcase')"
               class="hyn-highlight"
               :to="{ name: 'showcase' }"
+              aria-label="go to showcase page"
+              accesskey="s"
               >Showcase</router-link
             >
           </li>
@@ -41,6 +54,8 @@
               @click.native="onNavigate('resume')"
               class="hyn-highlight"
               :to="{ name: 'resume' }"
+              aria-label="go to resumé page"
+              accesskey="r"
               >Resumé</router-link
             >
           </li>
@@ -49,17 +64,17 @@
       <nav class="social">
         <ul>
           <li class="hyn-highlight">
-            <a href="https://twitter.com/nguyenhy132">
+            <a aria-label="twitter" href="https://twitter.com/nguyenhy132">
               <i class="hyni-twitter is-size-5"></i>
             </a>
           </li>
           <li class="hyn-highlight">
-            <a href="https://github.com/nguyenhy">
+            <a aria-label="github" href="https://github.com/nguyenhy">
               <i class="hyni-github is-size-5"></i>
             </a>
           </li>
           <li class="hyn-highlight">
-            <a href="mailto:nguyenhy311@gmail.com">
+            <a aria-label="email" href="mailto:nguyenhy311@gmail.com">
               <i class="hyni-mail is-size-5"></i>
             </a>
           </li>

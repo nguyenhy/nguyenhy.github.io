@@ -19,4 +19,8 @@ export default class App extends Vue {
       this.showContent = true;
     }
   }
+
+  protected onClickToggleMenu(): void {
+    this.showContent = false;
+  }
 }
