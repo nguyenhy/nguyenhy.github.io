@@ -23,8 +23,8 @@
       </div>
       <div class="slogan">
         <span class="is-size-5"
-          >Keep your eyes on the skies, you will rise to the glory of who you
-          are.</span
+          >Keep your eyes on the skies,<br />
+          you will rise to the glory of who you are.</span
         >
       </div>
       <nav class="nav">
