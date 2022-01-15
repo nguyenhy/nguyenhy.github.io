@@ -14,7 +14,7 @@
 
     ::v-deep {
       .wrap {
-        width: auto;
+        width: 100%;
       }
     }
 
@@ -46,8 +46,12 @@
 
   height: 100%;
   width: 100%;
+  overflow: auto;
 
   background-color: $dark;
+  .container {
+    height: 100%;
+  }
   .component {
     min-height: 100%;
     width: 100%;
