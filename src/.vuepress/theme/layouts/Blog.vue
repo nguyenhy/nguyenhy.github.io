@@ -1,5 +1,5 @@
 <template>
-  <Layout title="blog">
+  <Layout title="blog" href="/blog">
     <BlogCard
       :key="index"
       v-for="(item, index) in list"

@@ -20,9 +20,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  .title {
-    font-style: italic;
-    transform: rotate(-1deg);
-    font-size: 19px;
-  }
+}
+
+.title {
+  font-style: italic;
+  transform: rotate(-1deg);
+  font-size: 19px;
 }

@@ -3,15 +3,18 @@
     <div class="wrap">
       <header class="header p-2 mb-4">
         <div class="level is-flex is-flex-direction-row">
-          <div class="level-left">
-            <a accesskey="h" class="logo" href="/">
+          <div class="level-left is-flex is-flex-direction-row">
+            <a accesskey="h" class="logo href" href="/">
               <img
                 src="../../assets/logo-hyn_36x36.png"
                 width="36"
                 height="32"
                 alt="hyn's logo"
               />
-              <span class="title has-text-weight-bold has-text-primary"
+            </a>
+
+            <a class="title" :href="href">
+              <span class="has-text-weight-bold has-text-primary"
                 >'s {{ title }}</span
               >
             </a>
@@ -48,6 +51,7 @@
 export default {
   props: {
     title: String,
+    href: String,
   },
 };
 </script>
