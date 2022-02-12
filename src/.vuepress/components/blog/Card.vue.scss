@@ -1,1 +1,59 @@
 @import "../../sass/utilities/index.scss";
+
+.blog-item {
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 100px;
+}
+
+.thumb-desc {
+  position: relative;
+  img {
+    margin-bottom: 10px;
+    width: 800px;
+    height: 350px;
+    object-fit: cover;
+  }
+}
+
+.description {
+  // drawer + image + gap +  container's padding + description
+  $breakpoint: $width_drawer + 800px + 30px + 40px + 200px;
+  @include from($breakpoint) {
+    min-width: calc(100% - (800px + 30px));
+    position: absolute;
+    bottom: 0;
+    left: 800px + 30px;
+
+    border-left: 1px solid #aaa;
+    padding-left: 5px;
+  }
+
+  @include until($breakpoint) {
+    margin-top: 0.8rem;
+    &:empty {
+      display: none;
+    }
+  }
+
+  span {
+    font-size: 14px;
+  }
+}
+
+.summary {
+  &:empty {
+    display: none;
+  }
+}
+
+a {
+  color: #fff;
+}
+
+img {
+  display: block;
+}
