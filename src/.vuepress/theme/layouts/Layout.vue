@@ -5,7 +5,7 @@
       <div class="logo">
         <a accesskey="h">
           <img
-            src="../../assets/logo-hyn_512x512.png"
+            src="../../assets/logo-hyn_144x144.png"
             width="100"
             height="100"
             alt="hyn's logo"
