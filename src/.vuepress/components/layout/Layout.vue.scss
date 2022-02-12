@@ -1,0 +1,28 @@
+@import "../../sass/utilities/index.scss";
+
+.layout,
+.wrap {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1 1 auto;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .title {
+    font-style: italic;
+    transform: rotate(-1deg);
+    font-size: 19px;
+  }
+}
