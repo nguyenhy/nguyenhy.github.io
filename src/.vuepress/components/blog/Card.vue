@@ -10,7 +10,7 @@
     <div class="meta"></div>
     <div class="thumb-desc">
       <div class="thumb">
-        <a :href="item.href" :alt="item.title">
+        <a :href="item.href" :alt="item.title" class="is-inline-block mb-2">
           <img
             height="350"
             width="800"
@@ -21,11 +21,15 @@
       </div>
       <div class="description has-background-grey-dark px-2">
         <span class="has-text-grey-light">Description</span>
-        <p>{{ item.description }}</p>
+        <a :href="item.href" :alt="item.title">
+          <p>{{ item.description }}</p>
+        </a>
       </div>
     </div>
     <div class="summary has-background-grey-dark px-2">
-      <p class="is-italic">{{ item.summary }}</p>
+      <a :href="item.href" :alt="item.title">
+        <p class="is-italic">{{ item.summary }}</p>
+      </a>
     </div>
   </div>
 </template>
