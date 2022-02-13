@@ -10,7 +10,7 @@
     <div class="meta"></div>
     <div class="thumb-desc">
       <div class="thumb">
-        <a :href="item.href" :alt="item.title" class="is-inline-block mb-2">
+        <a :href="item.href" :alt="item.title" class="is-inline-block">
           <img
             height="350"
             width="800"

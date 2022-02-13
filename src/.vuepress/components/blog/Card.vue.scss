@@ -1,5 +1,8 @@
 @import "../../sass/utilities/index.scss";
 
+// drawer + image + gap +  container's padding + description
+$breakpoint: $width_drawer + 800px + 30px + 40px + 200px;
+
 .blog-item {
   color: #fff;
 
@@ -11,6 +14,12 @@
 
 .thumb-desc {
   position: relative;
+  a {
+    margin-bottom: 0px;
+    @include from($breakpoint) {
+      margin-bottom: 10px;
+    }
+  }
   img {
     width: 800px;
     height: 350px;
@@ -19,8 +28,7 @@
 }
 
 .description {
-  // drawer + image + gap +  container's padding + description
-  $breakpoint: $width_drawer + 800px + 30px + 40px + 200px;
+  padding-bottom: 10px;
   @include from($breakpoint) {
     min-width: calc(100% - (800px + 30px));
     position: absolute;
@@ -32,7 +40,6 @@
   }
 
   @include until($breakpoint) {
-    margin-top: 0.8rem;
     &:empty {
       display: none;
     }

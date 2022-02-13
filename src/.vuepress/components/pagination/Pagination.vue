@@ -1,9 +1,19 @@
 <template>
-  <nav class="pagination" role="navigation" aria-label="pagination">
-    <a class="has-text-light pagination-previous" @click="onClickPrev"
+  <nav
+    class="pagination is-small mb-6"
+    role="navigation"
+    aria-label="pagination"
+  >
+    <a
+      class="has-text-light has-text-centered is-block pagination-previous"
+      @click="onClickPrev"
       >Previous</a
     >
-    <a class="has-text-light pagination-next" @click="onClickNext">Next page</a>
+    <a
+      class="has-text-light has-text-centered is-block pagination-next"
+      @click="onClickNext"
+      >Next page</a
+    >
     <ul class="pagination-list" :data-active="activeIndex">
       <li v-for="item in list" :key="item">
         <a
