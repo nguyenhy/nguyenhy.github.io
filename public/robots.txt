@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://nguyenhy.github.io/sitemap.xml

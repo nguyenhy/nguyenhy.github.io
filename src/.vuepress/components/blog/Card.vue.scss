@@ -1,0 +1,66 @@
+@import "../../sass/variables/index.scss";
+@import "../../sass/utilities/index.scss";
+
+// drawer + image + gap +  container's padding + description
+$breakpoint: $width_drawer + 800px + 30px + 40px + 200px;
+
+.blog-item {
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 100px;
+}
+
+.thumb-desc {
+  position: relative;
+  a {
+    margin-bottom: 0px;
+    @include from($breakpoint) {
+      margin-bottom: 10px;
+    }
+  }
+  img {
+    width: 800px;
+    height: 350px;
+    object-fit: cover;
+  }
+}
+
+.description {
+  padding-bottom: 10px;
+  @include from($breakpoint) {
+    min-width: calc(100% - (800px + 30px));
+    position: absolute;
+    bottom: 0;
+    left: 800px + 30px;
+
+    border-left: 1px solid #aaa;
+    padding-left: 5px;
+  }
+
+  @include until($breakpoint) {
+    &:empty {
+      display: none;
+    }
+  }
+
+  span {
+    font-size: 14px;
+  }
+}
+
+.summary {
+  &:empty {
+    display: none;
+  }
+}
+
+a {
+  color: #fff;
+}
+
+img {
+  display: block;
+}
