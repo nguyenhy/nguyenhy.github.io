@@ -1,0 +1,21 @@
+@import "../../sass/variables/color.scss";
+
+@import "./code.scss";
+@import "./custom-blocks.scss";
+
+.content {
+  color: #fff;
+
+  div {
+  }
+  p img {
+    max-width: 30%;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: lighten($color: #363636, $amount: 10);
+  }
+}
+
+.blockquote {
+}

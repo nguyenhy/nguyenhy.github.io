@@ -26,13 +26,25 @@ module.exports = {
    * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
    */
   plugins: [
-    '@vuepress/plugin-medium-zoom',
+    [
+      'vuepress-plugin-container', {
+        type: 'tip',
+      }
+    ],
+    [
+      'vuepress-plugin-container', {
+        type: 'warning',
+      }
+    ],
+    [
+      'vuepress-plugin-container', {
+        type: 'danger',
+      }
+    ],
+    [
+      'vuepress-plugin-container', {
+        type: 'details',
+      }
+    ],
   ],
-
-  scss: {
-    includePaths: [
-      "./src/.vuepress/index.scss"
-    ]
-  },
-
 }

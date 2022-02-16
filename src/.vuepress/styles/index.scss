@@ -3,9 +3,11 @@
  *
  * ref：https://v1.vuepress.vuejs.org/config/#index-styl
  */
+
+@import "../sass/utilities/index.scss";
 @import "../sass/vendor/bulma/bulma.scss";
 @import "../assets/font/hyn/hyn-v1.0/style.css";
-@import "../sass/utilities/index.scss";
+@import "../sass/utilities/style.scss";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
