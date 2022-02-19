@@ -5,32 +5,9 @@
         <h3 class="title is-size-3 has-text-weight-bold">{{ title }}</h3>
         <p class="subtitle">{{ summary }}</p>
         <div class="meta mt-2">
-          <div class="tags">
-            <Tags :data="tags" />
-          </div>
+          <Tags :data="tags" />
           <div class="level">
-            <div class="level-left">
-              <div class="level-item is-justify-content-flex-start">
-                <span class="icon">
-                  <i class="hyni-user"></i>
-                </span>
-                <span class="text is-size-7">
-                  <a :href="`/tag/${author}`">{{ author }}</a>
-                </span>
-              </div>
-              <div class="level-item is-justify-content-flex-start">
-                <span class="icon">
-                  <i class="hyni-calendar"></i>
-                </span>
-                <span class="text is-size-7">
-                  <a :href="`/tag/y${date.year}`">{{ date.year }}</a>
-                  <span>/</span>
-                  <a :href="`/tag/m${date.month}`">{{ date.month }}</a>
-                  <span>/</span>
-                  <a :href="`/tag/d${date.day}`">{{ date.day }}</a>
-                </span>
-              </div>
-            </div>
+            <Meta :author="author" :date="date"/>
           </div>
         </div>
       </div>
@@ -46,11 +23,13 @@
 import Layout from "../../components/layout/Layout.vue";
 import Markdown from "../../components/markdown/Markdown.vue";
 import Tags from "../../components/tag/Tags.vue";
+import Meta from "../../components/blog/Meta.vue";
 export default {
   components: {
     Layout,
     Markdown,
     Tags,
+    Meta,
   },
   computed: {
     tags() {
@@ -71,12 +50,12 @@ export default {
       return this.$frontmatter.author;
     },
     date() {
-      const date = this.$frontmatter.date || ''
-      const array = date.split('-')
+      const date = this.$frontmatter.date || "";
+      const array = date.split("-");
       return {
-        year: array[0] || '',
-        month: array[1] || '',
-        day: array[2] || '',
+        year: array[0] || "",
+        month: array[1] || "",
+        day: array[2] || "",
       };
     },
   },

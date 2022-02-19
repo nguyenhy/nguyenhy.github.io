@@ -51,6 +51,12 @@
     .button {
       background-color: transparent;
     }
+    @include from(1024px) {
+      .navbar-start {
+        margin-left: auto;
+        margin-right: 0;
+      }
+    }
 
     @include until(1024px) {
       .navbar-menu {
