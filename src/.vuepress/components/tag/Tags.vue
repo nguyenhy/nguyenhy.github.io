@@ -32,9 +32,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tag {
-  background-color: transparent;
-  border: 1px solid;
+.tags {
+  .tag {
+    background-color: transparent;
+    border: 1px solid;
+    a {
+      color: inherit;
+    }
+  }
 }
 </style>
 
