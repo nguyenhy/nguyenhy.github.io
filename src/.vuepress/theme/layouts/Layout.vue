@@ -14,7 +14,10 @@
       </div>
       <div class="slogan">
         <span class="is-size-5">
-          <Content />
+          <a href="https://youtu.be/7O7Jeei6wv0?t=403" class="has-text-white">
+            Keep your eyes on the skies,<br />
+            you will rise to the glory of who you are.
+          </a>
         </span>
       </div>
       <nav class="nav">
@@ -72,3 +75,10 @@
 </template>
 
 <style lang="scss" scoped src="./Layout.vue.scss"></style>
+<script>
+export default {
+  mounted() {
+    console.log(this);
+  },
+};
+</script>

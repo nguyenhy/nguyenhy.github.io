@@ -1,16 +1,27 @@
 @import "../../sass/variables/index.scss";
 @import "../../sass/utilities/index.scss";
 
-.layout,
-.wrap {
+.layout {
   width: 100%;
-  height: 100%;
-  overflow: auto;
-}
-
-.wrap {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
+  &.full {
+    .header {
+      margin-bottom: 0 !important;
+      .hero {
+        height: 100vh;
+      }
+    }
+  }
+
+  &.half {
+    .header {
+      .hero {
+        height: 50vh;
+      }
+    }
+  }
 }
 
 .main {
@@ -20,14 +31,50 @@
   }
 }
 
-.logo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
 .title {
   font-style: italic;
-  transform: rotate(-1deg);
   font-size: 19px;
+}
+
+.header {
+  .navbar {
+    line-height: 2.2rem;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.6rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    position: absolute;
+
+    .button {
+      background-color: transparent;
+    }
+  }
+  .hero {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 30vh;
+    position: relative;
+    &.background-image {
+      &::after {
+        content: "";
+        background-color: rgba(0, 0, 0, 0.2);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+    }
+    .container {
+      z-index: 2;
+    }
+    .hero-body {
+      height: 30vh;
+    }
+  }
 }
