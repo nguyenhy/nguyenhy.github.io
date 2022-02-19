@@ -80,10 +80,10 @@ module.exports = {
           },
         ],
         sitemap: {
-          hostname: 'http://nguyenhy.github.io/'
+          hostname: 'https://nguyenhy.github.io/'
         },
         feed: {
-          canonical_base: 'http://nguyenhy.github.io/'
+          canonical_base: 'https://nguyenhy.github.io/'
         }
       },
     ],
