@@ -4,7 +4,7 @@
         <title>Nguyen Hy - Official Website</title>
         <link>https://nguyenhy.github.io/</link>
         <description>Personal blog for daily life, web, frontend</description>
-        <lastBuildDate>Sat, 19 Feb 2022 08:48:07 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 19 Feb 2022 10:09:43 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
         <atom:link href="https://nguyenhy.github.io/feed.atom" rel="self" type="application/rss+xml"/>
