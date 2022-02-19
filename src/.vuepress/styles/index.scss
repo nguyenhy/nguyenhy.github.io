@@ -32,3 +32,8 @@ html {
 .hyn-highlight {
   @include transition_border_bottom;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}

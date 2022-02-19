@@ -30,7 +30,7 @@ div[class*="language-"] pre[class*="language-"] {
 div[class*="language-"]::before {
   position: absolute;
   z-index: 3;
-  top: 0.8em;
+  top: 0;
   right: 1em;
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.4);

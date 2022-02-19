@@ -1,10 +1,5 @@
 <template>
-  <Layout
-    title="blog"
-    subtitle="mostly coding things"
-    class="half"
-    background="https://res.cloudinary.com/hqe/image/upload/c_scale,h_500/v1645229306/github-nguyenhy-hp/sky-1.jpg"
-  >
+  <Layout title="tags" href="/tag">
     <div class="main is-flex is-flex-direction-column">
       <div class="container-fluid is-flex-grow-1">
         <BlogCard
@@ -18,7 +13,6 @@
   </Layout>
 </template>
 
-<style scoped lang="scss" src="./Blog.vue.scss"></style>
 <script>
 import Layout from "../../components/layout/Layout.vue";
 export default {
@@ -27,19 +21,24 @@ export default {
     BlogCard: () => import("../../components/blog/Card.vue"),
     Pagination: () => import("../../components/pagination/Pagination.vue"),
   },
-  data() {
-    return {
-      offset: 0,
-    };
-  },
   computed: {
     pages() {
-      return this.pagination.pages;
+      return this.$currentTag.pages;
     },
     pagination() {
       return this.$pagination;
     },
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.container {
+  height: 100%;
+}
+.main {
+  min-height: 100%;
+}
+</style>
