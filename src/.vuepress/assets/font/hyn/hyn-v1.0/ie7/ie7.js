@@ -13,6 +13,8 @@
 		el.innerHTML = '<span style="font-family: \'hyn\'">' + entity + '</span>' + html;
 	}
 	var icons = {
+		'hyni-book': '&#xe90e;',
+		'hyni-calendar': '&#xe90a;',
 		'hyni-chevrons-up': '&#xe905;',
 		'hyni-github': '&#xe900;',
 		'hyni-image': '&#xe906;',
@@ -22,7 +24,10 @@
 		'hyni-moon': '&#xe904;',
 		'hyni-search': '&#xe908;',
 		'hyni-share-2': '&#xe909;',
+		'hyni-tag': '&#xe90b;',
 		'hyni-twitter': '&#xe903;',
+		'hyni-user': '&#xe90c;',
+		'hyni-watch': '&#xe90d;',
 		'0': 0
 		},
 		els = document.getElementsByTagName('*'),

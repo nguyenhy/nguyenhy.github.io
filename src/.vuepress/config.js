@@ -46,5 +46,46 @@ module.exports = {
         type: 'details',
       }
     ],
+    [
+      '@vuepress/blog',
+      {
+        directories: [
+          {
+            // Unique ID of current classification
+            id: 'blog',
+            // Target directory
+            dirname: '_blog',
+            // Path of the `entry page` (or `list page`)
+            path: '/blog/',
+            layout: 'Blog',
+            itemLayout: 'BlogPost',
+            pagination: {
+              lengthPerPage: 10,
+              layout: 'Blog',
+            },
+          },
+        ],
+        frontmatters: [
+          {
+            // Unique ID of current classification
+            id: 'tag',
+            // Decide that the frontmatter keys will be grouped under this classification
+            keys: ['tag'],
+            // Path of the `entry page` (or `list page`)
+            path: '/tag/',
+            // Layout of the `entry page`
+            layout: 'Tags',
+            // Layout of the `scope page`
+            scopeLayout: 'Tag'
+          },
+        ],
+        sitemap: {
+          hostname: 'http://nguyenhy.github.io/'
+        },
+        feed: {
+          canonical_base: 'http://nguyenhy.github.io/'
+        }
+      },
+    ],
   ],
 }

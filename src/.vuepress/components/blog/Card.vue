@@ -1,36 +1,31 @@
 <template>
   <div class="blog-item">
-    <div class="title">
-      <h4>
-        <a :href="item.href" :alt="item.title" class="has-text-weight-bold">{{
-          item.title
-        }}</a>
-      </h4>
-    </div>
-    <div class="meta"></div>
-    <div class="thumb-desc">
-      <div class="thumb">
-        <a :href="item.href" :alt="item.title" class="is-inline-block">
+    <nav class="level">
+      <div class="left pr-6">
+        <h4 class="title">
+          <a :href="href" :alt="data.title" class="has-text-weight-bold">{{
+            data.title
+          }}</a>
+        </h4>
+
+        <div class="summary">
+          <a :href="href" :alt="data.title">
+            <p class="is-italic">{{ data.description }}</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="right" v-if="data.thumb">
+        <a :href="href" :alt="data.title" class="is-inline-block thumb">
           <img
-            height="350"
-            width="800"
-            :src="item.thumb"
-            :alt="item.thumbAlt"
+            height="150"
+            width="150"
+            :src="data.thumb"
+            :alt="data.thumbAlt"
           />
         </a>
       </div>
-      <div class="description has-background-grey-dark px-2">
-        <span class="has-text-grey-light">Description</span>
-        <a :href="item.href" :alt="item.title">
-          <p>{{ item.description }}</p>
-        </a>
-      </div>
-    </div>
-    <div class="summary has-background-grey-dark px-2">
-      <a :href="item.href" :alt="item.title">
-        <p class="is-italic">{{ item.summary }}</p>
-      </a>
-    </div>
+    </nav>
   </div>
 </template>
 
@@ -39,6 +34,14 @@
 export default {
   props: {
     item: Object,
+  },
+  computed: {
+    data() {
+      return this.item.frontmatter;
+    },
+    href() {
+      return this.item.path;
+    },
   },
 };
 </script>
