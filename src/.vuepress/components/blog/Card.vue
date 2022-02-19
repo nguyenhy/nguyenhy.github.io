@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      <div class="right">
+      <div class="right" v-if="data.thumb">
         <a :href="href" :alt="data.title" class="is-inline-block thumb">
           <img
             height="150"

@@ -58,6 +58,7 @@
     background-position: center;
     min-height: 30vh;
     position: relative;
+    flex-direction: row;
     &.background-image {
       &::after {
         content: "";

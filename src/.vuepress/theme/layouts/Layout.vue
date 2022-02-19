@@ -1,5 +1,10 @@
 <template>
-  <div class="drawer">
+  <div
+    class="drawer"
+    :style="{
+      'background-image': `url(${background})`,
+    }"
+  >
     <div class="overlay"></div>
     <div class="wrap">
       <div class="logo">
@@ -24,7 +29,7 @@
         <ul>
           <li>
             <a
-              href="/blog"
+              href="/blog/"
               class="hyn-highlight"
               aria-label="go to blog page"
               accesskey="b"
@@ -34,7 +39,7 @@
           <li>
             <a
               class="hyn-highlight"
-              href="/showcase"
+              href="/showcase/"
               aria-label="go to showcase page"
               accesskey="s"
               >Showcase</a
@@ -43,7 +48,7 @@
           <li>
             <a
               class="hyn-highlight"
-              href="/resume"
+              href="/resume/"
               aria-label="go to resumé page"
               accesskey="r"
               >Resumé</a
@@ -77,6 +82,20 @@
 <style lang="scss" scoped src="./Layout.vue.scss"></style>
 <script>
 export default {
+  computed: {
+    background() {
+      const rand = Math.random();
+      if (rand <= 0.25) {
+        return "https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky.jpg";
+      } else if (rand <= 0.5) {
+        return "https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky-1.jpg";
+      } else if (rand <= 0.75) {
+        return "https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky-2.jpg";
+      } else {
+        return "https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky-3.jpg";
+      }
+    },
+  },
   mounted() {
     console.log(this);
   },
