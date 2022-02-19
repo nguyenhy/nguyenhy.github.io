@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://nguyenhy.github.io/</id>
+    <title>Nguyen Hy - Official Website</title>
+    <updated>2022-02-19T08:48:07.751Z</updated>
+    <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
+    <link rel="alternate" href="https://nguyenhy.github.io/"/>
+    <link rel="self" href="https://nguyenhy.github.io/feed.atom"/>
+    <subtitle>Personal blog for daily life, web, frontend</subtitle>
+    <entry>
+        <title type="html"><![CDATA[What this blog for?]]></title>
+        <id>https://nguyenhy.github.io/2022/02/19/disclaimer/</id>
+        <link href="https://nguyenhy.github.io/2022/02/19/disclaimer/">
+        </link>
+        <updated>2022-02-19T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Explain why I write this blog and why it's matters?]]></summary>
+    </entry>
+</feed>
