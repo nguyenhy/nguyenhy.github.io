@@ -51,6 +51,18 @@
     .button {
       background-color: transparent;
     }
+
+    @include until(1024px) {
+      .navbar-menu {
+        box-shadow: unset;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      //
+      .navbar-start {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
   .hero {
     background-repeat: no-repeat;
