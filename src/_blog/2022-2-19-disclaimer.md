@@ -4,14 +4,14 @@ tag:
   - hyn
   - disclaimer
   - y2022
+  - m2
+  - d19
   - y2022/m2
 author: hyn
 # post
 title: What this blog for?
 description: Explain why I write this blog and why it's matters?
 summary: You should not ready this.
-thumb: https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky.jpg
-thumbAlt: sky
 # meta
 meta:
   - name: keywords

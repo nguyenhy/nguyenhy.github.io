@@ -1,5 +1,9 @@
 <template>
-  <Layout title="tags" href="/tag">
+  <Layout
+    title="tags"
+    href="/tag"
+    background="https://res.cloudinary.com/hqe/image/upload/c_scale,h_500/v1645229306/github-nguyenhy-hp/sky-3.jpg"
+  >
     <span
       v-for="(item, index) in tags"
       :key="index"
