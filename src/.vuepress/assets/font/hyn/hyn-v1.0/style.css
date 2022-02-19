@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'hyn';
-  src:  url('fonts/hyn.eot?ftdff9');
-  src:  url('fonts/hyn.eot?ftdff9#iefix') format('embedded-opentype'),
-    url('fonts/hyn.ttf?ftdff9') format('truetype'),
-    url('fonts/hyn.woff?ftdff9') format('woff'),
-    url('fonts/hyn.svg?ftdff9#hyn') format('svg');
+  src:  url('fonts/hyn.eot?k2gj35');
+  src:  url('fonts/hyn.eot?k2gj35#iefix') format('embedded-opentype'),
+    url('fonts/hyn.ttf?k2gj35') format('truetype'),
+    url('fonts/hyn.woff?k2gj35') format('woff'),
+    url('fonts/hyn.svg?k2gj35#hyn') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.hyni-book:before {
+  content: "\e90e";
+}
 .hyni-calendar:before {
   content: "\e90a";
 }
