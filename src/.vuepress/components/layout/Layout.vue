@@ -1,42 +1,67 @@
 <template>
   <div class="layout has-background-dark has-text-light">
     <header class="header mb-6">
-      <div class="navbar level is-flex is-flex-direction-row p-2">
-        <div class="level-left is-flex is-flex-direction-row">
-          <a class="title" href="/">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
             <span class="has-text-white">$ cd /home/</span>
           </a>
-        </div>
-        <div class="level-right m-0">
-          <a class="button is-white has-text-light" href="/blog/">
-            <span class="icon is-small">
-              <i class="hyni-book"></i>
-            </span>
-            <span>blog</span>
-          </a>
-          <a class="button is-white has-text-light" href="/tag/">
-            <span class="icon is-small">
-              <i class="hyni-tag"></i>
-            </span>
-            <span>tags</span>
-          </a>
+
           <a
-            class="button is-white has-text-light"
-            href="https://github.com/nguyenhy/nguyenhy.github.io"
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+            :class="{
+              'is-active': activeMenu,
+            }"
+            @click="onClickMobileMenu"
           >
-            <span class="icon is-small">
-              <i class="hyni-github"></i>
-            </span>
-            <span>github</span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
           </a>
-          <button class="button is-white has-text-light">
-            <span class="icon is-small">
-              <i class="hyni-search"></i>
-            </span>
-            <span>search</span>
-          </button>
         </div>
-      </div>
+
+        <div
+          id="navbarBasicExample"
+          class="navbar-menu is-align-items-center"
+          :class="{
+            'is-active': activeMenu,
+          }"
+        >
+          <div class="navbar-start">
+            <a class="button is-white has-text-light" href="/blog/">
+              <span class="icon is-small">
+                <i class="hyni-book"></i>
+              </span>
+              <span>blog</span>
+            </a>
+            <a class="button is-white has-text-light" href="/tag/">
+              <span class="icon is-small">
+                <i class="hyni-tag"></i>
+              </span>
+              <span>tags</span>
+            </a>
+            <a
+              class="button is-white has-text-light"
+              href="https://github.com/nguyenhy/nguyenhy.github.io"
+            >
+              <span class="icon is-small">
+                <i class="hyni-github"></i>
+              </span>
+              <span>github</span>
+            </a>
+            <button class="button is-white has-text-light">
+              <span class="icon is-small">
+                <i class="hyni-search"></i>
+              </span>
+              <span>search</span>
+            </button>
+          </div>
+        </div>
+      </nav>
 
       <section
         class="hero is-link is-fullheight-with-navbar"
@@ -57,6 +82,9 @@
             is-justify-content-center
             py-6
           "
+          :style="{
+            opacity: activeMenu ? 0 : 1,
+          }"
         >
           <slot name="header">
             <div
@@ -81,7 +109,13 @@
       <div class="content has-text-centered">
         <p>
           Power by
-          <strong><a class="has-text-primary" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Power</a></strong>
+          <strong
+            ><a
+              class="has-text-primary"
+              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              >Power</a
+            ></strong
+          >
         </p>
       </div>
     </footer>
@@ -98,6 +132,16 @@ export default {
     background: {
       type: String,
       default: "",
+    },
+  },
+  data() {
+    return {
+      activeMenu: false,
+    };
+  },
+  methods: {
+    onClickMobileMenu() {
+      this.activeMenu = !this.activeMenu;
     },
   },
 };

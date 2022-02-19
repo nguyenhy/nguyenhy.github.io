@@ -51,6 +51,24 @@
     .button {
       background-color: transparent;
     }
+    @include from(1024px) {
+      .navbar-start {
+        margin-left: auto;
+        margin-right: 0;
+      }
+    }
+
+    @include until(1024px) {
+      .navbar-menu {
+        box-shadow: unset;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      //
+      .navbar-start {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
   .hero {
     background-repeat: no-repeat;
@@ -60,6 +78,8 @@
     position: relative;
     flex-direction: row;
     &.background-image {
+      background-color: rgba(0, 0, 0, 0.2);
+
       &::after {
         content: "";
         background-color: rgba(0, 0, 0, 0.2);
