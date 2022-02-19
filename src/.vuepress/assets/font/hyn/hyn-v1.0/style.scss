@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: '#{$icomoon-font-family}';
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?f5pm0l');
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?f5pm0l#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?f5pm0l') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?f5pm0l') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?f5pm0l##{$icomoon-font-family}') format('svg');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?ftdff9');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?ftdff9#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?ftdff9') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?ftdff9') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?ftdff9##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -27,6 +27,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.hyni-calendar {
+  &:before {
+    content: $hyni-calendar; 
+  }
+}
 .hyni-chevrons-up {
   &:before {
     content: $hyni-chevrons-up; 
@@ -72,9 +77,24 @@
     content: $hyni-share-2; 
   }
 }
+.hyni-tag {
+  &:before {
+    content: $hyni-tag; 
+  }
+}
 .hyni-twitter {
   &:before {
     content: $hyni-twitter; 
+  }
+}
+.hyni-user {
+  &:before {
+    content: $hyni-user; 
+  }
+}
+.hyni-watch {
+  &:before {
+    content: $hyni-watch; 
   }
 }
 
