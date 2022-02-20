@@ -15,6 +15,10 @@
   tbody tr:nth-child(even) {
     background-color: lighten($color: #363636, $amount: 10);
   }
+
+  strong {
+    color: #fff;
+  }
 }
 
 .blockquote {
