@@ -11,6 +11,13 @@
             "title": "What this blog for?",
             "summary": "Explain why I write this blog and why it's matters?",
             "date_modified": "2022-02-19T00:00:00.000Z"
+        },
+        {
+            "id": "https://nguyenhy.github.io/2022/02/19/introduction-to-web-development/",
+            "url": "https://nguyenhy.github.io/2022/02/19/introduction-to-web-development/",
+            "title": "Introduction To Web Development",
+            "summary": "Simple introduction to web development for absolutely beginner",
+            "date_modified": "2022-02-19T00:00:00.000Z"
         }
     ]
 }
