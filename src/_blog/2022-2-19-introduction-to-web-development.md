@@ -93,7 +93,7 @@ This's what i will do
 ```
 
 Basically, above line saying:
-- create me a [tag](https://www.digitalocean.com/community/tutorials/what-is-an-html-tag) with content of `hellow world`:
+- create me a [tag](https://www.digitalocean.com/community/tutorials/what-is-an-html-tag) with content of `hello world`:
 ``` html
 <span ...>hello world</span>
 ```
@@ -147,13 +147,25 @@ this.style.color='blue'
 It look like waste, redundancy code but trust me we'll need it for [later]() development
 
 
+<br>
+<br>
+
 #### Development
+To sum up, web development is to create a `*.html` with your content inside. Of course, real-world development is much more than just to create a `*.html`.
+
+But for now, *.html file is enough for us to understand big-image of web development
+<br>
+<br>
+
 ##### Where to start?
-- online development
+- **online development**
 <br>
 You could use some online editor like [codepen](https://codepen.io/trending),[jsbin](https://jsbin.com/), [stackblitz](https://stackblitz.com/), ... just paste some html code and start explore
-- local development
-  - raw file htmlt
+<br>
+<br>
+
+- **local development**
+  - **raw file html**
     + create file `index.html`
     + paste below code and save it
       ``` html
@@ -166,7 +178,9 @@ You could use some online editor like [codepen](https://codepen.io/trending),[js
       </html>
       ```
     + open file on any browser
-  - localhost server:
+<br>
+<br>
+  - **localhost server**:
     <br>
     For me, one fast, easy way is to start localhost, is to use extension [Web Server for Chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb)
     + install, open `Web Server for Chrome`
@@ -174,8 +188,12 @@ You could use some online editor like [codepen](https://codepen.io/trending),[js
     + check switch button so `Web Server: STARTED`
     + open your Web Server Url print on screen, eg: [http://127.0.0.1:3000](http://127.0.0.1:3000)
     + there we go
+<br>
+<br>
 - or [website's inspect](https://www.browserstack.com/guide/inspect-element-in-chrome), [view page resourse](https://www.lifewire.com/view-html-source-in-chrome-3466725)
   + if you're using Safari you need [Enabling Web Inspector](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/Web_Inspector_Tutorial/EnableWebInspector/EnableWebInspector.html) first. 
+<br>
+<br>
 
 ##### What's next
 - The purpose of this article is introduce you to basic idea of web development. We'll later explore more about [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript), ...
