@@ -7,7 +7,7 @@
         <div class="meta mt-2">
           <Tags :data="tags" />
           <div class="level">
-            <Meta :author="author" :date="date"/>
+            <Meta :author="author" :date="date" />
           </div>
         </div>
       </div>
@@ -59,9 +59,7 @@ export default {
       };
     },
   },
-  mounted() {
-    console.log(this);
-  },
+  mounted() {},
 };
 </script>
 
