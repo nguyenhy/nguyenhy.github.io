@@ -1,5 +1,9 @@
 const { description } = require('../../package.json')
 
+const createMeta = (name, content) => {
+  return ['meta', { name, content }]
+}
+
 module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
@@ -16,9 +20,8 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
-    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
-    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
+    createMeta("google-site-verification", "BWLTK_FQxlt8fKFkBfdd3zpXAaCD1Pym3ZTkByMmEnQ"),
+    createMeta("msvalidate.01", "773D2B99270FB6481587E375BAAC5D99"),
   ],
 
 
