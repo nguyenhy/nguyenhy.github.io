@@ -8,7 +8,7 @@
     <div class="overlay"></div>
     <div class="wrap">
       <div class="logo">
-        <a accesskey="h">
+        <a accesskey="h" href="/">
           <img
             src="../../assets/logo-hyn_144x144.png"
             width="100"
@@ -96,8 +96,6 @@ export default {
       }
     },
   },
-  mounted() {
-    console.log(this);
-  },
+  mounted() {},
 };
 </script>
