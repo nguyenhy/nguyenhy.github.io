@@ -18,8 +18,8 @@ author: hyn
 title: Introduction To Web Development
 description: Simple introduction to web development for absolutely beginner
 summary: Simple introduction to web development for absolutely beginner
-thumb: https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky-4.jpg
-thumbT: sky
+thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1641481664/github-nguyenhy-hp/sky-4.jpg
+thumbAlt: sky
 # meta
 meta:
   - name: keywords
@@ -38,6 +38,12 @@ meta:
     content: nguyen hy
   - name: location
     content: Vietnam 
+
+  - name: title
+    content: Introduction To Web Development
+  - name: description
+    content: Simple introduction to web development for absolutely beginner
+
     # og tag
   - name: og:type
     content: website
@@ -46,7 +52,19 @@ meta:
   - name: og:description
     content: Simple introduction to web development for absolutely beginner
   - name: og:image
-    content: https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky-4.jpg
+    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1641481664/github-nguyenhy-hp/sky-4.jpg
+  - name: og:url
+    content: https://nguyenhy.github.io/2022/02/19/introduction-to-web-development/
+
+    # twitter tag
+  - property: twitter:url
+    content: https://nguyenhy.github.io/2022/02/19/introduction-to-web-development/
+  - property: twitter:title
+    content: Introduction To Web Development
+  - property: twitter:description
+    content: Simple introduction to web development for absolutely beginner
+  - property: twitter:image
+    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1641481664/github-nguyenhy-hp/sky-4.jpg
 ---
 
 As always, you should read [this](/2022/02/19/disclaimer/) before reading below article
@@ -80,10 +98,10 @@ This's what i will do
 **Question:** Wow wow wow! what's the hell is this?
 <br>
 <br>
-**Answer:** the below `highlight` line is the only thing you should care about.
+**Answer:** For now, we only put our attention on the below highlight line.
 <br>
 ``` html{5}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head></head>
 <body>
@@ -93,24 +111,32 @@ This's what i will do
 ```
 
 Basically, above line saying:
-- create me a [tag](https://www.digitalocean.com/community/tutorials/what-is-an-html-tag) with content of `hello world`:
+- create me a [tag](https://developer.mozilla.org/en-US/docs/Glossary/Tag) with content of `hello world`:
 ``` html
 <span ...>hello world</span>
 ```
 
 >Think of `tag` like a container, you will put your stuff into it, whatever it's. Whether it's a `text`, `image`, `video`, ...
->and you can direct [styling](https://developer.mozilla.org/en-US/docs/Web/CSS), control its behavior it with specific kind of input ([click](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/click), [double click](https://developer.mozilla.org/en-US/docs/Web/API/Element/dblclick_event), [scroll](https://developer.mozilla.org/en-US/docs/Web/API/Document/scroll_event) your mouse...), change it content, ...
+>and you can direct styling using [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), control its behavior with specific kind of input ([click](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/click), [double click](https://developer.mozilla.org/en-US/docs/Web/API/Element/dblclick_event), [scroll](https://developer.mozilla.org/en-US/docs/Web/API/Document/scroll_event) your mouse...), change it content, ... with help of [JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript#for_complete_beginners)
 
 
 
-For now just think `span` is a box, and `<span>` is top surface of the box and `</span>` is bottom of it.
-We always do stuff on top surface which is `<span>` tag.
+Just think, in general, `span` is a box where `<span>` is the lid of the box and `</span>` is the bottom of it.
+We put stuff into box through the lid which is `<span>` tag.
 
 
 So tag's format will look like: 
 <br>
 ``` html
+<!-- normal elements -->
 <element attribute="value" attribute="value" ...>element content</element>
+
+<!-- no-ending elements -->
+<element attribute="value" attribute="value" ... />
+
+<!-- void elements -->
+<element attribute="value" attribute="value" ...></element>
+
 ```
 - color those text with red color
 ``` html
@@ -196,5 +222,6 @@ You could use some online editor like [codepen](https://codepen.io/trending),[js
 <br>
 
 ##### What's next
-- The purpose of this article is introduce you to basic idea of web development. We'll later explore more about [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript), ...
-- You could find more web frontend resource on [w3schools](https://www.w3schools.com/)
+- read my blog about [Introduction to HTML]()
+- The purpose of this article is introduce you to basic idea of web development. We'll later explore more about [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript#for_complete_beginners), ...
+- You should explore more about [HTML elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
