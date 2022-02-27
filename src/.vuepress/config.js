@@ -1,5 +1,15 @@
 const { description } = require('../../package.json')
 
+const createLink = (option) => {
+  return ['link', option]
+}
+
+const createMeta = (option) => {
+  return ['meta', option]
+}
+
+const createTag = (tag, option) => [tag, option]
+
 module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
@@ -16,9 +26,58 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
-    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
-    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
+    createMeta({ name: "google-site-verification", content: "BWLTK_FQxlt8fKFkBfdd3zpXAaCD1Pym3ZTkByMmEnQ" }),
+    createMeta({ name: "msvalidate.01", content: "773D2B99270FB6481587E375BAAC5D99" }),
+
+    createMeta({ property: "twitter:card", content: "summary_large_image" }),
+    createMeta({ property: "twitter:url", content: "https://nguyenhy.github.io/" }),
+    createMeta({ property: "twitter:title", content: "Nguyen Hy - Official Website" }),
+    createMeta({ property: "twitter:description", content: "Personal blog for daily life, web, frontend" }),
+    createMeta({ property: "twitter:image", content: "" }),
+
+    // <!-- Optional Meta Tags-->
+    createMeta({ name: "distribution", content: "web" }),
+    createMeta({ name: "web_author", content: "Nguyen Hy" }),
+    createMeta({ name: "rating", content: "general" }),
+    createMeta({ name: "subject", content: "Personal" }),
+    createMeta({ name: "title", content: "Nguyen Hy - Official Website" }),
+    createMeta({ name: "copyright", content: "Copyright 2022" }),
+    createMeta({ name: "reply-to", content: "nguyenhy311@gmail.com" }),
+    createMeta({ name: "abstract", content: "Personal blog for daily life, web, frontend" }),
+    createMeta({ name: "city", content: "Hochiminh" }),
+    createMeta({ name: "country", content: "Vietnam" }),
+    createMeta({ name: "distribution", content: "global" }),
+    createMeta({ name: "classification", content: "" }),
+
+    // <!-- Meta Tags for HTML pages on Mobile-->
+    createMeta({ name: "format-detection", content: "telephone=yes" }),
+    createMeta({ name: "HandheldFriendly", content: "true" }),
+    createMeta({ name: "viewport", content: "width=device-width, initial-scale=1.0" }),
+
+    // <!-- http-equiv Tags-->
+    createMeta({ 'http-equiv': "Content-Style-Type", content: "text/css" }),
+    createMeta({ 'http-equiv': "Content-Script-Type", content: "text/javascript" }),
+
+    // <!-- manifest -->
+    createLink({ rel: 'icon', href: 'favicon.ico', type: 'image/x-icon' }),
+    createLink({ rel: "apple-touch-icon", sizes: "57x57", href: "/manifest/apple-icon-57x57.png" }),
+    createLink({ rel: "apple-touch-icon", sizes: "60x60", href: "/manifest/apple-icon-60x60.png" }),
+    createLink({ rel: "apple-touch-icon", sizes: "72x72", href: "/manifest/apple-icon-72x72.png" }),
+    createLink({ rel: "apple-touch-icon", sizes: "76x76", href: "/manifest/apple-icon-76x76.png" }),
+    createLink({ rel: "apple-touch-icon", sizes: "114x114", href: "/manifest/apple-icon-114x114.png" }),
+    createLink({ rel: "apple-touch-icon", sizes: "120x120", href: "/manifest/apple-icon-120x120.png" }),
+    createLink({ rel: "apple-touch-icon", sizes: "144x144", href: "/manifest/apple-icon-144x144.png" }),
+    createLink({ rel: "apple-touch-icon", sizes: "152x152", href: "/manifest/apple-icon-152x152.png" }),
+    createLink({ rel: "apple-touch-icon", sizes: "180x180", href: "/manifest/apple-icon-180x180.png" }),
+    createLink({ rel: "icon", type: "image/png", sizes: "192x192", href: "/manifest/android-icon-192x192.png" }),
+    createLink({ rel: "icon", type: "image/png", sizes: "32x32", href: "/manifest/favicon-32x32.png" }),
+    createLink({ rel: "icon", type: "image/png", sizes: "96x96", href: "/manifest/favicon-96x96.png" }),
+    createLink({ rel: "icon", type: "image/png", sizes: "16x16", href: "/manifest/favicon-16x16.png" }),
+    createLink({ rel: "manifest", href: "/manifest/manifest.json" }),
+    createMeta({ name: "msapplication-TileColor", content: "#ffffff" }),
+    createMeta({ name: "msapplication-TileImage", content: "/ms-icon-144x144.png" }),
+    createMeta({ name: "theme-color", content: "#ffffff" }),
+
   ],
 
 
@@ -87,5 +146,14 @@ module.exports = {
         }
       },
     ],
+
+
+    [
+      '@vuepress/pwa',
+      {
+        serviceWorker: true,
+        generateSWConfig: {}
+      }
+    ]
   ],
 }

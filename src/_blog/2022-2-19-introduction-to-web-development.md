@@ -18,7 +18,7 @@ author: hyn
 title: Introduction To Web Development
 description: Simple introduction to web development for absolutely beginner
 summary: Simple introduction to web development for absolutely beginner
-thumb: https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky-4.jpg
+thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1641481664/github-nguyenhy-hp/sky-4.jpg
 thumbT: sky
 # meta
 meta:
@@ -46,10 +46,10 @@ meta:
   - name: og:description
     content: Simple introduction to web development for absolutely beginner
   - name: og:image
-    content: https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky-4.jpg
+    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1641481664/github-nguyenhy-hp/sky-4.jpg
 ---
 
-As always, you should read [this](/2022/02/19/disclaimer/) before reading below article
+As always, you should read this [disclaimer](/2022/02/19/disclaimer/) before reading below article
 #### Introduction
 The final result we should point out is to have a basic understanding of what website development look like, or how can you create yourself simple website
 #### To
@@ -144,7 +144,7 @@ this.style.color='blue'
 ``` html{5}
 <span style="color: red" onclick="this.style.color='blue'">hello world</span> 
 ```
-It look like waste, redundancy code but trust me we'll need it for [later]() development
+It look like waste, redundancy code but trust me we'll need it for later development
 
 
 <br>
