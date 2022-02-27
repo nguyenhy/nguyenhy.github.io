@@ -4,7 +4,7 @@
         <title>Nguyen Hy - Official Website</title>
         <link>https://nguyenhy.github.io/</link>
         <description>Personal blog for daily life, web, frontend</description>
-        <lastBuildDate>Sun, 20 Feb 2022 02:03:42 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 27 Feb 2022 10:19:40 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
         <atom:link href="https://nguyenhy.github.io/feed.atom" rel="self" type="application/rss+xml"/>
@@ -21,6 +21,15 @@
             <guid>https://nguyenhy.github.io/2022/02/19/introduction-to-web-development/</guid>
             <pubDate>Sat, 19 Feb 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Simple introduction to web development for absolutely beginner]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Introduction To HTML]]></title>
+            <link>https://nguyenhy.github.io/2022/02/24/introduction-to-html/</link>
+            <guid>https://nguyenhy.github.io/2022/02/24/introduction-to-html/</guid>
+            <pubDate>Thu, 24 Feb 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Simple introduction to HTML for absolutely beginner]]></description>
+            <enclosure url="https://nguyenhy.github.io/workplace.jpg">
+            </enclosure>
         </item>
     </channel>
 </rss>

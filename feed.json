@@ -18,6 +18,14 @@
             "title": "Introduction To Web Development",
             "summary": "Simple introduction to web development for absolutely beginner",
             "date_modified": "2022-02-19T00:00:00.000Z"
+        },
+        {
+            "id": "https://nguyenhy.github.io/2022/02/24/introduction-to-html/",
+            "url": "https://nguyenhy.github.io/2022/02/24/introduction-to-html/",
+            "title": "Introduction To HTML",
+            "summary": "Simple introduction to HTML for absolutely beginner",
+            "image": "https://nguyenhy.github.io/workplace.jpg",
+            "date_modified": "2022-02-24T00:00:00.000Z"
         }
     ]
 }
