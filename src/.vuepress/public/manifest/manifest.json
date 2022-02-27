@@ -1,6 +1,9 @@
 {
   "name": "Nguyen Hy - Official Website",
+  "short_name": "hyblog",
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "icons": [
     {

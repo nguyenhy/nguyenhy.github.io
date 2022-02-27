@@ -59,6 +59,7 @@ module.exports = {
     createMeta({ 'http-equiv': "Content-Script-Type", content: "text/javascript" }),
 
     // <!-- manifest -->
+    createLink({ rel: 'icon', href: 'favicon.ico', type: 'image/x-icon' }),
     createLink({ rel: "apple-touch-icon", sizes: "57x57", href: "/manifest/apple-icon-57x57.png" }),
     createLink({ rel: "apple-touch-icon", sizes: "60x60", href: "/manifest/apple-icon-60x60.png" }),
     createLink({ rel: "apple-touch-icon", sizes: "72x72", href: "/manifest/apple-icon-72x72.png" }),
@@ -68,10 +69,10 @@ module.exports = {
     createLink({ rel: "apple-touch-icon", sizes: "144x144", href: "/manifest/apple-icon-144x144.png" }),
     createLink({ rel: "apple-touch-icon", sizes: "152x152", href: "/manifest/apple-icon-152x152.png" }),
     createLink({ rel: "apple-touch-icon", sizes: "180x180", href: "/manifest/apple-icon-180x180.png" }),
-    createLink({ rel: "icon", type: "image,/png", sizes: "192x192", href: "/manifest/android-icon-192x192.png" }),
-    createLink({ rel: "icon", type: "image,/png", sizes: "32x32", href: "/manifest/favicon-32x32.png" }),
-    createLink({ rel: "icon", type: "image,/png", sizes: "96x96", href: "/manifest/favicon-96x96.png" }),
-    createLink({ rel: "icon", type: "image,/png", sizes: "16x16", href: "/manifest/favicon-16x16.png" }),
+    createLink({ rel: "icon", type: "image/png", sizes: "192x192", href: "/manifest/android-icon-192x192.png" }),
+    createLink({ rel: "icon", type: "image/png", sizes: "32x32", href: "/manifest/favicon-32x32.png" }),
+    createLink({ rel: "icon", type: "image/png", sizes: "96x96", href: "/manifest/favicon-96x96.png" }),
+    createLink({ rel: "icon", type: "image/png", sizes: "16x16", href: "/manifest/favicon-16x16.png" }),
     createLink({ rel: "manifest", href: "/manifest/manifest.json" }),
     createMeta({ name: "msapplication-TileColor", content: "#ffffff" }),
     createMeta({ name: "msapplication-TileImage", content: "/ms-icon-144x144.png" }),
@@ -145,5 +146,14 @@ module.exports = {
         }
       },
     ],
+
+
+    [
+      '@vuepress/pwa',
+      {
+        serviceWorker: true,
+        generateSWConfig: {}
+      }
+    ]
   ],
 }
