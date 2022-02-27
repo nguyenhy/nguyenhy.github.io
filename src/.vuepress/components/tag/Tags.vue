@@ -9,7 +9,7 @@
         'ml-1': index !== 0,
       }"
     >
-      <a :href="`/tag/${item}`">{{ item }}</a>
+      <a :href="`/tag/${item}/`">{{ item }}</a>
     </span>
   </div>
 </template>

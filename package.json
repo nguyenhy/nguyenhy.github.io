@@ -1,6 +1,6 @@
 {
   "name": "hyn",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Personal blog for daily life, web, frontend",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@vuepress/plugin-blog": "^1.9.4",
+    "@vuepress/plugin-pwa": "^1.9.7",
     "sass": "^1.49.7",
     "sass-loader": "^7.3.1",
     "vuepress": "^1.9.7",

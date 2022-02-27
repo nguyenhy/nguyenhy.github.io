@@ -8,7 +8,7 @@
     <div class="overlay"></div>
     <div class="wrap">
       <div class="logo">
-        <a accesskey="h">
+        <a accesskey="h" href="/">
           <img
             src="../../assets/logo-hyn_144x144.png"
             width="100"
@@ -88,16 +88,14 @@ export default {
       if (rand <= 0.25) {
         return "https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky.jpg";
       } else if (rand <= 0.5) {
-        return "https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky-1.jpg";
+        return "https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1641481664/github-nguyenhy-hp/sky-1.jpg";
       } else if (rand <= 0.75) {
-        return "https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky-2.jpg";
+        return "https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1641481664/github-nguyenhy-hp/sky-2.jpg";
       } else {
-        return "https://res.cloudinary.com/hqe/image/upload/v1641481664/github-nguyenhy-hp/sky-3.jpg";
+        return "https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1641481664/github-nguyenhy-hp/sky-3.jpg";
       }
     },
   },
-  mounted() {
-    console.log(this);
-  },
+  mounted() {},
 };
 </script>

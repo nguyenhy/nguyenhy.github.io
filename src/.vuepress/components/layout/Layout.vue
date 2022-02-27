@@ -81,6 +81,7 @@
             is-flex-direction-column
             is-justify-content-center
             py-6
+            px-2
           "
           :style="{
             opacity: activeMenu ? 0 : 1,

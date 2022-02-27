@@ -58,9 +58,7 @@ export default {
       return !!this.data.hasPrev;
     },
   },
-  mounted() {
-    console.log(this.data);
-  },
+  mounted() {},
 
   methods: {},
 };
