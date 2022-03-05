@@ -19,6 +19,7 @@ title: Introduction To Web Development
 description: Simple introduction to web development for absolutely beginner
 summary: Simple introduction to web development for absolutely beginner
 thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1641481664/github-nguyenhy-hp/sky-4.jpg
+bigThumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_600/v1641481664/github-nguyenhy-hp/sky-4.jpg
 thumbAlt: sky
 # meta
 meta:
@@ -222,6 +223,6 @@ You could use some online editor like [codepen](https://codepen.io/trending),[js
 <br>
 
 ##### What's next
-- read my blog about [Introduction to HTML]()
+- read my blog about [Introduction to HTML](/2022/02/24/introduction-to-html/)
 - The purpose of this article is introduce you to basic idea of web development. We'll later explore more about [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript#for_complete_beginners), ...
 - You should explore more about [HTML elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)

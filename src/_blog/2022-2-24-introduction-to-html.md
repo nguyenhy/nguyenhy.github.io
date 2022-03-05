@@ -18,6 +18,7 @@ title: Introduction To HTML
 description: Simple introduction to HTML for absolutely beginner
 summary: Simple introduction to HTML for absolutely beginner
 thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1645714015/github-nguyenhy-hp/sky-5.jpg
+bigThumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_600/v1645714015/github-nguyenhy-hp/sky-5.jpg
 thumbT: sky
 # meta
 meta:
