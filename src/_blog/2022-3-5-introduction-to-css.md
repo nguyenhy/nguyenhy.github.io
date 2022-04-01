@@ -67,7 +67,7 @@ meta:
 ---
 
 #### What is CSS for?
-CSS is a language for specifying how documents are presented to endpoint users, it allow us to create good-looking, less-boring, readable web pages. We can define rules specifying groups of style that should be applied to particular elements or groups of elements on documents.
+CSS is a language for specifying how documents are presented to endpoint users, it allows us to create good-looking, less-boring, readable web pages. We can define rules specifying groups of styles that should be applied to particular elements or groups of elements on documents.
 #### starting with some HTML
 <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="xxPBKNW" data-editable="true" data-user="nguyenhy" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
   <span>See the Pen <a href="https://codepen.io/nguyenhy/pen/xxPBKNW">
@@ -87,17 +87,17 @@ span {
 
 <br>
 
-CSS can be used for very basic document text styling - changing font style, text color, highlight text,... It can also be use to create complex layout with animation. We'll explore more and more of CSS later on this series but for now:
+CSS can be used for very basic document text styling - changing font style, text color, highlight text,... It can also be used to create complex layouts with animation. We'll explore more and more of CSS later in this series but for now:
 
 > <p style="text-align: center;">we use CSS for styling things</p>
 
 <br>
 
 #### CSS syntax
-CSS rules always starts with a selector. This's the part of a CSS rule to specify what elements in a document will take rules effects.
+CSS rules always start with a selector. this's the part of a CSS rule to specify what elements in a document will take rules effects.
 
 ``` css
-/* "span" is a selector in indicate that all "span" element will be styled by the following rules*/
+/* "span" is a selector to indicate that all "span" elements will be styled by the following rules*/
 span {
   /* the property "color" following by "red" value indicate that */
   /* text inside "span" element in the document will have red color */
@@ -112,8 +112,8 @@ span {
 
 #### class-based CSS selector
 
-So far, we have styled elements base of their HTML element names. This works as long as we need all element in page have same style, 
-but this's not the case for most of the times. In this section, we will look into some other ways of writing selector for CSS rules.
+So far, we have styled elements based on their HTML element names. This works as long as we need all elements on the page to have the same style, 
+but this's not the case most of the time. In this section, we will look into some other ways of writing selectors for CSS rules.
 
 ##### basic selectors
 ``` html
@@ -132,7 +132,7 @@ but this's not the case for most of the times. In this section, we will look int
 
 <br>
 
-It's a good idea not to skip below section but to be honest, all you need to do is try to remember all syntax with the symbols we have, which is
+It's a good idea not to skip the below section but to be honest, all you need to do is try to remember all syntax with the symbols we have, which is
 `*`, `element`, `.class-name`, `#element-id`, `[attribute]`, `,`, `A B`, `A>B`, `A+B`, `A~B`, `A:<...>`, `A::<...>`
 
 <br>
@@ -172,7 +172,7 @@ It's a good idea not to skip below section but to be honest, all you need to do 
 
 ##### grouping selectors
 
-This's same as [basic selector](#basic-selectors) but we separate them using `,` to groups same set of elements that take rules style
+This's the same as [basic selector](#basic-selectors) but we separate them using `,` to group the same set of elements that take rules style
 ``` css
 div, .class-b {
   /* all `div` in documents and also all element has class "class-b" */
@@ -259,7 +259,7 @@ Your jobs is to figure it out why elements has such style, browser devtools can 
 
 <br>
 
-If i need to style the "third span", there are several way to do it:
+If I need to style the "third span", there are several ways to do it:
 - by class: 
   - either `.a`, `.b`, `.c` work but `.a`, `.b` will all so style the "first span" and "second span"
   - `.a.b.c` is better idea
