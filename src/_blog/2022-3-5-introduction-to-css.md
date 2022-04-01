@@ -19,7 +19,7 @@ description: Simple introduction to CSS for absolutely beginner
 summary: Simple introduction to CSS for absolutely beginner
 thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1646454274/github-nguyenhy-hp/sky-6.jpg
 bigThumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_600/v1646454274/github-nguyenhy-hp/sky-6.jpg
-thumbT: sky
+thumbAlt: sky
 # meta
 meta:
   - name: keywords
