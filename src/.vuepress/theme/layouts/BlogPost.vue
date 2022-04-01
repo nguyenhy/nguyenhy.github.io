@@ -44,7 +44,7 @@ export default {
       return this.$frontmatter.summary;
     },
     background() {
-      return this.$frontmatter.thumb;
+      return this.$frontmatter.bigThumb;
     },
     author() {
       return this.$frontmatter.author;
