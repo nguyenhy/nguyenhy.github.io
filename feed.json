@@ -26,6 +26,13 @@
             "summary": "Simple introduction to HTML for absolutely beginner",
             "image": "https://nguyenhy.github.io/workplace.jpg",
             "date_modified": "2022-02-24T00:00:00.000Z"
+        },
+        {
+            "id": "https://nguyenhy.github.io/2022/03/05/introduction-to-css/",
+            "url": "https://nguyenhy.github.io/2022/03/05/introduction-to-css/",
+            "title": "Introduction To CSS",
+            "summary": "Simple introduction to CSS for absolutely beginner",
+            "date_modified": "2022-03-05T00:00:00.000Z"
         }
     ]
 }
