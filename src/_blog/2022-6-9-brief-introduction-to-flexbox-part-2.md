@@ -55,11 +55,11 @@ meta:
   - name: og:image
     content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1657411176/github-nguyenhy-hp/sky-8.jpg
   - name: og:url
-    content: https://nguyenhy.github.io/2022/02/24/introduction-to-html/
+    content: https://nguyenhy.github.io/2022/06/09/brief-introduction-to-flexbox-part-2/
 
     # twitter tag
   - property: twitter:url
-    content: https://nguyenhy.github.io/2022/02/24/introduction-to-html/
+    content: https://nguyenhy.github.io/2022/06/09/brief-introduction-to-flexbox-part-2/
   - property: twitter:title
     content: Introduction To Web Development
   - property: twitter:description
