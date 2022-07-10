@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nguyenhy.github.io/</id>
     <title>Nguyen Hy - Official Website</title>
-    <updated>2022-07-10T00:13:48.407Z</updated>
+    <updated>2022-07-10T04:55:13.591Z</updated>
     <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
     <link rel="alternate" href="https://nguyenhy.github.io/"/>
     <link rel="self" href="https://nguyenhy.github.io/feed.atom"/>
