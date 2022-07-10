@@ -68,9 +68,9 @@ meta:
     content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1646454274/github-nguyenhy-hp/sky-7.jpg
 ---
 ### Parts
-- [Parts 1: Basic understand about Flexbox]() - here we are
-- [Parts 2: Flex container properties]()
-- [Parts 3: Flex item properties]()
+- [Parts 1: Basic understand about Flexbox](/2022/06/09/brief-introduction-to-flexbox-part-1/) - here we are
+- [Parts 2: Flex container properties](/2022/06/09/brief-introduction-to-flexbox-part-2/)
+- [Parts 3: Flex item properties](/2022/06/09/brief-introduction-to-flexbox-part-3/)
 
 ### Prerequisites
 - basic understand of CSS
