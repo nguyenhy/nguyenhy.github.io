@@ -15,11 +15,11 @@ tag:
   - y2022/m6
 author: hyn
 # post
-title: Flexbox - [Part 2] container properties
-description: Flexbox - [Part 2] container properties
-summary: Flexbox - [Part 2] container properties
-thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1646454274/github-nguyenhy-hp/sky-6.jpg
-bigThumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_600/v1646454274/github-nguyenhy-hp/sky-6.jpg
+title: Flexbox - [Part 2] Flex container properties
+description: Flexbox - [Part 2] Flex container properties
+summary: Flexbox - [Part 2] Flex container properties
+thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1657411176/github-nguyenhy-hp/sky-8.jpg
+bigThumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_600/v1657411176/github-nguyenhy-hp/sky-8.jpg
 thumbAlt: sky
 # meta
 meta:
@@ -41,19 +41,19 @@ meta:
   - name: location
     content: Vietnam 
   - name: title
-    content: Flexbox - [Part 2] container properties
+    content: Flexbox - [Part 2] Flex container properties
   - name: description
-    content: Flexbox - [Part 2] container properties
+    content: Flexbox - [Part 2] Flex container properties
 
     # og tag
   - name: og:type
     content: website
   - name: og:title
-    content: Flexbox - [Part 2] container properties
+    content: Flexbox - [Part 2] Flex container properties
   - name: og:description
-    content: Flexbox - [Part 2] container properties
+    content: Flexbox - [Part 2] Flex container properties
   - name: og:image
-    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1646454274/github-nguyenhy-hp/sky-6.jpg
+    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1657411176/github-nguyenhy-hp/sky-8.jpg
   - name: og:url
     content: https://nguyenhy.github.io/2022/02/24/introduction-to-html/
 
@@ -65,7 +65,7 @@ meta:
   - property: twitter:description
     content: Simple introduction to web development for absolutely beginner
   - property: twitter:image
-    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1646454274/github-nguyenhy-hp/sky-6.jpg
+    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1657411176/github-nguyenhy-hp/sky-8.jpg
 ---
 ### Parts
 - [Parts 1: Basic understand about Flexbox]()

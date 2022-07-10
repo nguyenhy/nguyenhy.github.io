@@ -18,8 +18,8 @@ author: hyn
 title: Flexbox - [Part 1] Introduction
 description: Flexbox - [Part 1] Introduction
 summary: Flexbox - [Part 1] Introduction
-thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1646454274/github-nguyenhy-hp/sky-6.jpg
-bigThumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_600/v1646454274/github-nguyenhy-hp/sky-6.jpg
+thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1646454274/github-nguyenhy-hp/sky-7.jpg
+bigThumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_600/v1646454274/github-nguyenhy-hp/sky-7.jpg
 thumbAlt: sky
 # meta
 meta:
@@ -53,7 +53,7 @@ meta:
   - name: og:description
     content: Flexbox - [Part 1] Introduction
   - name: og:image
-    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1646454274/github-nguyenhy-hp/sky-6.jpg
+    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1646454274/github-nguyenhy-hp/sky-7.jpg
   - name: og:url
     content: https://nguyenhy.github.io/2022/02/24/introduction-to-html/
 
@@ -61,11 +61,11 @@ meta:
   - property: twitter:url
     content: https://nguyenhy.github.io/2022/02/24/introduction-to-html/
   - property: twitter:title
-    content: Introduction To Web Development
+    content: Flexbox - [Part 1] Introduction
   - property: twitter:description
-    content: Simple introduction to web development for absolutely beginner
+    content: Simple Flexbox - [Part 1] Introduction
   - property: twitter:image
-    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1646454274/github-nguyenhy-hp/sky-6.jpg
+    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1646454274/github-nguyenhy-hp/sky-7.jpg
 ---
 ### Parts
 - [Parts 1: Basic understand about Flexbox]() - here we are
