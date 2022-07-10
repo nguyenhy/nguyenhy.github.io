@@ -33,6 +33,27 @@
             "title": "Introduction To CSS",
             "summary": "Simple introduction to CSS for absolutely beginner",
             "date_modified": "2022-03-05T00:00:00.000Z"
+        },
+        {
+            "id": "https://nguyenhy.github.io/2022/06/09/brief-introduction-to-flexbox-part-1/",
+            "url": "https://nguyenhy.github.io/2022/06/09/brief-introduction-to-flexbox-part-1/",
+            "title": "Flexbox - [Part 1] Introduction",
+            "summary": "Flexbox - [Part 1] Introduction",
+            "date_modified": "2022-06-09T00:00:00.000Z"
+        },
+        {
+            "id": "https://nguyenhy.github.io/2022/06/09/brief-introduction-to-flexbox-part-2/",
+            "url": "https://nguyenhy.github.io/2022/06/09/brief-introduction-to-flexbox-part-2/",
+            "title": "Flexbox - [Part 2] Flex container properties",
+            "summary": "Flexbox - [Part 2] Flex container properties",
+            "date_modified": "2022-06-09T00:00:00.000Z"
+        },
+        {
+            "id": "https://nguyenhy.github.io/2022/06/09/brief-introduction-to-flexbox-part-3/",
+            "url": "https://nguyenhy.github.io/2022/06/09/brief-introduction-to-flexbox-part-3/",
+            "title": "Flexbox - [Part 3] Flex item properties",
+            "summary": "Flexbox - [Part 3] Flex item properties",
+            "date_modified": "2022-06-09T00:00:00.000Z"
         }
     ]
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Flexbox - [Part 1] Introduction | Nguyen Hy - Official Website</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="57x57" href="/manifest/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/manifest/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/manifest/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/manifest/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/manifest/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/manifest/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/manifest/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/manifest/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/manifest/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/manifest/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/manifest/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/manifest/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/manifest/favicon-16x16.png">
+    <link rel="manifest" href="/manifest/manifest.json">
+    <link rel="alternate" type="application/rss+xml" href="https://nguyenhy.github.io/rss.xml" title="Nguyen Hy - Official Website RSS Feed">
+    <link rel="alternate" type="application/atom+xml" href="https://nguyenhy.github.io/feed.atom" title="Nguyen Hy - Official Website Atom Feed">
+    <link rel="alternate" type="application/json" href="https://nguyenhy.github.io/feed.json" title="Nguyen Hy - Official Website JSON Feed">
+    <meta name="description" content="Flexbox - [Part 1] Introduction">
+    <meta name="keywords" content="hyn,web,blog,me,hyn,frontend,introduction,beginner,web development,HTML,flexbox">
+    <meta name="author" content="nguyen hy">
+    <meta name="location" content="Vietnam">
+    <meta name="title" content="Flexbox - [Part 1] Introduction">
+    <meta name="og:type" content="website">
+    <meta name="og:title" content="Flexbox - [Part 1] Introduction">
+    <meta name="og:description" content="Flexbox - [Part 1] Introduction">
+    <meta name="og:image" content="https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1646454274/github-nguyenhy-hp/sky-7.jpg">
+    <meta name="og:url" content="https://nguyenhy.github.io/2022/06/09/brief-introduction-to-flexbox-part-1/">
+    <meta property="twitter:url" content="https://nguyenhy.github.io/2022/06/09/brief-introduction-to-flexbox-part-1/">
+    <meta property="twitter:title" content="Flexbox - [Part 1] Introduction">
+    <meta property="twitter:description" content="Simple Flexbox - [Part 1] Introduction">
+    <meta property="twitter:image" content="https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1646454274/github-nguyenhy-hp/sky-7.jpg">
+    <meta name="google-site-verification" content="BWLTK_FQxlt8fKFkBfdd3zpXAaCD1Pym3ZTkByMmEnQ">
+    <meta name="msvalidate.01" content="773D2B99270FB6481587E375BAAC5D99">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta name="distribution" content="web">
+    <meta name="web_author" content="Nguyen Hy">
+    <meta name="rating" content="general">
+    <meta name="subject" content="Personal">
+    <meta name="copyright" content="Copyright 2022">
+    <meta name="reply-to" content="nguyenhy311@gmail.com">
+    <meta name="abstract" content="Personal blog for daily life, web, frontend">
+    <meta name="city" content="Hochiminh">
+    <meta name="country" content="Vietnam">
+    <meta name="classification" content="">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    
+    <link rel="preload" href="/assets/css/0.styles.bd7e4d11.css" as="style"><link rel="preload" href="/assets/js/app.805a5fda.js" as="script"><link rel="preload" href="/assets/js/4.86043ea3.js" as="script"><link rel="preload" href="/assets/js/21.b8c5e892.js" as="script"><link rel="prefetch" href="/assets/js/1.62443f30.js"><link rel="prefetch" href="/assets/js/10.d3970e1d.js"><link rel="prefetch" href="/assets/js/11.1183bfd6.js"><link rel="prefetch" href="/assets/js/12.8bbbb310.js"><link rel="prefetch" href="/assets/js/13.db598152.js"><link rel="prefetch" href="/assets/js/14.91fb53c2.js"><link rel="prefetch" href="/assets/js/15.62f8a05a.js"><link rel="prefetch" href="/assets/js/16.04cb4d15.js"><link rel="prefetch" href="/assets/js/17.591fa5cc.js"><link rel="prefetch" href="/assets/js/18.a75b17cd.js"><link rel="prefetch" href="/assets/js/19.b687f9ae.js"><link rel="prefetch" href="/assets/js/2.0d2980c1.js"><link rel="prefetch" href="/assets/js/20.02d1b9e2.js"><link rel="prefetch" href="/assets/js/22.8c70570d.js"><link rel="prefetch" href="/assets/js/23.dd29890b.js"><link rel="prefetch" href="/assets/js/24.1918a204.js"><link rel="prefetch" href="/assets/js/5.49282b20.js"><link rel="prefetch" href="/assets/js/6.3f22b853.js"><link rel="prefetch" href="/assets/js/7.2d06d015.js"><link rel="prefetch" href="/assets/js/8.b533d172.js"><link rel="prefetch" href="/assets/js/9.864cef8d.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.bd7e4d11.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="layout has-background-dark has-text-light" data-v-578632c4 data-v-45a66bb4><header class="header mb-6" data-v-578632c4><nav role="navigation" aria-label="main navigation" class="navbar" data-v-578632c4><div class="navbar-brand" data-v-578632c4><a href="/" class="navbar-item" data-v-578632c4><span class="has-text-white" data-v-578632c4>$ cd /home/</span></a> <a role="button" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" class="navbar-burger" data-v-578632c4><span aria-hidden="true" data-v-578632c4></span> <span aria-hidden="true" data-v-578632c4></span> <span aria-hidden="true" data-v-578632c4></span></a></div> <div id="navbarBasicExample" class="navbar-menu is-align-items-center" data-v-578632c4><div class="navbar-start" data-v-578632c4><a href="/blog/" class="button is-white has-text-light" data-v-578632c4><span class="icon is-small" data-v-578632c4><i class="hyni-book" data-v-578632c4></i></span> <span data-v-578632c4>blog</span></a> <a href="/tag/" class="button is-white has-text-light" data-v-578632c4><span class="icon is-small" data-v-578632c4><i class="hyni-tag" data-v-578632c4></i></span> <span data-v-578632c4>tags</span></a> <a href="https://github.com/nguyenhy/nguyenhy.github.io" class="button is-white has-text-light" data-v-578632c4><span class="icon is-small" data-v-578632c4><i class="hyni-github" data-v-578632c4></i></span> <span data-v-578632c4>github</span></a> <button class="button is-white has-text-light" data-v-578632c4><span class="icon is-small" data-v-578632c4><i class="hyni-search" data-v-578632c4></i></span> <span data-v-578632c4>search</span></button></div></div></nav> <section class="hero is-link is-fullheight-with-navbar background-image" style="background-image:url(https://res.cloudinary.com/hqe/image/upload/c_scale,h_600/v1646454274/github-nguyenhy-hp/sky-7.jpg);background-color:;" data-v-578632c4><div class="
+          container
+          is-max-desktop
+          is-flex
+          is-flex-direction-column
+          is-justify-content-center
+          py-6
+          px-2
+        " style="opacity:1;" data-v-578632c4><div class="py-6" data-v-578632c4 data-v-45a66bb4><h3 class="title is-size-3 has-text-weight-bold" data-v-578632c4 data-v-45a66bb4>Flexbox - [Part 1] Introduction</h3> <p class="subtitle" data-v-578632c4 data-v-45a66bb4>Flexbox - [Part 1] Introduction</p> <div class="meta mt-2" data-v-578632c4 data-v-45a66bb4><div class="tags" data-v-7eedc138 data-v-45a66bb4><span class="tag is-rounded my-1 mr-1 is-inline-flex ml-0" data-v-7eedc138><a href="/tag/web/" data-v-7eedc138>web</a></span><span class="tag is-rounded my-1 mr-1 is-inline-flex ml-1" data-v-7eedc138><a href="/tag/frontend/" data-v-7eedc138>frontend</a></span><span class="tag is-rounded my-1 mr-1 is-inline-flex ml-1" data-v-7eedc138><a href="/tag/introduction/" data-v-7eedc138>introduction</a></span><span class="tag is-rounded my-1 mr-1 is-inline-flex ml-1" data-v-7eedc138><a href="/tag/beginner/" data-v-7eedc138>beginner</a></span><span class="tag is-rounded my-1 mr-1 is-inline-flex ml-1" data-v-7eedc138><a href="/tag/css/" data-v-7eedc138>css</a></span><span class="tag is-rounded my-1 mr-1 is-inline-flex ml-1" data-v-7eedc138><a href="/tag/flexbox/" data-v-7eedc138>flexbox</a></span><span class="tag is-rounded my-1 mr-1 is-inline-flex ml-1" data-v-7eedc138><a href="/tag/html/" data-v-7eedc138>html</a></span></div> <div class="level" data-v-578632c4 data-v-45a66bb4><div class="level-left" data-v-4d9f91f2 data-v-45a66bb4><div class="level-item is-inline-flex is-justify-content-flex-start" data-v-4d9f91f2><span class="icon" data-v-4d9f91f2><i class="hyni-user" data-v-4d9f91f2></i></span> <span class="text is-size-7" data-v-4d9f91f2><a href="/tag/hyn/" data-v-4d9f91f2>hyn</a></span></div> <div class="level-item is-inline-flex is-justify-content-flex-start" data-v-4d9f91f2><span class="icon" data-v-4d9f91f2><i class="hyni-calendar" data-v-4d9f91f2></i></span> <span class="text is-size-7" data-v-4d9f91f2><a href="/tag/y2022/" data-v-4d9f91f2>2022</a> <span data-v-4d9f91f2>/</span> <a href="/tag/m6/" data-v-4d9f91f2>6</a> <span data-v-4d9f91f2>/</span> <a href="/tag/d9/" data-v-4d9f91f2>9</a></span></div></div></div></div></div></div></section></header> <main class="main" data-v-578632c4><div class="container px-1 is-max-desktop" data-v-578632c4> <div class="content has-background-dark mb-4" data-v-45a66bb4><div class="content__default" data-v-45a66bb4><h3 id="parts"><a href="#parts" class="header-anchor">#</a> Parts</h3> <ul><li><a href="/2022/06/09/brief-introduction-to-flexbox-part-1/" aria-current="page" class="router-link-exact-active router-link-active">Parts 1: Basic understand about Flexbox</a> - here we are</li> <li><a href="/2022/06/09/brief-introduction-to-flexbox-part-2/">Parts 2: Flex container properties</a></li> <li><a href="/2022/06/09/brief-introduction-to-flexbox-part-3/">Parts 3: Flex item properties</a></li></ul> <h3 id="prerequisites"><a href="#prerequisites" class="header-anchor">#</a> Prerequisites</h3> <ul><li>basic understand of CSS</li> <li>know how to write, read CSS rules</li></ul> <h3 id="why-flexbox"><a href="#why-flexbox" class="header-anchor">#</a> Why Flexbox</h3> <ul><li>efficient way to layout, align and distribute space among items in container, even when their size is unknown.</li></ul> <h3 id="basic-understand"><a href="#basic-understand" class="header-anchor">#</a> Basic understand</h3> <h4 id="idea"><a href="#idea" class="header-anchor">#</a> Idea</h4> <ul><li>The main idea behind <code>flexbox</code> is to provide the container ability to alter its items's width and height, order, alignment,... to best fill space in the efficient way.</li></ul> <h4 id="terminology"><a href="#terminology" class="header-anchor">#</a> Terminology</h4> <p>When working with flexbox, we need to think about its axis which <code>main axis</code> and <code>cross axis</code>.</p> <p>The main axis is define by <code>flex-direction</code> and the cross axis is perpendicular to its.
+Since flexbox was designed as a one-dimensional layout, almost everything we do with a flexbox layout is
+refer back to these two axes;</p> <h5 id="main-axis"><a href="#main-axis" class="header-anchor">#</a> Main axis</h5> <p>As mentioned above, the main axis is defined by <code>flex-direction</code>, which is has 4 values:</p> <ul><li>row</li> <li>row-reverse</li> <li>column</li> <li>column-reverse</li></ul> <p>You should choose <code>row</code> or <code>row-reverse</code> if you want your layout to be row  - <strong>in the inline direction</strong>
+and using <code>column</code> or <code>column-reverse</code> if your main axis go from top to bottom - <strong>in the block direction</strong></p> <p data-height="300" data-default-tab="html,result" data-slug-hash="PoRNLGE" data-user="nguyenhy" class="codepen" style="height:300px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:2px solid;margin:1em 0;padding:1em;"><span>See the Pen <a href="https://codepen.io/nguyenhy/pen/PoRNLGE">
+  Untitled</a> by nguyen (<a href="https://codepen.io/nguyenhy">@nguyenhy</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span></p> <script async="async" src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script> <br> <h5 id="cross-axis"><a href="#cross-axis" class="header-anchor">#</a> Cross axis</h5> <p>The cross axis runs perpendicular to its main axis. So, if your main axis is <code>row</code> or <code>row-reverse</code>
+then your cross axis will be <code>column</code> or <code>column-reverse</code></p> <h5 id="flex-container"><a href="#flex-container" class="header-anchor">#</a> Flex container</h5> <p>Flex container is an area of document using flexbox. To create a <code>flex container</code> we use set value for <code>display</code> of container
+to <code>flex</code> or <code>inline-flex</code>. After set value, direct children of the <code>flex container</code> will become <code>flex item</code> and some initial value are
+defined.</p></div></div></div></main> <footer class="footer p-2 has-background-grey-dark" data-v-578632c4><div class="content has-text-centered" data-v-578632c4><p data-v-578632c4>
+        Power by
+        <strong data-v-578632c4><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="has-text-primary" data-v-578632c4>Power</a></strong></p></div></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.805a5fda.js" defer></script><script src="/assets/js/4.86043ea3.js" defer></script><script src="/assets/js/21.b8c5e892.js" defer></script>
+  </body>
+</html>
