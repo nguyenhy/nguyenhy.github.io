@@ -1,6 +1,7 @@
-import { component$, useStyles$ } from '@builder.io/qwik';
-import { useContent, useLocation, ContentMenu } from '@builder.io/qwik-city';
-import styles from './breadcrumbs.css?inline';
+import { component$, useStyles$ } from "@builder.io/qwik";
+import type { ContentMenu } from "@builder.io/qwik-city";
+import { useContent, useLocation } from "@builder.io/qwik-city";
+import styles from "./breadcrumbs.css?inline";
 
 export const Breadcrumbs = component$(() => {
   useStyles$(styles);
@@ -22,13 +23,16 @@ export const Breadcrumbs = component$(() => {
   );
 });
 
-export function createBreadcrumbs(menu: ContentMenu | undefined, pathname: string) {
+export function createBreadcrumbs(
+  menu: ContentMenu | undefined,
+  pathname: string
+) {
   if (menu?.items) {
     for (const indexA of menu.items) {
       const breadcrumbA: ContentBreadcrumb = {
         text: indexA.text,
       };
-      if (typeof indexA.href === 'string') {
+      if (typeof indexA.href === "string") {
         breadcrumbA.href = indexA.href;
       }
       if (indexA.href === pathname) {
@@ -40,7 +44,7 @@ export function createBreadcrumbs(menu: ContentMenu | undefined, pathname: strin
           const breadcrumbB: ContentBreadcrumb = {
             text: indexB.text,
           };
-          if (typeof indexB.href === 'string') {
+          if (typeof indexB.href === "string") {
             breadcrumbB.href = indexB.href;
           }
           if (indexB.href === pathname) {
@@ -52,7 +56,7 @@ export function createBreadcrumbs(menu: ContentMenu | undefined, pathname: strin
               const breadcrumbC: ContentBreadcrumb = {
                 text: indexC.text,
               };
-              if (typeof indexC.href === 'string') {
+              if (typeof indexC.href === "string") {
                 breadcrumbC.href = indexC.href;
               }
               if (indexC.href === pathname) {
