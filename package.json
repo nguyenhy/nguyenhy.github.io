@@ -20,7 +20,9 @@
     "start": "vite --open --mode ssr",
     "qwik": "qwik",
     "prepare": "husky install",
-    "test": "echo 'test'"
+    "test": "vitest --config ./vitest.config.ts --run",
+    "test.watch": "vitest --config ./vitest.config.ts",
+    "coverage": "vitest run --coverage --config ./vitest.config.ts"
   },
   "devDependencies": {
     "@builder.io/qwik": "^1.1.4",
