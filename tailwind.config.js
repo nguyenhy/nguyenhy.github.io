@@ -2,9 +2,10 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,md,mdx}"],
   theme: {
-    extend: {},
-    fontFamily: {
-      logo: ['"Atomic\\ Age"', "cursive"],
+    extend: {
+      fontFamily: {
+        logo: ['"Atomic\\ Age"', "cursive"],
+      },
     },
   },
   plugins: [
