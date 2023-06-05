@@ -8,7 +8,7 @@ export default component$(() => {
     <footer>
       <ul>
         <li>
-          <a href="/blobs">Blogs</a>
+          <a href="/blogs">Blogs</a>
         </li>
         <li>
           <a href="/about-me">About me</a>
