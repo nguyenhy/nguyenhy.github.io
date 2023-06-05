@@ -1,34 +1,15 @@
-header {
-  position: sticky;
-  top: 0;
-  z-index: 11;
-  display: grid;
-  grid-template-columns: minmax(60px, auto) 1fr;
-  gap: 30px;
-  height: 80px;
-  width: 100%;
-  padding: 10px;
-  background-color: inherit;
-  overflow: hidden;
-}
-
-header a.logo {
-  display: block;
-}
-
-header a {
-  text-decoration: none;
-}
-
-header nav {
-  text-align: right;
-}
-
 header nav a {
-  display: inline-block;
-  padding: 5px 15px;
+  @apply inline-block py-1 px-3 font-logo;
 }
 
 header nav a:hover {
-  text-decoration: underline;
+  @apply underline;
+}
+
+header nav a.active {
+  @apply text-white border rounded-md;
+  background: theme("colors.accent.DEFAULT");
+}
+header nav a.active:hover {
+  background: theme("colors.accent.600");
 }
