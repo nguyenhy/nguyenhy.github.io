@@ -1,8 +1,11 @@
-import { defineConfig } from 'vite';
+import { HmrContext, defineConfig } from 'vite';
 import { qwikVite } from '@builder.io/qwik/optimizer';
 import { qwikCity } from '@builder.io/qwik-city/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import rehypePrettyCode from 'rehype-pretty-code';
+import { allMetaFiles, blogsPath, createMetaFile, rootPath } from './bin/crawl-blog'
+import path from 'path';
+
 
 const rehypePrettyCodeOptions = {
   // Use one of Shiki's packaged themes
@@ -30,6 +33,24 @@ const rehypePrettyCodeOptions = {
   },
 };
 
+function buildMdxMetadata() {
+	return {
+		name: 'mdx-metadata',
+		buildStart() {
+      createMetaFile();
+		},
+    handleHotUpdate(context: HmrContext) {
+      const file = context.file
+      const ext = path.extname(file)
+      const relativeFromBlogs = file.replace(blogsPath, '')
+      if(['.mdx', '.md'].includes(ext) && relativeFromBlogs) {
+        createMetaFile();
+      }
+    }
+
+	};
+}
+
 
 export default defineConfig(() => {
   return {
@@ -51,6 +72,7 @@ export default defineConfig(() => {
       }),
       qwikVite(),
       tsconfigPaths(),
+      buildMdxMetadata(),
     ],
     preview: {
       headers: {

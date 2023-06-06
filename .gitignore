@@ -41,3 +41,6 @@ lerna-debug.log*
 
 # test
 coverage/
+
+# generate meta
+src/routes/blogs/**/*.meta.ts
