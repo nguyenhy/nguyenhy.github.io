@@ -1,0 +1,3 @@
+.card a:not(:last-child) div {
+  @apply border-b border-solid border-slate-500;
+}
