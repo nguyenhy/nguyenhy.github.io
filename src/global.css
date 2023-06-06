@@ -23,6 +23,17 @@
 @media (min-width: 50em) {
   :root {
     --max-width: 46em;
+
+    --bg-color: #ffffff;
+    --bg-secondary-color: #f7f8fb;
+    --bg-header-color: #ffffff9e;
+    --text-color: #0e201a;
+    --secondary-text-color: #171a19;
+    --interactive-text-color: var(--qwik-dark-blue);
+
+    --code-bg-color: #282c34;
+    --code-border-color: #bfbfbf;
+    --blockquote-bg-color: #f1f5fe;
   }
 }
 
@@ -47,21 +58,6 @@ a {
 
 a:hover {
   text-decoration: none;
-}
-
-code,
-kbd,
-samp,
-pre {
-  font-family: var(--font-mono);
-}
-
-code {
-  background-color: rgb(224, 224, 224);
-  padding: 2px 4px;
-  border-radius: 3px;
-  font-size: 0.9em;
-  border-bottom: 2px solid #bfbfbf;
 }
 
 /**
