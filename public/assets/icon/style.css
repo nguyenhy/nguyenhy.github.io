@@ -1,18 +1,19 @@
 @font-face {
-  font-family: 'hytorium';
-  src:  url('fonts/hytorium.eot?n35l6v');
-  src:  url('fonts/hytorium.eot?n35l6v#iefix') format('embedded-opentype'),
-    url('fonts/hytorium.ttf?n35l6v') format('truetype'),
-    url('fonts/hytorium.woff?n35l6v') format('woff'),
-    url('fonts/hytorium.svg?n35l6v#hytorium') format('svg');
+  font-family: "hytorium";
+  src: url("fonts/hytorium.eot?n35l6v");
+  src: url("fonts/hytorium.eot?n35l6v#iefix") format("embedded-opentype"),
+    url("fonts/hytorium.ttf?n35l6v") format("truetype"),
+    url("fonts/hytorium.woff?n35l6v") format("woff"),
+    url("fonts/hytorium.svg?n35l6v#hytorium") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-[class^="hy-"], [class*=" hy-"] {
+[class^="hy-"],
+[class*=" hy-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'hytorium' !important;
+  font-family: "hytorium" !important;
   speak: never;
   font-style: normal;
   font-weight: normal;
