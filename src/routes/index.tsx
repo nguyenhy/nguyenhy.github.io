@@ -6,10 +6,8 @@ export default component$(() => {
     <>
       <div class="w-full h-[30vh] flex flex-row justify-start">
         <div class="max-w-[50vw] mt-[10vh]">
-          <h4 class="text-4xl font-bold font-logo text-slate-800">
-            Keep calm and code on
-          </h4>
-          <p class="text-lg text-gray-600">
+          <h4 class="text-4xl font-bold font-logo">Keep calm and code on</h4>
+          <p class="text-lg">
             Begin Your Web Development Adventure: Learn, Explore, Create!
           </p>
         </div>

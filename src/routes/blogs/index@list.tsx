@@ -37,13 +37,15 @@ export default component$(() => {
             <>
               <a class="group mb-4 block" href={item.url}>
                 <div class="py-4">
-                  <h4 class="group-hover:underline text-3xl mb-2 text-bold text-slate-800 font-bold">
+                  <h4 class="group-hover:underline text-3xl mb-2 text-bold font-bold text-[var(--text-color)]">
                     <span>{item?.title ?? ""}</span>
                   </h4>
                   {item?.description ? (
-                    <p class="text-lg text-slate-800">{item.description}</p>
+                    <p class="text-lg text-[var(--secondary-text-color)]">
+                      {item.description}
+                    </p>
                   ) : null}
-                  <span class="text-sm text-slate-700">
+                  <span class="text-sm text-[var(--secondary-text-color)]">
                     {item.author ?? null}
                     <span> | </span>
                     {item.date ?? null}

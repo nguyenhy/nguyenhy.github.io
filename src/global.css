@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   --user-font-scale: 1rem - 16px;
   --max-width: calc(100% - 1rem);
@@ -20,45 +16,9 @@
   color-scheme: light;
 }
 
-@media (min-width: 50em) {
-  :root {
-    --max-width: 46em;
-
-    --bg-color: #ffffff;
-    --bg-secondary-color: #f7f8fb;
-    --bg-header-color: #ffffff9e;
-    --text-color: #0e201a;
-    --secondary-text-color: #171a19;
-    --interactive-text-color: var(--qwik-dark-blue);
-
-    --code-bg-color: #282c34;
-    --code-border-color: #bfbfbf;
-    --blockquote-bg-color: #f1f5fe;
-  }
-}
-
-body {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-size: clamp(0.9rem, 0.75rem + 0.375vw + var(--user-font-scale), 1rem);
-  line-height: 1.5;
-  background: theme("colors.white");
-  color: theme("colors.text");
-}
-
-main {
-  padding: 10px 20px;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-a {
-  color: theme("colors.accent.DEFAULT");
-}
-
-a:hover {
-  text-decoration: none;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /**
  * WHAT IS THIS FILE?
@@ -80,4 +40,45 @@ html {
 body {
   padding: 0;
   line-height: inherit;
+
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-size: clamp(0.9rem, 0.75rem + 0.375vw + var(--user-font-scale), 1rem);
+  line-height: 1.5;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+:root.dark {
+  --bg-color: theme("colors.slate.700");
+  --text-color: theme("colors.slate.200");
+  --secondary-text-color: theme("colors.slate.400");
+  --anchor: theme("colors.accent.700");
+
+  --code-inline-code-color-bg: theme("colors.slate.500");
+  --code-inline-code-color-text: theme("colors.white");
+}
+
+:root:not(.dark) {
+  --bg-color: theme("colors.slate.50");
+  --text-color: theme("colors.black");
+  --secondary-text-color: theme("colors.slate.700");
+  --anchor: theme("colors.accent.DEFAULT");
+
+  --code-inline-code-color-bg: theme("colors.slate.600");
+  --code-inline-code-color-text: theme("colors.white");
+}
+
+a {
+  color: var(--anchor);
+}
+a:hover {
+  text-decoration: none;
+}
+
+main {
+  padding: 10px 20px;
+  max-width: 960px;
+  margin: 0 auto;
 }
