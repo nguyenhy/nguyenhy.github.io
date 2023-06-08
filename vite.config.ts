@@ -2,14 +2,31 @@ import { HmrContext, defineConfig } from 'vite';
 import { qwikVite } from '@builder.io/qwik/optimizer';
 import { qwikCity } from '@builder.io/qwik-city/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import rehypePrettyCode from 'rehype-pretty-code';
+import rehypePrettyCode, { Options } from 'rehype-pretty-code';
 import { allMetaFiles, blogsPath, createMetaFile, rootPath } from './bin/crawl-blog'
 import path from 'path';
 
+const highlightWordColorBgColor = {
+  a: 'rgb(196 42 94 / 59%)',
+  b: 'rgb(0 103 163 / 56%)',
+  c: 'rgb(100 50 255 / 35%)',
+};
 
-const rehypePrettyCodeOptions = {
+const highlightWordColor = {
+  a: 'rgb(255 225 225 / 100%)',
+  b: 'rgb(175 255 255 / 100%)',
+  c: 'rgb(225 200 255 / 100%)',
+};
+
+
+
+const rehypePrettyCodeOptions: Partial<Options> = {
   // Use one of Shiki's packaged themes
-  theme: 'one-dark-pro',
+  // theme: 'one-dark-pro',
+  theme: {
+    'one-dark-pro': 'one-dark-pro',
+    'nord': 'nord'
+  },
   // Or your own JSON theme
   // Keep the background or use a custom background color?
   keepBackground: true,
@@ -27,9 +44,29 @@ const rehypePrettyCodeOptions = {
     // Each line node by default has `class="line"`.
     node.properties.className.push('highlighted');
   },
-  onVisitHighlightedWord(node) {
+  onVisitHighlightedWord(node, id) {
     // Each word node has no className by default.
     node.properties.className = ['word'];
+    if (id) {
+      const backgroundColor = highlightWordColorBgColor[id];
+      const color = highlightWordColor[id];
+
+      if (node.properties['data-rehype-pretty-code-wrapper']) {
+        node.children.forEach((childNode: any) => {
+          childNode.properties.style = ``;
+          childNode.properties.className = '';
+        });
+      }
+      const styles: string[] = []
+      if(backgroundColor) {
+        styles.push(`background-color: ${backgroundColor}`)
+      }
+
+      if(color) {
+        styles.push(`color: ${color}`)
+      }
+      node.properties.style = styles.join(';');
+    }
   },
 };
 
