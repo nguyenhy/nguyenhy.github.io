@@ -1,4 +1,4 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useStore, useVisibleTask$ } from "@builder.io/qwik";
 import {
   QwikCityProvider,
   RouterOutlet,
@@ -7,6 +7,14 @@ import {
 import { RouterHead } from "./components/router-head/router-head";
 
 import "./global.css";
+import { SettingContext } from "./services/context";
+import { useContextProvider } from "@builder.io/qwik";
+import type { IContextSettingState } from "./services/context";
+import {
+  colorSchemeChangeListener,
+  getThemePreference,
+  setThemePreference,
+} from "./services/theme";
 
 const HeadFont = () => {
   return (
@@ -104,6 +112,18 @@ const HeadFavicon = () => {
 };
 
 export default component$(() => {
+  const settingStore = useStore<IContextSettingState>({});
+  useContextProvider(SettingContext, settingStore);
+  useVisibleTask$(() => {
+    const theme = getThemePreference();
+    if (theme) {
+      settingStore.theme = theme;
+    }
+    return colorSchemeChangeListener((isDark) => {
+      settingStore.theme = isDark ? "dark" : "light";
+      setThemePreference(settingStore.theme);
+    });
+  });
   /*
    * The root of a QwikCity site always start with the <QwikCityProvider> component,
    * immediately followed by the document's <head> and <body>.
