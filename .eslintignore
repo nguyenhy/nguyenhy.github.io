@@ -41,5 +41,6 @@ commitlint.config.js
 tailwind.config.js
 
 public/**/*.js
+src/**/*.script.js
 bin/*.js
 src/routes/blogs/**/*.meta.ts
