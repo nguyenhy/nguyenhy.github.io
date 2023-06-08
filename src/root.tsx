@@ -25,6 +25,7 @@ const HeadFont = () => {
         href="https://fonts.googleapis.com/css2?family=Atomic+Age&display=swap"
         rel="stylesheet"
       />
+      <link rel="stylesheet" href="/assets/icon/style.css" />
     </>
   );
 };
