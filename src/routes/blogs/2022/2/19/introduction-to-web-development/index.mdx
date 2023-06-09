@@ -15,9 +15,9 @@ tag:
   - y2022/m2
 author: hyn
 # post
-title: Introduction To Web Development
-description: Simple introduction to web development for absolutely beginner
-summary: Simple introduction to web development for absolutely beginner
+title: Introduction To FrontEnd Web Development
+description: Simple introduction to FrontEnd web development for absolutely beginner
+summary: Simple introduction to FrontEnd web development for absolutely beginner
 thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1641481664/github-nguyenhy-hp/sky-4.jpg
 bigThumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_600/v1641481664/github-nguyenhy-hp/sky-4.jpg
 thumbAlt: sky
@@ -41,59 +41,80 @@ meta:
     content: Vietnam
 
   - name: title
-    content: Introduction To Web Development
+    content: Introduction To FrontEnd Web Development
   - name: description
-    content: Simple introduction to web development for absolutely beginner
+    content: Simple introduction to FrontEnd web development for absolutely beginner
 
-    # og tag
+    # Og tag
   - name: og:type
     content: website
   - name: og:title
-    content: Introduction To Web Development
+    content: Introduction To FrontEnd Web Development
   - name: og:description
-    content: Simple introduction to web development for absolutely beginner
+    content: Simple introduction to FrontEnd web development for absolutely beginner
   - name: og:image
     content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1641481664/github-nguyenhy-hp/sky-4.jpg
   - name: og:url
     content: https://nguyenhy.github.io/2022/02/19/introduction-to-web-development/
 
-    # twitter tag
+    # Twitter tag
   - property: twitter:url
     content: https://nguyenhy.github.io/2022/02/19/introduction-to-web-development/
   - property: twitter:title
-    content: Introduction To Web Development
+    content: Introduction To FrontEnd Web Development
   - property: twitter:description
-    content: Simple introduction to web development for absolutely beginner
+    content: Simple introduction to FrontEnd web development for absolutely beginner
   - property: twitter:image
     content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1641481664/github-nguyenhy-hp/sky-4.jpg
 ---
 
-As always, you should read this [disclaimer](/2022/02/19/disclaimer/) before reading below article
+# Introduction To FrontEnd Web Development
 
-## Introduction
+Front-end web development involves working with `HTML`, `CSS`, and `JavaScript` to create websites and web applications that users can directly interact with.
+The core languages used are HTML (HyperText Markup Language), CSS (Cascading Style Sheets), and JavaScript.
 
-The final result we should point out is to have a basic understanding of what website development look like, or how can you create yourself simple website
+To get started with creating a simple website, you need to:
+- Understand the basics of HTML to structure the content of your web pages.
+- Use CSS to style and format the elements on your web pages.
+- Incorporate JavaScript to add interactivity and dynamic behavior to your website.
 
-## To
+## Goals
+
+The final result we should point out is to have:
+- A basic understanding of what website development look like
+- How can you create yourself simple website
+
+## Target audience
 
 those who:
+- Don't know or have no idea what web development look like
+- Is absolutely beginner and want to start develop some thing
 
-- don't know or have no idea what web development look like
-- is absolutely beginner and want to start develop some thing
+## Web and HTML
 
-## Web
+The **world wide web**, commonly known as the web, has revolutionized the way we access and share information.
+It has become an integral part of our daily lives, connecting people, businesses, and resources from all corners of the globe.
+
+At the core of the web's functionality lies a fundamental language known as `HTML` (`H`yper`T`ext `M`arkup `L`anguage), 
+which serves as the backbone for creating and structuring web pages.
+In this introduction, we will explore what the web is, delve into the details of HTML, and understand how these two concepts relate to each other.
+
+HTML is the standard markup language used for creating web pages. 
+It provides a set of tags, elements, and attributes that define the structure and content of a webpage. 
+With HTML, web developers can specify the layout, formatting, and placement of text, images, videos, links, and other multimedia elements. 
+By utilizing a simple and intuitive syntax, HTML allows developers to create structured documents that can be interpreted and rendered correctly by web browsers.
+
+---
+
+### Example 1
 
 Saying i want a website has simple text with some style kind of like <span style="color: red">red</span> color text
 and if i **click** on that text it turn from <span style="color: red">red</span> into <span style="color: blue">blue</span>
 This's what i will do
 
----
-
-### example 1
-
-<iframe height="300" style="width: 100%;" scrolling="no" title="Introduction To Web Development" src="https://codepen.io/nguyenhy/embed/mdqxbOj?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+<iframe height="300" style="width: 100%;" scrolling="no" title="Introduction To FrontEnd Web Development" src="https://codepen.io/nguyenhy/embed/mdqxbOj?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/nguyenhy/pen/mdqxbOj">
-  Introduction To Web Development</a> by nguyen (<a href="https://codepen.io/nguyenhy">@nguyenhy</a>)
+  Introduction To FrontEnd Web Development</a> by nguyen (<a href="https://codepen.io/nguyenhy">@nguyenhy</a>)
   on <a href="https://codepen.io">CodePen</a>.
 </iframe>
 
@@ -132,16 +153,17 @@ So tag's format will look like:
 
 ```html
 <!-- normal elements -->
-<element attribute="value" attribute="value" ...>element content</element>
+<element attribute="value" ...>element content</element>
 
 <!-- no-ending elements -->
-<element attribute="value" attribute="value" ... />
+<element attribute="value" ... />
 
-<!-- void elements -->
-<element attribute="value" attribute="value" ...></element>
+<!-- void elements (tags that cannot have any child nodes) -->
+<!--   -->
+<element attribute="value" ...></element>
 ```
 
-- color those text with red color
+Eg: create a tag that make text color is <span style="color: red">red</span>
 
 ```html
 <span style="color: red">...</span>
@@ -150,28 +172,22 @@ So tag's format will look like:
 > `<span style="">` mean "i want to change how this `span` tag look like"
 > and it is `color: red`
 
-This's what i call **inline style**. There're **external**, **internal** and **inline** style for you to know
-. We can put many, many style on this inline style with format `style="property: value; property: value; ..."`
-
-- and when i click on it
-
-```html
-<span onclick="..."></span>
-```
-
-- turn its text style color into blue
-
-```js
-this.style.color = "blue";
-```
-
-> we'll later talk about `this`, `this.style`, `this.style.color = ...`
+This's **inline style**. There're **external**, **internal** and **inline** style for you to know.
+We can put many, many style on this inline style with format `style="property: value; property: value; ..."`
 
 ---
 
-**Question:** So... if the `span` thing can do all the job, why waste time writing down all other (non-highlight) things?
+**Question:** So...back to the example above. If the `span` thing can do all the job, why waste time writing down all other (*non-highlight lines down below*) things?
 
-<br />
+``` html {5}
+<!doctype html>
+<html lang="en">
+<head></head>
+<body>
+  <span style="color: red" onclick="this.style.color='blue'">hello world</span>
+</body>
+</html>
+```
 
 **Answer:** yes, you can do it, believe me go ahead to [example](#example-1) and delete all other line
 . So it look like this and of course it's still work
@@ -184,14 +200,28 @@ It look like waste, redundancy code but trust me we'll need it for later develop
 
 ## Development
 
-To sum up, web development is to create a `*.html` with your content inside. Of course, real-world development is much more than just to create a `*.html`.
 
-But for now, \*.html file is enough for us to understand big-image of web development
+In simple words, creating a website is like creating an HTML `*.html` file where you write code to structure the content of a web page. 
+Once you have written the HTML code, save it with the `*.html` extension. 
+Next, open the saved file using your web browser. 
+The browser will then parse the HTML file and convert it into a tree-like structure, which represents the structure and layout of the web page. 
+Finally, the browser displays the formatted content of the web page based on the HTML code you wrote.
+
+Of course, real-world development is much more than just to create a `*.html`.
+In fact, real-world development, websites are typically hosted on servers and accessed over the internet rather than being local files on your computer
+But for now, `*.html` file is enough for us to understand big-image of front web development
+
+So instead of manual create `*.html` files. We can use online tools to do the same things: 
+- [codepen](https://codepen.io/trending)
+- [jsbin](https://jsbin.com/)
+- [stackblitz](https://stackblitz.com/)
+<br />
+Will do the jobs, just paste some html code and start explore
 
 ### Where to start?
 
-- **online development**
-  You could use some online editor like [codepen](https://codepen.io/trending),[jsbin](https://jsbin.com/), [stackblitz](https://stackblitz.com/), ... just paste some html code and start explore
+- **online development**:
+  [codepen](https://codepen.io/trending),[jsbin](https://jsbin.com/), [stackblitz](https://stackblitz.com/), ... 
 - **local development**
   - **raw file html**
     - create file `index.html`
@@ -220,6 +250,6 @@ But for now, \*.html file is enough for us to understand big-image of web develo
 
 ### What's next
 
-- read my blog about [Introduction to HTML](/2022/02/24/introduction-to-html/)
+- read my blog about [Introduction to HTML](/blogs/2022/2/24/introduction-to-html/)
 - The purpose of this article is introduce you to basic idea of web development. We'll later explore more about [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript#for_complete_beginners), ...
 - You should explore more about [HTML elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
