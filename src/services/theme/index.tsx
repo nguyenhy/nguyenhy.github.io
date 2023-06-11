@@ -3,7 +3,6 @@ import { SettingContext } from "../context";
 import { getLocalStorage, setLocalStorage } from "../storage/index.services";
 import { STORAGE_KEY_SETTING_THEME } from "../storage/index.const";
 import type { TThemeType } from "../context";
-import themeScript from "./index.script?raw";
 
 export const colorSchemeChangeListener = (
   onColorSchemeChange: (isDark: boolean) => void
@@ -71,7 +70,3 @@ export const ThemeToggle = component$(() => {
     </>
   );
 });
-
-export const ThemeScript = () => {
-  return <script dangerouslySetInnerHTML={themeScript} />;
-};
