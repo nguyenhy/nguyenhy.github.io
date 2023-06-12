@@ -54,7 +54,7 @@ body {
   --bg-color: theme("colors.slate.700");
   --text-color: theme("colors.slate.200");
   --secondary-text-color: theme("colors.slate.400");
-  --anchor: theme("colors.accent.700");
+  --anchor: #009fd4;
 
   --code-inline-code-color-bg: theme("colors.slate.500");
   --code-inline-code-color-text: theme("colors.white");
