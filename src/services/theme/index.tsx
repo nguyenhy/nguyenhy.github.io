@@ -60,7 +60,11 @@ export const ThemeToggle = component$(() => {
 
   return (
     <>
-      <button onClick$={onClick$} data-theme={state.theme}>
+      <button
+        aria-label="toggle theme"
+        onClick$={onClick$}
+        data-theme={state.theme}
+      >
         <i
           class={`inline-block hy-adjust text-xl text-[var(--anchor)] ${
             state.theme === "light" ? "rotate-180" : ""
