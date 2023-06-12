@@ -1,6 +1,6 @@
 import { component$, useStyles$ } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
-import QwikLogo from "../icons/qwik";
+import HeaderLogo from "../logo";
 import styles from "./header.css?inline";
 import { ThemeToggle } from "~/services/theme";
 
@@ -16,7 +16,7 @@ export default component$<IHeaderProps>(() => {
         <a class="no-underline" href="/">
           {/* h-20 ->  5rem: 80px */}
           {/* p-2 -> 0.5rem: 8px */}
-          <QwikLogo height={80 - 8 * 2} />
+          <HeaderLogo height={80 - 8 * 2} />
         </a>
         <div class="flex flex-row items-center">
           <nav>
