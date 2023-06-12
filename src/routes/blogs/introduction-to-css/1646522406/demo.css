@@ -1,0 +1,47 @@
+* {
+  /* select all element */
+  font-size: 18px;
+}
+
+span {
+  /* select all span */
+  color: cyan;
+  padding: 10px;
+  display: inline-block;
+  background-color: lightgrey;
+}
+
+div {
+  /* select all div */
+  background-color: grey;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+div > span {
+  /* select all span has parent of div */
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.a {
+  /* select all element has class "a" ( class="a" ) */
+  background-color: blue;
+}
+
+.b {
+  /* select all element has class "b" */
+  color: white;
+}
+
+.c,
+.d {
+  /* select all element has class "c" or "d" */
+  text-decoration: underline;
+}
+
+#c {
+  /* select all element has id "e" */
+  background-color: yellow;
+  color: blue;
+}

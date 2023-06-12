@@ -66,42 +66,62 @@ meta:
     content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1646454274/github-nguyenhy-hp/sky-6.jpg
 ---
 
-#### What is CSS for?
+# Introduction To CSS
 
-CSS is a language for specifying how documents are presented to endpoint users, it allows us to create good-looking, less-boring, readable web pages. We can define rules specifying groups of styles that should be applied to particular elements or groups of elements on documents.
+## Series
+- [Introduction To FrontEnd Web Development](/blogs/introduction-to-web-development/1686525497/)
+- [Introduction to HTML](/blogs/introduction-to-html/1645744806/)
+- [**Introduction to CSS**](/blogs/introduction-to-css/1646522406/)
+- [Introduction to Javascript](/blogs/introduction-to-javascript/1686525497)
 
-#### starting with some HTML
+## Goals
+The following article aims to provide an introduction to CSS by exploring some fundamental concepts. 
+We will examine a CSS code snippet and break down each line to understand its purpose. 
 
-<iframe height="300" style="width: 100%;" scrolling="no" title="Introduction To CSS - hello world - plain" src="https://codepen.io/nguyenhy/embed/xxPBKNW?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href="https://codepen.io/nguyenhy/pen/xxPBKNW">
-  Introduction To CSS - hello world - plain</a> by nguyen (<a href="https://codepen.io/nguyenhy">@nguyenhy</a>)
-  on <a href="https://codepen.io">CodePen</a>.
-</iframe>
+Additionally, we will discuss how we can modify and customize the code to suit our specific needs and use cases. 
+By the end of the article, you will have a solid understanding of the code and be equipped to apply it creatively to your own projects. 
+Let's dive in and explore the world of CSS together!
 
-<br />
+## What is CSS for?
+
+CSS (Cascading Style Sheets) is a language that defines how web documents are presented to end users. 
+It serves the purpose of enhancing the visual appearance of web pages, making them visually appealing, engaging, and easy to read. 
+With CSS, we can create visually captivating designs by defining rules that determine the styles to be applied to specific elements or groups of elements within a document. 
+By using CSS, we have the power to transform plain and dull web pages into visually stunning and aesthetically pleasing experiences for users.
+
+## Starting with some HTML
+
+``` html
+<!doctype html>
+<html lang="en">
+  <head></head>
+  <body>
+    <span>hello world</span> 
+  </body>
+</html>
+```
+
+>  <div class="bg-white p-1 text-black h-[60px]"><span>hello world</span> </div>
 
 Saying, "i need the **hello worlds** is in the middle of page, horizontally", the below rules of style will help me out.
-
 ```css
 span {
   text-align: center;
 }
 ```
+>  <div class="bg-white p-1 text-black h-[60px] text-center"><span>hello world</span> </div>
 
-<br />
+CSS can be used for very basic document text styling - changing font style, text color, highlight text,... 
+It can also be used to create complex layouts with animation. We'll explore more and more of CSS later in this series but for now:
+> We use CSS for styling things
 
-CSS can be used for very basic document text styling - changing font style, text color, highlight text,... It can also be used to create complex layouts with animation. We'll explore more and more of CSS later in this series but for now:
-
-> <p style="text-align: center;">we use CSS for styling things</p>
-
-<br />
-
-#### CSS syntax
+## CSS syntax
 
 CSS rules always start with a selector. this's the part of a CSS rule to specify what elements in a document will take rules effects.
 
 ```css
-/* "span" is a selector to indicate that all "span" elements will be styled by the following rules*/
+/* "span" is a SELECTOR to indicate */
+/* that all "span" elements will be styled by the following rules*/
 span {
   /* the property "color" following by "red" value indicate that */
   /* text inside "span" element in the document will have red color */
@@ -112,14 +132,14 @@ span {
 }
 ```
 
-<br />{" "}
+## Class-based CSS selector
 
-#### class-based CSS selector
+Up until now, we have been applying styles to elements based on their HTML element names. 
+This approach is suitable when we want all elements of the same type to have the same style. 
+However, in most cases, we need to target specific elements with different styles. 
+In this section, we will explore alternative ways of selecting elements and applying CSS rules to them.
 
-So far, we have styled elements based on their HTML element names. This works as long as we need all elements on the page to have the same style,
-but this's not the case most of the time. In this section, we will look into some other ways of writing selectors for CSS rules.
-
-##### basic selectors
+### Basic selectors
 
 ```html
 <!DOCTYPE html>
@@ -135,50 +155,73 @@ but this's not the case most of the time. In this section, we will look into som
 </html>
 ```
 
-<br />
+It's a good idea not to skip the below section. 
+But to be honest, all you need to know is there are `CSS` selectors look like this: 
+`*`, `element`, `.class-name`, `#element-id`, `[attribute]`, `A B`, `A>B`, `A+B`, `A~B`, `A:<...>`, `A::<...>`
 
-It's a good idea not to skip the below section but to be honest, all you need to do is try to remember all syntax with the symbols we have, which is
-`*`, `element`, `.class-name`, `#element-id`, `[attribute]`, `,`, `A B`, `A>B`, `A+B`, `A~B`, `A:<...>`, `A::<...>`
+> **Selector** is vital because it helps us answer the question of `how to style specific elements`. 
+> It provides the tools to customize the appearance of individual elements on a web page. 
 
-<br />
 
-- universal selector:
-
+#### Universal selector:
   - select all elements in document
   - syntax: `*`
-  - example: `* { property: value }` will match all elements, which is: `html`, `body`, `span`, `div`
+  - example: 
+  ``` css
+  /* will match all elements, which is: `html`, `body`, `span`, `div` */
+  * { property: value }
+  ```
 
-- type selector:
-
+#### Type selector:
   - select all elements match node name in selector
   - syntax: `elementname`
   - example:
-    - `span { property: value }` will match all `span`
-    - `div { property: value }` will match all `div`
+  ``` css
+  /* will match all `span` */
+  span { property: value } 
+  /* will match all `div` */
+  div { property: value }
+  ```
 
-- class selector:
-
+#### Class selector:
   - select all elements that have given `class` attribute in selector
   - syntax: `.classname`
   - example:
-    - `.class-a { property: value }` will match first `span`
-    - `.class-b { property: value }` will match 2nd, 3rd `span` and `div`
-    - `.class-a.class-b { property: value }` will match only 3rd `span`
+  ``` css
+  /* will match all element has class includes "class-a" */
+  .class-a { property: value } 
+  /* will match all element has class includes "class-b" */
+  .class-b { property: value } 
+  /* will match all element has class includes "class-a" AND "class-b" */
+  .class-a.class-b { property: value } 
+  ```
 
-- id selector:
-
+#### Id selector:
   - select all elements that have given `id` attribute in selector
   - syntax: `#id`
-  - example: `#span-a { property: value }` will match first `span`
+  - example: 
+  ``` css
+  /* will match all elements has id: `span-a` */
+  #span-a { property: value } 
+  ```
 
-- attribute selector:
+#### Attribute selector:
   - select all elements that have the given attribute.
   - syntax: `[attr]` `[attr=value]` `[attr~=value]` `[attr|=value]` `[attr^=value]` `[attr$=value]`
   - example:
-    - `[class="class-a"] { property: value }` will match first `span`
-    - `[id="span-a"] { property: value }` will match first `span`
+  ``` css
+  /* will match all element has class includes "class-a" */
+  [class="class-a"] { property: value }
+  /* this's same as */
+  .class-a { property: value } 
 
-##### grouping selectors
+  /* will match first `span` */
+  [id="span-a"] { property: value } 
+  /* this's same as */
+  #span-a { property: value } 
+  ```
+
+#### Grouping selectors
 
 This's the same as [basic selector](#basic-selectors) but we separate them using `,` to group the same set of elements that take rules style
 
@@ -191,7 +234,7 @@ div,
 }
 ```
 
-##### combinator
+### Combinator
 
 ```html
 <!DOCTYPE html>
@@ -216,14 +259,14 @@ div,
 </html>
 ```
 
-- descendant combinator:
+#### descendant combinator:
 
   - select nodes that are descendants of the first elements
   - syntax: `A B` where `A`, `B` are [basic selector](#basic-selector)
   - example: - `div span { ... }` will match all `span` that are child of `div`, which is 2nd and 3rd `span` - `div .class-a {}` will match `span` that has class `class-a` and the span must be child of a `div`
     , which is 3rd `span` - we can apply all kind of [basic selector](#basic-selector) into descendant combinator to make CSS work the way we need.
 
-- child combinator:
+#### child combinator:
 
   - selects nodes that are direct children of the first element
   - syntax: `A > B`
@@ -231,7 +274,7 @@ div,
     - `div > span` will match all `span` that are **direct** child of a `div`, which is 2nd, 3rd and 5th `span`
       the 4th `span` will not match because it is direct child of a `p`
 
-- general sibling combinator
+#### general sibling combinator
 
   - select nodes that are siblings of the first element that are share same direct parent
   - syntax: `A ~ B`
@@ -239,43 +282,103 @@ div,
     `span ~ span` will match 3rd, 5th `span`, the 4th `span` will not be match because it doesn't share same parent
     `span ~ p` will match `p`
 
-- adjacent sibling combinator
+#### adjacent sibling combinator
   - same as general sibling combinator but the siblings must be immediately follows the first element
   - syntax: `A + B`
   - example:
     `span + span` will match 3rd `span`, the 5th `span` will not match because it's not immediately after the 2nd `span`
     `span + p` will match `p`
 
-##### pseudo selector
+### Pseudo selector
 
-- pseudo classes
+#### pseudo classes
 
   - select elements based on state information
   - syntax: `A:pseudo { ... }`
   - example: `a:visited` will match all `a` elements that have been visited by the user.
 
-- pseudo elements
+#### pseudo elements
   - select a specific part of the selected element
   - syntax: `A::pseudo { ... }`
   - example: `div span:first-child` will match 2nd `span`
 
-#### example
+## Example
 
 Most of the time, we use selector to answer the question "how to style that specific element", this section is for demonstrating this.
 
-Your jobs is to figure it out why elements has such style, browser devtools can help. Checkout this [article](https://developer.chrome.com/docs/devtools/css/) to learn more about how to inspect web page.
+To understand why elements have certain styles, you can use browser dev tools. 
+These tools allow you to inspect and analyze web pages, helping you understand the styling applied to different elements. 
+Check out this [article](https://developer.chrome.com/docs/devtools/css/) to learn more about inspecting web pages and gaining insights into their styling.
 
-<br />
 
-<iframe height="300" style="width: 100%;" scrolling="no" title="Introduction To CSS - selector example" src="https://codepen.io/nguyenhy/embed/popWBEr?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href="https://codepen.io/nguyenhy/pen/popWBEr">
-  Introduction To CSS - selector example</a> by nguyen (<a href="https://codepen.io/nguyenhy">@nguyenhy</a>)
-  on <a href="https://codepen.io">CodePen</a>.
-</iframe>
+import Demo from './Demo'
 
-<br />
+> <Demo />
+``` html
+<div class="first">
+  <span class="a">first span</span>
+  <span class="b">second span</span>
+</div>
+<div class="second">
+  <span class="a b c" id="c">
+    third span
+  </span>
+  <span class="d">fourth span</span>
+</div>
+```
 
-If I need to style the "third span", there are several ways to do it:
+``` css
+* {
+	/* select all element */
+	font-size: 18px;
+}
+
+span {
+	/* select all span */
+	color: cyan;
+	padding: 10px;
+	display: inline-block;
+	background-color: lightgrey;
+}
+
+div {
+	/* select all div */
+	background-color: grey;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+div > span {
+	/* select all span has parent of div */
+	font-weight: bold;
+	font-size: 22px;
+}
+
+.a {
+	/* select all element has class "a" ( class="a" ) */
+	background-color: blue;
+}
+
+.b {
+	/* select all element has class "b" */
+	color: white;
+}
+
+.c,
+.d {
+	/* select all element has class "c" or "d" */
+	text-decoration: underline;
+}
+
+#c {
+	/* select all element has id "e" */
+	background-color: yellow;
+	color: blue;
+}
+
+```
+
+If I need to style the `third span`, there are several ways to do it:
 
 - by class:
   - either `.a`, `.b`, `.c` work but `.a`, `.b` will all so style the "first span" and "second span"
