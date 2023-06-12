@@ -26,6 +26,12 @@ export default component$(() => {
           </span>
         </a>
       </div>
+
+      <ul>
+        <li>
+          <a href="/assets/icon/demo.html">Icon pack</a>
+        </li>
+      </ul>
     </footer>
   );
 });
