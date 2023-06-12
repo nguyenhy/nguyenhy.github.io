@@ -1,0 +1,185 @@
+---
+date: 2022-2-24
+tag:
+  - hyn
+  - web
+  - frontend
+  - introduction
+  - beginner
+  - css
+  - html
+  - y2022
+  - m2
+  - d24
+  - y2022/m2
+author: hyn
+# post
+title: Introduction To Javascript
+description: Simple introduction to Javascript for absolutely beginner
+summary: Simple introduction to Javascript for absolutely beginner
+thumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1645714015/github-nguyenhy-hp/sky-5.jpg
+bigThumb: https://res.cloudinary.com/hqe/image/upload/c_scale,h_600/v1645714015/github-nguyenhy-hp/sky-5.jpg
+thumbAlt: sky
+# meta
+meta:
+  - name: keywords
+    content:
+      - hyn
+      - web
+      - blog
+      - me
+      - hyn
+      - frontend
+      - introduction
+      - beginner
+      - javascript
+      - HTML
+  - name: author
+    content: nguyen hy
+  - name: location
+    content: Vietnam
+  - name: title
+    content: Introduction To Javascript
+  - name: description
+    content: Simple introduction to Javascript for absolutely beginner
+
+    # og tag
+  - name: og:type
+    content: website
+  - name: og:title
+    content: Introduction To Javascript
+  - name: og:description
+    content: Simple introduction to Javascript for absolutely beginner
+  - name: og:image
+    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_300/v1645714015/github-nguyenhy-hp/sky-5.jpg
+  - name: og:url
+    content: https://nguyenhy.github.io/blogs/introduction-to-javascript/1686525497/
+
+    # twitter tag
+  - property: twitter:url
+    content: https://nguyenhy.github.io/blogs/introduction-to-javascript/1686525497/
+  - property: twitter:title
+    content: Introduction To Javascript
+  - property: twitter:description
+    content: Simple introduction to Javascript for absolutely beginner
+  - property: twitter:image
+    content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1641481664/github-nguyenhy-hp/sky-5.jpg
+---
+import DemoWebsiteInteractive from './DemoWebsiteInteractive'
+import DemoUpdateRealtime from './DemoUpdateRealtime'
+import DemoChangeElements from './DemoChangeElements'
+import DemoAnimation from '../../introduction-to-web-development/1686525497/animation.tsx'
+
+
+
+# Introduction To Javascript
+
+## Series
+- [Introduction To FrontEnd Web Development](/blogs/introduction-to-web-development/1686525497/)
+- [Introduction to HTML](/blogs/introduction-to-html/1645744806/)
+- [Introduction to CSS](/blogs/introduction-to-css/1646522406/)
+- [**Introduction to Javascript**](/blogs/introduction-to-javascript/1686525497)
+
+## Goals
+The goal of this post is to introduce JavaScript to absolute beginners in a simple and easy-to-understand way. 
+By the end of this post, you will have a clear idea of what JavaScript is, why it is important for building websites, and what it can do.
+
+## Target audience
+This post is specifically for:
+- Absolute beginners who have no prior knowledge or understanding of JavaScript or programming in general.
+- Who are curious about JavaScript and want to learn more about it.
+
+## What JavaScript is
+JavaScript is a flexible scripting or programming language that allows you to add advanced features to web pages. 
+When a web page goes beyond showing static information and starts offering dynamic elements like timely updates, 
+interactive maps, animated graphics, or scrolling video jukeboxes, JavaScript is usually involved. 
+It's the language that enables these interactive and engaging experiences on the web.
+
+This entire web page is typically static, meaning that the content remains fixed and doesn't change. 
+However, there is one exception: the red button displayed below. You can click on the button, and its text color will dynamically change from red to blue. Go ahead and give it a try!
+
+> Eg: 
+> <button style="color: #ac7ef4" onclick="this.style.color='white'; this.textContent='Weeeeeee'">Click me</button>
+
+## What JavaScript can do or why we need it?
+JavaScript is incredibly important for frontend web development because it helps us create amazing user experiences. Here's why we need JavaScript:
+
+### Making Websites Interactive: 
+JavaScript allows us to add interactive elements to our websites. 
+We can create forms that validate user input, sliders that let users adjust settings, and dropdown menus that respond to their selections. 
+These interactive features make websites more user-friendly and engaging.
+
+> Eg
+> <DemoWebsiteInteractive />
+
+
+### Updating Content in Real-Time: 
+With JavaScript, we can update parts of a web page without refreshing the whole thing. 
+This means we can display live data, like stock prices or social media feeds, that automatically update as new information comes in. 
+It makes our websites feel dynamic and up-to-date.
+
+> Eg
+> <DemoUpdateRealtime />
+
+
+### Changing Web Page Elements: 
+JavaScript gives us the power to modify the elements on a web page. 
+We can change the content, style, and behavior of different parts of the page based on user interactions or other factors. 
+This helps us create websites that respond to user actions and provide a personalized experience.
+
+> Eg
+> <DemoChangeElements />
+> Click to toggle between 
+
+
+### Responding to User Actions: 
+When users click a button, type in a form, or scroll a page, JavaScript lets us respond to those actions. 
+We can write code that executes specific tasks or displays certain content when users interact with our website. 
+It adds interactivity and makes our websites more intuitive.
+
+> All of the above examples demonstrate how JavaScript responds when a user clicks on a specific button. 
+These examples are associated with an onclick event, which triggers the JavaScript code when the button is clicked.
+
+### Adding Animations and Effects: 
+JavaScript enables us to create eye-catching animations and visual effects. 
+We can make elements fade in and out, slide across the screen, or respond to mouse movements. 
+These animations and effects make our websites more visually appealing and memorable.
+
+> Eg
+> <DemoAnimation />
+
+### Compatibility with Different Browsers: 
+JavaScript works seamlessly across different web browsers, ensuring that our code functions properly no matter which browser our users prefer. 
+It's a reliable language that allows us to build websites that work consistently for everyone.
+
+## Example
+
+``` javascript
+/// find, in the current web page browser, the first `<button>` tag 
+const para = document.querySelector("button");
+
+// when user click it, then trigger function `updateName`
+para.addEventListener("click", updateName);
+
+function updateName() {
+  // open a browser default prompt dialog, to ask for name
+  const name = prompt("Enter a new name");
+
+  // then change the text content of the `<button>` with new-entered name
+  para.textContent = `Player 1: ${name}`;
+}
+```
+
+> Eg
+>
+> <button class="border p-1 bg-white/20 rounded-md" onclick="const name = prompt('Enter a name'); this.textContent = `Hi '${name || 'Anonymous'}', welcome to Hytorium blogs`;">Click me</button>
+
+## Sumary
+To summarize, JavaScript is crucial for frontend web development as it enables us to create interactive and dynamic websites. 
+It allows us to add interactive features, update content in real-time, modify web page elements, respond to user actions, create animations and effects, and ensure compatibility across different web browsers.
+
+It's important to note that while JavaScript strives for compatibility, there can be slight variations in how different web browsers handle JavaScript code or support specific features. 
+This means that sometimes things may not work exactly the same way in every situation or browser.
+
+Nevertheless, JavaScript remains a powerful tool that empowers us to build engaging, user-friendly, and visually impressive websites. 
+By following best practices, staying informed about browser-specific behaviors, and applying appropriate techniques for cross-browser compatibility, we can overcome these challenges and create compelling web experiences that work seamlessly for the majority of users.
