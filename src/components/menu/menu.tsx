@@ -16,7 +16,7 @@ export default component$(() => {
               <h5>{item.text}</h5>
               <ul>
                 {item.items?.map((item) => (
-                  <li>
+                  <li key={item.href}>
                     <Link
                       href={item.href}
                       class={{

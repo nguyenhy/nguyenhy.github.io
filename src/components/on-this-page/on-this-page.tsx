@@ -19,7 +19,7 @@ export default component$(() => {
           <h6>On This Page</h6>
           <ul>
             {contentHeadings.map((h) => (
-              <li>
+              <li key={h.id}>
                 <a
                   href={`#${h.id}`}
                   class={{
