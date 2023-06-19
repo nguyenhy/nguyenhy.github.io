@@ -31,6 +31,9 @@ export default component$(() => {
         <li>
           <a href="/assets/icon/demo.html">Icon pack</a>
         </li>
+        <li>
+          <a href="/blogs/series">Series</a>
+        </li>
       </ul>
     </footer>
   );
