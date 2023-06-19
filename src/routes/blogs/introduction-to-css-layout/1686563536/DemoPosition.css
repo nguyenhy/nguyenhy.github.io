@@ -1,0 +1,12 @@
+.wrapper {
+  position: relative;
+  @apply border-2 border-accent-700 m-2 p-2;
+}
+
+.item {
+  @apply rounded border-2 p-1 mb-2;
+}
+
+.item.positioned {
+  @apply border-red-700 bg-red-300/10 text-red-500;
+}
