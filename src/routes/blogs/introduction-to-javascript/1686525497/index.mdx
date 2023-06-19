@@ -65,11 +65,6 @@ meta:
   - property: twitter:image
     content: https://res.cloudinary.com/hqe/image/upload/c_scale,h_800/v1641481664/github-nguyenhy-hp/sky-5.jpg
 ---
-import DemoWebsiteInteractive from './DemoWebsiteInteractive'
-import DemoUpdateRealtime from './DemoUpdateRealtime'
-import DemoChangeElements from './DemoChangeElements'
-import DemoAnimation from '../../introduction-to-web-development/1686525497/animation.tsx'
-
 
 
 # Introduction To Javascript
@@ -95,10 +90,18 @@ interactive maps, animated graphics, or scrolling video jukeboxes, JavaScript is
 It's the language that enables these interactive and engaging experiences on the web.
 
 This entire web page is typically static, meaning that the content remains fixed and doesn't change. 
-However, there is one exception: the red button displayed below. You can click on the button, and its text color will dynamically change from red to blue. Go ahead and give it a try!
+However, there is one exception: the <span style="color: red">red button</span> displayed below. You can click on the button, and its text color will dynamically change from <span style="color: red">red</span> to <span style="color: #19B5FE">blue</span>. Go ahead and give it a try!
 
-> Eg: 
-> <button style="color: #bf55ec" onclick="this.style.color='white'; this.textContent='Weeeeeee'">Click me</button>
+``` html
+<button 
+  style="color: red" 
+  onclick="this.style.color='blue';"
+  >Welcome to blog: Introduction to Javascript</button>
+```
+
+import DemoChangeColor from './DemoChangeColor'
+
+<DemoChangeColor />
 
 ## What JavaScript can do or why we need it?
 JavaScript is incredibly important for frontend web development because it helps us create amazing user experiences. Here's why we need JavaScript:
@@ -108,8 +111,9 @@ JavaScript allows us to add interactive elements to our websites.
 We can create forms that validate user input, sliders that let users adjust settings, and dropdown menus that respond to their selections. 
 These interactive features make websites more user-friendly and engaging.
 
-> Eg
-> <DemoWebsiteInteractive />
+import DemoWebsiteInteractive from './DemoWebsiteInteractive'
+
+<DemoWebsiteInteractive />
 
 
 ### Updating Content in Real-Time: 
@@ -117,8 +121,9 @@ With JavaScript, we can update parts of a web page without refreshing the whole 
 This means we can display live data, like stock prices or social media feeds, that automatically update as new information comes in. 
 It makes our websites feel dynamic and up-to-date.
 
-> Eg
-> <DemoUpdateRealtime />
+import DemoUpdateRealtime from './DemoUpdateRealtime'
+
+<DemoUpdateRealtime />
 
 
 ### Changing Web Page Elements: 
@@ -126,9 +131,10 @@ JavaScript gives us the power to modify the elements on a web page.
 We can change the content, style, and behavior of different parts of the page based on user interactions or other factors. 
 This helps us create websites that respond to user actions and provide a personalized experience.
 
-> Eg
-> <DemoChangeElements />
-> Click to toggle between 
+
+import DemoChangeElements from './DemoChangeElements'
+
+<DemoChangeElements />
 
 
 ### Responding to User Actions: 
@@ -144,8 +150,9 @@ JavaScript enables us to create eye-catching animations and visual effects.
 We can make elements fade in and out, slide across the screen, or respond to mouse movements. 
 These animations and effects make our websites more visually appealing and memorable.
 
-> Eg
-> <DemoAnimation />
+import AnimationDemo from '../../introduction-to-web-development/1686525497/AnimationDemo.tsx'
+
+<AnimationDemo />
 
 ### Compatibility with Different Browsers: 
 JavaScript works seamlessly across different web browsers, ensuring that our code functions properly no matter which browser our users prefer. 
@@ -169,9 +176,9 @@ function updateName() {
 }
 ```
 
-> Eg
->
-> <button class="border p-1 bg-white/20 rounded-md" onclick="const name = prompt('Enter a name'); this.textContent = `Hi '${name || 'Anonymous'}', welcome to Hytorium blogs`;">Click me</button>
+import DemoPrompt from './DemoPrompt'
+
+<DemoPrompt />
 
 ## Sumary
 To summarize, JavaScript is crucial for frontend web development as it enables us to create interactive and dynamic websites. 

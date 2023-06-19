@@ -1,4 +1,6 @@
 import { $, component$, useSignal } from "@builder.io/qwik";
+import { DemoButton } from "~/components/demo/DemoButton";
+import { DemoLayout } from "~/components/demo/DemoLayout";
 
 export default component$(() => {
   const date = useSignal(new Date());
@@ -7,15 +9,17 @@ export default component$(() => {
   });
 
   return (
-    <>
-      <span>Current datetime is: </span>
-      <span>{date.value.toLocaleString()}</span>
-      <button
-        class="bg-black/20 rounded-sm p-1 ml-1 text-white dark:text-white"
-        onClick$={changeSpanStyle}
-      >
-        <span>Update</span>
-      </button>
-    </>
+    <DemoLayout
+      title="Demo interactive"
+      child={
+        <div class="p-2">
+          <span>Current datetime is: </span>
+          <span>{date.value.toLocaleString()}</span>
+          <DemoButton class="ml-2 mr-2" onClick$={changeSpanStyle}>
+            Update
+          </DemoButton>
+        </div>
+      }
+    />
   );
 });
