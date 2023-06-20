@@ -100,7 +100,32 @@ $ git svn clone {svn-url} --no-metadata -A {source}/authors-transform.txt .
 ```
 These 2 commands will fetch, then clone with commit message, file changes, ....
 
-**Note**: 
+Depend on how extensive your `svn` code base is. This process will take some time to complete.
+``` bash
+$ git svn clone {svn-url} --no-metadata -A {source}/authors-transform.txt .
+Initialized empty Git repository in {target}/.git/
+	A	package-lock.json
+	A	app/utils/index.js
+	A	app/utils/Helper.js
+	A	app/models/Test.js
+	A	app/controllers/controller.js
+	A	routes/index.js
+	A	package.json
+	A	config/index.js
+	A	config/constant.js
+r1 = e3b0c44298fc1c149afbf4c8996fb92427ae41e4 (refs/remotes/git-svn)
+	M	app/controllers/ApiController.js
+	M	app/utils/Helper.js
+	M	app/models/Test.js
+  ...
+  ...
+Checked out HEAD: {svn-url} r592
+```
+- `r1` is revision 1
+- `r592` is last revision. If your last revision is bigger than `1000`, then you make yourself some coffe
+
+
+Note: 
 - `{svn-url}`: url to the svn repository
 - `{source}/authors-transform.txt`: path to the generated file in step 2
 - `.`: there's a dot (`.`) at the end of the 2nd command if you want to clone into `{target}`.
@@ -128,4 +153,7 @@ $ git push --set-upstream origin master
 ```
 
 From now on, you good to go.
+Learn more about [`git-svn`](https://git-scm.com/docs/git-svn), and its [`basic examples`](https://git-scm.com/docs/git-svn#_basic_examples)
+
+
 
