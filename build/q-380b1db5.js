@@ -1,0 +1,1 @@
+import{U as l,N as r,K as s,x as n}from"./q-2e1691b4.js";const u=()=>l(s,{children:r("div",null,{class:"blogs"},r("article",null,null,l(n,null,3,"iD_0"),1,null),1,null)},1,"iD_1");export{u as s_09M8tRi4Lpc};
