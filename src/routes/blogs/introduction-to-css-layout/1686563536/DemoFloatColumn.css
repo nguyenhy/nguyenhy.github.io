@@ -1,0 +1,36 @@
+header {
+  overflow: hidden;
+  padding: 20px 10px;
+}
+
+header a {
+  float: left;
+}
+
+header input[type="search"] {
+  float: right;
+}
+
+.wrapper {
+  all: revert;
+}
+
+header a {
+  @apply text-center p-3 text-sm rounded text-inherit;
+}
+
+header a:not(:hover) {
+  @apply no-underline;
+}
+
+header a:hover {
+  @apply bg-slate-50/30;
+}
+
+header input[type="search"] {
+  @apply p-2 mt-1 text-sm rounded-sm;
+}
+
+header input[type="search"]::placeholder {
+  @apply text-gray-400;
+}

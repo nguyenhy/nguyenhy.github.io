@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+
+# Get the list of files to be committed
+files=$(git diff --cached --name-only --diff-filter=ACM)
+
+# Check if any of the files are in the specific folder
+hasFolderFiles=false
+
+for file in $files; do
+  if [[ "$file" == "src"* ]]; then
+    hasFolderFiles=true
+    break
+  fi
+done
+
+if [ "$hasFolderFiles" = true ]; then
+	npm run fmt
+	npm run test
+fi

@@ -1,0 +1,15 @@
+header nav a {
+  @apply inline-block py-1 px-3 font-logo;
+}
+
+header nav a:hover {
+  @apply underline;
+}
+
+header nav a.active {
+  @apply text-white border rounded-md;
+  background: theme("colors.accent.DEFAULT");
+}
+header nav a.active:hover {
+  background: theme("colors.accent.600");
+}
