@@ -112,6 +112,15 @@ const HeadFavicon = () => {
   );
 };
 
+const HeadDCMA = () => {
+  return (
+    <meta
+      name="dmca-site-verification"
+      content="N21wTXo3YTBsbU9XYlhoejMxN0Y0NVl3cDdNYnRPVm9zcTVCN01hRWZ4bz01"
+    />
+  );
+};
+
 export default component$(() => {
   const settingStore = useStore<IContextSettingState>({});
   useContextProvider(SettingContext, settingStore);
@@ -135,6 +144,7 @@ export default component$(() => {
     <QwikCityProvider>
       <head>
         <meta charSet="utf-8" />
+        <HeadDCMA />
         <HeadFont />
         <HeadFavicon />
         <RouterHead />
