@@ -1,38 +1,73 @@
-import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
+import {
+  component$,
+  useSignal,
+  useStore,
+  useVisibleTask$,
+} from "@builder.io/qwik";
+import { useLocation } from "@builder.io/qwik-city";
+
+import { Pagination } from "~/components/pagination";
+
 import { data } from "./index.meta";
 import "./index@list.css";
+import type { IPaginationData } from "~/components/pagination/index.types";
+import { createPaginationNumber } from "~/components/pagination/index.services";
 
-async function getPaginationData(index: number, length: number = 5) {
-  const importers = data.slice(index * length, (index + 1) * length);
-  const output: { data: any }[] = [];
-  for (let index = 0; index < importers.length; index++) {
-    const importer = importers[index];
+async function getPaginationData(
+  currentPageIndex: number,
+  itemPerPage: number,
+  callback: (module: { data: any }) => void
+) {
+  for (let index = 0; index < itemPerPage; index++) {
+    const itemIndex = currentPageIndex * itemPerPage + index;
+    const importer = data[itemIndex];
+
     if (typeof importer === "function") {
       try {
         const module = await importer();
-        output.push(module.data);
+        callback(module.data);
       } catch (error) {
         console.error(error);
       }
     }
   }
-
-  return output;
 }
 
 export default component$(() => {
-  // useStyles$(styles);
-  const blogs = useSignal<Record<string, any>[]>([]);
+  const loc = useLocation();
+  const currentPageIndex = useSignal(0);
+  const store = useSignal<IPaginationData | null>(null);
+  const blogs = useStore<Record<string, any>[]>([]);
+
   useVisibleTask$(() => {
-    getPaginationData(0).then((value) => {
-      blogs.value = value;
+    const page = loc.url.searchParams.get("page") ?? "";
+    const pageInt = parseInt(page, 10);
+    const index = pageInt >= 0 ? pageInt : 0;
+
+    currentPageIndex.value = index;
+
+    const itemPerPage = 5;
+    const paginationData = createPaginationNumber({
+      totalItems: data.length,
+      itemPerPage: itemPerPage,
+      currentPageIndex: index,
     });
+
+    store.value = paginationData;
+
+    getPaginationData(
+      paginationData.currentPageIndex,
+      itemPerPage,
+      (module) => {
+        blogs.push(module);
+      }
+    );
   });
 
   return (
     <>
       <div class="card">
-        {blogs.value.map((item) => {
+        {blogs.map((item) => {
           return (
             <>
               <a class="group mb-4 block" href={item.url}>
@@ -55,6 +90,16 @@ export default component$(() => {
             </>
           );
         })}
+      </div>
+      <div>
+        {store.value ? (
+          <Pagination
+            pagination={store.value}
+            url={(index) => {
+              return index > 0 ? `/blogs?page=${index}` : "/blogs";
+            }}
+          />
+        ) : null}
       </div>
     </>
   );
