@@ -1,7 +1,17 @@
+import { getOptions } from "~/services/options";
 import type {
   ICreatePaginationNumberOptions,
+  ICreatePaginationNumberOptional,
   IPaginationData,
 } from "./index.types";
+
+export const PaginationDefaultOptions: ICreatePaginationNumberOptional = {
+  itemPerPage: 5,
+  maxPreviousPage: 3,
+  maxNextPage: 3,
+  includeFirstPage: true,
+  includeLastPage: true,
+};
 
 export function getPageIndexFromItemIndex(
   index: number,
@@ -13,13 +23,31 @@ export function getPageIndexFromItemIndex(
 export function createPaginationNumber(
   options: ICreatePaginationNumberOptions
 ): IPaginationData {
-  const {
-    itemPerPage = 5,
-    maxPreviousPage = 3,
-    maxNextPage = 3,
-    includeFirstPage = true,
-    includeLastPage = true,
-  } = options;
+  const itemPerPage = getOptions(
+    "itemPerPage",
+    options,
+    PaginationDefaultOptions
+  );
+  const maxPreviousPage = getOptions(
+    "maxPreviousPage",
+    options,
+    PaginationDefaultOptions
+  );
+  const maxNextPage = getOptions(
+    "maxNextPage",
+    options,
+    PaginationDefaultOptions
+  );
+  const includeFirstPage = getOptions(
+    "includeFirstPage",
+    options,
+    PaginationDefaultOptions
+  );
+  const includeLastPage = getOptions(
+    "includeLastPage",
+    options,
+    PaginationDefaultOptions
+  );
 
   let currentPageIndex = options.currentPageIndex;
 
@@ -81,5 +109,6 @@ export function createPaginationNumber(
     lastPageIndex: lastPageIndex,
     totalPages: totalPages,
     currentPageIndex: currentPageIndex,
+    options: options,
   };
 }

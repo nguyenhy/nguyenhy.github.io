@@ -1,11 +1,15 @@
-export interface ICreatePaginationNumberOptions {
+export interface ICreatePaginationNumberOptions
+  extends Partial<ICreatePaginationNumberOptional> {
   totalItems: number;
   currentPageIndex: number;
-  itemPerPage?: number;
-  maxPreviousPage?: number;
-  maxNextPage?: number;
-  includeFirstPage?: boolean;
-  includeLastPage?: boolean;
+}
+
+export interface ICreatePaginationNumberOptional {
+  itemPerPage: number;
+  maxPreviousPage: number;
+  maxNextPage: number;
+  includeFirstPage: boolean;
+  includeLastPage: boolean;
 }
 
 export interface IPaginationData {
@@ -14,6 +18,7 @@ export interface IPaginationData {
   lastPageIndex: number;
   totalPages: number;
   currentPageIndex: number;
+  options: ICreatePaginationNumberOptions;
 }
 
 export interface IPaginationProps {
