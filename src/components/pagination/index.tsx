@@ -22,9 +22,13 @@ export const Pagination = (props: IPaginationProps) => {
           <a
             key={page}
             href={url}
-            class="bg-black/30 text-white w-[30px] h-[30px] leading-[30px] text-center rounded-sm mr-1"
+            class={`w-[30px] h-[30px] leading-[30px] text-center rounded-sm mr-1 ${
+              page === pagination.currentPageIndex
+                ? "bg-accent-700 text-white"
+                : "bg-black/20 dark:text-white text-black "
+            }`}
           >
-            <span>{page}</span>
+            <span>{page + 1}</span>
           </a>
         );
       })}
