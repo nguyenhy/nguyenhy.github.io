@@ -3,6 +3,11 @@ export function getOptions<KS extends Record<string, any>, K extends keyof KS>(
   options: Partial<KS>,
   defaultValue: KS
 ): KS[K] {
-  const a = options[key];
-  return typeof a !== "undefined" ? a : defaultValue[key];
+  if (key in options) {
+    const value = (options as KS)[key];
+    if (typeof value !== "undefined") {
+      return value;
+    }
+  }
+  return defaultValue[key];
 }
