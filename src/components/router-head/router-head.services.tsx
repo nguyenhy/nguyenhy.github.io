@@ -1,15 +1,15 @@
 import type { DocumentHeadValue } from "@builder.io/qwik-city";
 import { getValue } from "~/services/options";
 
-interface CustomFrontmatter {
+export interface CustomFrontmatter {
   meta: Partial<{
     description: string;
     keywords: string[];
     url: string;
     image: string;
     article: Partial<{
-      published_time: string;
-      modified_time: string;
+      published_time: number;
+      modified_time: number;
     }>;
     twitter: Partial<{
       card: string;
@@ -17,7 +17,14 @@ interface CustomFrontmatter {
   }>;
 }
 
-interface CustomDocumentHeadValue extends Required<DocumentHeadValue> {
+export interface PageFrontmatter {
+  url?: string;
+  title?: string;
+  tag?: string[];
+  meta: CustomFrontmatter["meta"];
+}
+
+export interface CustomDocumentHeadValue extends Required<DocumentHeadValue> {
   readonly frontmatter: Partial<CustomFrontmatter>;
 }
 
@@ -36,8 +43,8 @@ const defaultHeaderValue: CustomFrontmatter = {
     url: "https://nguyenhy.github.io/",
     image: "",
     article: {
-      published_time: "",
-      modified_time: "",
+      published_time: 1645312806,
+      modified_time: 0,
     },
     twitter: {
       card: "summary_large_image",
@@ -146,10 +153,18 @@ export function CustomMeta({ head }: { head: CustomDocumentHeadValue }) {
       {createMetaTag(
         "article:published_time",
         head.frontmatter?.meta?.article?.published_time
+          ? new Date(
+              head.frontmatter?.meta?.article?.published_time * 1000
+            ).toISOString()
+          : ""
       )}
       {createMetaTag(
         "article:modified_time",
         head.frontmatter?.meta?.article?.modified_time
+          ? new Date(
+              head.frontmatter?.meta?.article?.modified_time * 1000
+            ).toISOString()
+          : ""
       )}
 
       <meta name="twitter:card" content="summary_large_image" />
