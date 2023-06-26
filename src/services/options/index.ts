@@ -1,3 +1,6 @@
+/**
+ * get value of option from config object if not exists then use value from default config
+ */
 export function getOptions<KS extends Record<string, any>, K extends keyof KS>(
   key: K,
   options: Partial<KS>,
