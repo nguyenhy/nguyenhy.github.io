@@ -13,12 +13,13 @@ import { data } from "./index.meta";
 import "./index@list.css";
 import type { IPaginationData } from "~/components/pagination/index.types";
 import { createPaginationNumber } from "~/components/pagination/index.services";
+import type { PageFrontmatter } from "~/components/router-head/router-head.services";
 import { createDocumentFrontMatter } from "~/components/router-head/router-head.services";
 
 async function getPaginationData(
   currentPageIndex: number,
   itemPerPage: number,
-  callback: (module: { data: any }) => void
+  callback: (module: PageFrontmatter) => void
 ) {
   for (let index = 0; index < itemPerPage; index++) {
     const itemIndex = currentPageIndex * itemPerPage + index;
@@ -39,7 +40,7 @@ export default component$(() => {
   const loc = useLocation();
   const currentPageIndex = useSignal(0);
   const store = useSignal<IPaginationData | null>(null);
-  const blogs = useStore<Record<string, any>[]>([]);
+  const blogs = useStore<PageFrontmatter[]>([]);
 
   useVisibleTask$(() => {
     const page = loc.url.searchParams.get("page") ?? "";
@@ -72,20 +73,28 @@ export default component$(() => {
         {blogs.map((item) => {
           return (
             <>
-              <a class="group mb-4 block" href={item.url}>
+              <a class="group mb-4 block" href={item.url ?? ""}>
                 <div class="py-4">
                   <h4 class="group-hover:underline text-3xl mb-2 text-bold font-bold text-[var(--text-color)]">
-                    <span>{item?.title ?? ""}</span>
+                    <span>{item.title ?? ""}</span>
                   </h4>
-                  {item?.description ? (
+                  {item.meta?.description ? (
                     <p class="text-lg text-[var(--secondary-text-color)]">
-                      {item.description}
+                      {item.meta.description}
                     </p>
                   ) : null}
                   <span class="text-sm text-[var(--secondary-text-color)]">
-                    {item.author ?? null}
-                    <span> | </span>
-                    {item.date ?? null}
+                    <span>hyn | </span>
+
+                    {item.meta?.article?.modified_time
+                      ? `Update at: ${new Date(
+                          item.meta?.article?.modified_time * 1000
+                        ).toLocaleString()}`
+                      : item.meta?.article?.published_time
+                      ? new Date(
+                          item.meta?.article?.published_time * 1000
+                        ).toLocaleString()
+                      : null}
                   </span>
                 </div>
               </a>
