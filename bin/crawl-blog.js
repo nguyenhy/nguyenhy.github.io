@@ -26,6 +26,10 @@ async function createMetaFile() {
     const mdxContent = await fs.readFile(itemPath, "utf-8");
     const parsed = parser(mdxContent);
 
+    if (parsed.data.meta && parsed.data.meta.hidden) {
+      continue
+    }
+
     const importPath = `.${dirPath.replace(blogsPath, "")}/index.meta`
     const module = {
       chunk: '${chunk}',

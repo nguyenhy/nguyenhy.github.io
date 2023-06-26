@@ -3,6 +3,13 @@ import { getValue } from "~/services/options";
 
 export interface CustomFrontmatter {
   meta: Partial<{
+    /**
+     * should not be open via visible link in webpage
+     * - when `true`, `createMetaFile` of `crawl-blog.js` will skip
+     * parsing and create dynamic chunk from this file meta
+     * - it's does not mean that this page is absolutely invisible
+     */
+    hidden?: boolean;
     description: string;
     keywords: string[];
     url: string;
