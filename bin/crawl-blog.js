@@ -21,14 +21,29 @@ async function createMetaFile() {
     const item = files[index];
     const itemPath = resolve(item);
     const dirPath = dirname(itemPath);
-    const newFilePath = resolve(dirPath, "index.meta.ts");
+    const newFilePath = resolve(dirPath, "index.meta.js");
 
     const mdxContent = await fs.readFile(itemPath, "utf-8");
     const parsed = parser(mdxContent);
 
-    chunkImport.push(
-      `() => import(".${dirPath.replace(blogsPath, "")}/index.meta")`
-    );
+    const importPath = `.${dirPath.replace(blogsPath, "")}/index.meta`
+    const module = {
+      chunk: '${chunk}',
+    }
+    if (parsed.data.meta && parsed.data.meta.article && parsed.data.meta.article.published_time) {
+      module.published_time = parsed.data.meta.article.published_time
+    }
+    if (parsed.data.meta && parsed.data.meta.article && parsed.data.meta.article.modified_time) {
+      module.modified_time = parsed.data.meta.article.modified_time
+    }
+
+    const moduleString = JSON.stringify(module)
+      .replace(
+        '\"${chunk}\"',
+        `() => import("${importPath}")`
+      )
+
+    chunkImport.push(moduleString);
 
     await fs.writeFile(
       newFilePath,
@@ -39,12 +54,13 @@ async function createMetaFile() {
     );
   }
 
-  const allMetaPath = resolve(blogsPath, "index.meta.ts");
+  const allMetaPath = resolve(blogsPath, "index.meta.js");
   fs.writeFile(
     allMetaPath,
-    `export const data : (()=>Promise<{data:any}>)[] = [ ${chunkImport.join(
-      ","
-    )} ]`
+    [
+      `export const data = [ ${chunkImport.join(",")} ]`,
+      `export const meta = ${JSON.stringify({ update: Date.now() })}`
+    ].join('\n')
   );
 }
 

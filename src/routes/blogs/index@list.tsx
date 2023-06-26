@@ -9,7 +9,7 @@ import { useLocation } from "@builder.io/qwik-city";
 
 import { Pagination } from "~/components/pagination";
 
-import { data } from "./index.meta";
+import { data } from "./index.meta.js";
 import "./index@list.css";
 import type { IPaginationData } from "~/components/pagination/index.types";
 import { createPaginationNumber } from "~/components/pagination/index.services";
@@ -25,9 +25,9 @@ async function getPaginationData(
     const itemIndex = currentPageIndex * itemPerPage + index;
     const importer = data[itemIndex];
 
-    if (typeof importer === "function") {
+    if (typeof importer.chunk === "function") {
       try {
-        const module = await importer();
+        const module = await importer.chunk();
         callback(module.data);
       } catch (error) {
         console.error(error);
