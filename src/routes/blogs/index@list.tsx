@@ -4,6 +4,7 @@ import {
   useStore,
   useVisibleTask$,
 } from "@builder.io/qwik";
+import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
 
 import { Pagination } from "~/components/pagination";
@@ -12,6 +13,7 @@ import { data } from "./index.meta";
 import "./index@list.css";
 import type { IPaginationData } from "~/components/pagination/index.types";
 import { createPaginationNumber } from "~/components/pagination/index.services";
+import { createDocumentFrontMatter } from "~/components/router-head/router-head.services";
 
 async function getPaginationData(
   currentPageIndex: number,
@@ -104,3 +106,8 @@ export default component$(() => {
     </>
   );
 });
+
+export const head: DocumentHead = {
+  title: "Hyotrium blogs",
+  frontmatter: createDocumentFrontMatter({}),
+};

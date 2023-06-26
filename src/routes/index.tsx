@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { createDocumentFrontMatter } from "~/components/router-head/router-head.services";
 
 export default component$(() => {
   return (
@@ -18,4 +19,5 @@ export default component$(() => {
 
 export const head: DocumentHead = {
   title: "Welcome to Hytorium blogs",
+  frontmatter: createDocumentFrontMatter({}),
 };
