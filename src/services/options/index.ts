@@ -12,5 +12,20 @@ export function getOptions<KS extends Record<string, any>, K extends keyof KS>(
       return value;
     }
   }
-  return defaultValue[key];
+  return defaultOptions[key];
+}
+
+/**
+ * get value of option from config object if not exists then use default value
+ */
+export function getValue<
+  O extends Record<string, any>,
+  K extends keyof O,
+  V extends O[K]
+>(object: O, key: K, defaultValue: V | null) {
+  if (key in object && !!object[key]) {
+    return object[key];
+  } else if (defaultValue) {
+    return defaultValue;
+  }
 }
