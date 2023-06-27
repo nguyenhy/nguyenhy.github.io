@@ -66,6 +66,52 @@ async function createMetaFile() {
       `export const meta = ${JSON.stringify({ update: Date.now() })}`
     ].join('\n')
   );
+  const latestCreated = chunkImport
+    .map(chunk => {
+      const pattern = /"published_time":(\d+)/;
+
+      const match = chunk.match(pattern);
+      if (match) {
+        const extractedNumber = match[1];
+        return {
+          date: extractedNumber,
+          data: chunk,
+        }
+      }
+
+      return null
+    })
+    .filter(chunk => chunk && chunk.date)
+    .sort((a, b) => {
+      if (!a.date && !b.date) {
+        return 0
+      }
+
+      const publishedA = a.date;
+      const publishedB = b.date;
+      if (publishedA < publishedB) {
+        // sort a after b
+        return 1;
+      }
+      if (publishedA > publishedB) {
+        // sort a before b
+        return -1;
+      }
+
+      // names must be equal
+      return 0;
+    })
+    .map(item => item.data)
+    .slice(0, 3);
+
+  const latestCreatedMetaPath = resolve(blogsPath, "index.latest-created.meta.js");
+  fs.writeFile(
+    latestCreatedMetaPath,
+    [
+      `export const data = [ ${latestCreated.join(",")} ]`,
+      `export const meta = ${JSON.stringify({ update: Date.now() })}`
+    ].join('\n')
+  );
 }
 
 function createMetaContent(data) {
