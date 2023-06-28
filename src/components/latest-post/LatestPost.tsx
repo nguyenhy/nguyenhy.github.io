@@ -6,6 +6,7 @@ import {
 } from "@builder.io/qwik";
 import type { PageFrontmatter } from "../router-head/router-head.services";
 import { BlockItem } from "../blog-item/BlogItem";
+import { importer } from "~/services/importer";
 
 export const LatestPost = component$(() => {
   const loading = useSignal(true);
@@ -18,13 +19,9 @@ export const LatestPost = component$(() => {
       if (Array.isArray(latest.data)) {
         for (let index = 0; index < latest.data.length; index++) {
           const element = latest.data[index];
-          if (typeof element.chunk === "function") {
-            try {
-              const module = await element.chunk();
-              blogs.push(module.data);
-            } catch (error) {
-              console.error(error);
-            }
+          const chunk = await importer(element.chunk, latest.meta.update);
+          if (chunk) {
+            blogs.push(chunk.data);
           }
         }
       }
