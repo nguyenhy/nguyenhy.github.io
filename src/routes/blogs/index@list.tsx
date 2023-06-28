@@ -5,7 +5,6 @@ import {
   useVisibleTask$,
 } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { useLocation } from "@builder.io/qwik-city";
 
 import { Pagination } from "~/components/pagination";
 
@@ -38,13 +37,13 @@ async function getPaginationData(
 }
 
 export default component$(() => {
-  const loc = useLocation();
   const currentPageIndex = useSignal(0);
   const store = useSignal<IPaginationData | null>(null);
   const blogs = useStore<PageFrontmatter[]>([]);
 
   useVisibleTask$(() => {
-    const page = loc.url.searchParams.get("page") ?? "";
+    const searchParams = new URLSearchParams(location.search);
+    const page = searchParams.get("page") ?? "";
     const pageInt = parseInt(page, 10);
     const index = pageInt >= 0 ? pageInt : 0;
 
