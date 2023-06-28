@@ -35,9 +35,13 @@ export const LatestPost = component$(() => {
   });
   return (
     <div>
+      {blogs.length ? (
+        <div class="h-[1px] bg-slate-700 dark:bg-white w-full"></div>
+      ) : null}
       {blogs.map((item) => {
         return <BlockItem key={item.url} item={item} />;
       })}
+      {blogs.length ? <a href="/blogs/">Read more</a> : null}
     </div>
   );
 });

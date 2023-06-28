@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { LatestPost } from "~/components/latest-post/LatestPost";
 import { createDocumentFrontMatter } from "~/components/router-head/router-head.services";
 
 export default component$(() => {
@@ -13,6 +14,7 @@ export default component$(() => {
           </p>
         </div>
       </div>
+      <LatestPost />
     </>
   );
 });
