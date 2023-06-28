@@ -23,6 +23,7 @@ export const RouterHead = component$(() => {
         <meta {...m} />
       ))}
 
+      <script src="/font/index.script.js"></script>
       <script src="/theme/index.script.js"></script>
 
       {head.links.map((l) => (
