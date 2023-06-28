@@ -15,7 +15,7 @@ import type { IPaginationData } from "~/components/pagination/index.types";
 import { createPaginationNumber } from "~/components/pagination/index.services";
 import type { PageFrontmatter } from "~/components/router-head/router-head.services";
 import { createDocumentFrontMatter } from "~/components/router-head/router-head.services";
-import { BlockItem } from "~/components/blog-item/BlogItem.js";
+import { BlockItem } from "~/components/blog-item/BlogItem";
 
 async function getPaginationData(
   currentPageIndex: number,
