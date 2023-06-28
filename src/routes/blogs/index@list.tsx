@@ -4,27 +4,31 @@ import {
   useStore,
   useVisibleTask$,
 } from "@builder.io/qwik";
+import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
 
 import { Pagination } from "~/components/pagination";
 
-import { data } from "./index.meta";
+import { data } from "./index.meta.js";
 import "./index@list.css";
 import type { IPaginationData } from "~/components/pagination/index.types";
 import { createPaginationNumber } from "~/components/pagination/index.services";
+import type { PageFrontmatter } from "~/components/router-head/router-head.services";
+import { createDocumentFrontMatter } from "~/components/router-head/router-head.services";
+import { BlockItem } from "~/components/blog-item/BlogItem";
 
 async function getPaginationData(
   currentPageIndex: number,
   itemPerPage: number,
-  callback: (module: { data: any }) => void
+  callback: (module: PageFrontmatter) => void
 ) {
   for (let index = 0; index < itemPerPage; index++) {
     const itemIndex = currentPageIndex * itemPerPage + index;
     const importer = data[itemIndex];
 
-    if (typeof importer === "function") {
+    if (typeof importer.chunk === "function") {
       try {
-        const module = await importer();
+        const module = await importer.chunk();
         callback(module.data);
       } catch (error) {
         console.error(error);
@@ -37,7 +41,7 @@ export default component$(() => {
   const loc = useLocation();
   const currentPageIndex = useSignal(0);
   const store = useSignal<IPaginationData | null>(null);
-  const blogs = useStore<Record<string, any>[]>([]);
+  const blogs = useStore<PageFrontmatter[]>([]);
 
   useVisibleTask$(() => {
     const page = loc.url.searchParams.get("page") ?? "";
@@ -68,27 +72,7 @@ export default component$(() => {
     <>
       <div class="card">
         {blogs.map((item) => {
-          return (
-            <>
-              <a class="group mb-4 block" href={item.url}>
-                <div class="py-4">
-                  <h4 class="group-hover:underline text-3xl mb-2 text-bold font-bold text-[var(--text-color)]">
-                    <span>{item?.title ?? ""}</span>
-                  </h4>
-                  {item?.description ? (
-                    <p class="text-lg text-[var(--secondary-text-color)]">
-                      {item.description}
-                    </p>
-                  ) : null}
-                  <span class="text-sm text-[var(--secondary-text-color)]">
-                    {item.author ?? null}
-                    <span> | </span>
-                    {item.date ?? null}
-                  </span>
-                </div>
-              </a>
-            </>
-          );
+          return <BlockItem key={item.url} item={item} />;
         })}
       </div>
       <div>
@@ -104,3 +88,8 @@ export default component$(() => {
     </>
   );
 });
+
+export const head: DocumentHead = {
+  title: "Hyotrium blogs",
+  frontmatter: createDocumentFrontMatter({}),
+};
