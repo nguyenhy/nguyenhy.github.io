@@ -24,6 +24,12 @@ module.exports = {
         },
         text: "#181818",
       },
+
+      screens: {
+        'xsm': '360px',
+        // => @media (min-width: 360px) { ... }
+
+      }
     },
   },
   plugins: [
