@@ -1,1 +1,0 @@
-import{N as r}from"./q-11926211.js";const i=t=>{const o=(t.height??60)/24;return r("img",{width:60*o,height:24*o},{alt:"hytorim's logo",loading:"lazy",src:"/assets/logo/hytorium_horizontal_long_trans.svg"},null,3,"3C_0")};export{i as s_zZ7aFsOXAuk};
