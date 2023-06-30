@@ -24,7 +24,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm ci
-      - run: npm run build --if-present
+      - run: |
+          node ./bin/create-meta.js && \
+          VITE_DCMA=$VITE_DCMA \
+          VITE_GA4=$VITE_GA4 \
+          VITE_GTM=$VITE_GTM \
+          qwik build
       - run: npm test
 
       - name: Build and Deploy with JamesIves/github-pages-deploy-action@v4
