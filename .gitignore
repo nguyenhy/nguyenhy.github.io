@@ -45,3 +45,6 @@ coverage/
 # generate meta here
 src/routes/blogs/**/*.meta.ts
 src/routes/blogs/**/*.meta.js
+
+
+.env
