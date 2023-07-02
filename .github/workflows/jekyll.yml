@@ -11,6 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+
     strategy:
       matrix:
         node-version: [16.x]
@@ -23,7 +26,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: echo "NET_ENV\":\" $.github/workflows/jekyll.yml"
+      - run: echo "NET_ENV\":\" $NET_ENV"
       - run: npm ci
       - run: |
           node ./bin/create-meta.js && \
