@@ -23,6 +23,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - run: echo "NET_ENV\":\" $.github/workflows/jekyll.yml"
       - run: npm ci
       - run: |
           node ./bin/create-meta.js && \
