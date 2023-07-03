@@ -26,13 +26,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: echo "NET_ENV\":\" $NET_ENV"
+      - run: echo "NET_ENV\":\" ${{ vars.NET_ENV }}"
       - run: npm ci
       - run: |
           node ./bin/create-meta.js && \
-          VITE_DCMA=$VITE_DCMA \
-          VITE_GA4=$VITE_GA4 \
-          VITE_GTM=$VITE_GTM \
+          VITE_DCMA=${{ vars.VITE_DCMA }} \
+          VITE_GA4=${{ vars.VITE_GA4 }} \
+          VITE_GTM=${{ vars.VITE_GTM }} \
           npx qwik build
       - run: npm test
 
