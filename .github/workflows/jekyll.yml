@@ -11,6 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     strategy:
       matrix:
         node-version: [16.x]
@@ -23,14 +26,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - run: echo "NET_ENV\":\" ${{ vars.NET_ENV }}"
       - run: npm ci
-      - run: npm run build --if-present
+      - run: |
+          node ./bin/create-meta.js && \
+          VITE_DCMA=${{ vars.VITE_DCMA }} \
+          VITE_GA4=${{ vars.VITE_GA4 }} \
+          VITE_GTM=${{ vars.VITE_GTM }} \
+          npx qwik build
       - run: npm test
 
       - name: Build and Deploy with JamesIves/github-pages-deploy-action@v4
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BASE_BRANCH: master
-          BRANCH: gh-pages
-          FOLDER: dist
+          ssh: ${{ secrets.GH_PAGE_DEPLOY_TOKEN }}
+          branch: gh-pages
+          folder: dist

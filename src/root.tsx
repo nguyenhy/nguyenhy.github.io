@@ -15,6 +15,12 @@ import {
   getThemePreference,
   setThemePreference,
 } from "./services/theme";
+import {
+  DcmaVerification,
+  GoogleAnalytics,
+  GoogleTagManagerBody,
+  GoogleTagManagerHead,
+} from "./components/seo/analytics";
 
 const HeadFont = () => {
   return (
@@ -112,12 +118,33 @@ const HeadFavicon = () => {
   );
 };
 
-const HeadDCMA = () => {
+const AfterStartHead = () => {
   return (
-    <meta
-      name="dmca-site-verification"
-      content="N21wTXo3YTBsbU9XYlhoejMxN0Y0NVl3cDdNYnRPVm9zcTVCN01hRWZ4bz01"
-    />
+    <>
+      {import.meta.env.VITE_DCMA ? (
+        <DcmaVerification code={import.meta.env.VITE_DCMA} />
+      ) : null}
+      {import.meta.env.VITE_GA4 ? (
+        <GoogleAnalytics tag={import.meta.env.VITE_GA4} />
+      ) : null}
+      {import.meta.env.VITE_GTM ? (
+        <GoogleTagManagerHead tag={import.meta.env.VITE_GTM} />
+      ) : null}
+    </>
+  );
+};
+
+const BeforeEndHead = () => {
+  return <></>;
+};
+
+const AfterStartBody = () => {
+  return (
+    <>
+      {import.meta.env.VITE_GTM ? (
+        <GoogleTagManagerBody tag={import.meta.env.VITE_GTM} />
+      ) : null}
+    </>
   );
 };
 
@@ -143,13 +170,15 @@ export default component$(() => {
   return (
     <QwikCityProvider>
       <head>
+        <AfterStartHead />
         <meta charSet="utf-8" />
-        <HeadDCMA />
         <HeadFont />
         <HeadFavicon />
         <RouterHead />
+        <BeforeEndHead />
       </head>
       <body lang="en">
+        <AfterStartBody />
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>
