@@ -25,7 +25,6 @@ const rehypePrettyCodeOptions: Partial<Options> = {
   // theme: 'one-dark-pro',
   theme: {
     'one-dark-pro': 'one-dark-pro',
-    'nord': 'nord'
   },
   // Or your own JSON theme
   // Keep the background or use a custom background color?
