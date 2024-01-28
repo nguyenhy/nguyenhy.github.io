@@ -6,7 +6,7 @@ import {
 } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
 
-import "./global.css";
+import "./global.scss";
 import { SettingContext } from "./services/context";
 import { useContextProvider } from "@builder.io/qwik";
 import type { IContextSettingState } from "./services/context";
