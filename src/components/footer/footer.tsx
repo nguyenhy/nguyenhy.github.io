@@ -1,8 +1,8 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import styles from "./footer.css?inline";
 
 export default component$(() => {
-  useStyles$(styles);
+  useStylesScoped$(styles);
 
   return (
     <footer class="border-t mt-10 p-5">

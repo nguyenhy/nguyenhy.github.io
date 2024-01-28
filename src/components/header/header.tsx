@@ -1,4 +1,4 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import HeaderLogo from "../logo";
 import styles from "./header.css?inline";
@@ -7,7 +7,7 @@ import { ThemeToggle } from "~/services/theme";
 interface IHeaderProps {}
 
 export default component$<IHeaderProps>(() => {
-  useStyles$(styles);
+  useStylesScoped$(styles);
   const { url } = useLocation();
 
   return (

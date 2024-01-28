@@ -1,9 +1,9 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { useContent, Link, useLocation } from "@builder.io/qwik-city";
 import styles from "./menu.css?inline";
 
 export default component$(() => {
-  useStyles$(styles);
+  useStylesScoped$(styles);
 
   const { menu } = useContent();
   const loc = useLocation();
