@@ -29,7 +29,7 @@ jobs:
       - run: echo "NET_ENV\":\" ${{ vars.NET_ENV }}"
       - run: npm ci
       - run: |
-          node ./bin/create-meta.js && \
+          node ./vite/bin/create-meta.js && \
           VITE_DCMA=${{ vars.VITE_DCMA }} \
           VITE_GA4=${{ vars.VITE_GA4 }} \
           VITE_GTM=${{ vars.VITE_GTM }} \

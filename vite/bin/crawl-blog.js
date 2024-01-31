@@ -27,25 +27,32 @@ async function createMetaFile() {
     const parsed = parser(mdxContent);
 
     if (parsed.data.meta && parsed.data.meta.hidden) {
-      continue
+      continue;
     }
 
-    const importPath = `.${dirPath.replace(blogsPath, "")}/index.meta`
+    const importPath = `.${dirPath.replace(blogsPath, "")}/index.meta`;
     const module = {
-      chunk: '${chunk}',
+      chunk: "${chunk}",
+    };
+    if (
+      parsed.data.meta &&
+      parsed.data.meta.article &&
+      parsed.data.meta.article.published_time
+    ) {
+      module.published_time = parsed.data.meta.article.published_time;
     }
-    if (parsed.data.meta && parsed.data.meta.article && parsed.data.meta.article.published_time) {
-      module.published_time = parsed.data.meta.article.published_time
-    }
-    if (parsed.data.meta && parsed.data.meta.article && parsed.data.meta.article.modified_time) {
-      module.modified_time = parsed.data.meta.article.modified_time
+    if (
+      parsed.data.meta &&
+      parsed.data.meta.article &&
+      parsed.data.meta.article.modified_time
+    ) {
+      module.modified_time = parsed.data.meta.article.modified_time;
     }
 
-    const moduleString = JSON.stringify(module)
-      .replace(
-        '\"${chunk}\"',
-        `() => import("${importPath}")`
-      )
+    const moduleString = JSON.stringify(module).replace(
+      '"${chunk}"',
+      `() => import("${importPath}")`
+    );
 
     chunkImport.push(moduleString);
 
@@ -63,11 +70,11 @@ async function createMetaFile() {
     allMetaPath,
     [
       `export const data = [ ${chunkImport.join(",")} ]`,
-      `export const meta = ${JSON.stringify({ update: Date.now() })}`
-    ].join('\n')
+      `export const meta = ${JSON.stringify({ update: Date.now() })}`,
+    ].join("\n")
   );
   const latestCreated = chunkImport
-    .map(chunk => {
+    .map((chunk) => {
       const pattern = /"published_time":(\d+)/;
 
       const match = chunk.match(pattern);
@@ -76,15 +83,15 @@ async function createMetaFile() {
         return {
           date: extractedNumber,
           data: chunk,
-        }
+        };
       }
 
-      return null
+      return null;
     })
-    .filter(chunk => chunk && chunk.date)
+    .filter((chunk) => chunk && chunk.date)
     .sort((a, b) => {
       if (!a.date && !b.date) {
-        return 0
+        return 0;
       }
 
       const publishedA = a.date;
@@ -101,16 +108,19 @@ async function createMetaFile() {
       // names must be equal
       return 0;
     })
-    .map(item => item.data)
+    .map((item) => item.data)
     .slice(0, 3);
 
-  const latestCreatedMetaPath = resolve(blogsPath, "index.latest-created.meta.js");
+  const latestCreatedMetaPath = resolve(
+    blogsPath,
+    "index.latest-created.meta.js"
+  );
   fs.writeFile(
     latestCreatedMetaPath,
     [
       `export const data = [ ${latestCreated.join(",")} ]`,
-      `export const meta = ${JSON.stringify({ update: Date.now() })}`
-    ].join('\n')
+      `export const meta = ${JSON.stringify({ update: Date.now() })}`,
+    ].join("\n")
   );
 }
 

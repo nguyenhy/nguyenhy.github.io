@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "build": "node ./bin/create-meta.js && qwik build",
+    "build": "node ./vite/bin/create-meta.js && qwik build",
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
     "build.server": "vite build -c adapters/static/vite.config.ts",
