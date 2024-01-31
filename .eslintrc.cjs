@@ -40,4 +40,12 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": ["error"],
     "@typescript-eslint/consistent-type-imports": "warn",
   },
+  overrides: [
+    {
+      files: ["*.config.cjs", "*.config.js", "vite/**/*.js"],
+      rules: {
+        "@typescript-eslint/no-var-requires": "off",
+      },
+    },
+  ],
 };
