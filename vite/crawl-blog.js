@@ -16,6 +16,7 @@ async function allMetaFiles() {
 async function createMetaFile() {
   const files = await allMetaFiles();
   let chunkImport = [];
+  let modules = [];
 
   for (let index = 0; index < files.length; index++) {
     const item = files[index];
@@ -53,16 +54,14 @@ async function createMetaFile() {
       '"${chunk}"',
       `() => import("${importPath}")`
     );
-
     chunkImport.push(moduleString);
 
-    await fs.writeFile(
-      newFilePath,
-      createMetaContent({
-        url: item.replace(/src\/routes\/(.*)\/index.mdx/g, "/$1"),
-        ...parsed.data,
-      })
-    );
+    const finalModule = {
+      url: item.replace(/src\/routes\/(.*)\/index.mdx/g, "/$1"),
+      ...parsed.data,
+    };
+    modules.push(finalModule);
+    await fs.writeFile(newFilePath, createMetaContent(finalModule));
   }
 
   const allMetaPath = resolve(blogsPath, "index.meta.js");
@@ -73,43 +72,12 @@ async function createMetaFile() {
       `export const meta = ${JSON.stringify({ update: Date.now() })}`,
     ].join("\n")
   );
-  const latestCreated = chunkImport
-    .map((chunk) => {
-      const pattern = /"published_time":(\d+)/;
 
-      const match = chunk.match(pattern);
-      if (match) {
-        const extractedNumber = match[1];
-        return {
-          date: extractedNumber,
-          data: chunk,
-        };
-      }
-
-      return null;
-    })
-    .filter((chunk) => chunk && chunk.date)
-    .sort((a, b) => {
-      if (!a.date && !b.date) {
-        return 0;
-      }
-
-      const publishedA = a.date;
-      const publishedB = b.date;
-      if (publishedA < publishedB) {
-        // sort a after b
-        return 1;
-      }
-      if (publishedA > publishedB) {
-        // sort a before b
-        return -1;
-      }
-
-      // names must be equal
-      return 0;
-    })
-    .map((item) => item.data)
-    .slice(0, 3);
+  const latest = modules
+    .sort(
+      (a, b) => b.meta.article.published_time - a.meta.article.published_time
+    )
+    .slice(0, 5);
 
   const latestCreatedMetaPath = resolve(
     blogsPath,
@@ -118,7 +86,7 @@ async function createMetaFile() {
   fs.writeFile(
     latestCreatedMetaPath,
     [
-      `export const data = [ ${latestCreated.join(",")} ]`,
+      `export const data = ${JSON.stringify(latest)}`,
       `export const meta = ${JSON.stringify({ update: Date.now() })}`,
     ].join("\n")
   );
