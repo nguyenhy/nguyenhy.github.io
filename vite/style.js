@@ -1,8 +1,8 @@
-import { resolve } from "path";
-import fs from "node:fs/promises";
-import dsp from "./theme/tokens.json";
+const { resolve } = require("path");
+const fs = require("node:fs/promises");
+const dsp = require("./theme/tokens.json");
 
-export const breakpoints = {
+const breakpoints = {
   "2xsm": 320,
   xsm: 480,
   sm: 640,
@@ -16,7 +16,7 @@ export const breakpoints = {
   "6xl": 2560,
 };
 
-export const createScssBreakpointsMap = () => {
+const createScssBreakpointsMap = () => {
   let map = ``;
   for (const key in breakpoints) {
     if (Object.prototype.hasOwnProperty.call(breakpoints, key)) {
@@ -27,12 +27,12 @@ export const createScssBreakpointsMap = () => {
   return `$breakpoints: (${map})`;
 };
 
-export const writeScssBreakpointsToFile = (dir: string, content: string) => {
+const writeScssBreakpointsToFile = (dir, content) => {
   const path = resolve(dir, "constant/_auto.breakpoint.scss");
   fs.writeFile(path, content);
 };
 
-export const createDspTokenMap = () => {
+const createDspTokenMap = () => {
   let output = "";
   const categories = {};
   const ids = {};
@@ -80,7 +80,7 @@ export const createDspTokenMap = () => {
   return output;
 };
 
-export const parseDspTokenIdToScssVar = (id: string) => {
+const parseDspTokenIdToScssVar = (id) => {
   return (
     "$" +
     id
@@ -97,28 +97,32 @@ export const parseDspTokenIdToScssVar = (id: string) => {
   );
 };
 
-export const parseDspAliasValueIdToScssVar = (id: string) => {
+const parseDspAliasValueIdToScssVar = (id) => {
   return parseDspTokenIdToScssVar(id).replace("{", "").replace("}", "");
 };
 
-export const writeDspTokenToFile = (dir: string, content: string) => {
+const writeDspTokenToFile = (dir, content) => {
   const path = resolve(dir, "constant/_auto.dsp.scss");
   fs.writeFile(path, content);
 };
 
-export const autoGenerateStyle = () => {
-  const rootPath = resolve("./");
-  const stylesPath = resolve(rootPath, "./src/styles");
+const autoGenerateStyle = () => {
   return {
     name: "auto-generate-style",
     /**
      * https://rollupjs.org/plugin-development/#buildstart
      */
     buildStart() {
-      writeScssBreakpointsToFile(stylesPath, createScssBreakpointsMap());
-      writeDspTokenToFile(stylesPath, createDspTokenMap());
+      buildStyles();
     },
   };
+};
+
+const buildStyles = () => {
+  const rootPath = resolve("./");
+  const stylesPath = resolve(rootPath, "./src/styles");
+  writeScssBreakpointsToFile(stylesPath, createScssBreakpointsMap());
+  writeDspTokenToFile(stylesPath, createDspTokenMap());
 };
 
 const remapBreakpointsToPixels = (input) => {
@@ -130,4 +134,15 @@ const remapBreakpointsToPixels = (input) => {
   }
 };
 
-export const breakpointsInPixels = () => remapBreakpointsToPixels(breakpoints);
+const breakpointsInPixels = () => remapBreakpointsToPixels(breakpoints);
+
+exports.breakpoints = breakpoints;
+exports.createScssBreakpointsMap = createScssBreakpointsMap;
+exports.writeScssBreakpointsToFile = writeScssBreakpointsToFile;
+exports.createDspTokenMap = createDspTokenMap;
+exports.parseDspTokenIdToScssVar = parseDspTokenIdToScssVar;
+exports.parseDspAliasValueIdToScssVar = parseDspAliasValueIdToScssVar;
+exports.writeDspTokenToFile = writeDspTokenToFile;
+exports.autoGenerateStyle = autoGenerateStyle;
+exports.buildStyles = buildStyles;
+exports.breakpointsInPixels = breakpointsInPixels;

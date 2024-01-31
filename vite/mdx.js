@@ -1,21 +1,14 @@
-import path from "path";
-
-import type { HmrContext } from "vite";
-import { blogsPath, createMetaFile } from "./bin/crawl-blog";
+const path = require("path");
+const { blogsPath, createMetaFile } = require("./crawl-blog");
 
 export const buildMdxMetadata = () => {
   return {
     name: "mdx-metadata",
     /**
-     * https://rollupjs.org/plugin-development/#buildstart
-     */
-    buildStart() {
-      createMetaFile();
-    },
-    /**
      * https://vitejs.dev/guide/api-plugin#handlehotupdate
+     * @param {import('vite').HmrContext}
      */
-    handleHotUpdate(context: HmrContext) {
+    handleHotUpdate(context) {
       const file = context.file;
       const ext = path.extname(file);
       const relativeFromBlogs = file.replace(blogsPath, "");

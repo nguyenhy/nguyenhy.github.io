@@ -1,5 +1,3 @@
-import type { Options } from "rehype-pretty-code";
-
 const highlightWordColorBgColor = {
   a: "rgb(196 42 94 / 59%)",
   b: "rgb(0 103 163 / 56%)",
@@ -12,7 +10,10 @@ const highlightWordColor = {
   c: "rgb(225 200 255 / 100%)",
 };
 
-export const rehypePrettyCodeOptions: Partial<Options> = {
+/**
+ * @type {Partial<import("rehype-pretty-code").Options>}
+ */
+export const rehypePrettyCodeOptions = {
   // Use one of Shiki's packaged themes
   // theme: 'one-dark-pro',
   theme: {
@@ -43,12 +44,15 @@ export const rehypePrettyCodeOptions: Partial<Options> = {
       const color = highlightWordColor[id];
 
       if (node.properties["data-rehype-pretty-code-wrapper"]) {
-        node.children.forEach((childNode: any) => {
+        node.children.forEach((childNode) => {
           childNode.properties.style = ``;
           childNode.properties.className = "";
         });
       }
-      const styles: string[] = [];
+      /**
+       * @type {string[]}
+       */
+      const styles = [];
       if (backgroundColor) {
         styles.push(`background-color: ${backgroundColor}`);
       }

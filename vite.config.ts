@@ -5,7 +5,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import rehypePrettyCode from "rehype-pretty-code";
 import { buildMdxMetadata } from "./vite/mdx";
 import { rehypePrettyCodeOptions } from "./vite/rehype";
-import { autoGenerateStyle } from "./vite/style";
 
 export default defineConfig(() => {
   return {
@@ -23,7 +22,6 @@ export default defineConfig(() => {
       qwikVite(),
       tsconfigPaths(),
       buildMdxMetadata(),
-      autoGenerateStyle(),
     ],
     preview: {
       headers: {

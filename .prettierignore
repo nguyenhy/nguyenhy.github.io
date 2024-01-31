@@ -40,3 +40,9 @@ server
 
 *.md
 *.mdx
+
+public/**/*.js
+src/**/*.script.js
+src/routes/blogs/**/*.meta.ts
+src/routes/blogs/**/*.meta.js
+!/vite/build
