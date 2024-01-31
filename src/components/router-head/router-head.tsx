@@ -20,18 +20,18 @@ export const RouterHead = component$(() => {
       <CustomMeta head={head} />
 
       {head.meta.map((m) => (
-        <meta {...m} />
+        <meta key={m.name ?? m.key} {...m} />
       ))}
 
       <script src="/font/index.script.js"></script>
       <script src="/theme/index.script.js"></script>
 
       {head.links.map((l) => (
-        <link {...l} />
+        <link key={`${l.rel ?? ""}-${l.href}`} {...l} />
       ))}
 
       {head.styles.map((s) => (
-        <style {...s.props} dangerouslySetInnerHTML={s.style} />
+        <style key={s.key} {...s.props} dangerouslySetInnerHTML={s.style} />
       ))}
     </>
   );

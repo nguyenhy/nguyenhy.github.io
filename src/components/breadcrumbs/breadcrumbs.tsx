@@ -16,8 +16,10 @@ export const Breadcrumbs = component$(() => {
 
   return (
     <nav class="breadcrumbs">
-      {breadcrumbs.map((b) => (
-        <span>{b.href ? <a href={b.href}>{b.text}</a> : b.text}</span>
+      {breadcrumbs.map((b, index) => (
+        <span key={index}>
+          {b.href ? <a href={b.href}>{b.text}</a> : b.text}
+        </span>
       ))}
     </nav>
   );
