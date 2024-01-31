@@ -13,9 +13,6 @@ export default component$(() => {
               <a href="/blogs">Blogs</a>
             </li>
             <li>
-              <a href="/about-me">About me</a>
-            </li>
-            <li>
               <a href="https://github.com/nguyenhy" target="_blank">
                 GitHub
               </a>
