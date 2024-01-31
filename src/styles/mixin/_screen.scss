@@ -1,0 +1,15 @@
+@use "../constant" as constant;
+
+@mixin from($device) {
+  $max_width: constant.breakpoint-breakpoint_or_px($device);
+  @media screen and (max-width: $max_width) {
+    @content;
+  }
+}
+
+@mixin until($device) {
+  $max_width: constant.breakpoint-breakpoint_or_px($device);
+  @media screen and (max-width: #{$max_width - 1px}) {
+    @content;
+  }
+}

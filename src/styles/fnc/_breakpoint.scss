@@ -1,0 +1,24 @@
+@use "sass:map";
+@use "../constant/breakpoint" as breakpoint;
+
+@function get_breakpoints($name) {
+  @return map.get(breakpoint.$breakpoints, $name);
+}
+
+@function breakpoint_or_px($device) {
+  @if type-of($device) == "string" {
+    $width: get_breakpoints($device);
+    @if $width == null {
+      @error _msg("invalid_breakpoint(#{$device})");
+    }
+    @return $width;
+  } @else if type-of($device) == "number" {
+    @return $device;
+  } @else {
+    @error _msg("invalid_breakpoint(#{$device})");
+  }
+}
+
+@function _msg($msg) {
+  @return "constant/breakpoint: $msg";
+}

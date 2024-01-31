@@ -1,0 +1,464 @@
+@use "../fnc/breakpoint" as breakpoint;
+
+@mixin headline($level, $max-width) {
+  @if ($level == 1) {
+    @include headline1($max-width);
+  } @else if ($level == 2) {
+    @include headline2($max-width);
+  } @else if ($level == 3) {
+    @include headline3($max-width);
+  } @else if ($level == 4) {
+    @include headline4($max-width);
+  } @else if ($level == 5) {
+    @include headline5($max-width);
+  } @else if ($level == 6) {
+    @include headline6($max-width);
+  }
+}
+
+@mixin headline1($max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-5xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-5xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-5xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-5xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-5xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-6xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-6xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-6xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-6xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-6xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-6xl/normal font-bold;
+  }
+}
+
+@mixin headline2($max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-4xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-4xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-4xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-4xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-4xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-5xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-5xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-5xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-5xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-5xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-5xl/normal font-bold;
+  }
+}
+
+@mixin headline3($max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-4xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-4xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-4xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-4xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-4xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-4xl/normal font-bold;
+  }
+}
+
+@mixin headline4($max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-2xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-2xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-2xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-2xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-2xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-3xl/normal font-bold;
+  }
+}
+
+@mixin headline5($max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-2xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-2xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-2xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-2xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-2xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-3xl/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-3xl/normal font-bold;
+  }
+}
+
+@mixin headline6($max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-sm/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-sm/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-sm/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-sm/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-sm/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-lg/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-lg/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-lg/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-lg/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-lg/normal font-bold;
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-lg/normal font-bold;
+  }
+}
+
+@mixin text($level, $bold, $max-width) {
+  @if ($level == 1) {
+    @include text1($bold, $max-width);
+  } @else if ($level == 2) {
+    @include text2($bold, $max-width);
+  } @else if ($level == 3) {
+    @include text3($bold, $max-width);
+  }
+}
+
+@mixin text1($bold, $max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-xl/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-xl/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-xl/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-xl/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-xl/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-xl/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  }
+}
+
+@mixin text2($bold, $max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-lg/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  }
+}
+
+@mixin text3($bold, $max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-sm/normal;
+    @if $bold == true {
+      @apply font-bold;
+    }
+  }
+}
+
+@mixin button($max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-lg/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-lg/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-lg/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-lg/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-lg/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-2xl/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-2xl/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-2xl/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-2xl/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-2xl/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-2xl/tight;
+  }
+}
+
+@mixin field_placeholder($max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-lg/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-lg/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-lg/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-lg/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-lg/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-lg/tight;
+  }
+}
+
+@mixin field_title($max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-sm/tight;
+  }
+}
+
+@mixin field_description($max-width) {
+  @if ($max-width < breakpoint.get_breakpoints("2xsm")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("xsm")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("sm")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("md")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("lg")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("xl")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("2xl")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("3xl")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("4xl")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("5xl")) {
+    @apply text-sm/tight;
+  } @else if ($max-width < breakpoint.get_breakpoints("6xl")) {
+    @apply text-sm/tight;
+  }
+}

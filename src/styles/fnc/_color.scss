@@ -1,0 +1,29 @@
+@use "sass:map";
+@use "../constant/color" as color;
+
+@function get_source_color($name) {
+  @return map.get(color.$source, $name);
+}
+
+@function get_color($role, $is_dark) {
+  $mode: $is_dark == true and "dark" or "light";
+  $name: "md.sys.color." + $role + "." + $mode;
+  $map: $is_dark == true and color.$dark or color.$light;
+  @return get($map, $name);
+}
+
+@function get_palette($name) {
+  @return get(color.$palette, $name);
+}
+
+@function get_palette_tone($type, $tone) {
+  $name: "md.ref.palette." + $type + $tone;
+  @return get_palette($name);
+}
+
+@function get($map, $name) {
+  @if map.has-key($map, $name) == false {
+    @error "constant.color.get(#{$name}): key_not_found";
+  }
+  @return map.get($map, $name);
+}
