@@ -5,7 +5,7 @@ export default component$(() => {
   return (
     <>
       <HeaderFooterMainLayout>
-        <div class="blogs">
+        <div class="blogs main-container">
           <article>
             <Slot />
           </article>

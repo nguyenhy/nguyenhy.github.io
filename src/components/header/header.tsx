@@ -11,7 +11,7 @@ export default component$<IHeaderProps>(() => {
   const { url } = useLocation();
 
   return (
-    <header class="sticky top-0 z-10 h-20 w-full py-2 overflow-hidden color-primary">
+    <header class="sticky top-0 z-10 grow-0 shrink-0 basis-20 w-full py-2 overflow-hidden color-primary">
       <div class="px-1 2xl:max-w-5xl container mx-auto flex flex-row justify-between items-center">
         <a class="no-underline" href="/">
           {/* h-20 ->  5rem: 80px */}
@@ -25,12 +25,6 @@ export default component$<IHeaderProps>(() => {
               class={{ active: url.pathname.startsWith("/docs") }}
             >
               Blogs
-            </a>
-            <a
-              href="/about-me"
-              class={{ active: url.pathname.startsWith("/about-me") }}
-            >
-              <span>About Me</span>
             </a>
           </nav>
           <ThemeToggle />

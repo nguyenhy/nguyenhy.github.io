@@ -8,7 +8,7 @@ export default component$(() => {
   return (
     <>
       <HeaderFooterMainLayout>
-        <div class="w-full min-h-[30vh] flex flex-row justify-start items-center">
+        <div class="w-full min-h-[30vh] flex flex-row justify-start items-center main-container">
           <div>
             <h1 class="font-bold font-logo">Keep calm and code on</h1>
             <p class="text-lg">

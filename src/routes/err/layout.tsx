@@ -7,7 +7,7 @@ export default component$(() => {
   return (
     <>
       <HeaderFooterMainLayout>
-        <h1 class="text-bold text-4xl text-center font-logo my-4 h-full flex items-center">
+        <h1 class="text-bold text-4xl text-center font-logo my-4 h-full flex items-center main-container">
           <span class="capitalize">
             <Slot></Slot>
           </span>
