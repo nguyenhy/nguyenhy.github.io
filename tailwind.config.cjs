@@ -1,13 +1,30 @@
+const { breakpointsInPixels } = require("./vite/style");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class'],
+  darkMode: ["class"],
   content: ["./src/**/*.{js,ts,jsx,tsx,md,mdx}"],
+  screens: breakpointsInPixels(),
   theme: {
     extend: {
       fontFamily: {
         logo: ['"Atomic\\ Age"', "cursive"],
       },
       colors: {
+        scheme: {
+          a: {
+            a: "#eeedeb",
+            b: "#e0ccbe",
+            c: "#747264",
+            d: "#3c3633",
+          },
+          b: {
+            a: "#3e3232",
+            b: "#503c3c",
+            c: "#7e6363",
+            d: "#a87c7c",
+          },
+        },
         accent: {
           DEFAULT: "#006ce9",
           50: "#edfaff",
@@ -24,12 +41,6 @@ module.exports = {
         },
         text: "#181818",
       },
-
-      screens: {
-        'xsm': '360px',
-        // => @media (min-width: 360px) { ... }
-
-      }
     },
   },
   plugins: [
