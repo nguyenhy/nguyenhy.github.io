@@ -8,7 +8,7 @@ export default component$(() => {
     <footer class="border-t mt-10 p-5">
       <div>
         <div class="flex flex-row justify-center">
-          <ul class="flex flex-row">
+          <ul>
             <li>
               <a href="/blogs">Blogs</a>
             </li>
@@ -20,8 +20,6 @@ export default component$(() => {
                 GitHub
               </a>
             </li>
-          </ul>
-          <ul class="flex flex-row">
             <li>
               <a href="/assets/icon/demo.html">Icon pack</a>
             </li>

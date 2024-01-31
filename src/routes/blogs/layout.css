@@ -210,8 +210,6 @@ html:not([data-code-theme])
   border-radius: 3px;
   font-size: 0.9em;
   user-select: all;
-  background-color: var(--code-inline-code-color-bg);
-  color: var(--code-inline-code-color-text);
 }
 
 @media (max-width: 640px) {

@@ -38,7 +38,11 @@ export const LatestPost = component$(() => {
       {blogs.map((item) => {
         return <BlockItem key={item.url} item={item} />;
       })}
-      {blogs.length ? <a href="/blogs/">Read more</a> : null}
+      {blogs.length ? (
+        <a class="mt-4 inline-block" href="/blogs/">
+          Read more
+        </a>
+      ) : null}
     </div>
   );
 });

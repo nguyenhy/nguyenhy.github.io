@@ -1,4 +1,5 @@
 import {
+  $,
   component$,
   useSignal,
   useStore,
@@ -74,16 +75,21 @@ export default component$(() => {
     <>
       <div class="card">
         {blogs.map((item) => {
-          return <BlockItem key={item.url} item={item} />;
+          return (
+            <>
+              <BlockItem key={item.url} item={item} />
+              <div class="divider"></div>
+            </>
+          );
         })}
       </div>
-      <div>
+      <div class="mt-4">
         {store.value ? (
           <Pagination
             pagination={store.value}
-            url={(index) => {
+            url={$((index) => {
               return index > 0 ? `/blogs?page=${index}` : "/blogs";
-            }}
+            })}
           />
         ) : null}
       </div>

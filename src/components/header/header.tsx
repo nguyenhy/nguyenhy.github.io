@@ -11,7 +11,7 @@ export default component$<IHeaderProps>(() => {
   const { url } = useLocation();
 
   return (
-    <header class="sticky top-0 z-10 h-20 w-full bg-[#ffffff9e] py-2 overflow-hidden backdrop-blur-xl backdrop-saturate-[4.5]">
+    <header class="sticky top-0 z-10 h-20 w-full py-2 overflow-hidden color-primary">
       <div class="px-1 2xl:max-w-5xl container mx-auto flex flex-row justify-between items-center">
         <a class="no-underline" href="/">
           {/* h-20 ->  5rem: 80px */}

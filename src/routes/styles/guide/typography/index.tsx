@@ -2,7 +2,7 @@ import { component$, useStyles$, useStylesScoped$ } from "@builder.io/qwik";
 import styles from "./index.scss?inline";
 
 export default component$(() => {
-  useStyles$(`body { --bg-color: white; --text-color: black}`);
+  useStyles$(`body { background-color: white; color: black}`);
   useStylesScoped$(styles);
 
   return (
@@ -154,54 +154,54 @@ export default component$(() => {
             </div>
           </div>
         </section>
+
+        <section class="section-style section--button">
+          <h2 class="section-label">Button</h2>
+          <div class="section-container">
+            <div class="row row--head">
+              <div class="col">Desktop</div>
+              <div class="col">Mobile</div>
+            </div>
+            <div class="row">
+              <div class="col col--desktop">
+                <button class="default">Default</button>
+                <div>Regular - 20 / 24</div>
+              </div>
+              <div class="col col--mobile">
+                <button class="small">Small</button>
+                <div>Regular - 16 / 24</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col--desktop">
+                <button class="small">Small</button>
+                <div>Regular - 16 / 24</div>
+              </div>
+              <div class="col col--mobile"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-style section--fields">
+          <h2 class="section-label">Fields</h2>
+          <div class="section-container">
+            <div class="row">
+              <div class="col">
+                <div class="placeholder">Text_Placeholder</div>
+                <div>Regular - 16 / 24</div>
+              </div>
+              <div class="col">
+                <div class="title">Text_Title</div>
+                <div>Regular - 12 / 16</div>
+              </div>
+              <div class="col">
+                <div class="description">Text_Description</div>
+                <div>Regular - 12 / 16</div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-
-      <section class="section-style section--button">
-        <h2 class="section-label">Button</h2>
-        <div class="section-container">
-          <div class="row row--head">
-            <div class="col">Desktop</div>
-            <div class="col">Mobile</div>
-          </div>
-          <div class="row">
-            <div class="col col--desktop">
-              <button class="default">Default</button>
-              <div>Regular - 20 / 24</div>
-            </div>
-            <div class="col col--mobile">
-              <button class="small">Small</button>
-              <div>Regular - 16 / 24</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col col--desktop">
-              <button class="small">Small</button>
-              <div>Regular - 16 / 24</div>
-            </div>
-            <div class="col col--mobile"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-style section--fields">
-        <h2 class="section-label">Fields</h2>
-        <div class="section-container">
-          <div class="row">
-            <div class="col">
-              <div class="placeholder">Text_Placeholder</div>
-              <div>Regular - 16 / 24</div>
-            </div>
-            <div class="col">
-              <div class="title">Text_Title</div>
-              <div>Regular - 12 / 16</div>
-            </div>
-            <div class="col">
-              <div class="description">Text_Description</div>
-              <div>Regular - 12 / 16</div>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   );
 });

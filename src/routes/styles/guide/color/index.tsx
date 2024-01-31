@@ -13,7 +13,7 @@ const palettes = [
 const roles = ["primary", "secondary", "tertiary", "error"];
 
 export default component$(() => {
-  useStyles$(`body { --bg-color: white; --text-color: black}`);
+  useStyles$(`body { background-color: white; color: black}`);
   useStylesScoped$(styles);
 
   return (

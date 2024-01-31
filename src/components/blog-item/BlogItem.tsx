@@ -3,17 +3,24 @@ import type { PageFrontmatter } from "~/components/router-head/router-head.servi
 export const BlockItem = ({ item }: { item: PageFrontmatter }) => {
   return (
     <>
-      <a class="group mb-4 block" href={item.url ?? ""}>
+      <a
+        class={
+          "group mt-4 block p-4 border-solid border-[var(--outline-variant)] border-b-[1px]"
+        }
+        href={item.url ?? ""}
+        style={{
+          backgroundColor: "rgb(var(--primary-rgb) / 0.05)",
+          color: "var(--on-surface)",
+        }}
+      >
         <div class="py-4">
-          <h4 class="group-hover:underline text-3xl mb-2 text-bold font-bold text-[var(--text-color)]">
+          <h3 class="group-hover:underline mb-2">
             <span>{item.title ?? ""}</span>
-          </h4>
+          </h3>
           {item.meta?.description ? (
-            <p class="text-lg text-[var(--secondary-text-color)]">
-              {item.meta.description}
-            </p>
+            <p class="text-lg no-underline">{item.meta.description}</p>
           ) : null}
-          <span class="text-sm text-[var(--secondary-text-color)]">
+          <span class="text-sm no-underline">
             <span>hyn | </span>
 
             {item.meta?.article?.modified_time
