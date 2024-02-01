@@ -28,7 +28,7 @@ build
 .rollup.cache
 dist
 tsconfig.tsbuildinfo
-vite.config.ts
+# vite.config.ts
 # *.spec.tsx
 # *.spec.ts
 .netlify
@@ -37,11 +37,11 @@ package-lock.json
 yarn.lock
 server
 
-commitlint.config.js
-tailwind.config.js
+# commitlint.config.js
+# tailwind.config.js
 
 public/**/*.js
 src/**/*.script.js
-bin/*.js
 src/routes/blogs/**/*.meta.ts
 src/routes/blogs/**/*.meta.js
+!/vite/build

@@ -1,4 +1,5 @@
 import {
+  $,
   component$,
   useSignal,
   useStore,
@@ -8,13 +9,14 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 
 import { Pagination } from "~/components/pagination";
 
-import { data } from "./index.meta.js";
+import { data, meta } from "./index.meta.js";
 import "./index@list.css";
 import type { IPaginationData } from "~/components/pagination/index.types";
 import { createPaginationNumber } from "~/components/pagination/index.services";
 import type { PageFrontmatter } from "~/components/router-head/router-head.services";
 import { createDocumentFrontMatter } from "~/components/router-head/router-head.services";
 import { BlockItem } from "~/components/blog-item/BlogItem";
+import { importer } from "~/services/importer/index.js";
 
 async function getPaginationData(
   currentPageIndex: number,
@@ -23,12 +25,14 @@ async function getPaginationData(
 ) {
   for (let index = 0; index < itemPerPage; index++) {
     const itemIndex = currentPageIndex * itemPerPage + index;
-    const importer = data[itemIndex];
+    const item = data[itemIndex];
 
-    if (typeof importer.chunk === "function") {
+    if (typeof item.chunk === "function") {
       try {
-        const module = await importer.chunk();
-        callback(module.data);
+        const module = await importer(item.chunk, meta.update);
+        if (module) {
+          callback(module.data);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -71,16 +75,21 @@ export default component$(() => {
     <>
       <div class="card">
         {blogs.map((item) => {
-          return <BlockItem key={item.url} item={item} />;
+          return (
+            <>
+              <BlockItem key={item.url} item={item} />
+              <div class="divider"></div>
+            </>
+          );
         })}
       </div>
-      <div>
+      <div class="mt-4">
         {store.value ? (
           <Pagination
             pagination={store.value}
-            url={(index) => {
+            url={$((index) => {
               return index > 0 ? `/blogs?page=${index}` : "/blogs";
-            }}
+            })}
           />
         ) : null}
       </div>

@@ -3,7 +3,7 @@ footer {
 }
 
 footer a {
-  @apply text-sm text-[var(--secondary-text-color)];
+  @apply text-sm;
 }
 
 footer ul {

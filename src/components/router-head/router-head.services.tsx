@@ -11,7 +11,7 @@ export interface CustomFrontmatter {
      */
     hidden?: boolean;
     description: string;
-    keywords: string[];
+    keywords: (string | number)[];
     url: string;
     image: string;
     article: Partial<{

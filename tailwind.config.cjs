@@ -1,13 +1,40 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class'],
+  darkMode: ["class"],
   content: ["./src/**/*.{js,ts,jsx,tsx,md,mdx}"],
   theme: {
     extend: {
+      screens: {
+        "2xsm": "320px",
+        xsm: "480px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1366px",
+        "3xl": "1440px",
+        "4xl": "1680px",
+        "5xl": "1920px",
+        "6xl": "2560px",
+      },
       fontFamily: {
         logo: ['"Atomic\\ Age"', "cursive"],
       },
       colors: {
+        scheme: {
+          a: {
+            a: "#eeedeb",
+            b: "#e0ccbe",
+            c: "#747264",
+            d: "#3c3633",
+          },
+          b: {
+            a: "#3e3232",
+            b: "#503c3c",
+            c: "#7e6363",
+            d: "#a87c7c",
+          },
+        },
         accent: {
           DEFAULT: "#006ce9",
           50: "#edfaff",

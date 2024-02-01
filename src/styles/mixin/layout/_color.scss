@@ -1,0 +1,33 @@
+@use "sass:color";
+@use "../../fnc" as fnc;
+
+@mixin color() {
+  :focus {
+    --color: var(--tertiary);
+    outline: 1px dashed var(--color);
+    text-decoration: underline;
+    outline-offset: 2px;
+  }
+
+  a {
+    --color: var(--tertiary);
+    &:hover {
+      text-decoration: underline;
+      color: var(--color);
+    }
+    &:focus {
+      outline: 1px dashed var(--color);
+      text-decoration: underline;
+      outline-offset: 2px;
+      color: var(--color);
+    }
+    &:active {
+      background-color: var(--color);
+      color: var(--on-tertiary);
+    }
+
+    &:disabled {
+      color: var(on-background);
+    }
+  }
+}

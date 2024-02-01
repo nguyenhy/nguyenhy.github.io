@@ -1,7 +1,12 @@
+import { component$, useContext, useStylesScoped$ } from "@builder.io/qwik";
 import { createPaginationNumber } from "./index.services";
 import type { IPaginationData, IPaginationProps } from "./index.types";
+import { SettingContext } from "~/services/context";
+import styles from "./index.scss?inline";
 
-export const Pagination = (props: IPaginationProps) => {
+export const Pagination = component$((props: IPaginationProps) => {
+  useStylesScoped$(styles);
+  const state = useContext(SettingContext);
   let pagination: IPaginationData;
   if (props.pagination) {
     pagination = props.pagination;
@@ -12,20 +17,19 @@ export const Pagination = (props: IPaginationProps) => {
   }
 
   return (
-    <div class="flex flex-row">
+    <div class={["flex flex-row", state.theme].join(" ")}>
       {pagination.pages.map(async (page) => {
         const url =
           typeof props.url === "string"
             ? props.url.replace("${index}", `${page}`)
-            : props.url(page);
+            : await props.url(page);
+
         return (
           <a
             key={page}
             href={url}
             class={`w-[30px] h-[30px] leading-[30px] text-center rounded-sm mr-1 ${
-              page === pagination.currentPageIndex
-                ? "bg-accent-700 text-white"
-                : "bg-black/20 dark:text-white text-black "
+              page === pagination.currentPageIndex ? "color-secondary" : ""
             }`}
           >
             <span>{page + 1}</span>
@@ -34,4 +38,4 @@ export const Pagination = (props: IPaginationProps) => {
       })}
     </div>
   );
-};
+});

@@ -1,3 +1,5 @@
+import type { QRL } from "@builder.io/qwik";
+
 export interface ICreatePaginationNumberOptions
   extends Partial<ICreatePaginationNumberOptional> {
   totalItems: number;
@@ -24,5 +26,5 @@ export interface IPaginationData {
 export interface IPaginationProps {
   options?: ICreatePaginationNumberOptions;
   pagination?: IPaginationData;
-  url: string | ((index: number) => string);
+  url: string | QRL<(index: number) => string>;
 }

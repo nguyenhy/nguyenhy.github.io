@@ -1,0 +1,15 @@
+@use "./auto.dsp.scss" as dsp;
+
+$source: (
+  // https://m3.material.io/theme-builder#/custom
+  // source color to auto create color
+  "primary": #776b5d,
+  "secondary": #a58d6f,
+  "tertiary": #83976e,
+  "neutral": #978f88
+);
+
+$light: dsp.$sys_color_light;
+$dark: dsp.$sys_color_dark;
+$auto: dsp.$sys_color;
+$palette: dsp.$ref_palette;

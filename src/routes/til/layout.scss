@@ -1,0 +1,14 @@
+@use "../../styles" as styles;
+
+.til {
+  --background: #{styles.fnc-color_get_dark_color("background")};
+  --on-background: #{styles.fnc-color_get_dark_color("on-background")};
+}
+.header {
+  background-color: styles.fnc-color_get_light_color("background");
+  color: styles.fnc-color_get_light_color("on-background");
+}
+.modal {
+  background-color: styles.fnc-color_get_light_color("surface-variant");
+  color: styles.fnc-color_get_light_color("on-surface-variant");
+}

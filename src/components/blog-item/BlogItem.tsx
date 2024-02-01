@@ -1,21 +1,25 @@
 import type { PageFrontmatter } from "~/components/router-head/router-head.services";
+import { component$, useStylesScoped$ } from "@builder.io/qwik";
+import styles from "./BlogItem.scss?inline";
 
-export const BlockItem = ({ item }: { item: PageFrontmatter }) => {
+export const BlockItem = component$(({ item }: { item: PageFrontmatter }) => {
+  useStylesScoped$(styles);
   return (
     <>
-      <a class="group mb-4 block" href={item.url ?? ""}>
+      <a
+        class={
+          "item group mt-4 block p-4 border-solid border-[1px] no-underline no-hover"
+        }
+        href={item.url ?? ""}
+      >
         <div class="py-4">
-          <h4 class="group-hover:underline text-3xl mb-2 text-bold font-bold text-[var(--text-color)]">
+          <h3 class="group-hover:underline mb-2">
             <span>{item.title ?? ""}</span>
-          </h4>
+          </h3>
           {item.meta?.description ? (
-            <p class="text-lg text-[var(--secondary-text-color)]">
-              {item.meta.description}
-            </p>
+            <p class="body-2 no-underline">{item.meta.description}</p>
           ) : null}
-          <span class="text-sm text-[var(--secondary-text-color)]">
-            <span>hyn | </span>
-
+          <span class="body-3 text-[var(--on-surface-variant)] italic no-underline">
             {item.meta?.article?.modified_time
               ? `Update at: ${new Date(
                   item.meta?.article?.modified_time * 1000
@@ -30,4 +34,4 @@ export const BlockItem = ({ item }: { item: PageFrontmatter }) => {
       </a>
     </>
   );
-};
+});

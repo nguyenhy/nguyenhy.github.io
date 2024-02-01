@@ -1,0 +1,268 @@
+@use "../styles.mixin.scss" as guide_style;
+$tones: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100;
+$palettes: "error", "neutral-variant", "neutral", "primary", "secondary",
+  "tertiary";
+.section-style {
+  @apply mb-5;
+
+  .section-label {
+    @include guide_style.mixin-text-headline(3, 1280px);
+    @apply mb-4;
+  }
+
+  .section-container {
+    .row {
+      &.row--palette {
+        .col {
+          width: 100px;
+          height: 100px;
+        }
+      }
+    }
+  }
+
+  &.section--color {
+    .col {
+      &.col--primary {
+        background-color: guide_style.fnc-color-get_palette_tone("primary", 60);
+      }
+    }
+  }
+
+  &.section--palette {
+    .row {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 10px;
+
+      @each $type in $palettes {
+        &.row--#{$type} {
+          .col {
+            @each $tone in $tones {
+              &.col--#{$tone} {
+                background-color: guide_style.fnc-color-get_palette_tone(
+                  $type,
+                  $tone
+                );
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .tone-light {
+                  color: black;
+                }
+                .tone-dark {
+                  color: white;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.section--role {
+    .row {
+      display: flex;
+      flex-direction: row;
+      height: 100px;
+
+      text-align: center;
+      line-height: 100px;
+
+      font-size: 30px;
+    }
+    .col {
+      flex: 1;
+      &.col--role {
+        background-color: var(--role);
+        color: var(--on-role);
+      }
+      &.col--on-role {
+        background-color: var(--on-role);
+        color: var(--role);
+      }
+      &.col--role-container {
+        background-color: var(--role-container);
+        color: var(--on-role-container);
+      }
+      &.col--on-role-container {
+        background-color: var(--on-role-container);
+        color: var(--role-container);
+      }
+    }
+
+    .section-container {
+      padding: 20px;
+      &.light {
+        background-color: guide_style.fnc-color-get_color("background", false);
+        .row {
+          &.row--primary {
+            --role: #{guide_style.fnc-color-get_color("primary", false)};
+            --on-role: #{guide_style.fnc-color-get_color("on-primary", false)};
+            --role-container: #{guide_style.fnc-color-get_color(
+                "primary-container",
+                false
+              )};
+            --on-role-container: #{guide_style.fnc-color-get_color(
+                "on-primary-container",
+                false
+              )};
+          }
+          &.row--secondary {
+            --role: #{guide_style.fnc-color-get_color("secondary", false)};
+            --on-role: #{guide_style.fnc-color-get_color("on-secondary", false)};
+            --role-container: #{guide_style.fnc-color-get_color(
+                "secondary-container",
+                false
+              )};
+            --on-role-container: #{guide_style.fnc-color-get_color(
+                "on-secondary-container",
+                false
+              )};
+          }
+          &.row--tertiary {
+            --role: #{guide_style.fnc-color-get_color("tertiary", false)};
+            --on-role: #{guide_style.fnc-color-get_color("on-tertiary", false)};
+            --role-container: #{guide_style.fnc-color-get_color(
+                "tertiary-container",
+                false
+              )};
+            --on-role-container: #{guide_style.fnc-color-get_color(
+                "on-tertiary-container",
+                false
+              )};
+          }
+          &.row--error {
+            --role: #{guide_style.fnc-color-get_color("error", false)};
+            --on-role: #{guide_style.fnc-color-get_color("on-error", false)};
+            --role-container: #{guide_style.fnc-color-get_color(
+                "error-container",
+                false
+              )};
+            --on-role-container: #{guide_style.fnc-color-get_color(
+                "on-error-container",
+                false
+              )};
+          }
+          &.row--background {
+            --role: #{guide_style.fnc-color-get_color("background", false)};
+            --on-role: #{guide_style.fnc-color-get_color("on-background", false)};
+          }
+          &.row--surface {
+            --role: #{guide_style.fnc-color-get_color("surface", false)};
+            --on-role: #{guide_style.fnc-color-get_color("on-surface", false)};
+          }
+          &.row--surface-variant {
+            --role: #{guide_style.fnc-color-get_color("surface-variant", false)};
+            --on-role: #{guide_style.fnc-color-get_color(
+                "on-surface-variant",
+                false
+              )};
+          }
+          &.row--outline {
+            .col--outline {
+              background-color: #{guide_style.fnc-color-get_color(
+                  "outline",
+                  false
+                )};
+              color: white;
+            }
+            .col--outline-variant {
+              background-color: #{guide_style.fnc-color-get_color(
+                  "outline-variant",
+                  false
+                )};
+              color: white;
+            }
+          }
+        }
+      }
+
+      &.dark {
+        background-color: guide_style.fnc-color-get_color("background", true);
+        .row {
+          &.row--primary {
+            --role: #{guide_style.fnc-color-get_color("primary", true)};
+            --on-role: #{guide_style.fnc-color-get_color("on-primary", true)};
+            --role-container: #{guide_style.fnc-color-get_color(
+                "primary-container",
+                true
+              )};
+            --on-role-container: #{guide_style.fnc-color-get_color(
+                "on-primary-container",
+                true
+              )};
+          }
+          &.row--secondary {
+            --role: #{guide_style.fnc-color-get_color("secondary", true)};
+            --on-role: #{guide_style.fnc-color-get_color("on-secondary", true)};
+            --role-container: #{guide_style.fnc-color-get_color(
+                "secondary-container",
+                true
+              )};
+            --on-role-container: #{guide_style.fnc-color-get_color(
+                "on-secondary-container",
+                true
+              )};
+          }
+          &.row--tertiary {
+            --role: #{guide_style.fnc-color-get_color("tertiary", true)};
+            --on-role: #{guide_style.fnc-color-get_color("on-tertiary", true)};
+            --role-container: #{guide_style.fnc-color-get_color(
+                "tertiary-container",
+                true
+              )};
+            --on-role-container: #{guide_style.fnc-color-get_color(
+                "on-tertiary-container",
+                true
+              )};
+          }
+          &.row--error {
+            --role: #{guide_style.fnc-color-get_color("error", true)};
+            --on-role: #{guide_style.fnc-color-get_color("on-error", true)};
+            --role-container: #{guide_style.fnc-color-get_color(
+                "error-container",
+                true
+              )};
+            --on-role-container: #{guide_style.fnc-color-get_color(
+                "on-error-container",
+                true
+              )};
+          }
+          &.row--background {
+            --role: #{guide_style.fnc-color-get_color("background", true)};
+            --on-role: #{guide_style.fnc-color-get_color("on-background", true)};
+          }
+          &.row--surface {
+            --role: #{guide_style.fnc-color-get_color("surface", true)};
+            --on-role: #{guide_style.fnc-color-get_color("on-surface", true)};
+          }
+          &.row--surface-variant {
+            --role: #{guide_style.fnc-color-get_color("surface-variant", true)};
+            --on-role: #{guide_style.fnc-color-get_color(
+                "on-surface-variant",
+                true
+              )};
+          }
+          &.row--outline {
+            .col--outline {
+              background-color: #{guide_style.fnc-color-get_color(
+                  "outline",
+                  true
+                )};
+              color: white;
+            }
+            .col--outline-variant {
+              background-color: #{guide_style.fnc-color-get_color(
+                  "outline-variant",
+                  true
+                )};
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -66,7 +66,7 @@ export const ThemeToggle = component$(() => {
         data-theme={state.theme}
       >
         <i
-          class={`inline-block hy-adjust text-xl text-[var(--anchor)] ${
+          class={`inline-block hy-adjust text-xl ${
             state.theme === "light" ? "rotate-180" : ""
           }`}
         ></i>

@@ -1,0 +1,64 @@
+@use "sass:map";
+@use "sass:color" as sass_color;
+@use "../constant/color" as color;
+
+@function get_source_color($name) {
+  @return map.get(color.$source, $name);
+}
+
+@function get_color($role, $is_dark: false, $is_rgb: false) {
+  $mode: $is_dark == true and "dark" or "light";
+  $name: "md.sys.color." + $role + "." + $mode;
+  $map: $is_dark == true and color.$dark or color.$light;
+  $color: get($map, $name);
+  @if $is_rgb == true {
+    @return to_rgba($color);
+  } @else {
+    @return $color;
+  }
+}
+
+@function get_light_color($role) {
+  $name: "md.sys.color." + $role + ".light";
+  @return get(color.$light, $name);
+}
+
+@function get_dark_color($role) {
+  $name: "md.sys.color." + $role + ".dark";
+  @return get(color.$dark, $name);
+}
+
+@function get_color_rgb($role, $is_dark) {
+  $color: get_color($role, $is_dark);
+  @return to_rgba($color);
+}
+
+@function get_light_color_rgb($role) {
+  $color: get_light_color($role);
+  @return to_rgba($color);
+}
+
+@function get_dark_color_rgb($role) {
+  $color: get_dark_color($role);
+  @return to_rgba($color);
+}
+
+@function get_palette($name) {
+  @return get(color.$palette, $name);
+}
+
+@function get_palette_tone($type, $tone) {
+  $name: "md.ref.palette." + $type + $tone;
+  @return get_palette($name);
+}
+
+@function get($map, $name) {
+  @if map.has-key($map, $name) == false {
+    @error "constant.color.get(#{$name}): key_not_found";
+  }
+  @return map.get($map, $name);
+}
+
+@function to_rgba($hex) {
+  @return "#{sass_color.red($hex)} #{sass_color.green($hex)} #{sass_color.blue($hex)}";
+}
