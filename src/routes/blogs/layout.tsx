@@ -1,5 +1,5 @@
 import { Slot, component$, useStyles$ } from "@builder.io/qwik";
-import styles from "./layout.css?inline";
+import styles from "./layout.scss?inline";
 import { HeaderFooterMainLayout } from "~/components/layout/header-footer-main";
 
 export default component$(() => {
@@ -9,7 +9,7 @@ export default component$(() => {
     <>
       <HeaderFooterMainLayout>
         <div class="blogs main-container">
-          <article>
+          <article class="code">
             <Slot />
           </article>
         </div>

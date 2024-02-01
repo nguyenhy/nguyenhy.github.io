@@ -1,3 +1,9 @@
+@use "../../styles" as styles;
+
+.code {
+  @include styles.mixin-code-code_format;
+}
+
 .blogs article a {
   text-decoration: underline;
 }
@@ -153,65 +159,6 @@ h6 a:hover .icon {
   font-weight: 800;
 }
 
-[data-rehype-pretty-code-fragment] {
-  overflow: auto;
-  color: white;
-  background-color: rgb(1 31 51);
-  border-radius: 8px;
-  margin: 20px 0;
-}
-
-[data-rehype-pretty-code-fragment] pre {
-  overflow: auto;
-  border-radius: 8px;
-}
-
-[data-rehype-pretty-code-title] {
-  padding: 5px 15px;
-  background: #4199d3;
-  font-family: monospace;
-  font-weight: bold;
-}
-
-.blogs article pre {
-  padding: 18px 15px;
-  overflow: auto;
-}
-
-html[data-code-theme]:not([data-code-theme="one-dark-pro"])
-  .blogs
-  article
-  pre[data-language][data-theme="one-dark-pro"],
-html[data-code-theme]:not([data-code-theme="nord"])
-  .blogs
-  article
-  pre[data-language][data-theme="nord"] {
-  @apply hidden;
-}
-
-html:not([data-code-theme])
-  .blogs
-  article
-  pre[data-language]:not([data-theme="one-dark-pro"]) {
-  @apply hidden;
-}
-
-.blogs article pre code {
-  display: grid;
-  counter-reset: line;
-  background-color: transparent;
-  border: none;
-  user-select: auto;
-  line-height: 1.28;
-}
-
-.blogs article code:not([data-language]) {
-  padding: 2px 4px;
-  border-radius: 3px;
-  font-size: 0.9em;
-  user-select: all;
-}
-
 @media (max-width: 640px) {
   .blogs article code {
     word-break: break-all;
@@ -247,18 +194,4 @@ html:not([data-code-theme])
 .blogs article img {
   border-radius: 5px;
   overflow: hidden;
-}
-
-.blogs main.no-right-menu .on-this-page {
-  display: none;
-}
-
-@media (min-width: 1280px) {
-  .blogs main.no-right-menu .docs-container {
-    margin-right: 6rem;
-  }
-}
-
-.blogs article .line.highlighted {
-  background-color: rgba(200, 200, 255, 0.1);
 }
