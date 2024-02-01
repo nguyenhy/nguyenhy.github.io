@@ -1,5 +1,18 @@
 a.item {
   text-decoration: none;
-  background-color: rgb(var(--primary-rgb) / 0.05);
-  color: var(--on-surface);
+  background-color: rgb(var(--surface-variant-rgb) / 0.3);
+  color: var(--on-surface-variant);
+
+  border-color: var(--outline-variant);
+  outline: 1px transparent dashed;
+  outline-offset: -1px;
+  transition: 100ms ease-in-out;
+
+  &:focus,
+  &:hover {
+    border-color: rgb(var(--outline-variant-rgb) / 0.4);
+    outline-color: var(--outline-variant);
+    outline-offset: 3px;
+    outline-width: 2px;
+  }
 }

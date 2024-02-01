@@ -8,7 +8,7 @@ export const BlockItem = component$(({ item }: { item: PageFrontmatter }) => {
     <>
       <a
         class={
-          "item group mt-4 block p-4 border-solid border-[var(--outline-variant)] border-b-[1px] no-underline"
+          "item group mt-4 block p-4 border-solid border-[1px] no-underline no-hover"
         }
         href={item.url ?? ""}
       >
