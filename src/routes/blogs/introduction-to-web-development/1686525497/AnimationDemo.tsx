@@ -38,7 +38,7 @@ export default component$(() => {
                 </button>
               </div>
             </div>
-            <div class="text-sm italic mt-1">
+            <div class="body-3 italic mt-1">
               Click refresh icon to review animation
             </div>
           </div>

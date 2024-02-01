@@ -11,8 +11,8 @@ export default component$(() => {
         <div class="main-container">
           <div class="w-full min-h-[30vh] flex flex-row justify-start items-center">
             <div>
-              <h1 class="font-bold font-logo">Keep calm and code on</h1>
-              <p class="text-lg">
+              <h1 class="font-bold font-logo">Keep Calm & Code On</h1>
+              <p class="body-2">
                 Begin Your Web Development Adventure: Learn, Explore, Create!
               </p>
             </div>

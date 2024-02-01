@@ -18,11 +18,9 @@ export const BlockItem = ({ item }: { item: PageFrontmatter }) => {
             <span>{item.title ?? ""}</span>
           </h3>
           {item.meta?.description ? (
-            <p class="text-lg no-underline">{item.meta.description}</p>
+            <p class="body-2 no-underline">{item.meta.description}</p>
           ) : null}
-          <span class="text-sm no-underline">
-            <span>hyn | </span>
-
+          <span class="body-3 text-[var(--on-surface-variant)] italic no-underline">
             {item.meta?.article?.modified_time
               ? `Update at: ${new Date(
                   item.meta?.article?.modified_time * 1000
