@@ -269,8 +269,7 @@
             color: guide_style.fnc-color-get_dark_color("tertiary");
           }
           .anchor--focused {
-            outline: 1px dashed
-              guide_style.fnc-color-get_dark_color("tertiary");
+            outline: 1px dashed guide_style.fnc-color-get_dark_color("tertiary");
             text-decoration: underline;
             outline-offset: 2px;
             color: guide_style.fnc-color-get_dark_color("tertiary");
