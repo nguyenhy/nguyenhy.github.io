@@ -2,7 +2,7 @@
 
 @mixin from($device) {
   $max_width: fnc.breakpoint-breakpoint_or_px($device);
-  @media screen and (max-width: $max_width) {
+  @media screen and (min-width: $max_width) {
     @content;
   }
 }
