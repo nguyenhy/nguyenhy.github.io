@@ -1,1 +1,0 @@
-import{d as e}from"./q-9833d4b1.js";const d=r=>{const{children:t,class:a,...o}=r;return e("button",{class:`dark:bg-gray-700 dark:text-gray-200 bg-gray-200 text-black border border-gray-300 rounded-md px-4 py-2 ${a}`,...o,children:t},null,0,"nq_0")};export{d as D};
