@@ -2,19 +2,27 @@
 @use "../../fnc" as fnc;
 
 @mixin color() {
+  :focus {
+    --color: var(--tertiary);
+    outline: 1px dashed var(--color);
+    text-decoration: underline;
+    outline-offset: 2px;
+  }
+
   a {
+    --color: var(--tertiary);
     &:hover {
       text-decoration: underline;
-      color: var(--tertiary);
+      color: var(--color);
     }
     &:focus {
-      outline: 1px dashed var(--tertiary);
+      outline: 1px dashed var(--color);
       text-decoration: underline;
       outline-offset: 2px;
-      color: var(--tertiary);
+      color: var(--color);
     }
     &:active {
-      background-color: var(--tertiary);
+      background-color: var(--color);
       color: var(--on-tertiary);
     }
 

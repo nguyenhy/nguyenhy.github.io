@@ -1,5 +1,9 @@
+header a {
+  --color: var(--on-primary);
+}
+
 header nav a {
-  @apply inline-block py-1 px-3 font-logo;
+  @apply inline-block py-1 px-1 mr-1 font-logo;
 }
 
 header nav a:hover {
