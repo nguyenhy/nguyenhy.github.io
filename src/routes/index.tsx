@@ -8,15 +8,17 @@ export default component$(() => {
   return (
     <>
       <HeaderFooterMainLayout>
-        <div class="w-full min-h-[30vh] flex flex-row justify-start items-center main-container">
-          <div>
-            <h1 class="font-bold font-logo">Keep calm and code on</h1>
-            <p class="text-lg">
-              Begin Your Web Development Adventure: Learn, Explore, Create!
-            </p>
+        <div class="main-container">
+          <div class="w-full min-h-[30vh] flex flex-row justify-start items-center">
+            <div>
+              <h1 class="font-bold font-logo">Keep calm and code on</h1>
+              <p class="text-lg">
+                Begin Your Web Development Adventure: Learn, Explore, Create!
+              </p>
+            </div>
           </div>
+          <LatestPost />
         </div>
-        <LatestPost />
       </HeaderFooterMainLayout>
     </>
   );
