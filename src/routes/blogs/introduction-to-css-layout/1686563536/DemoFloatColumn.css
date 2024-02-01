@@ -16,7 +16,7 @@ header input[type="search"] {
 }
 
 header a {
-  @apply text-center p-3 body-3 rounded text-inherit;
+  @apply text-center p-3 rounded text-inherit;
 }
 
 header a:not(:hover) {
@@ -28,7 +28,7 @@ header a:hover {
 }
 
 header input[type="search"] {
-  @apply p-2 mt-1 body-3 rounded-sm;
+  @apply p-2 mt-1 rounded-sm;
 }
 
 header input[type="search"]::placeholder {
