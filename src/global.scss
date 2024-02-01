@@ -174,3 +174,17 @@ main {
   max-width: 840px;
   @apply mx-auto;
 }
+
+@layer components {
+  @include styles.mixin-layout-text-text(
+    styles.fnc-breakpoint-get_breakpoints("2xsm")
+  );
+
+  @include styles.mixin-screen-from(
+    styles.fnc-breakpoint-get_breakpoints("lg")
+  ) {
+    @include styles.mixin-layout-text-text(
+      styles.fnc-breakpoint-get_breakpoints("lg")
+    );
+  }
+}
