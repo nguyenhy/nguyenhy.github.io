@@ -1,0 +1,10 @@
+@use "../../styles" as styles;
+
+body {
+  --background: #{styles.fnc-color_get_dark_color("background")};
+  --on-background: #{styles.fnc-color_get_dark_color("on-background")};
+}
+
+.code {
+  @include styles.mixin-code-code_format;
+}
