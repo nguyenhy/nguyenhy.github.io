@@ -6,11 +6,16 @@
   @return map.get(color.$source, $name);
 }
 
-@function get_color($role, $is_dark) {
+@function get_color($role, $is_dark: false, $is_rgb: false) {
   $mode: $is_dark == true and "dark" or "light";
   $name: "md.sys.color." + $role + "." + $mode;
   $map: $is_dark == true and color.$dark or color.$light;
-  @return get($map, $name);
+  $color: get($map, $name);
+  @if $is_rgb == true {
+    @return to_rgba($color);
+  } @else {
+    @return $color;
+  }
 }
 
 @function get_light_color($role) {
