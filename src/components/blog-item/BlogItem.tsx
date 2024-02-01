@@ -1,17 +1,16 @@
 import type { PageFrontmatter } from "~/components/router-head/router-head.services";
+import { component$, useStylesScoped$ } from "@builder.io/qwik";
+import styles from "./BlogItem.scss?inline";
 
-export const BlockItem = ({ item }: { item: PageFrontmatter }) => {
+export const BlockItem = component$(({ item }: { item: PageFrontmatter }) => {
+  useStylesScoped$(styles);
   return (
     <>
       <a
         class={
-          "group mt-4 block p-4 border-solid border-[var(--outline-variant)] border-b-[1px]"
+          "item group mt-4 block p-4 border-solid border-[var(--outline-variant)] border-b-[1px] no-underline"
         }
         href={item.url ?? ""}
-        style={{
-          backgroundColor: "rgb(var(--primary-rgb) / 0.05)",
-          color: "var(--on-surface)",
-        }}
       >
         <div class="py-4">
           <h3 class="group-hover:underline mb-2">
@@ -35,4 +34,4 @@ export const BlockItem = ({ item }: { item: PageFrontmatter }) => {
       </a>
     </>
   );
-};
+});
