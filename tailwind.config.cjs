@@ -1,12 +1,22 @@
-const { breakpointsInPixels } = require("./vite/style");
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: ["./src/**/*.{js,ts,jsx,tsx,md,mdx}"],
-  screens: breakpointsInPixels(),
   theme: {
     extend: {
+      screens: {
+        "2xsm": "320px",
+        xsm: "480px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1366px",
+        "3xl": "1440px",
+        "4xl": "1680px",
+        "5xl": "1920px",
+        "6xl": "2560px",
+      },
       fontFamily: {
         logo: ['"Atomic\\ Age"', "cursive"],
       },
