@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "../styles.mixin.scss" as guide_style;
 
 .section-style {
@@ -146,6 +147,154 @@
       }
       .description {
         @include guide_style.mixin-text-field_description(1280px);
+      }
+    }
+  }
+
+  &.section--link {
+    .row {
+      padding: 10px;
+      &.row--light {
+        background-color: guide_style.fnc-color-get_light_color("background");
+        .col {
+          .anchor--test {
+            color: guide_style.fnc-color-get_light_color("on-background");
+            &:hover {
+              text-decoration: underline;
+              color: guide_style.fnc-color-get_light_color("tertiary");
+            }
+            &:focus {
+              outline: 1px dashed
+                guide_style.fnc-color-get_light_color("tertiary");
+              text-decoration: underline;
+              outline-offset: 2px;
+              color: guide_style.fnc-color-get_light_color("tertiary");
+            }
+            &:active {
+              background-color: color.change(
+                guide_style.fnc-color-get_light_color("tertiary"),
+                $alpha: 0.5
+              );
+              color: guide_style.fnc-color-get_light_color("on-tertiary");
+            }
+            &:visited {
+              color: color.change(
+                guide_style.fnc-color-get_light_color("on-background"),
+                $alpha: 0.8
+              );
+            }
+            &:disabled {
+              color: color.change(
+                guide_style.fnc-color-get_light_color("on-background"),
+                $alpha: 0.5
+              );
+            }
+          }
+          .anchor--default {
+            color: guide_style.fnc-color-get_light_color("on-background");
+          }
+          .anchor--hover {
+            text-decoration: underline;
+            color: guide_style.fnc-color-get_light_color("tertiary");
+          }
+          .anchor--focused {
+            outline: 1px dashed
+              guide_style.fnc-color-get_light_color("tertiary");
+            text-decoration: underline;
+            outline-offset: 2px;
+            color: guide_style.fnc-color-get_light_color("tertiary");
+          }
+          .anchor--active {
+            background-color: color.change(
+              guide_style.fnc-color-get_light_color("tertiary"),
+              $alpha: 0.5
+            );
+            color: guide_style.fnc-color-get_light_color("on-tertiary");
+          }
+          .anchor--click {
+            color: color.change(
+              guide_style.fnc-color-get_light_color("on-background"),
+              $alpha: 0.8
+            );
+          }
+          .anchor--disabled {
+            color: color.change(
+              guide_style.fnc-color-get_light_color("on-background"),
+              $alpha: 0.5
+            );
+          }
+        }
+      }
+      &.row--dark {
+        background-color: guide_style.fnc-color-get_dark_color("background");
+        .col {
+          .anchor--test {
+            color: guide_style.fnc-color-get_dark_color("on-background");
+            &:hover {
+              text-decoration: underline;
+              color: guide_style.fnc-color-get_dark_color("tertiary");
+            }
+            &:focus {
+              outline: 1px dashed
+                guide_style.fnc-color-get_dark_color("tertiary");
+              text-decoration: underline;
+              outline-offset: 2px;
+              color: guide_style.fnc-color-get_dark_color("tertiary");
+            }
+            &:active {
+              background-color: color.change(
+                guide_style.fnc-color-get_dark_color("tertiary"),
+                $alpha: 0.5
+              );
+              color: guide_style.fnc-color-get_dark_color("on-tertiary");
+            }
+            &:visited {
+              color: color.change(
+                guide_style.fnc-color-get_dark_color("on-background"),
+                $alpha: 0.8
+              );
+            }
+            &:disabled {
+              color: color.change(
+                guide_style.fnc-color-get_dark_color("on-background"),
+                $alpha: 0.5
+              );
+            }
+          }
+          .anchor--default {
+            color: guide_style.fnc-color-get_dark_color("on-background");
+          }
+          .anchor--hover {
+            text-decoration: underline;
+            color: guide_style.fnc-color-get_dark_color("tertiary");
+          }
+          .anchor--focused {
+            outline: 1px dashed
+              guide_style.fnc-color-get_dark_color("tertiary");
+            text-decoration: underline;
+            outline-offset: 2px;
+            color: guide_style.fnc-color-get_dark_color("tertiary");
+          }
+          .anchor--active {
+            background-color: color.change(
+              guide_style.fnc-color-get_dark_color("tertiary"),
+              $alpha: 0.5
+            );
+            color: guide_style.fnc-color-get_dark_color("on-tertiary");
+          }
+          .anchor--click {
+            color: color.change(
+              guide_style.fnc-color-get_dark_color("on-background"),
+              $alpha: 0.8
+            );
+          }
+          .anchor--disabled {
+            color: color.change(
+              guide_style.fnc-color-get_dark_color("on-background"),
+              $alpha: 0.5
+            );
+          }
+        }
       }
     }
   }

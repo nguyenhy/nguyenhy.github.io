@@ -201,6 +201,95 @@ export default component$(() => {
             </div>
           </div>
         </section>
+
+        <section class="section-style section--link">
+          <h2 class="section-label">Links</h2>
+          <div class="section-container">
+            <div class="row row--head">
+              <div class="col"></div>
+              <div class="col">Default</div>
+              <div class="col">Hover</div>
+              <div class="col">Focused</div>
+              <div class="col">Active</div>
+              <div class="col">Click</div>
+              <div class="col">Disabled</div>
+            </div>
+            <div class="row row--light">
+              <div class="col">
+                <a class="anchor--test" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--default" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--hover" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--focused" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--active" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--click" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--disabled" href="">
+                  Link
+                </a>
+              </div>
+            </div>
+            <div class="row row--dark">
+              <div class="col">
+                <a class="anchor--test" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--default" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--hover" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--focused" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--active" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--click" href="">
+                  Link
+                </a>
+              </div>
+              <div class="col">
+                <a class="anchor--disabled" href="">
+                  Link
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );
