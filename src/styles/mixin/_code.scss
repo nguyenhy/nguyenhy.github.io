@@ -26,6 +26,8 @@
     border-radius: 3px;
     font-size: 0.9em;
     user-select: all;
+    background: var(--surface-variant);
+    color: var(--on-surface-variant);
   }
 
   [data-rehype-pretty-code-fragment] {
