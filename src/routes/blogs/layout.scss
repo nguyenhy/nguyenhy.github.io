@@ -1,5 +1,15 @@
 @use "../../styles" as styles;
 
+main {
+  background-color: var(--background-10);
+  .main-container {
+    background-color: var(--background);
+    padding: 20px;
+    outline: 2px dashed var(--background-10);
+    outline-offset: -5px;
+  }
+}
+
 .code {
   @include styles.mixin-code-code_format;
 }
