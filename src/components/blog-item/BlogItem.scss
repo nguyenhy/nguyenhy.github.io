@@ -4,13 +4,13 @@ a.item {
   color: var(--on-surface-variant);
 
   border-color: var(--outline-variant);
-  outline: 1px transparent dashed;
+  outline: 2px transparent dashed;
   outline-offset: -1px;
-  transition: 100ms ease-in-out;
+  transition: 100ms cubic-bezier(0.4, 0, 1, 1);
 
   &:focus,
   &:hover {
-    border-color: rgb(var(--outline-variant-rgb) / 0.4);
+    border-color: rgb(var(--outline-variant-rgb) / 0.2);
     outline-color: var(--outline-variant);
     outline-offset: 3px;
     outline-width: 2px;
