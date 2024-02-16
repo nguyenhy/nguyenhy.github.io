@@ -42,6 +42,6 @@ server
 
 public/**/*.js
 src/**/*.script.js
-src/routes/blogs/**/*.meta.ts
-src/routes/blogs/**/*.meta.js
+src/routes/**/*.meta.ts
+src/routes/**/*.meta.js
 !/vite/build
