@@ -16,7 +16,6 @@ export const buildMdxMetadata = () => {
         file.replace(getPath("blogs"), "");
       if ([".mdx", ".md"].includes(ext) && relativeFromBlogs) {
         createMetaFile("blogs");
-        createMetaFile("til");
       }
     },
   };
