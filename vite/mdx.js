@@ -1,5 +1,5 @@
 const path = require("path");
-const { blogsPath, createMetaFile } = require("./crawl-blog");
+const { getPath, createMetaFile } = require("./crawl-blog");
 
 export const buildMdxMetadata = () => {
   return {
@@ -11,9 +11,12 @@ export const buildMdxMetadata = () => {
     handleHotUpdate(context) {
       const file = context.file;
       const ext = path.extname(file);
-      const relativeFromBlogs = file.replace(blogsPath, "");
+      const relativeFromBlogs =
+        file.replace(getPath("blogs"), "") ||
+        file.replace(getPath("blogs"), "");
       if ([".mdx", ".md"].includes(ext) && relativeFromBlogs) {
-        createMetaFile();
+        createMetaFile("blogs");
+        createMetaFile("til");
       }
     },
   };

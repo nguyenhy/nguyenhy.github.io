@@ -5,16 +5,19 @@ const { dirname, resolve } = require("node:path");
 const parser = require("gray-matter");
 
 const rootPath = resolve("./");
-const blogsPath = resolve(rootPath, "./src/routes/blogs");
+const getPath = (dir) => resolve(rootPath, `./src/routes/${dir}`);
 
 const ignoreFile = ["**/menu.md"];
 
-async function allMetaFiles() {
-  return await glob("./src/routes/blogs/**/*.{mdx,md}", { ignore: ignoreFile });
+async function allMetaFiles(dir) {
+  return await glob(`./src/routes/${dir}/**/*.{mdx,md}`, {
+    ignore: ignoreFile,
+  });
 }
 
-async function createMetaFile() {
-  const files = await allMetaFiles();
+async function createMetaFile(dir) {
+  const parentPath = getPath(dir);
+  const files = await allMetaFiles(dir);
   let chunkImport = [];
   let modules = [];
 
@@ -31,7 +34,7 @@ async function createMetaFile() {
       continue;
     }
 
-    const importPath = `.${dirPath.replace(blogsPath, "")}/index.meta`;
+    const importPath = `.${dirPath.replace(parentPath, "")}/index.meta`;
     const module = {
       chunk: "${chunk}",
     };
@@ -64,7 +67,7 @@ async function createMetaFile() {
     await fs.writeFile(newFilePath, createMetaContent(finalModule));
   }
 
-  const allMetaPath = resolve(blogsPath, "index.meta.js");
+  const allMetaPath = resolve(parentPath, "index.meta.js");
   fs.writeFile(
     allMetaPath,
     [
@@ -80,7 +83,7 @@ async function createMetaFile() {
     .slice(0, 5);
 
   const latestCreatedMetaPath = resolve(
-    blogsPath,
+    parentPath,
     "index.latest-created.meta.js"
   );
   fs.writeFile(
@@ -100,5 +103,5 @@ module.exports = {
   createMetaFile,
   allMetaFiles,
   rootPath,
-  blogsPath,
+  getPath,
 };
