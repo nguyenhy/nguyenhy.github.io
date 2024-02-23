@@ -1,0 +1,433 @@
+---
+title: Sad Servers - The Command Line Murders
+tag:
+  - hyn
+  - linux
+  - sad servers
+meta:
+  title: Sad Servers | The Command Line Murders
+  description: This is the Command Line Murders with a small twist as in the solution is different
+  keywords:
+    - Sad Servers
+    - The Command Line Murders
+    - 2024
+  article:
+    published_time: 1708613294
+---
+# The Command Line Murders
+What is the best way to invest in learning new Linux-based commands and having fun at the same time?
+Introduce '[The Command Line Murders](https://github.com/veltman/clmystery)', an interactive game designed to teach and reinforce command line concepts and Linux navigation.
+
+Unlike any other game we used to play, 'The Command Line Murders' is entirely command-line-based.
+In this game, players must navigate and complete challenges using Linux-based commands
+
+
+## Scenario
+```
+There has been a murder in Terminal City, and the TCPD (Terminal City Police Department) needs your help.
+Your task is to utilize your skills to solve the murder by following the provided hints and instructions
+```
+
+## Instructions
+### Download source
+Go to the repo [The Command Line Murders](https://github.com/veltman/clmystery), clone it or [download it as a zip file](https://github.com/veltman/clmystery/archive/master.zip)
+### Repo directory explaination
+```
+.
+└── root/
+    ├── mystery/
+    │   ├── interviews/
+    │   ├── memberships/
+    │   ├── streets/
+    │   ├── people
+    │   ├── vehicles
+    │   └── crimescene
+    ├── LICENSE.md
+    ├── README.md
+    ├── cheatsheet.md
+    ├── cheatsheet.pdf
+    ├── encoded
+    ├── hint1
+    ├── hint2
+    ├── ...
+    ├── hint8
+    ├── instructions
+    └── solution
+```
+- `hintX`: hese files contain hints and instructions on how to uncover the identity of the whodunit.
+- `cheatsheet.md|pdf`: This file provides Linux skills that can assist you in extracting information from the given pieces of evidence.
+- `mystery`: This directory holds all the necessary information to identify the perpetrator.
+
+To increase the difficulty of manual discovery through file reading, some additional information has been added as noise data.
+
+### Assumed Prerequisites
+You should be comfortable working within the `terminal` or have a basic understanding of what a `terminal` is.
+If you're unfamiliar, don't worry—the [`cheatsheet`](https://github.com/veltman/clmystery/blob/master/cheatsheet.md) provided by the game's author will guide you through
+
+### Skill Development Zone
+#### Finding clues, aka Searching
+The `grep` command  will let you find words or patterns in files.
+Think of it as a `google search` but for `terminal`
+```bash
+# search `evident` in `file.txt`
+$ grep "evident" file.txt
+# this is the result that has evident in side it
+
+
+# search `evident` in all file that has extension *.txt
+$ grep "evident" *.txt
+
+# search `evident` in all file that has extension *.txt
+# show 5 line AFTER the line that has the `evident` words
+# in total we would have 6 line
+$ grep "evident" *.txt -A 5
+
+# search `evident` in all file that has extension *.txt
+# show 5 line BEFORE the line that has the `evident` words
+# in total we would have 6 line
+$ grep "evident" *.txt -B 5
+
+# search `evident` in all file that has extension *.txt
+# but instead of printing out the line that has `evident`, print out the filenames
+$ grep "evident" *.txt -l
+```
+
+#### Print out file(s) content
+The `cat` command will let you print out the entire contents of the files in terminal.
+Think of it like an `PDF reader` but instead of application we use `terminal`.
+```bash
+$ cat file.txt
+# NAME    GENDER    ADDRESS
+# John    M         123 Main St
+# Emily   F         456 Oak Ave
+# Mike    M         789 Elm St
+# Sarah   F         101 Pine Rd
+# Alex    M         222 Birch Ln
+```
+#### List all files in a directory
+The `ls` will help us on this, think of it like a `File Explorer`
+
+### Investigation
+All of the below commands, assumes you `cd` to the `root` dir
+#### Reading hint
+```bash
+$ cat hint1
+# Try poking around what\'s in a file by using the head 
+# 
+#   head -n 20 people
+# 
+# This will show you the first 20 lines of the 'people' file.
+```
+The `hint1` instructs us to check the information in the file named `people` located inside the `mystery` subdirectory
+
+```bash
+$ head -n 20 ./mystery/people
+# ***************
+# To go to the street someone lives on, use the file
+# for that street name in the 'streets' subdirectory.
+# To knock on their door and investigate, read the line number
+# they live on from the file.  If a line looks like gibberish, you're at the wrong house.
+# ***************
+# 
+# NAME    GENDER    AGE    ADDRESS
+# Alicia Fuentes    F    48    Walton Street, line 433
+# Jo-Ting Losev     F    46    Hemenway Street, line 390
+# Elena Edmonds     F    58    Elmwood Avenue, line 123
+# Naydene Cabral    F    46    Winthrop Street, line 454
+# Dato Rosengren    M    22    Mystic Street, line 477
+# Fernanda Serrano  F    37    Redlands Road, line 392
+# Emiliano Wenk     M    90    Paulding Street, line 490
+# Larry Lapin       M    71    Atwill Road, line 298
+# Jakub Gondos      M    61    Mitchell Street, line 187
+# Derek Kazanin     M    55    Tennis Road, line 440
+# Jens Tuimalealiifano    M    83    Rockwood Street, line 205
+# Nikola Kadhi      M    75    Glenville Avenue, line 226
+```
+
+The explaination instructs us on how to correctly find someone's house to ask for information.
+For example, to find `Nikola Kadhi`
+```bash
+$ awk 'FNR == 226' ./mystery/streets/Glenville_Avenue
+# influentially arrogant magnetos equipped
+```
+Unfortunally, the information looks like gibberish, meaning we in the wrong house, and asking wrong person
+
+Let's look for another hint
+```bash
+$ cat hint2
+# Try using grep to search for the clues in the crimescene file:
+# 
+#   grep "CLUE" crimescene
+
+$ grep "CLUE" crimescene
+# CLUE: Footage from an ATM security camera is blurry but shows that the perpetrator is a tall male, at least 6'.
+# CLUE: Found a wallet believed to belong to the killer: no ID, just loose change, and membership cards for AAA, Delta SkyMiles, the local library, and the Museum of Bash History. The cards are totally untraceable and have no name, for some reason.
+# CLUE: Questioned the barista at the local coffee shop. He said a woman left right before they heard the shots. The name on her latte was Annabel, she had blond spiky hair and a New Zealand accent.
+```
+
+#### Finding suspect with clue
+- CLUE: Footage from an ATM security camera is blurry but shows that the perpetrator is a `tall male`, at least `6'`.
+  - so the suspect should be a `male`, with `6'` tall at least
+  - recall [hint1, hint2](#reading-hint) on how to find some one's house
+
+- CLUE: Found a wallet believed to belong to the killer: no ID, just loose change, and membership cards for AAA, Delta SkyMiles, the local library, and the Museum of Bash History. The cards are totally untraceable and have no name, for some reason.
+  - so the killer has membership of
+    - AAA
+    - Delta SkyMiles
+    - the local library
+    - the Museum of Bash History
+  - recall [directory explaination](#repo-directory-explaination), we have a directory named 'memberships'
+
+- CLUE: Questioned the barista at the local coffee shop. He said a woman left right before they heard the shots. The name on her latte was Annabel, she had blond spiky hair and a New Zealand accent.
+  - so there's a witness name `Annabel`, with spiky hair and New Zealand accent
+  - recall [hint1, hint2](#reading-hint) on how to find some one's house with just their name
+
+
+The first two clue has vas information to search, let's find `Annabel` and ask for infomation
+```bash
+# find all people has name `Annabel`
+$ grep 'Annabel' ./mystery/people
+# Annabel Sun    F    26    Hart Place, line 40
+# Oluwasegun Annabel    M    37    Mattapan Street, line 173
+# Annabel Church    F    38    Buckingham Place, line 179
+# Annabel Fuglsang    M    40    Haley Street, line 176
+
+# or even better
+$ grep 'Annabel' ./mystery/people | grep 'F\s'
+# Annabel Sun    F    26    Hart Place, line 40
+# Annabel Church F    38    Buckingham Place, line 179
+```
+The `|` in this case called `pipe`. For this pacticular situation, this mean apply `grep 'F\s'` on the result of `grep 'Annabel' ./mystery/people`.
+Which mean search for those line has `F` follow by a space (`\s`) in
+```
+# Annabel Sun    F    26    Hart Place, line 40
+# Oluwasegun Annabel    M    37    Mattapan Street, line 173
+# Annabel Church    F    38    Buckingham Place, line 179
+# Annabel Fuglsang    M    40    Haley Street, line 176
+```
+
+Let's us ask them, but first we had to find their house
+```bash
+$ awk 'FNR == 40' ./mystery/streets/Hart_Place
+# SEE INTERVIEW #47246024
+
+$ awk 'FNR == 179' ./mystery/streets/Buckingham_Place
+# SEE INTERVIEW #699607
+```
+Recall [directory explaination](#repo-directory-explaination), we have a directory named 'interviews'
+```bash
+$ ls ./mystery/interviews
+# interview-000296   interview-13768464 interview-2415821  interview-325611   interview-4335306  interview-555536   interview-6884359  interview-7959148  interview-91673757
+# .....
+```
+So this directory contains the interview of police with someone. Let's us find those 2 interview from `Annabel`
+
+```bash
+$ cat ./mystery/interviews/interview-47246024
+# Ms. Sun has brown hair and is not from New Zealand.  Not the witness from the cafe.
+
+cat ./mystery/interviews/interview-699607
+# Interviewed Ms. Church at 2:04 pm.  Witness stated that she did not see anyone she could identify as the shooter, that she ran away as soon as the shots were fired.
+# 
+# However, she reports seeing the car that fled the scene.  Describes it as a blue Honda, with a license plate that starts with "L337" and ends with "9"
+```
+Hah, got'cha. So we now have to find the owner of a `blue Honda` with `plate that starts with "L337" and ends with "9"`.
+We could look at the [vehicles](#repo-directory-explaination) file
+
+```bash
+$ head -n 20 ./mystery/vehicles
+# ***************
+# Vehicle and owner information from the Terminal City Department of Motor Vehicles
+# ***************
+# 
+# License Plate T3YUHF6
+# Make: Toyota
+# Color: Yellow
+# Owner: Jianbo Megannem
+# Height: 5'6"
+# Weight: 246 lbs
+# 
+# License Plate EZ21ECE
+# Make: BMW
+# Color: Gold
+# Owner: Norbert Feldwehr
+# Height: 5'3"
+# Weight: 205 lbs
+# 
+# License Plate CQN2TJE
+# Make: Mazda
+```
+So now, all we have to do is to search in this file to find to find the car.
+First, we should narrow down the car by plate number
+```bash
+$ grep ./mystery/vehicles -e 'L337.*9$'
+# License Plate L337ZR9
+# License Plate L337P89
+# License Plate L337GX9
+# License Plate L337QE9
+# License Plate L337GB9
+# License Plate L337OI9
+# License Plate L337X19
+# License Plate L337539
+# License Plate L3373U9
+# License Plate L337369
+# License Plate L337DV9
+# License Plate L3375A9
+# License Plate L337WR9
+```
+`-e 'L337.*9$'` part, mean to find in pattern, the plate should match
+  - match `L337`
+  - match any things (`.*`)
+  - match `9`
+  - and end `$`
+But by doing this, we also lose other infomation, we need a little bit of change
+```bash
+$ grep ./mystery/vehicles -e 'L337.*9$' -A 4
+# License Plate L337ZR9
+# Make: Honda
+# Color: Red
+# Owner: Katie Park
+# Height: 6'2"
+# --
+# ...
+# --
+# License Plate L337WR9
+# Make: Honda
+# Color: Blue
+# Owner: Jacqui Maher
+# Height: 6'2"
+```
+`-A 4` is to show 4 line after the result, recall [grep](#finding-clues-aka-searching).
+This's great cause we could use this result to `grep` using `pipe`
+```bash
+# finding honda vehicle
+# =========
+# -i mean to search 'honda' with case insensitive
+# meaning the line has 'honda', or `Honda` or HoNdA` will also count
+$ grep ./mystery/vehicles  -e 'L337.*9$' -A 4 | grep -i 'honda' -A 3
+# Make: Honda
+# Color: Red
+# Owner: Katie Park
+# Height: 6'2"
+# --
+# ...
+# --
+# Make: Honda
+# Color: Blue
+# Owner: Jacqui Maher
+# Height: 6'2"
+
+# finding blue honda
+# =========
+$ grep ./mystery/vehicles  -e 'L337.*9$' -A 4 | grep -i 'honda' -A 3 | grep -i 'blue' -A 2
+# Color: Blue
+# Owner: Erika Owens
+# Height: 6'5"
+# --
+# ...
+# --
+# Color: Blue
+# Owner: Jacqui Maher
+# Height: 6'2"
+
+# finding blue honda owner has at least 6' height
+# =========
+# -B 1 mean show 1 line Before the result
+$ grep ./mystery/vehicles  -e 'L337.*9$' -A 4 | grep -i 'honda' -A 3 | grep -i 'blue' -A 2 | grep "6'" -B 1
+# Owner: Erika Owens
+# Height: 6'5"
+# --
+# Owner: Joe Germuska
+# Height: 6'2"
+# --
+# Owner: Jeremy Bowers
+# Height: 6'1"
+# --
+# Owner: Jacqui Maher
+# Height: 6'2"
+
+# get the owner name
+# =========
+$ grep ./mystery/vehicles  -e 'L337.*9$' -A 4 | grep -i 'honda' -A 3 | grep -i 'blue' -A 2 | grep "6'" -B 1 | grep 'Owner'
+# Owner: Erika Owens
+# Owner: Joe Germuska
+# Owner: Jeremy Bowers
+# Owner: Jacqui Maher
+
+# extra step to get the name only by remove 'Owner: '
+$ grep ./mystery/vehicles  -e 'L337.*9$' -A 4 | grep -i 'honda' -A 3 | grep -i 'blue' -A 2 | grep "6'" -B 1 | grep 'Owner' | awk '{sub($1 FS, ""); print}'
+# Erika Owens
+# Joe Germuska
+# Jeremy Bowers
+# Jacqui Maher
+```
+
+Great, we could use this name to find address in the `people` files
+```bash
+$ grep 'Erika Owens' ./mystery/people
+Erika Owens	F	56	Trapelo Street, line 98
+```
+
+Or we could use pipe `|` to apply search for each line of result
+```bash
+$ grep ./mystery/vehicles  -e 'L337.*9$' -A 4 | grep -i 'honda' -A 3 | grep -i 'blue' -A 2 | grep "6'" -B 1 | grep 'Owner' | awk '{sub($1 FS, ""); print}' | xargs -I {} sh -c 'grep "{}" ./mystery/people'
+# Erika Owens    F    56    Trapelo Street, line 98
+# Joe Germuska   M    65    Plainfield Street, line 275
+# Jeremy Bowers  M    34    Dunstable Road, line 284
+# Jacqui Maher   F    40    Andover Road, line 224
+`xargs -I {} sh -c 'grep "{}" ./mystery/people'`:
+  - `xargs -I {} sh -c`: for each line of result we excute a shell command
+  - `grep "{}" ./mystery/people`: replace each line of result to "{}"
+  - together: search each line of result in file `./mystery/people`
+
+
+$ grep ./mystery/vehicles  -e 'L337.*9$' -A 4 | grep -i 'honda' -A 3 | grep -i 'blue' -A 2 | grep "6'" -B 1 | grep 'Owner' | awk '{sub($1 FS, ""); print}' | xargs -I {} sh -c 'grep "{}" ./mystery/people' | grep 'M\s'
+# Joe Germuska    M    65    Plainfield Street, line 275
+# Jeremy Bowers   M    34    Dunstable Road, line 284
+```
+
+```bash
+$ awk 'FNR == 275' ./mystery/streets/Plainfield_Street
+# SEE INTERVIEW #29741223
+
+$ cat ./mystery/interviews/interview-29741223
+# Should not be considered a suspect, has no SkyMiles membership and has never been a member of the Museum of Bash History.
+
+$ awk 'FNR == 284' ./mystery/streets/Dunstable_Road
+# SEE INTERVIEW #9620713
+
+$ cat ./mystery/interviews/interview-9620713
+Home appears to be empty, no answer at the door.
+
+After questioning neighbors, appears that the occupant may have left for a trip recently.
+
+Considered a suspect until proven otherwise, but would have to eliminate other suspects to confirm.
+```
+
+For now `Jeremy Bowers` highly match the suspect description:
+  - Male
+  - 6' at least (6'1")
+  - owner of a `blue Honda` with plate `L3375A9`
+Which match the [CLUE](#finding-clues-aka-searching) 1 and 3
+To make sure he is the killer. Let use [CLUE 2](#finding-clues-aka-searching)
+```
+CLUE: Found a wallet believed to belong to the killer: no ID, just loose change, and membership cards for AAA, Delta SkyMiles, the local library, and the Museum of Bash History. The cards are totally untraceable and have no name, for some reason.
+```
+
+```bash
+grep 'Jeremy Bowers' ./mystery/memberships/*
+# ./mystery/memberships/AAA:Jeremy Bowers
+# ./mystery/memberships/Delta_SkyMiles:Jeremy Bowers
+# ./mystery/memberships/Museum_of_Bash_History:Jeremy Bowers
+# ./mystery/memberships/Terminal_City_Library:Jeremy Bowers
+```
+
+Great, seem like we use all the infomation. Let's us check the result using the command provide in the `solution` file
+```bash
+$ echo "Jeremy Bowers" | $(command -v md5 || command -v md5sum) | grep -qif /dev/stdin encoded && echo CORRECT\! GREAT WORK, GUMSHOE. || echo SORRY, TRY AGAIN.
+# CORRECT! GREAT WORK, GUMSHOE.
+```
+
+## Conclusion
+'The Command Line Murders' is an excellent resource for individuals looking to enhance their Linux command-line skills in a playful and interactive manner.
+The game effectively combines learning with entertainment, making it a valuable tool for both beginners and experienced users seeking to refine their command-line abilities.
