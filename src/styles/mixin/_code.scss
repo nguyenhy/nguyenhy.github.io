@@ -1,3 +1,5 @@
+@use "./screen" as screen;
+
 @mixin code_format {
   @include code_line_number;
   @include code_overflow;
@@ -19,6 +21,9 @@
     border: none;
     user-select: auto;
     line-height: 1.28;
+    @include screen.from("md") {
+      white-space: pre-wrap;
+    }
   }
 
   code:not([data-language]) {
