@@ -45,4 +45,5 @@ public/**/*.js
 src/**/*.script.js
 src/routes/**/*.meta.ts
 src/routes/**/*.meta.js
+src/styles/**/_auto.*.scss
 !/vite/build
