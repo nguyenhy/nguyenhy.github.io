@@ -1,1 +1,0 @@
-import{N as t}from"./q-6c0a4695.js";import{l as i}from"./q-052fb51d.js";const l=r=>{const o=(r.height??60)/24;return t("div",{style:{width:`${60*o}px`,height:`${24*o}px`}},null,i("currentColor"),1,"3C_0")};export{l as s_zZ7aFsOXAuk};

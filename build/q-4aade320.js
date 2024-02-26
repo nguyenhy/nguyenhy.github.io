@@ -1,0 +1,1 @@
+const i={url:"/blogs/disclaimer/1645312806",title:"Disclaimer",tag:["hyn","disclaimer","y2022","m2","d19","y2022/m2"],meta:{description:"Explain why I write this blog and why it's matters?",url:"https://nguyenhy.github.io/blogs/disclaimer/1645312806/",keywords:["blog","me","hyn"],article:{published_time:1645312806}}};export{i as data};
