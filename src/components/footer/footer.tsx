@@ -5,7 +5,7 @@ export default component$(() => {
   useStylesScoped$(styles);
 
   return (
-    <footer class="border-t mt-10 p-5">
+    <footer>
       <div>
         <div class="flex flex-row justify-center">
           <ul>

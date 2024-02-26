@@ -2,11 +2,14 @@
 @use "../../fnc" as fnc;
 
 @mixin color() {
-  :focus {
-    --color: var(--tertiary);
-    outline: 1px dashed var(--color);
-    text-decoration: underline;
-    outline-offset: 2px;
+  .focus,
+  a {
+    &:focus {
+      --color: var(--tertiary);
+      outline: 1px dashed var(--color);
+      text-decoration: underline;
+      outline-offset: 2px;
+    }
   }
 
   a {
@@ -16,9 +19,6 @@
       color: var(--color);
     }
     &:focus {
-      outline: 1px dashed var(--color);
-      text-decoration: underline;
-      outline-offset: 2px;
       color: var(--color);
     }
     &:active {

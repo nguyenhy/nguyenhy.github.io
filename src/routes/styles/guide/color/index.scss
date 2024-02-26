@@ -64,15 +64,27 @@ $palettes: "error", "neutral-variant", "neutral", "primary", "secondary",
   &.section--role {
     .row {
       display: flex;
-      flex-direction: row;
-      height: 100px;
+      flex-direction: column;
+      margin-bottom: 10px;
 
-      text-align: center;
-      line-height: 100px;
+      @include guide_style.mixin-screen-until("md") {
+        outline: 1px solid;
+        outline-offset: 2px;
+        margin-bottom: 20px;
+      }
 
-      font-size: 30px;
+      @include guide_style.mixin-screen-from("md") {
+        flex-direction: row;
+        height: 100px;
+
+        text-align: center;
+        line-height: 100px;
+
+        font-size: 30px;
+      }
     }
     .col {
+      padding: 5px;
       flex: 1;
       &.col--role {
         background-color: var(--role);
@@ -94,9 +106,16 @@ $palettes: "error", "neutral-variant", "neutral", "primary", "secondary",
 
     .section-container {
       padding: 20px;
+      outline: 2px dashed var(--on-background);
+      outline-offset: 2px;
+      margin-bottom: 20px;
       &.light {
         background-color: guide_style.fnc-color-get_color("background", false);
         .row {
+          outline-color: guide_style.fnc-color-get_color(
+            "on-background",
+            false
+          );
           &.row--primary {
             --role: #{guide_style.fnc-color-get_color("primary", false)};
             --on-role: #{guide_style.fnc-color-get_color("on-primary", false)};
@@ -182,6 +201,7 @@ $palettes: "error", "neutral-variant", "neutral", "primary", "secondary",
       &.dark {
         background-color: guide_style.fnc-color-get_color("background", true);
         .row {
+          outline-color: guide_style.fnc-color-get_color("on-background", true);
           &.row--primary {
             --role: #{guide_style.fnc-color-get_color("primary", true)};
             --on-role: #{guide_style.fnc-color-get_color("on-primary", true)};

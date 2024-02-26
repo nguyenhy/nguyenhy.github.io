@@ -1,3 +1,3 @@
 const { createMetaFile } = require("../crawl-blog");
 
-createMetaFile();
+createMetaFile("blogs");

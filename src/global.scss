@@ -50,7 +50,7 @@ body {
 }
 
 main {
-  @apply flex-1 px-5 py-3;
+  @apply flex-1 px-2 py-2 md:px-5 md:py-3;
 }
 
 :root.dark {
@@ -101,6 +101,11 @@ main {
   --outline-variant-rgb: #{styles.fnc-color-get_dark_color_rgb(
       "outline-variant"
     )};
+
+  --background-10: #{color.scale(
+      styles.fnc-color-get_dark_color("background"),
+      $lightness: 10%
+    )};
 }
 
 :root:not(.dark) {
@@ -145,11 +150,17 @@ main {
   --tertiary: #{styles.fnc-color-get_light_color("tertiary")};
 
   --primary-rgb: #{styles.fnc-color-get_light_color_rgb("primary")};
+  --background-rgb: #{styles.fnc-color-get_dark_color_rgb("background")};
   --surface-variant-rgb: #{styles.fnc-color-get_light_color_rgb(
       "surface-variant"
     )};
   --outline-variant-rgb: #{styles.fnc-color-get_light_color_rgb(
       "outline-variant"
+    )};
+
+  --background-10: #{color.scale(
+      styles.fnc-color-get_light_color("background"),
+      $blackness: 10%
     )};
 }
 

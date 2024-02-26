@@ -1,5 +1,7 @@
 footer {
   text-align: center;
+  background-color: var(--surface-variant);
+  @apply p-5;
 }
 
 footer a {

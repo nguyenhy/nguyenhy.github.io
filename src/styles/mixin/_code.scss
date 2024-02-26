@@ -1,3 +1,5 @@
+@use "./screen" as screen;
+
 @mixin code_format {
   @include code_line_number;
   @include code_overflow;
@@ -19,6 +21,9 @@
     border: none;
     user-select: auto;
     line-height: 1.28;
+    @include screen.from("md") {
+      white-space: pre-wrap;
+    }
   }
 
   code:not([data-language]) {
@@ -26,6 +31,8 @@
     border-radius: 3px;
     font-size: 0.9em;
     user-select: all;
+    background: var(--surface-variant);
+    color: var(--on-surface-variant);
   }
 
   [data-rehype-pretty-code-fragment] {
@@ -68,7 +75,7 @@
     /* Other styling */
     display: inline-block;
     width: 1rem;
-    margin-right: 2rem;
+    margin-right: 0.5rem;
     text-align: right;
     color: gray;
   }
@@ -79,5 +86,8 @@
 
   code[data-line-numbers-max-digits="3"] > .line::before {
     width: 3rem;
+  }
+  code[data-line-numbers-max-digits="4"] > .line::before {
+    width: 4rem;
   }
 }
