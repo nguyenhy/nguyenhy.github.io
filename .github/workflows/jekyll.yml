@@ -26,16 +26,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: echo "NET_ENV\":\" ${{ vars.NET_ENV }}"
       - run: npm ci
-      - run: node ./vite/build/style.js
-      - run: node ./vite/build/meta.js
+      - run: ./scripts/lint.sh
+      - run: ./scripts/test.sh
+      - run: ./scripts/pre-build.sh
       - run: |
           VITE_DCMA=${{ vars.VITE_DCMA }} \
           VITE_GA4=${{ vars.VITE_GA4 }} \
           VITE_GTM=${{ vars.VITE_GTM }} \
           npx qwik build
-      - run: npm test
 
       - name: Build and Deploy with JamesIves/github-pages-deploy-action@v4
         uses: JamesIves/github-pages-deploy-action@v4
