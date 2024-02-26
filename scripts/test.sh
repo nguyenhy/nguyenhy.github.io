@@ -1,3 +1,3 @@
 #!/bin/bash
 set -e
-vitest --config ./vitest.config.ts --run
+npx vitest --config ./vitest.config.ts --run
