@@ -29,9 +29,9 @@ async function getPaginationData(
 
     if (typeof item.chunk === "function") {
       try {
-        const module = await importer(item.chunk, meta.update);
+        const module = await importer((item as any).chunk, meta.update);
         if (module) {
-          callback(module.data);
+          callback((module as any).data);
         }
       } catch (error) {
         console.error(error);
