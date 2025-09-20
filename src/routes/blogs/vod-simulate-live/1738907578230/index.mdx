@@ -248,7 +248,7 @@ function process(playlist) {
   }
 
     // Remove VOD tag indicator
-    return  output
+    return playlist
       .replace('#EXT-X-PLAYLIST-TYPE:VOD\n', '')
       .replace('#EXT-X-ENDLIST\n', '');
 }
@@ -271,8 +271,9 @@ class pLoader extends Hls.DefaultConfig.loader {
 }
 
 var hls = new Hls({
-  pLoader: pLoader,
-  liveDurationInfinity: true
+  pLoader: pLoader, // to create make sure simulate live work
+  liveDurationInfinity: true, // to remove the duration in the video tag
+  startPosition: 0, // start playing position
 });
 ```
 

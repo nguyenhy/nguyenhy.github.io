@@ -40,36 +40,10 @@
         return playlist
       }
 
-      let output = playlist;
-      const parsed = new m3u8Parser.Parser()
-      parsed.push(playlist)
-
-      const segments = parsed.manifest.segments
-      let time = 0
-      let stopIndex = null
-      for (let index = 0; index < segments.length; index++) {
-        const element = segments[index];
-        time += element.duration
-        stopIndex = index
-        if (time >= position) {
-          break;
-        }
-      }
-
-      if (stopIndex !== null) {
-        if (segments[stopIndex + 1]) {
-          const splitted = playlist.split(segments[stopIndex + 1].uri)
-
-          output = splitted[0];
-        }
-      }
-
-      output = output
+      return playlist
         .replace('#EXT-X-PLAYLIST-TYPE:VOD\n', '')
         .replace('#EXT-X-ENDLIST\n', '');
 
-
-      return output;
     }
 
     class pLoader extends Hls.DefaultConfig.loader {
@@ -100,6 +74,8 @@
       hls = new Hls({
         debug: false,
         pLoader: pLoader,
+        liveDurationInfinity: true,
+        startPosition: 0,
       });
 
       console.log(hls);
