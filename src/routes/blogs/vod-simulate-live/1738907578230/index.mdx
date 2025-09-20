@@ -29,25 +29,21 @@ This article explores how to transform an HLS Video on Demand (VOD) stream into 
 
 HLS (HTTP Live Streaming) is widely used for delivering video content over the internet. 
 However, many videos are available as Video on Demand (VOD), meaning users can start, pause, and seek through the content at any time. 
+
 While this flexibility is useful, there are scenarios where we need to simulate a live broadcast experience from a VOD source. This means that when a user joins, they should see the video at the point where a real-time stream would have been if it were truly live.
 
 
 ## Find the Solution
-### What Hls is?
-HLS (HTTP Live Streaming) is a streaming technology developed by Apple that allows video files to be broken into smaller chunks and delivered over HTTP. 
+### What HLS is?
+HLS (HTTP Live Streaming) is a streaming technology developed by Apple, that allows video files to be broken into smaller chunks and delivered over HTTP. 
 This makes streaming more efficient and adaptable to different network conditions. The core of HLS is the M3U8 playlist file and its segments file.
 
 ### Building blocks of HLS
-HLS (HTTP Live Streaming) operates using two main types of M3U8 playlists
-#### Master playlist
-A Master Playlist is an M3U8 file that tells the HLS player which video quality options are available. 
+HLS (HTTP Live Streaming) operates using two main types of M3U8 playlists: main playlist and media playlist
+#### Main playlist
+A main playlist is an M3U8 file that tells the HLS player which video quality options are available. 
 It contains multiple variants of the same video at different bitrates or resolutions, allowing the player to adapt to network conditions dynamically.
 
-Example of master playlist contains:
-- Low quality (e.g., 480p, lower bitrate)
-- Medium quality (e.g., 720p, moderate bitrate)
-- High quality (e.g., 1080p, high bitrate)
-- Audio-only option
 ```m3u8
 #EXTM3U
 #EXT-X-STREAM-INF:BANDWIDTH=1280000,AVERAGE-BANDWIDTH=1000000
@@ -60,12 +56,66 @@ http://example.com/hi.m3u8
 http://example.com/audio-only.m3u8
 ```
 
+Example of main playlist contains:
+- Low quality (e.g., 480p, lower bitrate)
+```m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=1280000,AVERAGE-BANDWIDTH=1000000
+http://example.com/low.m3u8
+```
+- Medium quality (e.g., 720p, moderate bitrate)
+```m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=2560000,AVERAGE-BANDWIDTH=2000000
+http://example.com/mid.m3u8
+```
+- High quality (e.g., 1080p, high bitrate)
+```m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=7680000,AVERAGE-BANDWIDTH=6000000
+http://example.com/hi.m3u8
+```
+- Audio-only option
+```m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=65000,CODECS="mp4a.40.5"
+http://example.com/audio-only.m3u8
+```
+
 #### Media (Level) playlist
 A Media Playlist (or Level Playlist) contains the actual video segments (chunks of video) that are played sequentially.
 
 Types of Media Playlists:
 - VOD (Video on Demand): Fixed playlist with an `#EXT-X-ENDLIST` tag.
+```m3u8
+#EXTM3U
+#EXT-X-PLAYLIST-TYPE:VOD
+#EXT-X-TARGETDURATION:10
+#EXT-X-VERSION:4
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:10.0,
+http://example.com/movie1/fileSequenceA.ts
+#EXTINF:10.0,
+http://example.com/movie1/fileSequenceB.ts
+#EXTINF:10.0,
+http://example.com/movie1/fileSequenceC.ts
+#EXTINF:9.0,
+http://example.com/movie1/fileSequenceD.ts
+#EXT-X-ENDLIST
+```
 - Live Streaming: Updates dynamically with `#EXT-X-MEDIA-SEQUENCE`
+```
+#EXTM3U
+#EXT-X-TARGETDURATION:10
+#EXT-X-VERSION:4
+#EXT-X-MEDIA-SEQUENCE:1
+#EXTINF:10.0,
+fileSequence1.ts
+#EXTINF:10.0,
+fileSequence2.ts
+#EXTINF:10.0,
+fileSequence3.ts
+#EXTINF:10.0,
+fileSequence4.ts
+#EXTINF:10.0,
+fileSequence5.ts
+```
 
 ### How Hls work
 
