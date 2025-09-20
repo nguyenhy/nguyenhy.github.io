@@ -242,7 +242,15 @@ And all we have to do it copy it and modify the `process` function to fit our ne
 ```js
 // special playlist post processing function
 function process(playlist) {
-  return playlist;
+  if (playlist.includes('#EXT-X-STREAM-INF')) {
+    // we only process media playlist
+    return playlist 
+  }
+
+    // Remove VOD tag indicator
+    return  output
+      .replace('#EXT-X-PLAYLIST-TYPE:VOD\n', '')
+      .replace('#EXT-X-ENDLIST\n', '');
 }
 
 class pLoader extends Hls.DefaultConfig.loader {
@@ -264,83 +272,12 @@ class pLoader extends Hls.DefaultConfig.loader {
 
 var hls = new Hls({
   pLoader: pLoader,
+  liveDurationInfinity: true
 });
 ```
 
-## Implementation
-```js
-function process(playlist) {
-  if (playlist.includes('#EXT-X-STREAM-INF')) {
-    // we onyl process media playlist
-    return playlist 
-  }
-
-  const output = playlist
-
-  // assume current live-stream should playing around 15.7s
-  const POSITION = 15.7
-
-  // 1. parse playlist (string) to array of lines
-  // use https://www.npmjs.com/package/m3u8-parser
-  const parsed = new m3u8Parser.Parser()
-  parsed.push(playlist)
-
-  // 2. find the segment at specific time (SegmentX)
-  const segments = parsed.manifest.segments
-  let time = 0
-  let stopIndex = null
-  for (let index = 0; index < segments.length; index++) {
-    const element = segments[index];
-    time += element.duration
-    stopIndex = index
-    if (time >= POSITION) {
-      break;
-    }
-  }
-
-  // 3. remove all semgent after `SegmentX`
-  if (stopIndex !== null) {
-    if (segments[stopIndex + 1]) {
-      /**
-       * playlist:
-       * ```
-       * #EXTINF:10,
-       * segment0.ts
-       * #EXTINF:10,  
-       * segment1.ts  <----stopIndex
-       * #EXTINF:10,  
-       * segment2.ts  <----stopIndex + 1
-       * #EXTINF:10,
-       * segment3.ts
-       * ```
-       * 
-       * splitted[0]
-       * ```
-       * #EXTINF:10,
-       * segment0.ts
-       * #EXTINF:10,  
-       * segment1.ts
-       * #EXTINF:10,  
-       * ```
-       */
-      const splitted = playlist.split(segments[stopIndex + 1].uri) 
-
-      output = splitted[0];
-    }
-  }
-
-  // 4. Remove VOD tag indicator
-    output = output
-    .replace('#EXT-X-PLAYLIST-TYPE:VOD\n', '')
-    .replace('#EXT-X-ENDLIST\n', '');
-
-  return output;
-}
-```
-
 ## Demo
-<iframe src="/assets/blogs/vod-simulate-live/1738907578230/demo.html" style="width: 100%; height: 350px"></iframe>
-Available demo at [here](https://output.jsbin.com/mavesos)
+Available demo at [here](https://output.jsbin.com/doruvuxobo)
 
 ## Conclusion
 
