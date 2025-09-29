@@ -38,4 +38,4 @@ jobs:
         with:
           ssh-key: ${{ secrets.GH_PAGE_DEPLOY_TOKEN }}
           branch: gh-pages
-          folder: blog/dist
+          folder: dist
