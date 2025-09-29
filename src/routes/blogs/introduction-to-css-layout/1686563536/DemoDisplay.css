@@ -1,5 +1,0 @@
-.wrapper {
-}
-.box {
-  @apply bg-accent-300 border border-accent-400 text-black rounded-sm p-2;
-}

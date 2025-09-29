@@ -1,4 +1,0 @@
-@use "sass:map";
-@use "./auto.breakpoint" as auto_breakpoint;
-
-$breakpoints: auto_breakpoint.$breakpoints;
