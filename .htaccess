@@ -1,8 +1,0 @@
-# prevent access folder
-Options -Indexes
-RewriteEngine On
-
-# error page for infinityfreeapp
-ErrorDocument 403 http://hyn.infinityfreeapp.com/err/403
-ErrorDocument 404 http://hyn.infinityfreeapp.com/err/404
-ErrorDocument 500 http://hyn.infinityfreeapp.com/err/500

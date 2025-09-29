@@ -1,2 +1,0 @@
-const r=`.wrapper{position:relative;margin:.5rem;border-width:2px;--tw-border-opacity: 1;border-color:rgb(0 108 233 / var(--tw-border-opacity));padding:.5rem}.item{margin-bottom:.5rem;border-radius:.25rem;border-width:2px;padding:.25rem}.item.positioned{--tw-border-opacity: 1;border-color:rgb(185 28 28 / var(--tw-border-opacity));background-color:#fca5a51a;--tw-text-opacity: 1;color:rgb(239 68 68 / var(--tw-text-opacity))}
-`;export{r as s};

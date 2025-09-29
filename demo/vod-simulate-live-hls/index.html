@@ -1,0 +1,103 @@
+<!DOCTYPE html><html data-astro-cid-e65zmapv> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>JS Bin</title><script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script><style>video[data-astro-cid-e65zmapv]{width:100%;height:300px;background-color:#000}.input[data-astro-cid-e65zmapv]{width:100%;display:flex;flex-direction:row}.input[data-astro-cid-e65zmapv] input[data-astro-cid-e65zmapv]{flex:1}
+</style></head> <body data-astro-cid-e65zmapv> <div class="input" data-astro-cid-e65zmapv> <input type="url" id="source" data-astro-cid-e65zmapv> <button id="play" data-astro-cid-e65zmapv>play</button> <button id="reference" data-astro-cid-e65zmapv>reference</button> </div> <video id="video" data-astro-cid-e65zmapv></video> <script>
+            function process(playlist, position) {
+                if (playlist.includes("#EXT-X-STREAM-INF")) {
+                    return playlist;
+                }
+
+                return playlist
+                    .replace("#EXT-X-PLAYLIST-TYPE:VOD\n", "")
+                    .replace("#EXT-X-ENDLIST\n", "");
+            }
+
+            const init = (src) => {
+                class pLoader extends Hls.DefaultConfig.loader {
+                    constructor(config) {
+                        super(config);
+                        const load = this.load.bind(this);
+                        this.load = function (context, config, callbacks) {
+                            console.log(context);
+
+                            if (
+                                "type" in context &&
+                                (context.type == "manifest" ||
+                                    context.type == "level")
+                            ) {
+                                const onSuccess = callbacks.onSuccess;
+                                callbacks.onSuccess = function (
+                                    response,
+                                    stats,
+                                    context,
+                                    networkDetails,
+                                ) {
+                                    const now = performance.now();
+                                    response.data = process(
+                                        response.data?.toString() || "",
+                                        Math.round(
+                                            ((now - start) / 1000) * 100,
+                                        ) / 100,
+                                    );
+
+                                    onSuccess(
+                                        response,
+                                        stats,
+                                        context,
+                                        networkDetails,
+                                    );
+                                };
+                            }
+                            load(context, config, callbacks);
+                        };
+                    }
+                }
+
+                hls = new Hls({
+                    debug: false,
+                    pLoader: pLoader,
+                    liveDurationInfinity: true,
+                    startPosition: 0,
+                });
+
+                console.log(hls);
+
+                hls.loadSource(src);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                    video.muted = true;
+                    video.play();
+                });
+            };
+
+            const destroy = () => {
+                if (hls) {
+                    hls.stopLoad();
+                }
+            };
+
+            const start = performance.now();
+
+            // const src = 'https://ben.videolyser.de/videos/2868631/56370527_sd.m3u8'
+            const src = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
+
+            let hls = null;
+            window.onload = () => {
+                video.controls = true;
+                video.muted = true;
+                source.value = src;
+                play.onclick = () => {
+                    const src = source.value;
+                    if (src) {
+                        destroy();
+                        init(src);
+                    }
+                };
+                reference.onclick = () => {
+                    const src = source.value;
+                    if (src) {
+                        window.open(
+                            `https://hlsjs.video-dev.org/demo/?src=${src}`,
+                        );
+                    }
+                };
+            };
+        </script> </body> </html>
