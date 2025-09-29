@@ -1,0 +1,270 @@
+---
+title: "Introduction To Web Development"
+description: "Simple introduction to FrontEnd web development for absolutely beginner"
+pubDate: "Feb 19 2022"
+heroImage: "../../../assets/blog-placeholder-5.jpg"
+---
+
+# Introduction To FrontEnd Web Development
+
+## Series
+
+1. [Introduction to HTML](/blog/web-development/html-introduction)
+2. [Introduction to CSS](/blog/web-development/css-introduction/)
+3. [Introduction to CSS Layout](/blog/web-development/css-layout-introduction/)
+4. [Introduction to Javascript](/blog/web-development/js-introduction/)
+
+## Introduction
+
+Front-end web development involves working with core languages, `HTML` (HyperText Markup Language), `CSS` (Cascading Style Sheets), and `JavaScript`,
+to create websites and web applications that users can directly interact with.
+
+To get started with Front-end web development or creating a simple website, you need to:
+
+- Understand the basics of HTML to structure the content of your web pages.
+- Use CSS to style and format the elements on your web pages.
+- Incorporate JavaScript to add interactivity and dynamic behavior to your website.
+
+## TLDR
+
+You need to learn [HTML](/blogs/introduction-to-html/1645744806/), [CSS](/blogs/introduction-to-css/1646522406/), [JavaScript](/blogs/introduction-to-javascript/1686525497)
+
+## Goals
+
+This post was create to help you to have:
+
+- A basic understanding of what website development look like
+- How can you create yourself simple website
+
+## Target audience
+
+Those who:
+
+- Don't know or have no idea what web development look like
+- Absolutely beginner and want to start develop some thing
+
+## Web and HTML
+
+The **world wide web**, commonly known as the web, has revolutionized the way we access and share information.
+It has become an integral part of our daily lives, connecting people, businesses, and resources from all corners of the globe.
+
+At the core of the web's functionality lies a fundamental language known as `HTML` (`H`yper`T`ext `M`arkup `L`anguage),
+which serves as the backbone for creating and structuring web pages.
+In this introduction, we will explore what the web is, delve into the details of HTML, and understand how these two concepts relate to each other.
+
+HTML is the standard markup language used for creating web pages.
+It provides a set of tags, elements, and attributes that define the structure and content of a webpage.
+With HTML, web developers can specify the layout, formatting, and placement of text, images, videos, links, and other multimedia elements.
+By utilizing a simple and intuitive syntax, HTML allows developers to create structured documents that can be interpreted and rendered correctly by web browsers.
+
+---
+
+### Example 1
+
+Saying i want a website has simple text with some style kind of like <span style="color: red">red</span> color text
+and if i **click** on that text it turn from <span style="color: red">red</span> into <span style="color: blue">blue</span>
+This's what i will do
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head></head>
+  <body>
+    <span style="color: red" onclick="this.style.color='blue'"
+      >hello world</span
+    >
+  </body>
+</html>
+```
+Result
+<div style="background: white">
+  <span style="color: red" onclick="this.style.color='blue'">
+    hello world
+  </span>
+</div>
+
+---
+
+Don't worry, for now, we only put our attention on the below highlight line.
+
+```html {5}
+<!doctype html>
+<html lang="en">
+  <head></head>
+  <body>
+    <span style="color: red" onclick="this.style.color='blue'">hello world</span>
+  </body>
+</html>
+```
+
+Basically, above line saying:
+
+- create me a [tag](#tag) with content of `hello world`:
+
+```html
+<span ...>hello world</span>
+```
+
+- when click
+
+```html
+<span onclick="...">hello world</span>
+```
+
+- change color style of this tag to <span style="color: blue">blue</span>
+
+```js
+// find in this tag
+// |
+// |   the appearance setting
+// |   |
+// |   |    of text color
+// |   |    |
+// |   |    |   and change this to 'blue'
+// |   |    |   |
+this.style.color = "blue";
+```
+
+### Tag
+
+> Think of `tag` like a container, you will put your stuff into it, whatever it's. Whether it's a `text`, `image`, `video`, ...
+> and you can direct styling using [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), control its behavior with specific kind of input ([click](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/click), [double click](https://developer.mozilla.org/en-US/docs/Web/API/Element/dblclick_event), [scroll](https://developer.mozilla.org/en-US/docs/Web/API/Document/scroll_event) your mouse...), change it content, ... with help of [JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript#for_complete_beginners)
+
+Just think, in general, `span` is a box where `<span>` is the lid of the box and `</span>` is the bottom of it.
+We put stuff into box through the lid which is `<span>` tag.
+
+So tag's format will look like:
+
+```html
+<!-- normal elements -->
+<element attribute="value" ...>element content</element>
+
+<!-- no-ending elements -->
+<element attribute="value" ... />
+
+<!-- void elements (tags that cannot have any child nodes) -->
+<!--   -->
+<element attribute="value" ...></element>
+
+<!-- a tag has text color of red -->
+<span style="color: red">...</span>
+```
+
+> `<span style="">` mean "i want to change how this `span` tag look like"
+> and it is `color: red`
+
+This's **inline style**. There're **external**, **internal** and **inline** style for you to know.
+We can put many, many style on this inline style with format `style="property: value; property: value; ..."`
+
+### CSS
+
+CSS is a language for specifying how documents are presented to endpoint users, it allows us to create good-looking, less-boring, readable web pages.
+We can define rules specifying groups of styles that should be applied to particular elements or groups of elements on documents.
+
+In the above example we use **inline style** (`style="color: red"`) to define how the `span` tag look.
+In this case is to change the text color to red.
+but CSS can do more, it allows us to change: background color, width,height of tag, create a round corners style, make the tag has shadow,
+alter the font, color, size, and spacing of your content, split it into multiple columns, or add animations and other decorative features.
+
+Of course, CSS can do even more than we can imagine. And it's really depend on your experience in CSS.
+Checkout this website, [animista.net](https://animista.net/) is a place where you can play with a collection of pre-made css animations, tweak them and get only those you will actually use.
+
+
+### JavaScript
+
+JavaScript is a programming language that adds interactivity and functionality to websites.
+It's a versatile and widely used language that allows you to create dynamic web pages and build web applications.
+If you're an absolute beginner to programming, JavaScript is a great language to start with and you don't need to have any prior programming experience to get started.
+You can write JavaScript code directly in your HTML files or in separate JavaScript files and link them to your web pages.
+
+Learn more about JavaScript in [javascript.info](https://javascript.info/)
+
+### Why are there so many HTML elements(tags) ?
+
+So...back to the example above. If the `span` thing can do all the job, why waste time writing down all other (_non-highlight lines down below_) things?
+
+```html {5}
+<!doctype html>
+<html lang="en">
+  <head></head>
+  <body>
+    <span style="color: red" onclick="this.style.color='blue'">hello world</span>
+  </body>
+</html>
+```
+
+**Answer:** yes, you can do it, believe me go ahead to [example](#example-1) and delete all other line
+. So it look like this and of course it's still work
+
+```html
+<span style="color: red" onclick="this.style.color='blue'">hello world</span>
+```
+
+It look like waste, redundancy code but trust me we'll need it for later development
+
+## Development
+
+In simple words, creating a website is like creating an HTML `*.html` file where you write code to structure the content of a web page.
+Once you have written the HTML code, save it with the `*.html` extension.
+Next, open the saved file using your web browser.
+The browser will then parse the HTML file and convert it into a tree-like structure, which represents the structure and layout of the web page.
+Finally, the browser displays the formatted content of the web page based on the HTML code you wrote.
+
+Of course, real-world development is much more than just to create a `*.html`.
+In fact, real-world development, websites are typically hosted on servers and accessed over the internet rather than being local files on your computer
+But for now, `*.html` file is enough for us to understand big-image of front web development
+
+So instead of manual create `*.html` files. We can use online tools to do the same things:
+
+- [codepen](https://codepen.io/)
+- [jsbin](https://jsbin.com/)
+- [stackblitz](https://stackblitz.com/)
+
+Will do the jobs, just paste some html code and start explore
+
+### Where to start?
+
+#### Online development
+
+[codepen](https://codepen.io/),[jsbin](https://jsbin.com/), [stackblitz](https://stackblitz.com/), ...
+
+#### Local development
+
+##### Raw file html
+
+- Create file `index.html`
+- Paste below code and save it
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head></head>
+  <body>
+    <span style="color: red" onclick="this.style.color='blue'">hello world</span>
+  </body>
+</html>
+```
+
+- Open the file on any browser
+
+##### Localhost server
+
+For me, one fast, easy way is to start localhost, is to use extension [Web Server for Chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb)
+
+- Install, open `Web Server for Chrome`
+- Choose folder where you save your `index.html` file
+- Check switch button so `Web Server: STARTED`
+- Open your Web Server Url print on screen, eg: [http://127.0.0.1:3000](http://127.0.0.1:3000)
+- There we go
+
+##### Browser's inspector
+
+- [browser's inspect](https://www.browserstack.com/guide/inspect-element-in-chrome)
+- [view page resourse](https://www.lifewire.com/view-html-source-in-chrome-3466725)
+  - If you're using Safari you need [Enabling Web Inspector](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/Web_Inspector_Tutorial/EnableWebInspector/EnableWebInspector.html) first.
+
+### What's next
+
+- Read my blog about [Introduction to HTML](/blogs/introduction-to-html/1645744806/)
+- The purpose of this article is introduce you to basic idea of web development. We'll later explore more about [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript#for_complete_beginners), ...
+- You should explore more about [HTML elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)

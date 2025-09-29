@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "xd.globalEditor": false,
+  "xd.lastPackage": "/Users/hy/Documents/project/hyn/config/theme",
+  "configurations": [
+    {
+      "command": "./node_modules/.bin/astro dev",
+      "name": "Development server",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
+}

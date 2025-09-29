@@ -1,0 +1,22 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import BlogPost from "./BlogPost.astro";
+
+// type Props = CollectionEntry<"pages">;
+
+const pages = await getCollection("pages");
+const page = pages.find(
+    (item) => `/${item.id}` === Astro.props.frontmatter.url,
+);
+const rendered = page ? await render(page) : null;
+const Content = rendered ? rendered.Content : null;
+const data = page ? page.data : null;
+---
+
+{
+    data && Content && (
+        <BlogPost {...data}>
+            <Content />
+        </BlogPost>
+    )
+}
