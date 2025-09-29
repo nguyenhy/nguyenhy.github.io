@@ -1,0 +1,32 @@
+{
+  "name": "playground-core",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./dist/main.js",
+    "./web": {
+      "import": "./dist/web.js",
+      "types": "./dist/web.d.ts"
+    }
+  },
+  "module": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "example:dist": "cd ./example && npm run dev:dist",
+    "example:bundle": "cd ./example && npm run dev:bundle",
+    "pack": "./scripts/pack.sh"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3",
+    "vite": "^7.0.0",
+    "vite-plugin-dts": "^4.5.4"
+  },
+  "overrides": {
+    "vite": "^7.0.0"
+  }
+}

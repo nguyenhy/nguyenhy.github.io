@@ -1,0 +1,34 @@
+---
+
+---
+
+<astro-playground class="o--playground">
+    <div></div>
+</astro-playground>
+
+<script>
+    import { run } from "playground-core/web";
+
+    class AstroPlayground extends HTMLElement {
+        connectedCallback() {
+            run({
+                container: this.querySelector("div")!,
+                source: {
+                    html: "<p>123",
+                    css: "",
+                    js: "",
+                },
+            });
+        }
+    }
+
+    customElements.define("astro-playground", AstroPlayground);
+</script>
+
+<style scoped lang="scss">
+    .o--playground {
+        :global(iframe) {
+            width: 100%;
+        }
+    }
+</style>

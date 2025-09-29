@@ -1,0 +1,19 @@
+{
+  "name": "vanilajs",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:bundle": "./scripts/package.sh true",
+    "dev:dist": "./scripts/package.sh false",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "playground-core": "file:../bundle/playground-core-0.0.0.tgz"
+  },
+  "devDependencies": {
+    "vite": "^7.1.7"
+  }
+}
