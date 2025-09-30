@@ -1,0 +1,35 @@
+header {
+  overflow: hidden;
+  padding: 20px 10px;
+}
+
+header a {
+  float: left;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  color: inherit;
+}
+
+header a:not(:hover) {
+  text-decoration: none;
+}
+
+header a:hover {
+  background-color: rgba(203, 213, 225, 0.3);
+}
+
+header input[type="search"] {
+  float: right;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border-radius: 0.125rem;
+}
+
+header input[type="search"]::placeholder {
+  color: #a1a1aa;
+}
+
+.wrapper {
+  all: revert;
+}

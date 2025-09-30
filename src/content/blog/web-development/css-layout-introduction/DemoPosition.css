@@ -1,0 +1,48 @@
+.container {
+  position: relative;
+}
+.container[data-position="sticky"] .sticky {
+  position: sticky;
+  top: 0;
+}
+.container[data-position="relative"] .relative {
+  position: relative;
+}
+.container[data-position="absolute"] .absolute {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+}
+.container[data-position="fixed"] .fixed {
+  position: fixed;
+  top: 30px;
+  right: 50px;
+}
+.container[data-position="static"] .static {
+  position: static;
+}
+
+/* just for styling */
+.container {
+  border: 1px solid blue;
+  background-color: lightblue;
+  padding: 10px;
+  height: 170px;
+  overflow: auto;
+  box-sizing: content-box;
+}
+.item {
+  border: 1px solid gray;
+  background-color: lightgray;
+  padding: 30px 10px;
+  line-height: 20px;
+}
+
+.container .highlight,
+.container[data-position="sticky"] .sticky,
+.container[data-position="relative"] .relative,
+.container[data-position="absolute"] .absolute,
+.container[data-position="fixed"] .fixed,
+.container[data-position="static"] .static {
+  background-color: lightcyan;
+}

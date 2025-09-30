@@ -1,0 +1,15 @@
+---
+import WebPlaygroundChoices from "../../../../components/playground/WebPlaygroundChoices.astro";
+import html from "./DemoFloatImage.html?raw";
+
+const items = ["none", "left", "right"];
+---
+
+<WebPlaygroundChoices
+    selected={0}
+    cases={items.map((item) => ({
+        name: `float: ${item}`,
+        css: `.image-box { float: ${item}}`,
+    }))}
+    html={html}
+/>

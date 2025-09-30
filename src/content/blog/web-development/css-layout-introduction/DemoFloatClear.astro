@@ -1,0 +1,19 @@
+---
+import WebPlaygroundChoices from "../../../../components/playground/WebPlaygroundChoices.astro";
+import html from "./DemoFloatClear.html?raw";
+---
+
+<WebPlaygroundChoices
+    class="abcd def"
+    cases={[
+        {
+            name: "Unclear float",
+            js: "document.querySelector('.box.m--box_2').style.clear = ''",
+        },
+        {
+            name: "Clear float",
+            js: "document.querySelector('.box.m--box_2').style.clear = 'right'",
+        },
+    ]}
+    html={html}
+/>

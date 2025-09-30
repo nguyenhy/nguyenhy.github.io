@@ -1,24 +1,47 @@
 ---
+import { randStr } from "../utils/id";
 
+interface Props {
+    html?: string;
+    css?: string;
+    js?: string;
+}
+const props = Astro.props;
+const id = randStr();
+const cid = `$$_${id}`;
 ---
 
-<astro-playground class="o--playground">
+<astro-playground class="o--playground" data-cid={id}>
     <div></div>
 </astro-playground>
 
+<script is:inline define:vars={{ cid }}>
+    window.$astroProps = window.$astroProps || {};
+    window.$astroProps[cid] = props;
+</script>
 <script>
     import { run } from "./web";
 
     class AstroPlayground extends HTMLElement {
         connectedCallback() {
-            run({
+            const cid = this.dataset.cid;
+            const props = cid ? window.$astroProps[cid] : null;
+            const html = props?.html || "";
+            const css = props?.css || "";
+            const js = props?.js || "";
+            const iframe = run({
                 container: this.querySelector("div")!,
                 source: {
-                    html: "<p>123",
-                    css: "",
-                    js: "",
+                    html,
+                    css,
+                    js,
                 },
             });
+
+            const $parent = iframe.parentNode;
+            if ($parent && $parent instanceof Element) {
+                iframe.height = $parent.scrollHeight.toString();
+            }
         }
     }
 
@@ -29,6 +52,7 @@
     .o--playground {
         :global(iframe) {
             width: 100%;
+            border: 0;
         }
     }
 </style>

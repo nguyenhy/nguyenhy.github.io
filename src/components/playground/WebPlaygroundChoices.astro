@@ -1,0 +1,216 @@
+---
+import { randStr } from "../utils/id";
+import type { WebPlaygroundChoicesProps } from "./WebPlaygroundChoices.types";
+
+interface Props extends WebPlaygroundChoicesProps, Record<string, any> {}
+
+const {
+    cases,
+    title,
+    selected,
+    css,
+    js,
+    html,
+    class: className,
+    // "data-cid": _datasetCid,
+    ...otherProps
+} = Astro.props;
+const props: Props = { cases, title, selected, css, js, html };
+
+const cid = randStr("o--playground_choices-");
+const showHeaderTitle = typeof title === "string" && !!title.trim();
+const showHeaderReset = typeof selected === "number" && selected >= 0;
+---
+
+<astro-playground-choices
+    class:list={[
+        "o--playground_choices",
+        ...(className || "").toString().split(" "),
+    ]}
+    {...otherProps}
+    data-cid={cid}
+>
+    {
+        (showHeaderTitle || showHeaderReset) && (
+            <div class="o--playground_choices-header">
+                {showHeaderTitle && <header>{title}</header>}
+                {showHeaderReset && (
+                    <button class="o--playground_choices-reset">Reset</button>
+                )}
+            </div>
+        )
+    }
+    <div class="o--playground_choices-btns">
+        {
+            cases.map((item, index) => (
+                <button
+                    class={[
+                        "o--playground_choices-btn",
+                        selected === index ? "m--active" : "",
+                    ].join(" ")}
+                    data-index={index}
+                >
+                    {item.name}
+                </button>
+            ))
+        }
+    </div>
+    <div class="o--playground_choices-preview">
+        <iframe class="o--playground_choices-iframe"></iframe>
+    </div>
+</astro-playground-choices>
+
+<script is:inline define:vars={{ cid, props }} data-cid={cid}>
+    window.$astroProps = window.$astroProps || {};
+    window.$astroProps[cid] = props;
+
+    const $script = document.querySelector(`script[data-cid="${cid}"]`);
+    if ($script) {
+        $script.remove();
+    }
+</script>
+<script>
+    import { combiner } from "./web";
+    import { run } from "./web";
+    import type {
+        WebPlaygroundChoicesProps,
+        WebPlaygroundChoicesCase,
+    } from "./WebPlaygroundChoices.types";
+
+    class AstroPlaygroundChoices extends HTMLElement {
+        connectedCallback() {
+            const cid = this.dataset.cid || "";
+            const props = window.$astroProps[cid] as WebPlaygroundChoicesProps;
+
+            const $reset = this.querySelector<HTMLButtonElement>(
+                ".o--playground_choices-reset",
+            );
+            const $btns =
+                this.querySelectorAll<HTMLButtonElement>(
+                    ".o--playground_choices-btn",
+                ) || [];
+            const $iframeContainer = this.querySelector<HTMLDivElement>(
+                ".o--playground_choices-preview",
+            )!;
+            const $iframe = this.querySelector<HTMLIFrameElement>(
+                ".o--playground_choices-iframe",
+            )!;
+
+            run({
+                source: {
+                    html: props.html,
+                    css: props.css,
+                    js: props.js,
+                },
+                container: $iframeContainer,
+                sanbox: $iframe,
+            });
+
+            const $parent = $iframe.parentNode;
+            if ($parent && $parent instanceof Element) {
+                $iframe.height = $parent.scrollHeight.toString();
+            }
+
+            const selected = props.selected;
+            if (typeof selected === "number" && selected >= 0 && $reset) {
+                $reset.addEventListener("click", () => {
+                    const item = this.querySelector<HTMLButtonElement>(
+                        `.o--playground_choices-btn[data-index="${selected}"]`,
+                    );
+                    const data = props.cases[selected];
+                    if (item && data) {
+                        activate(item, data);
+                    }
+                });
+            }
+
+            $btns.forEach((item, index) => {
+                const data = props.cases[index];
+                item.addEventListener("click", (event: MouseEvent) => {
+                    activate(item, data);
+                });
+            });
+
+            const activate = (
+                item: HTMLButtonElement,
+                data: WebPlaygroundChoicesCase,
+            ) => {
+                const html = combiner({
+                    html: props.html || data.html || "",
+                    css: [props.css || "", data.css || ""],
+                    js: [props.js || "", data.js || ""],
+                });
+
+                $iframe.srcdoc = html;
+
+                this.querySelectorAll<HTMLButtonElement>(
+                    ".o--playground_choices-btn.m--active",
+                ).forEach((item) => {
+                    item.classList.remove("m--active");
+                });
+                item.classList.add("m--active");
+            };
+        }
+    }
+
+    customElements.define("astro-playground-choices", AstroPlaygroundChoices);
+</script>
+
+<style scoped lang="scss">
+    .o--playground_choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "header header" "btns preview";
+
+        border: 1px solid black;
+        border-radius: 4px;
+        gap: 6px;
+
+        --playground_choices-bg-btns: inherit;
+        --playground_choices-bg-preview: white;
+    }
+    .o--playground_choices-header {
+        grid-area: header;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        padding: 6px;
+
+        border-bottom: 1px solid black;
+    }
+    .o--playground_choices-reset {
+        margin-left: auto;
+    }
+    .o--playground_choices-btns {
+        grid-area: btns;
+        display: flex;
+        flex-direction: column;
+
+        gap: 6px;
+        padding-left: 6px;
+
+        background-color: var(--playground_choices-bg-btns);
+    }
+    .o--playground_choices-btn {
+        padding: 10px;
+        background-color: lightgrey;
+        border: none;
+        border-radius: 4px;
+
+        &.m--active {
+            background-color: grey;
+            color: white;
+        }
+    }
+    .o--playground_choices-preview {
+        grid-area: preview;
+        background-color: var(--playground_choices-bg-preview);
+
+        border-left: 1px solid black;
+    }
+    .o--playground_choices-iframe {
+        width: 100%;
+        border: 0;
+    }
+</style>

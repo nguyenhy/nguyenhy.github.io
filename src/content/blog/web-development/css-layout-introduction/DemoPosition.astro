@@ -1,0 +1,19 @@
+---
+import WebPlaygroundChoices from "../../../../components/playground/WebPlaygroundChoices.astro";
+import html from "./DemoPosition.html?raw";
+import css from "./DemoPosition.css?raw";
+
+const items = [null, "sticky", "relative", "absolute", "fixed", "static"];
+---
+
+<WebPlaygroundChoices
+    selected={0}
+    cases={items.map((item) => ({
+        name: `position: ${item}`,
+        js: item === null
+                ? `document.querySelector('.container').removeAttribute('data-position')`
+                : `document.querySelector('.container').setAttribute('data-position', '${item}')`,
+    }))}
+    html={html}
+    css={css}
+/>

@@ -1,0 +1,21 @@
+---
+import WebPlaygroundChoices from "../../../../components/playground/WebPlaygroundChoices.astro";
+import html from "./DemoDisplay.html?raw";
+
+const items = [null, "block", "inline-block", "none", "grid", "flex"];
+---
+
+<WebPlaygroundChoices
+    selected={0}
+    cases={items.map((item) =>
+        item === null
+            ? {
+                  name: `default`,
+              }
+            : {
+                  name: `display: ${item}`,
+                  css: `.container { display: ${item}}`,
+              },
+    )}
+    html={html}
+/>

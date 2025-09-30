@@ -1,0 +1,27 @@
+---
+import WebPlayground from "../components/playground/WebPlayground.astro";
+import WebPlaygroundChoices from "../components/playground/WebPlaygroundChoices.astro";
+
+export const title = "Playground";
+export const description = "Playground";
+export const pubDate = "Sep 29 2025";
+export const heroImage = "../assets/blog-placeholder-2.jpg";
+---
+
+<WebPlayground
+    css="p {color:red} li{color:blue}"
+    js=""
+    html="<p>aaaa<li>bbbb"
+/>
+
+<WebPlaygroundChoices
+    cases={[
+        {
+            name: "item1",
+            css: "p {color:blue} li{color:red}",
+        },
+    ]}
+    css="p {color:red} li{color:blue}"
+    js=""
+    html="<p style='height: 1000px'>aaaa<li>bbbb"
+/>

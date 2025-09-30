@@ -1,0 +1,58 @@
+<h1>Real-Time Data Gatherer</h1>
+<div class="data">
+  <div>Date Time: <strong id="dateTime">N/A</strong></div>
+  <div>Mouse Position: <strong id="mousePosition">N/A</strong></div>
+  <div>Browser Width: <strong id="browserWidth">N/A</strong></div>
+  <div>Browser Height: <strong id="browserHeight">N/A</strong></div>
+
+  <div>
+    <button id="start">Update</button>
+    <button id="stop">Stop</button>
+  </div>
+</div>
+
+<script>
+  let mousePosition = { x: 0, y: 0 };
+
+  // Update mouse position on mousemove event
+  document.addEventListener("mousemove", (event) => {
+    mousePosition.x = event.clientX;
+    mousePosition.y = event.clientY;
+  });
+
+  // Function to gather and display information
+  function gatherData() {
+    // Update mouse position
+    document.getElementById("mousePosition").textContent =
+      `X: ${mousePosition.x}, Y: ${mousePosition.y}`;
+
+    // Update browser dimensions
+    document.getElementById("browserWidth").textContent = window.innerWidth;
+    document.getElementById("browserHeight").textContent = window.innerHeight;
+
+    // Update current date time
+    document.getElementById("dateTime").textContent =
+      new Date().toLocaleString();
+  }
+
+  let intervalId = 0;
+  document.getElementById("start").addEventListener("click", () => {
+    // Update data every 100 milliseconds
+    clearInterval(intervalId);
+    intervalId = setInterval(gatherData, 100);
+  });
+
+  document.getElementById("stop").addEventListener("click", () => {
+    // Stop update
+    clearInterval(intervalId);
+  });
+</script>
+
+<style>
+  .data {
+    margin: 20px 0;
+  }
+  .data strong {
+    color: #333;
+  }
+</style>
