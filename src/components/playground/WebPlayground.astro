@@ -1,0 +1,280 @@
+---
+import { Code } from "astro-expressive-code/components";
+import { randStr } from "../utils/id";
+import { combiner } from "./web";
+
+interface Props {
+    html?: string;
+    css?: string;
+    js?: string;
+}
+
+const cid = randStr("o--playground-");
+const props = Astro.props;
+---
+
+<astro-playground class="o--playground" data-cid={cid}>
+    <div class="o--tab_navs">
+        <button data-lang="html" class="o--tab_nav m--html">HTML</button>
+        <button data-lang="css" class="o--tab_nav m--css">CSS</button>
+        <button data-lang="js" class="o--tab_nav m--js">JS</button>
+        <button data-lang="preview" class="o--tab_nav m--preview"
+            >Preview</button
+        >
+    </div>
+    <div class="o--tab_contents">
+        <div class="o--tab_content o--playground_code m--html">
+            {props.html && <Code lang="html" code={props.html} />}
+        </div>
+        <div class="o--tab_content o--playground_code m--css">
+            {props.css && <Code lang="css" code={props.css} />}
+        </div>
+        <div class="o--tab_content o--playground_code m--js">
+            {props.js && <Code lang="javascript" code={props.js} />}
+        </div>
+        <div class="o--tab_content o--playground_preview m--preview"></div>
+    </div>
+</astro-playground>
+
+<script is:inline define:vars={{ cid, props }} data-cid={cid}>
+    window.$astroProps = window.$astroProps || {};
+    window.$astroProps[cid] = props;
+
+    const $script = document.querySelector(`script[data-cid="${cid}"]`);
+    if ($script) {
+        $script.remove();
+    }
+</script>
+<script>
+    import { run } from "./web";
+
+    class AstroPlayground extends HTMLElement {
+        connectedCallback() {
+            const cid = this.dataset.cid || "";
+            const props = window.$astroProps[cid];
+
+            window.$astroProps[cid] = null;
+            delete window.$astroProps[cid];
+
+            const html = props.html || "";
+            const css = props.css || "";
+            const js = props.js || "";
+
+            const iframe = run({
+                container: this.querySelector(".o--playground_preview")!,
+                source: {
+                    html,
+                    css,
+                    js,
+                },
+            });
+
+            const $parent = iframe.parentNode;
+            if ($parent && $parent instanceof Element) {
+                iframe.height = $parent.scrollHeight.toString();
+            }
+
+            let grid = 1;
+            this.setAttribute("data-layout", "grid");
+            this.setAttribute("data-tab-preview", "");
+            if (html) {
+                this.setAttribute("data-tab-html", "");
+                grid += 1;
+            }
+            if (css) {
+                this.setAttribute("data-tab-css", "");
+                grid += 1;
+            }
+            if (js) {
+                this.setAttribute("data-tab-js", "");
+                grid += 1;
+            }
+            this.setAttribute("data-grid", grid.toString());
+            this.setAttribute("data-active_tab", "preview");
+
+            const $btns =
+                this.querySelectorAll<HTMLButtonElement>(".o--tab_nav");
+            $btns.forEach((item) => {
+                item.addEventListener("click", () => {
+                    this.setAttribute(
+                        "data-active_tab",
+                        item.dataset.lang || "",
+                    );
+                });
+            });
+        }
+    }
+
+    customElements.define("astro-playground", AstroPlayground);
+</script>
+
+<style scoped lang="scss">
+    .o--playground {
+        border: 1px solid black;
+        border-radius: 4px;
+        display: block;
+    }
+
+    .o--playground {
+        &[data-tab-html] {
+            .o--tab_nav.m--html {
+                display: block;
+            }
+        }
+        &[data-tab-css] {
+            .o--tab_nav.m--css {
+                display: block;
+            }
+        }
+        &[data-tab-js] {
+            .o--tab_nav.m--js {
+                display: block;
+            }
+        }
+        &[data-tab-preview] {
+            .o--tab_nav.m--preview {
+                display: block;
+            }
+        }
+
+        &[data-layout="tab"] {
+            .o--tab_content {
+                display: none;
+            }
+            &[data-tab-html] {
+                &[data-active_tab="html"] {
+                    .o--tab_content.m--html {
+                        display: block;
+                    }
+                }
+            }
+            &[data-tab-css] {
+                &[data-active_tab="css"] {
+                    .o--tab_content.m--css {
+                        display: block;
+                    }
+                }
+            }
+            &[data-tab-js] {
+                &[data-active_tab="js"] {
+                    .o--tab_content.m--js {
+                        display: block;
+                    }
+                }
+            }
+            &[data-tab-preview] {
+                &[data-active_tab="preview"] {
+                    .o--tab_content.m--preview {
+                        display: block;
+                    }
+                }
+            }
+        }
+        &[data-layout="grid"] {
+            .o--tab_contents {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                max-height: 50vh;
+            }
+            .o--tab_content {
+                overflow: auto;
+            }
+            &[data-grid="1"] {
+                .o--tab_contents {
+                    grid-template-areas: "preview preview" "preview preview";
+                }
+            }
+            &[data-grid="2"] {
+                &[data-tab-html] {
+                    .o--tab_contents {
+                        grid-template-areas: "html preview" "html preview";
+                    }
+                }
+                &[data-tab-css] {
+                    .o--tab_contents {
+                        grid-template-areas: "css preview" "css preview";
+                    }
+                }
+                &[data-tab-js] {
+                    .o--tab_contents {
+                        grid-template-areas: "js preview" "js preview";
+                    }
+                }
+            }
+            &[data-grid="3"] {
+                &[data-tab-html][data-tab-css] {
+                    .o--tab_contents {
+                        grid-template-areas: "html preview" "css preview";
+                    }
+                }
+                &[data-tab-html][data-tab-js] {
+                    .o--tab_contents {
+                        grid-template-areas: "html preview" "js preview";
+                    }
+                }
+                &[data-tab-css][data-tab-js] {
+                    .o--tab_contents {
+                        grid-template-areas: "css preview" "js preview";
+                    }
+                }
+            }
+            &[data-grid="4"] {
+                .o--tab_contents {
+                    grid-template-areas: "html css" "js preview";
+                }
+            }
+        }
+    }
+    .o--playground_code {
+        :global(.expressive-code) {
+            height: 100%;
+        }
+        :global(.expressive-code > figure) {
+            height: 100%;
+            box-shadow: unset;
+        }
+        :global(.expressive-code > figure > pre) {
+            height: 100%;
+            border-radius: 0;
+        }
+    }
+    .o--tab_navs {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        border-bottom: 1px solid black;
+    }
+    .o--tab_nav {
+        padding: 4px;
+        border: 1px solid black;
+        display: none;
+        border: none;
+    }
+    .o--tab_contents {
+    }
+    .o--tab_content {
+        &:empty {
+            display: none !important;
+        }
+        &.m--html {
+            grid-area: html;
+        }
+        &.m--css {
+            grid-area: css;
+        }
+        &.m--js {
+            grid-area: js;
+        }
+        &.m--preview {
+            grid-area: preview;
+        }
+    }
+    .o--playground_preview {
+        :global(iframe) {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    }
+</style>

@@ -1,0 +1,14 @@
+<div class="p-2">
+  <span>Current datetime is: </span>
+  <span id="time"></span>
+  <button
+    class="ml-2 mr-2"
+    onclick="time.innerText = (new Date()).toLocaleString()"
+  >
+    Update
+  </button>
+</div>
+
+<script>
+  time.innerText = (new Date()).toLocaleString();
+</script>

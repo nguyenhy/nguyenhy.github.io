@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        /* select all element */
+        font-size: 18px;
+      }
+
+      span {
+        /* select all span */
+        color: cyan;
+        padding: 10px;
+        display: inline-block;
+        background-color: lightgrey;
+      }
+
+      div {
+        /* select all div */
+        background-color: grey;
+        padding: 10px;
+        margin-top: 10px;
+      }
+
+      div > span {
+        /* select all span has parent of div */
+        font-weight: bold;
+        font-size: 22px;
+      }
+
+      .a {
+        /* select all element has class "a" ( class="a" ) */
+        background-color: blue;
+      }
+
+      .b {
+        /* select all element has class "b" */
+        color: white;
+      }
+
+      .c,
+      .d {
+        /* select all element has class "c" or "d" */
+        text-decoration: underline;
+      }
+
+      #c {
+        /* select all element has id "e" */
+        background-color: yellow;
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="first">
+      <span class="a">first span</span>
+      <span class="b">second span</span>
+    </div>
+    <div class="second">
+      <span class="a b c" id="c"> third span </span>
+      <span class="d">fourth span</span>
+    </div>
+  </body>
+</html>

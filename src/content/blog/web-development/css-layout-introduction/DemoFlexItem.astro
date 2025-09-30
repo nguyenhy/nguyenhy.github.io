@@ -1,0 +1,21 @@
+---
+import WebPlaygroundChoices from "../../../../components/playground/WebPlaygroundChoices.astro";
+import html from "./DemoFlexItem.html?raw";
+
+const items = [null, "row", "row-reverse", "column", "column-reverse"];
+---
+
+<WebPlaygroundChoices
+    selected={0}
+    cases={items.map((item) =>
+        item === null
+            ? {
+                  name: `default`,
+              }
+            : {
+                  name: `flex-direction: ${item}`,
+                  css: `.container { flex-direction: ${item}}`,
+              },
+    )}
+    html={html}
+/>

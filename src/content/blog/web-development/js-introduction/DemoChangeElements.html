@@ -1,0 +1,46 @@
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .font-bold {
+    font-weight: bold;
+    color: #b91c1c; /* text-red-700 */
+  }
+  .italic {
+    font-style: italic;
+  }
+</style>
+
+<div class="container">
+  <button id="btn">Toggle</button>
+  <div id="message"></div>
+</div>
+
+<script>
+  let show = false;
+  const messageDiv = document.getElementById("message");
+
+  const updateMessage = () => {
+    if (show) {
+      messageDiv.innerHTML = [
+        "<h1>Lorem ipsum </h1>",
+        "<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus, aperiam.</p>",
+        '<span class="italic">Welcome to blog: Introduction to Javascript</span>',
+      ].join("");
+    } else {
+      messageDiv.innerHTML =
+        '<span class="italic">Welcome to blog: Introduction to Javascript</span>';
+    }
+  };
+
+  document.getElementById("btn").addEventListener("click", () => {
+    show = !show;
+    updateMessage();
+  });
+
+  // Initial message setup
+  updateMessage();
+</script>
