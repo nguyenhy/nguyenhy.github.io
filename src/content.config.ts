@@ -14,10 +14,6 @@ const blog = defineCollection({
       updatedDate: z.coerce.date().optional(),
       heroImage: image().optional(),
       /**
-       * import `mermaid` script in `BlobPost.astro`
-       */
-      useMermaid: z.boolean().optional(),
-      /**
        * make item, in list blogs, full width
        */
       fullWidth: z.boolean().optional(),
