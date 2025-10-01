@@ -10,8 +10,7 @@ import Header from "../components/Header.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage, useMermaid } =
-    Astro.props;
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
@@ -19,18 +18,6 @@ const { title, description, pubDate, updatedDate, heroImage, useMermaid } =
         <BaseHead title={title} description={description} />
         <style is:global lang="scss">
             @reference "../styles/global.css"
-
-
-            pre.mermaid[data-processed="true"] {
-                text-align: center;
-            }
-            pre.mermaid[data-processed="true"] > svg {
-                margin: 0 auto;
-            }
-            pre.mermaid:not([data-processed="true"]) {
-                color: transparent;
-                background-color: #ebebeb;
-            }
 
             .expressive-code {
                 margin-bottom: 1rem;
@@ -75,11 +62,7 @@ const { title, description, pubDate, updatedDate, heroImage, useMermaid } =
             </article>
         </main>
         <Footer />
-    </body>{
-        useMermaid ? (
-            <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs" />
-        ) : null
-    }
+    </body>
 </html>
 
 <style lang="scss" scoped>
