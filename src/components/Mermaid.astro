@@ -1,0 +1,198 @@
+---
+import { randStr } from "./utils/id";
+
+const props = Astro.props;
+const cid = randStr();
+---
+
+<mermaid-pan-zoom class="o--mermaid" data-cid={cid}>
+    <div class="o--mermaid_container"></div>
+    <div class="o--mermaid_tools">
+        <button class="o--mermaid_tool m--zoomin">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="#000000"
+                viewBox="0 0 256 256"
+                ><path
+                    d="M152,112a8,8,0,0,1-8,8H120v24a8,8,0,0,1-16,0V120H80a8,8,0,0,1,0-16h24V80a8,8,0,0,1,16,0v24h24A8,8,0,0,1,152,112Zm77.66,117.66a8,8,0,0,1-11.32,0l-50.06-50.07a88.11,88.11,0,1,1,11.31-11.31l50.07,50.06A8,8,0,0,1,229.66,229.66ZM112,184a72,72,0,1,0-72-72A72.08,72.08,0,0,0,112,184Z"
+                ></path></svg
+            >
+        </button>
+        <button class="o--mermaid_tool m--zoomout">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="#000000"
+                viewBox="0 0 256 256"
+                ><path
+                    d="M152,112a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h64A8,8,0,0,1,152,112Zm77.66,117.66a8,8,0,0,1-11.32,0l-50.06-50.07a88.11,88.11,0,1,1,11.31-11.31l50.07,50.06A8,8,0,0,1,229.66,229.66ZM112,184a72,72,0,1,0-72-72A72.08,72.08,0,0,0,112,184Z"
+                ></path></svg
+            >
+        </button>
+        <button class="o--mermaid_tool m--reset">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="#000000"
+                viewBox="0 0 256 256"
+                ><path
+                    d="M224,48V96a8,8,0,0,1-8,8H168a8,8,0,0,1,0-16h28.69L182.06,73.37a79.56,79.56,0,0,0-56.13-23.43h-.45A79.52,79.52,0,0,0,69.59,72.71,8,8,0,0,1,58.41,61.27a96,96,0,0,1,135,.79L208,76.69V48a8,8,0,0,1,16,0ZM186.41,183.29a80,80,0,0,1-112.47-.66L59.31,168H88a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8v48a8,8,0,0,0,16,0V179.31l14.63,14.63A95.43,95.43,0,0,0,130,222.06h.53a95.36,95.36,0,0,0,67.07-27.33,8,8,0,0,0-11.18-11.44Z"
+                ></path></svg
+            >
+        </button>
+    </div>
+</mermaid-pan-zoom>
+
+<style>
+    .o--mermaid {
+        width: 100%;
+        min-height: 150px;
+        overflow: hidden;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fafafa;
+        cursor: grab;
+        position: relative;
+
+        display: block;
+
+        &:active {
+            cursor: grabbing;
+        }
+
+        global(svg) {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    .o--mermaid_container {
+        position: relative;
+        z-index: 1;
+    }
+    .o--mermaid_tools {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        z-index: 2;
+
+        background-color: grey;
+        color: white;
+        border-radius: 4px;
+
+        display: flex;
+        flex-direction: row;
+    }
+    .o--mermaid_tool {
+        width: 30px;
+        height: 30px;
+
+        padding: 4px;
+        border-radius: 4px;
+        border: none;
+        line-height: 16px;
+        cursor: pointer;
+
+        svg {
+            fill: white;
+        }
+    }
+</style>
+
+<script is:inline define:vars={{ cid, props }} data-cid={cid}>
+    window.$astroProps = window.$astroProps || {};
+    window.$astroProps[cid] = props;
+
+    const $script = document.querySelector(`script[data-cid="${cid}"]`);
+    if ($script) {
+        $script.remove();
+    }
+</script>
+<script>
+    import panzoom from "panzoom";
+    import mermaid from "mermaid";
+
+    class MermaidPanZoom extends HTMLElement {
+        async connectedCallback() {
+            const cid = this.dataset.cid || "";
+            const props = window.$astroProps[cid];
+
+            window.$astroProps[cid] = null;
+            delete window.$astroProps[cid];
+
+            const code = props.code || "";
+
+            const $container = this.querySelector<HTMLDivElement>(
+                ".o--mermaid_container",
+            )!;
+
+            mermaid.initialize({ startOnLoad: false });
+            let diagramHTML = "";
+            try {
+                const id = `mermaid-${cid}`;
+                const res = await mermaid.render(id, code);
+                $container.innerHTML = res.svg;
+            } catch (e) {
+                reportError(e);
+
+                $container.innerHTML = `<pre style="color:red">Syntax error</pre>`;
+                this.dataset.error = "true";
+            }
+
+            this.dataset.processed = "true";
+
+            const $svg = this.querySelector("svg");
+            if ($svg) {
+                const pan = panzoom($svg, {
+                    maxZoom: 10,
+                    minZoom: 0.3,
+                    autocenter: true,
+                    zoomDoubleClickSpeed: 1,
+                    smoothScroll: false,
+                });
+
+                // Reset on double click
+                $svg.addEventListener("dblclick", () => {
+                    pan.moveTo(0, 0);
+                    pan.zoomAbs(0, 0, 1);
+                });
+
+                const $zoomIn = this.querySelector<HTMLDivElement>(
+                    ".o--mermaid_tool.m--zoomin",
+                );
+                if ($zoomIn) {
+                    $zoomIn.addEventListener("click", () => {
+                        const { scale } = pan.getTransform();
+                        pan.zoomAbs(0, 0, scale + 0.1);
+                    });
+                }
+                const $zoomOut = this.querySelector<HTMLDivElement>(
+                    ".o--mermaid_tool.m--zoomout",
+                );
+                if ($zoomOut) {
+                    $zoomOut.addEventListener("click", () => {
+                        const { scale } = pan.getTransform();
+                        pan.zoomAbs(0, 0, scale - 0.1);
+                    });
+                }
+
+                const $reset = this.querySelector<HTMLDivElement>(
+                    ".o--mermaid_tool.m--reset",
+                );
+                if ($reset) {
+                    $reset.addEventListener("click", () => {
+                        pan.moveTo(0, 0);
+                        pan.zoomAbs(0, 0, 1);
+                    });
+                }
+            }
+        }
+    }
+
+    customElements.define("mermaid-pan-zoom", MermaidPanZoom);
+</script>
