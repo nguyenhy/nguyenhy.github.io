@@ -64,10 +64,9 @@ const cid = randStr();
             cursor: grabbing;
         }
 
-        global(svg) {
-            display: block;
-            max-width: 100%;
-            max-height: 100%;
+        &:not([data-processed="true"]) {
+            color: transparent;
+            background-color: #ebebeb;
         }
     }
 
@@ -156,10 +155,16 @@ const cid = randStr();
                     smoothScroll: false,
                 });
 
+                const {
+                    x: initialX,
+                    y: initialY,
+                    scale: initialScale,
+                } = pan.getTransform();
+
                 // Reset on double click
                 $svg.addEventListener("dblclick", () => {
-                    pan.moveTo(0, 0);
-                    pan.zoomAbs(0, 0, 1);
+                    pan.moveTo(initialX, initialY);
+                    pan.zoomAbs(0, 0, initialScale);
                 });
 
                 const $zoomIn = this.querySelector<HTMLDivElement>(
@@ -186,8 +191,8 @@ const cid = randStr();
                 );
                 if ($reset) {
                     $reset.addEventListener("click", () => {
-                        pan.moveTo(0, 0);
-                        pan.zoomAbs(0, 0, 1);
+                        pan.moveTo(initialX, initialY);
+                        pan.zoomAbs(0, 0, initialScale);
                     });
                 }
             }
