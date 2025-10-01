@@ -48,6 +48,7 @@ graph LR
 
 `}/>
 
+#### Parser
 The **Parser** is the first component of the Javascript Engine that processes the raw source code.
 
 <Mermaid
@@ -120,6 +121,7 @@ While the interpreter allows quick execution of code, it may not apply optimizat
 
 To address the performance limitations of the interpreter, modern Javascript Engines implement a **Just-In-Time (JIT) Compiler**.
 
+#### JIT - Just-In-Time Compiler
 <Mermaid code={`
 graph LR
     machine_code["Machine Code"] --> jit["JIT Compiler"]
@@ -130,13 +132,19 @@ graph LR
 
 `}/>
 
-JIT compilation occurs during the execution of the program, converting frequently executed sections of code (often referred to as "hot" code) into optimized machine code.
-This optimized code can be stored and reused for subsequent calls, significantly reducing execution time compared to interpreted code. By combining interpretation with JIT compilation, engines strike a balance between fast startup times and efficient long-term execution.
+**JIT** compilation occurs during the execution of the program, **converting frequently executed** sections of code (often referred to as "hot" code) into optimized machine code.
+This optimized code can be **stored** and **reused** for subsequent calls, significantly reducing execution time compared to interpreted code.
+
+By combining interpretation with JIT compilation, engines strike a balance between fast startup times and efficient long-term execution.
+
+#### Call Stack
 
 The **Call Stack** is a last-in, first-out (LIFO) data structure that tracks active function calls and manages execution contexts.
 When a function is invoked, a new frame is added to the top of the Call Stack, containing information about the function's execution, such as parameters, local variables, and the return address.
 As functions complete execution, their frames are popped off the stack. This mechanism ensures that control returns to the correct location in the code after a function finishes.
 The Call Stack interacts with the heap when functions need to access objects or data stored there during execution.
+
+#### Heap
 
 Unlike the structured Call Stack, the heap is an unstructured space where objects, arrays, and data structures are stored.
 When the engine needs to allocate memory for complex or variable-sized data, it utilizes the heap. Efficient memory management in the heap enables Javascript to handle the dynamic nature of web applications, which often require frequent creation and deletion of objects.
@@ -201,7 +209,11 @@ Just like in the browser context, the Javascript Engine relies on the same stand
 
 #### Callback Queue (Tasks, Microtasks, and Event Loop)
 
-Javascript is designed to function in a single-threaded environment, meaning only one task can be executed at a time. This design choice simplifies programming by eliminating concurrency issues; however, it also presents challenges when dealing with asynchronous operations, such as user interactions, network requests, and timers. To handle these operations without blocking the main thread, Javascript employs a queuing mechanism that uses **Tasks** and **Microtasks**.
+In web development, concurrency issues can arise when multiple operations need to occur simultaneously or when asynchronous tasks are handled. For example, user interactions, network requests, and timer events can introduce complexity if not managed properly, leading to problems like race conditions and inconsistent application states.
+
+To simplify these concurrency issues, JavaScript was designed as a single-threaded language. This means that at any given moment, only one unit of work is processed in the call stack. Importantly, each unit of work in the call stack cannot be paused or resumed; it must complete before the next task can be handled. This design choice helps eliminate many common problems associated with concurrency but also presents challenges when trying to manage multiple asynchronous operations effectively.
+
+To address the need for handling as many asynchronous operations as possible without blocking the main thread, JavaScript employs a queuing mechanism, which uses **Tasks**, **Microtasks**, and the **Event Loop** to efficiently manage and prioritize the execution of these operations.
 
 ##### Tasks
 
@@ -252,30 +264,38 @@ This cyclical checking process allows Javascript to manage asynchronous operatio
 
 ### Example
 
+#### Code
+
 ```js
+function fnc_resolve1 (response) {
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+}
+
+function fnc_resolve2 (userData) => {
+  // Use a microtask to process the fetched user data
+  processUserData(userData);
+}
+
+function fnc_reject(error) => {
+  // Use a microtask to log exception
+  console.error("Error fetching user data:", error);
+}
+
 function fetchUserData() {
-  console.log("Fetching user data...");
+  console.log("Fetching user data");
 
   // Simulate a network request to fetch user data from an API (Microtask)
   const userRequest = fetch("https://jsonplaceholder.typicode.com/users/1")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((userData) => {
-      // Use a microtask to process the fetched user data
-      processUserData(userData);
-    })
-    .catch((error) => {
-      // Use a microtask to log exception
-      console.error("Error fetching user data:", error);
-    });
+    .then(fnc_resolve1)
+    .then(fnc_resolve2)
+    .catch(fnc_reject);
 }
 
 function processUserData(userData) {
-  console.log("Processing user data...");
+  console.log("Processing user data");
   // Simulate processing of user data
   console.log(`User Name: ${userData.name}`);
   console.log(`Email: ${userData.email}`);
@@ -285,3 +305,42 @@ console.log("Start");
 fetchUserData();
 console.log("End");
 ```
+
+#### Flow chart
+
+<Mermaid code={`
+flowchart TD
+  global_start[line 35 - print - Start] --> |1| fnc_fetchUserData[line 19 - print - Fetching user data]
+  fnc_fetchUserData -->|2| global_end(line 37 - print - End)
+  global_end --> END[End of execution]
+
+  fnc_fetchUserData -->|3| fnc_fetchUserData_fetch[line 22 - add fetch to Task Queue]
+  fnc_fetchUserData_fetch --> fnc_fetchUserData_fetch_callstack{Call Stack execute fetch}
+  fnc_fetchUserData_fetch_callstack --> |resolve| fnc_fetchUserData_fetch_resovel1[line 23 - add fnc_resolve1 to microtask]
+  fnc_fetchUserData_fetch_resovel1 --> fnc_fetchUserData_fetch_resovel1_execute{fnc_resolve1 executed}
+  fnc_fetchUserData_fetch_resovel1_execute -->|line 3 - throw| fnc_fetchUserData_fetch_reject
+  fnc_fetchUserData_fetch_resovel1_execute -->|line 5 - not throw| fnc_fetchUserData_fetch_resovel1_execute_notthrow[line 24 - add fnc_resolve2 to microtask]
+  fnc_fetchUserData_fetch_resovel1_execute_notthrow --> fnc_fetchUserData_fetch_resovel2_execute_executed[fnc_resolve2 executed]
+  fnc_fetchUserData_fetch_resovel2_execute_executed --> fnc_fetchUserData_fetch_resovel2_execute_executed_log1[line 29 - print - Processing user data]
+  fnc_fetchUserData_fetch_resovel2_execute_executed_log1 --> fnc_fetchUserData_fetch_resovel2_execute_executed_log2[line 31- print - User Name]
+  fnc_fetchUserData_fetch_resovel2_execute_executed_log2 --> fnc_fetchUserData_fetch_resovel2_execute_executed_log3[line 32- print - Email]
+  --> END
+
+  fnc_fetchUserData_fetch_callstack --> |reject| fnc_fetchUserData_fetch_reject[print - Error fetching user data]
+  fnc_fetchUserData_fetch_reject --> END
+`}
+/>
+
+
+### Explanation of the Flowchart
+1. **Start**: The execution begins with a call to the main function.
+2. **Call `fetchUserData()`**: The function `fetchUserData()` is invoked.
+3. **Log Message**: The message "Fetching user data..." is printed to the console.
+4. **Initiate Fetch Request**: A fetch request is initiated, which gets added to the Task Queue.
+5. **Check Fetch Status**: After the fetch resolves, the program checks if the response is OK.
+   - If the response is OK, the process continues through `fnc_resolve1()`, where response.json() is called.
+   - If the response is not OK, an error is thrown, which triggers `fnc_reject()`, logging an error message.
+6. **Process User Data**: Once the data is fetched and resolved, control moves to `fnc_resolve2()` to process the user data.
+7. **Log Processing**: The data is logged, including the user's name and email.
+8. **Finish Processing**: After all logs are executed, processing is complete.
+9. **End**: The program execution reaches the end after handling the successful fetch or any errors.
