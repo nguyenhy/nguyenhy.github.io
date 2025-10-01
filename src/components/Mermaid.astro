@@ -60,6 +60,8 @@ const cid = randStr();
 
         display: block;
 
+        margin-bottom: 20px;
+
         &:active {
             cursor: grabbing;
         }
@@ -86,6 +88,13 @@ const cid = randStr();
 
         display: flex;
         flex-direction: row;
+
+        opacity: 1;
+        transition: 100ms linear;
+
+        &:not(:hover) {
+            opacity: 0.3;
+        }
     }
     .o--mermaid_tool {
         width: 30px;
@@ -96,6 +105,8 @@ const cid = randStr();
         border: none;
         line-height: 16px;
         cursor: pointer;
+
+        background-color: inherit;
 
         svg {
             fill: white;
