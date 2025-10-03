@@ -1,5 +1,6 @@
 {
   "name": "hyn",
+  "description": "Personal blog to explore fresh insights and elevate your tech skills daily with innovative articles and guidance",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
