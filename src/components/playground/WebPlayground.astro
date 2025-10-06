@@ -5,8 +5,11 @@ import { combiner } from "./web";
 
 interface Props {
     html?: string;
+    htmlFileName?: string;
     css?: string;
+    cssFileName?: string;
     js?: string;
+    jsFileName?: string;
 }
 
 const cid = randStr("o--playground-");
@@ -24,13 +27,37 @@ const props = Astro.props;
     </div>
     <div class="o--tab_contents">
         <div class="o--tab_content o--playground_code m--html">
-            {props.html && <Code lang="html" code={props.html} />}
+            {
+                props.html && (
+                    <Code
+                        lang="html"
+                        code={props.html}
+                        title={props.htmlFileName}
+                    />
+                )
+            }
         </div>
         <div class="o--tab_content o--playground_code m--css">
-            {props.css && <Code lang="css" code={props.css} />}
+            {
+                props.css && (
+                    <Code
+                        lang="css"
+                        code={props.css}
+                        title={props.cssFileName}
+                    />
+                )
+            }
         </div>
         <div class="o--tab_content o--playground_code m--js">
-            {props.js && <Code lang="javascript" code={props.js} />}
+            {
+                props.js && (
+                    <Code
+                        lang="javascript"
+                        code={props.js}
+                        title={props.jsFileName}
+                    />
+                )
+            }
         </div>
         <div class="o--tab_content o--playground_preview m--preview"></div>
     </div>
