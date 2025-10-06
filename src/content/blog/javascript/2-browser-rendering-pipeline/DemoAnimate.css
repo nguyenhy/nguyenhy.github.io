@@ -1,0 +1,28 @@
+/* moving */
+.container.with_transition.animate .content {
+  transform: translateX(50px);
+}
+
+.container:not(.with_transition).animate .content {
+  left: 50px;
+}
+
+/* just for coloring */
+.container.with_transition .content {
+  background-color: lightcyan;
+  color: black;
+}
+
+.container {
+  padding: 10px;
+  background-color: lightgrey;
+  position: relative;
+}
+
+.content {
+  display: inline-block;
+  padding: 10px;
+  background-color: grey;
+  color: white;
+  position: relative;
+}
