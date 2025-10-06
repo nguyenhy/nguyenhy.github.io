@@ -1,0 +1,23 @@
+---
+import WebPlayground from "../../../../components/playground/WebPlayground.astro";
+import html from "./DemoComputedStyle.html?raw";
+import css from "./DemoComputedStyle.css?raw";
+---
+
+<div>
+    <WebPlayground html={html} css={css} cssFileName="styles.css" />
+</div>
+
+<style lang="scss" scoped>
+    div {
+        :global(
+            .o--playground[data-layout="grid"][data-grid="3"][data-tab-html][data-tab-css]
+                .o--tab_contents
+        ) {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-areas:
+                "html html html"
+                "css css preview" !important;
+        }
+    }
+</style>

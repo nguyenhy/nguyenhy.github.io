@@ -1,0 +1,237 @@
+---
+title: "[Javascript] Browser Rendering Pipeline"
+description: "Browser Rendering Pipeline Explained"
+pubDate: "Oct 01 2025"
+heroImage: "../../../../assets/blog-placeholder-4.jpg"
+hidden: true
+---
+
+import Mermaid from "../../../../components/Mermaid.astro";
+import DemoAnimate from "./DemoAnimate.astro";
+import DemoComputedStyle from "./DemoComputedStyle.astro";
+
+# Introduction
+
+HTML, CSS is foundation building block use to build visual experience on the web. Understand how browsers convert text into a visual form, is not only a very crutial aspect of web development, but also a required knowledge to build high performance visual.
+
+In this article, we would try to explain the journey from raw text of HTML, CSS all the way to be visual as pixels on the screen, which is of course has multiple immediate steps involved.
+
+<Mermaid code={`
+graph TD;
+    A[HTML Content] -->|Parse| B[DOM Tree]
+    style A fill:#4c8df6,stroke:black,color:white,stroke-width:1px
+    style B fill:#4c8df6,stroke:black,color:white,stroke-width:1px
+
+    C[CSS Text] -->|Parse| D[CSSOM]
+    style C fill:#4c8df6,stroke:black,color:white,stroke-width:1px
+    style D fill:#4c8df6,stroke:black,color:white,stroke-width:1px
+
+    D -->|Combine| E[Render Tree]
+    style E fill:#4c8df6,stroke:black,color:white,stroke-width:1px
+
+    B -->|Combine| E[Render Tree]
+
+    E -->|Layout| F[Layout Information]
+    style F fill:#e2b0e4,stroke:black,color:black,stroke-width:1px
+
+    F -->|Calculate| G[Paint Information]
+    style G fill:#e2b0e4,stroke:black,color:black,stroke-width:1px
+
+    G -->|Render| H[Paint]
+    style H fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+
+    style A fill:#4c8df6,stroke:#000000,color:black,stroke-width:1px
+    style B fill:#e2b0e4,stroke:black,color:black,stroke-width:1px
+    style C fill:#e2b0e4,stroke:black,color:black,stroke-width:1px
+    style D fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style E fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style F fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style G fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+
+`}/>
+
+To be more practical, we would **examine the below demo**, to understand the step it's required to rendering the animation, and what is the different between methods.
+
+<DemoAnimate />
+
+## Parsing
+
+### HTML Parsing
+
+In the HTML parsing step, the browser takes the raw HTML content and constructs the Document Object Model (DOM) tree. The following visualization illustrates the structure of the DOM based on our example HTML:
+
+<Mermaid code={`
+graph TD;
+    dot_container[.container] --> dot_content[.content]
+    dot_container --> label[label]
+    label --> input_h_with_transition[input#with_transition]
+    label --> span[span]
+    dot_container --> button_h_animate[button#animate]
+    dot_container --> button_h_reset[button#reset]
+
+    style dot_container fill:#4c8df6,stroke:#000000,stroke-width:1px
+    style dot_content fill:#e2b0e4,stroke:black,color:black,stroke-width:1px
+    style label fill:#e2b0e4,stroke:black,color:black,stroke-width:1px
+    style input_h_with_transition fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style span fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style button_h_animate fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style button_h_reset fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+
+`} />
+
+This structure describes how the `div.container` holds everything else, including the `div.content`, a `label` element with a checkbox, a descriptive `span`, and the two buttons for animation control.
+
+### CSS Parsing
+
+During the CSS parsing stage, the browser processes CSS styles to construct the CSS Object Model (CSSOM). We can visualize the `display` properties of the important elements as follows:
+
+<Mermaid code={`
+graph TD;
+    dot_container[.container] --> display_block[display: block]
+    dot_content[.content] --> display_inline_block[display: inline-block]
+    input_h_with_transition[input#with_transition] --> display_inline[display: inline-block]
+    span[span] --> display_inline_2[display: inline]
+    button_h_animate[button#animate] --> display_inline_block_2[display: inline-block]
+    button_h_reset[button#reset] --> display_inline_block_3[display: inline-block]
+
+    style dot_container fill:#4c8df6,stroke:#000000,stroke-width:1px
+    style dot_content fill:#e2b0e4,stroke:black,color:black,stroke-width:1px
+    style input_h_with_transition fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style span fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style button_h_animate fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style button_h_reset fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+
+`} />
+
+Each displayed property showcases how elements will be laid out on the page. The `.container` is a block-level element, while `.content` is an inline-block, providing specific behavior and layout characteristics.
+
+## Style and The Rendering Tree
+
+Combining the DOM and CSSOM leads to the creation of the **Rendering Tree** (sometimes called the **Layout Tree**). This tree, is browser-internal data structure, represents what elements need to be rendered on the screen along with the corresponding computed styles.
+
+### Steps to Create the Rendering Tree
+
+**Step 1.** **Traverse** the from the root of DOM, recursively to identify visual elements. There are some nodes that will be ignored as an result not being part of the visual render tree, including:
+
+- Nodes that are not visible (for example, script tags, meta tags, and so on), and are omitted since they are not reflected in the rendered output.
+
+- Nodes that are hidden using CSS and are also omitted from the render tree
+
+**Step 2.** **Create or update** the corresponding Render Tree node that links back to the original DOM node.
+
+**Step 3.** **Calculate the Computed Styles** for each DOM node and associate them with both the DOM node and the Render Tree node.
+
+<Mermaid code={`
+graph TD;
+    dot_container[div.container] -->|style: display: block;...| dot_content[.content]
+    dot_container -->|style: background-color: lightgrey| label[label]
+    label -->|style: display: inline-block;...| input_h_with_transition[input#with_transition]
+    label -->|style: display: inline;...| span[span]
+    dot_container -->|style: display: block;...| button_h_animate[button#animate]
+    dot_container -->|style: display: block;...| button_h_reset[button#reset]
+
+    %% Additional styles from CSSOM
+    dot_content -->|style: display: inline-block;...| computed_style[Computed Style]
+    input_h_with_transition -->|style: display: inline;...| computed_style_input[Computed Style]
+    span -->|style: display: inline;...| computed_style_span[Computed Style]
+    button_h_animate -->|style: display: inline-block;...| computed_style_button_animate[Computed Style]
+    button_h_reset -->|style: display: inline-block;...| computed_style_button_reset[Computed Style]
+
+    style dot_container fill:#4c8df6,stroke:#000000,color:black,stroke-width:1px
+    style dot_content fill:#e2b0e4,stroke:black,color:black,stroke-width:1px
+    style label fill:#e2b0e4,stroke:black,color:black,stroke-width:1px
+    style input_h_with_transition fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style span fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style button_h_animate fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+    style button_h_reset fill:#a4e6b2,stroke:black,color:black,stroke-width:1px
+
+`} />
+
+#### Computed Style
+
+The **computed style** is the final style that gets applied to each element, taking into account styles from various sources.
+
+1. **Multiple Sources of Style**: Styles can come from several places, including:
+   - **Inline Styles**: Styles defined directly on the elements via the `style` attribute.
+   - **Internal Styles**: Styles defined within `<style>` tags in the HTML document.
+   - **External Stylesheets**: Styles applied via linked CSS files.
+   - **User Agent Styles**: Default styles provided by the browser if no other styles are specified.
+
+<DemoComputedStyle />
+
+2. **Order of Style Overriding**: When multiple styles are applicable to an element, CSS follows a specific order to determine which style takes precedence:
+   - **Inline Styles** have the highest specificity. They override styles from stylesheets.
+   - **Internal CSS** comes next. It overrides any styles from external stylesheets.
+   - **External Stylesheets** have lower specificity than inline and internal styles but can still affect styles depending on the order of the linked stylesheets.
+   - **User Agent Styles** are the default styles applied by the browser and have the lowest precedence.
+
+3. **Cascade and Specificity**: In cases where multiple rules could apply, the **cascade** determines the applicable style based on specificity and importance. Further details of this topic would be discuss in a separate topic, since it's long and complex. Or you could learn more in the [document of mozilla](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Specificity)
+
+### Final Computed Styles
+
+The computed style contains all the resolved values of CSS properties necessary for rendering, ensuring that each element appears as designed on the screen. By understanding the sources and overriding logic of styles, developers can create more predictable and maintainable CSS in their projects.
+
+## Layout
+
+Before the paint step, the layout process takes place. Layout is the step where
+
+> the browser **calculates the size and position of every visible element** in the rendering tree.
+
+It determines where elements will appear on the screen based on their dimensions, styles, and the structure defined by the HTML and CSS.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout example</title>
+    <style>
+      body {
+        margin: 0; /* Resetting margin for body */
+        padding: 0; /* Resetting padding for body */
+        background-color: lightyellow;
+      }
+      .outer {
+        width: 70%;
+        background-color: lightgrey;
+        padding: 10px;
+        position: relative; /* This sets the positioning context */
+      }
+      .inner {
+        width: 50%;
+        padding: 10px;
+        background-color: lightblue;
+        position: absolute; /* This positions to outer element */
+        top: 20px; /* 20 pixels from the top of the outer div */
+        left: 25%; /* Positioned to the center of the outer div */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="inner">Hello world!</div>
+    </div>
+  </body>
+</html>
+```
+
+- **Outer Element (`.outer`)**:
+  - The `.outer` div is assigned a width of **70%** of its containing block (the body), and it has a background color of light grey.
+  - The positioning is set to `relative`, which means that it will be placed according to where it naturally fits in the document flow.
+- **Inner Element (`.inner`)**:
+  - The `.inner` div has a width of **50%** of its parent (`.outer`), and its background color is light blue.
+  - It is positioned using `absolute`, which means it will be positioned relative to the nearest positioned ancestor (in this case, the `.outer` div).
+  - The `top: 20px;` property means it will be positioned 20 pixels from the top of the `.outer` div.
+  - The `left: 25%;` property positions it **25%** from the left side of the `.outer` div, centering it within this outer div.
+
+After determining the positions of both elements, the browser prepares to paint the pixels on the screen. The `.outer` div will be displayed first, followed by the `.inner` div at the calculated position.
+
+## Paint
+
+In the paint step, the browser takes the information generated from the rendering tree, including the positions, dimensions, and order of appearance of each node. It converts it into drawing instructions, which are then used by the graphics library to render pixel.
+
+Once textures are produced from the GPU, the browser aggregates them into a Frame, and this frame submitted to the user's display!
+
+## Conclusions
+By understanding the entire rendering pipeline, developers can optimize performance and improve the user experience on the web.
