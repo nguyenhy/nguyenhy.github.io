@@ -73,6 +73,9 @@ const posts = (await getCollection("blog")).sort(
                 margin: 0;
                 color: rgb(var(--gray));
             }
+            .date-updated {
+                font-size: 1rem;
+            }
             ul li a:hover h4,
             ul li a:hover .date {
                 color: rgb(var(--accent));
@@ -129,6 +132,21 @@ const posts = (await getCollection("blog")).sort(
                                                 <FormattedDate
                                                     date={post.data.pubDate}
                                                 />
+                                                {post.data.updatedDate && (
+                                                    <span class="date-updated">
+                                                        (
+                                                        <strong>
+                                                            Last updated on
+                                                        </strong>
+                                                        <FormattedDate
+                                                            date={
+                                                                post.data
+                                                                    .updatedDate
+                                                            }
+                                                        />
+                                                        )
+                                                    </span>
+                                                )}
                                             </p>
                                         </a>
                                     </li>
