@@ -2,6 +2,8 @@
 import { Code } from "astro-expressive-code/components";
 import { randStr } from "../utils/id";
 import { combiner } from "./web";
+import UITabs from "../UITabs.astro";
+import type { Tab } from "../UITabs.types";
 
 interface Props {
     html?: string;
@@ -12,55 +14,79 @@ interface Props {
     jsFileName?: string;
 }
 
+const tabs: Tab[] = [];
+
 const cid = randStr("o--playground-");
 const props = Astro.props;
+
+if (props.html) {
+    tabs.push({
+        id: "html",
+        label: "HTML",
+        attrs: {
+            "data-lang": "html",
+        },
+        content: {
+            tag: Code,
+            attrs: {
+                lang: "html",
+                code: props.html,
+                title: props.htmlFileName,
+            },
+        },
+    });
+}
+
+if (props.css) {
+    tabs.push({
+        id: "css",
+        label: "CSS",
+        attrs: {
+            "data-lang": "css",
+        },
+        content: {
+            tag: Code,
+            attrs: {
+                lang: "css",
+                code: props.css,
+                title: props.cssFileName,
+            },
+        },
+    });
+}
+
+if (props.js) {
+    tabs.push({
+        id: "js",
+        label: "JS",
+        attrs: {
+            "data-lang": "js",
+        },
+        content: {
+            tag: Code,
+            attrs: {
+                lang: "javascript",
+                code: props.js,
+                title: props.jsFileName,
+            },
+        },
+    });
+}
+
+tabs.push({
+    id: "preview",
+    label: "Preview",
+    content: {
+        tag: "div",
+        attrs: {
+            class: "o--tab_content o--playground_preview m--preview",
+        },
+    },
+});
 ---
 
 <astro-playground class="o--playground" data-cid={cid}>
-    <div class="o--tab_navs">
-        <button data-lang="html" class="o--tab_nav m--html">HTML</button>
-        <button data-lang="css" class="o--tab_nav m--css">CSS</button>
-        <button data-lang="js" class="o--tab_nav m--js">JS</button>
-        <button data-lang="preview" class="o--tab_nav m--preview"
-            >Preview</button
-        >
-    </div>
-    <div class="o--tab_contents">
-        <div class="o--tab_content o--playground_code m--html">
-            {
-                props.html && (
-                    <Code
-                        lang="html"
-                        code={props.html}
-                        title={props.htmlFileName}
-                    />
-                )
-            }
-        </div>
-        <div class="o--tab_content o--playground_code m--css">
-            {
-                props.css && (
-                    <Code
-                        lang="css"
-                        code={props.css}
-                        title={props.cssFileName}
-                    />
-                )
-            }
-        </div>
-        <div class="o--tab_content o--playground_code m--js">
-            {
-                props.js && (
-                    <Code
-                        lang="javascript"
-                        code={props.js}
-                        title={props.jsFileName}
-                    />
-                )
-            }
-        </div>
-        <div class="o--tab_content o--playground_preview m--preview"></div>
-    </div>
+    <UITabs tabs={tabs} />
 </astro-playground>
 
 <script is:inline define:vars={{ cid, props }} data-cid={cid}>
@@ -98,37 +124,10 @@ const props = Astro.props;
 
             const $parent = iframe.parentNode;
             if ($parent && $parent instanceof Element) {
-                iframe.height = $parent.scrollHeight.toString();
+                if ($parent.scrollHeight > 0) {
+                    iframe.height = $parent.scrollHeight.toString();
+                }
             }
-
-            let grid = 1;
-            this.setAttribute("data-tab-preview", "");
-            if (html) {
-                this.setAttribute("data-tab-html", "");
-                grid += 1;
-            }
-            if (css) {
-                this.setAttribute("data-tab-css", "");
-                grid += 1;
-            }
-            if (js) {
-                this.setAttribute("data-tab-js", "");
-                grid += 1;
-            }
-            this.setAttribute("data-grid", grid.toString());
-            this.setAttribute("data-active_tab", "preview");
-            this.setAttribute("data-layout", "grid");
-
-            const $btns =
-                this.querySelectorAll<HTMLButtonElement>(".o--tab_nav");
-            $btns.forEach((item) => {
-                item.addEventListener("click", () => {
-                    this.setAttribute(
-                        "data-active_tab",
-                        item.dataset.lang || "",
-                    );
-                });
-            });
         }
     }
 
@@ -140,123 +139,7 @@ const props = Astro.props;
         border: 1px solid black;
         border-radius: 4px;
         display: block;
-    }
 
-    .o--playground {
-        &[data-tab-html] {
-            .o--tab_nav.m--html {
-                display: block;
-            }
-        }
-        &[data-tab-css] {
-            .o--tab_nav.m--css {
-                display: block;
-            }
-        }
-        &[data-tab-js] {
-            .o--tab_nav.m--js {
-                display: block;
-            }
-        }
-        &[data-tab-preview] {
-            .o--tab_nav.m--preview {
-                display: block;
-            }
-        }
-
-        &[data-layout="tab"] {
-            .o--tab_content {
-                display: none;
-            }
-            &[data-tab-html] {
-                &[data-active_tab="html"] {
-                    .o--tab_content.m--html {
-                        display: block;
-                    }
-                }
-            }
-            &[data-tab-css] {
-                &[data-active_tab="css"] {
-                    .o--tab_content.m--css {
-                        display: block;
-                    }
-                }
-            }
-            &[data-tab-js] {
-                &[data-active_tab="js"] {
-                    .o--tab_content.m--js {
-                        display: block;
-                    }
-                }
-            }
-            &[data-tab-preview] {
-                &[data-active_tab="preview"] {
-                    .o--tab_content.m--preview {
-                        display: block;
-                    }
-                }
-            }
-        }
-        &[data-layout="grid"] {
-            .o--tab_contents {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 1fr 1fr;
-                max-height: 50vh;
-            }
-            .o--tab_content {
-                overflow: auto;
-            }
-            &[data-grid="1"] {
-                .o--tab_contents {
-                    grid-template-areas: "preview preview" "preview preview";
-                }
-            }
-            &[data-grid="2"] {
-                &[data-tab-html] {
-                    .o--tab_contents {
-                        grid-template-areas: "html preview" "html preview";
-                    }
-                }
-                &[data-tab-css] {
-                    .o--tab_contents {
-                        grid-template-areas: "css preview" "css preview";
-                    }
-                }
-                &[data-tab-js] {
-                    .o--tab_contents {
-                        grid-template-areas: "js preview" "js preview";
-                    }
-                }
-            }
-            &[data-grid="3"] {
-                &[data-tab-html][data-tab-css] {
-                    .o--tab_contents {
-                        grid-template-areas: "html preview" "css preview";
-                    }
-                }
-                &[data-tab-html][data-tab-js] {
-                    .o--tab_contents {
-                        grid-template-areas: "html preview" "js preview";
-                    }
-                }
-                &[data-tab-css][data-tab-js] {
-                    .o--tab_contents {
-                        grid-template-areas: "css preview" "js preview";
-                    }
-                }
-            }
-            &[data-grid="4"] {
-                .o--tab_contents {
-                    grid-template-areas: "html css" "js preview";
-                }
-            }
-        }
-        &:not([data-layout]) {
-            display: none;
-        }
-    }
-    .o--playground_code {
         :global(.expressive-code) {
             height: 100%;
         }
@@ -268,39 +151,7 @@ const props = Astro.props;
             height: 100%;
             border-radius: 0;
         }
-    }
-    .o--tab_navs {
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-        border-bottom: 1px solid black;
-    }
-    .o--tab_nav {
-        padding: 4px;
-        border: 1px solid black;
-        display: none;
-        border: none;
-    }
-    .o--tab_contents {
-    }
-    .o--tab_content {
-        &:empty {
-            display: none !important;
-        }
-        &.m--html {
-            grid-area: html;
-        }
-        &.m--css {
-            grid-area: css;
-        }
-        &.m--js {
-            grid-area: js;
-        }
-        &.m--preview {
-            grid-area: preview;
-        }
-    }
-    .o--playground_preview {
+
         :global(iframe) {
             width: 100%;
             height: 100%;
