@@ -38,6 +38,7 @@ read the content of a blog post and output a final DALL·E-style prompt to gener
   - Focus visually on {keywords} as the central, dominant elements of the   composition, not background details.
   - The main subject should be instantly recognizable and fill most of the frame,   clearly conveying the concept even without any text.
   - If using reallife, implement work flow, make sure the order and the components is correct
+  - If using code, make sure it correct syntax, valid context and result
   - Do not include:
     - Any real-world, copyrighted, or licensed characters.
     - Any cartoon, mascot, or character that resembles known intellectual property
