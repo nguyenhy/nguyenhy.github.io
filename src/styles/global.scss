@@ -1,8 +1,11 @@
+@use "./elements" as elements;
 @reference "./global.css";
 
 :root {
-  --accent: #2337ff;
-  --accent-dark: #000d8a;
+  --root: rgb(17 107 22);
+  --root--rgb: 17, 107, 22;
+  --accent: rgba(var(--root--rgb), 0.5);
+  --accent-dark: rgba(var(--root--rgb), 1);
   --black: 15, 18, 25;
   --gray: 96, 115, 159;
   --gray-light: 229, 233, 240;
@@ -169,4 +172,11 @@ hr {
   clip-path: inset(50%);
   /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
+}
+.expressive-code {
+  @apply mb-2;
+}
+
+:focus-visible {
+  @include elements.global_focus_visible;
 }
