@@ -1,3 +1,4 @@
+@use "./elements" as elements;
 @reference "./global.css";
 
 :root {
@@ -175,4 +176,8 @@ hr {
 
 .expressive-code {
   @apply mb-2;
+}
+
+:focus-visible {
+  @include elements.global_focus_visible;
 }
