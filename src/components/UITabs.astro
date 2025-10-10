@@ -1,0 +1,139 @@
+---
+import { randStr } from "./utils/id";
+import type { Tab } from "./UITabs.types";
+
+interface Props {
+    tabs: Tab[];
+    activeId?: string;
+}
+
+const cid = randStr();
+const { tabs, activeId: rawActivateId, ...others } = Astro.props;
+const activeId = rawActivateId || (tabs.length ? tabs[0].id : "");
+const props: Props = { tabs, activeId };
+---
+
+<astro-uitabs class="o--ui_tabs" data-cid={cid}>
+    <div class="tabs" role="tablist" aria-label="Content Tabs" {...others}>
+        {
+            tabs.map((tab) => (
+                <button
+                    type="button"
+                    role="tab"
+                    id={`uitabs_${cid}-tab-${tab.id}`}
+                    aria-controls={`uitabs_${cid}-panel-${tab.id}`}
+                    aria-selected={tab.id === activeId}
+                    tabindex="0"
+                    class:list={[
+                        "px-4 py-2 border-b-2 transition",
+                        tab.id === activeId
+                            ? "border-blue-600 text-blue-600 font-semibold"
+                            : "border-transparent text-gray-600 hover:text-blue-600",
+                    ]}
+                >
+                    {tab.label}
+                </button>
+            ))
+        }
+    </div>
+
+    {
+        tabs.map((tab) => (
+            <div
+                id={`uitabs_${cid}-panel-${tab.id}`}
+                role="tabpanel"
+                tabindex="0"
+                aria-labelledby={`uitabs_${cid}-tab-${tab.id}`}
+                hidden={tab.id !== activeId}
+                class="py-4"
+            >
+                <tab.content.tag {...tab.content.attrs} />
+            </div>
+        ))
+    }
+</astro-uitabs>
+
+<script is:inline define:vars={{ cid, props }} data-cid={cid}>
+    window.$astroProps = window.$astroProps || {};
+    window.$astroProps[cid] = props;
+
+    const $script = document.querySelector(`script[data-cid="${cid}"]`);
+    if ($script) {
+        $script.remove();
+    }
+</script>
+
+<script></script>
+
+<script>
+    class AstroPlayground extends HTMLElement {
+        connectedCallback() {
+            const tablist =
+                this.querySelector<HTMLDivElement>('[role="tablist"]')!;
+            const tabs =
+                tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+            const tabpanels =
+                tablist.querySelectorAll<HTMLDivElement>('[role="tabpanel"]');
+
+            tabs.forEach((tab) => {
+                tab.addEventListener("click", () =>
+                    this.activateTab(tabs, tab),
+                );
+            });
+        }
+
+        activateTab(
+            tabs: NodeListOf<HTMLButtonElement>,
+            tab: HTMLButtonElement,
+        ) {
+            tabs.forEach((item) => {
+                const isActive = item === tab;
+                const ariaControls = item.getAttribute("aria-controls");
+
+                item.setAttribute("aria-selected", isActive.toString());
+                const panel = ariaControls
+                    ? document.getElementById(ariaControls)
+                    : null;
+                if (panel) {
+                    panel.hidden = !isActive;
+                }
+            });
+        }
+    }
+    customElements.define("astro-uitabs", AstroPlayground);
+</script>
+
+<style>
+    [role="tablist"] {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        border-bottom: 1px solid black;
+        padding: 4px;
+    }
+    [role="tab"] {
+        padding: 4px;
+        min-width: 60px;
+
+        background-color: lightgrey;
+        color: black;
+        &[aria-selected="true"] {
+            background-color: grey;
+            color: white;
+        }
+
+        border: 1px solid black;
+        &:first-child {
+            border-radius: 4px 0 0 4px;
+            border-right: none;
+        }
+        &:last-child {
+            border-radius: 0 4px 4px 0;
+            border-left: none;
+        }
+    }
+
+    [role="tabpanel"] {
+        outline: none;
+    }
+</style>

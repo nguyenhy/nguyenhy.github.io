@@ -174,10 +174,6 @@ hr {
   white-space: nowrap;
 }
 
-.expressive-code {
-  @apply mb-2;
-}
-
 :focus-visible {
   @include elements.global_focus_visible;
 }
