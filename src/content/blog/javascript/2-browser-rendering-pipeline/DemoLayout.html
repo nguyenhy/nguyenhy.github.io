@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layout example</title>
+    <style>
+      body {
+        margin: 0; /* Resetting margin for body */
+        padding: 0; /* Resetting padding for body */
+        background-color: lightyellow;
+      }
+      .outer {
+        width: 70%;
+        background-color: lightgrey;
+        padding: 10px;
+        position: relative; /* This sets the positioning context */
+      }
+      .outer::before {
+        content: "outer";
+      }
+      .inner {
+        width: 50%;
+        padding: 10px;
+        background-color: lightblue;
+        position: fixed; /* This positions to outer element */
+        top: 20px; /* 20 pixels from the top of the outer div */
+        left: 25%; /* Positioned to the center of the outer div */
+      }
+      .inner::before {
+        content: "inner";
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="inner"></div>
+    </div>
+  </body>
+</html>
