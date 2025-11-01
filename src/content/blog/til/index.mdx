@@ -1,0 +1,138 @@
+---
+title: "Today I Learned"
+description: "Today I Learned"
+pubDate: "Nov 01 2025"
+updatedDate: "Nov 01 2025"
+heroImage: "./thumb.png"
+sticky: true
+---
+
+import WebPlayground from "../../../components/playground/WebPlayground.astro";
+
+# Introduction
+I’ve noticed that the longer I write code, the more I bump into things I **"already know"** but never really understood.
+They work, I use them, and then one day a tiny behavior or detail makes me stop and dig deeper. Most of those discoveries never make it past a browser tab or a passing thought — which is a waste, because that’s where the real learning hides.
+
+**"Today I Learned"** doesn't always mean brand new. Sometimes it's something I've used for years but never stopped to read the spec, question the behavior, or write it down properly. This series is my way of slowing down just enough to capture those quiet **"oh, that's why"** moments — *not because they're groundbreaking, but because they're worth remembering*.
+
+And of course, not everything here comes from experience. Some posts start with me realizing I actually don’t know how something works, then digging until it finally makes sense — and writing it down before I forget again.
+
+## Day 0
+
+1. [CSS] [`accent-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/accent-color)
+
+<WebPlayground
+  html={`
+  <div>
+    <div>
+      <input type="checkbox" checked />
+    </div>
+    <div>
+      <input type="radio" checked />
+    </div>
+    <div>
+      <input type="range" />
+    </div>
+    <div>
+      <progress></progress>
+    </div>
+  </div>
+`}
+  css={`
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="range"],
+    progress {
+      accent-color: #ff5a00;
+    }
+  `}
+/>
+
+Browsers that support `accent-color` currently apply it to the following HTML elements:
+
+- `<input type="checkbox">`
+- `<input type="radio">`
+- `<input type="range">`
+- `<progress>`
+
+2. [CSS] `:active`, `:focus`, `:focus-visible`, `:focus-within`
+
+<WebPlayground
+  html={`
+  <div>
+    <fieldset>
+      <legend>:focus-within</legend>
+      <button>click here then press <strong>Tab</strong></button>
+      <div class="focus-within">
+        <input type="checkbox" />
+        <label>focus-within</label>
+      </div>
+    </fieldset>
+  </div>
+`}
+  css={`
+  .focus-within:focus-within {
+    font-weight: bold;
+  }
+  .focus-within:not(:focus-within) label:after {
+    content: ': false'
+  }
+  .focus-within:focus-within label:after {
+    content: ': true'
+  }
+`}
+/>
+
+- The [:focus-within](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within) CSS pseudo-class matches an element **if the element or any of its descendants are focused**. In other words, it represents an element that is itself matched by the :focus pseudo-class or has a descendant that is matched by :focus. (This includes descendants in shadow trees.)
+
+<WebPlayground
+  html={`
+  <div>
+    <fieldset>
+      <legend>:active, :focus, :focus-visible</legend>
+      <div class="pseudo_input">
+        <input type="text" class="pseudo_input-input" placeholder="try me"/>
+        <span class="pseudo_input-span pseudo_input-span--active">active</span>
+        <span class="pseudo_input-span pseudo_input-span--focus">focus</span>
+        <span class="pseudo_input-span pseudo_input-span--focus-visible">focus-visible</span>
+      </div>
+      <div class="pseudo_btn">
+        <button class="pseudo_btn-btn">click or tab me</button>
+        <span class="pseudo_btn-span pseudo_btn-span--active">active</span>
+        <span class="pseudo_btn-span pseudo_btn-span--focus">focus</span>
+        <span class="pseudo_btn-span pseudo_btn-span--focus-visible">focus-visible</span>
+      </div>
+    </fieldset>
+  </div>
+`}
+  css={`
+  .pseudo_input-span{
+    display: none;
+  }
+  .pseudo_input-input:active ~ .pseudo_input-span--active,
+  .pseudo_input-input:focus ~ .pseudo_input-span--focus,
+  .pseudo_input-input:focus-visible ~ .pseudo_input-span--focus-visible{
+    display:inline-block
+  }
+
+  .pseudo_btn-span {
+    display: none;
+  }
+  .pseudo_btn-btn:active ~ .pseudo_btn-span--active,
+  .pseudo_btn-btn:focus ~ .pseudo_btn-span--focus,
+  .pseudo_btn-btn:focus-visible ~ .pseudo_btn-span--focus-visible {
+    display:inline-block
+  }
+`}
+/>
+
+
+- The [`:active`](https://developer.mozilla.org/en-US/docs/Web/CSS/:active) CSS pseudo-class represents an element (such as a button) that is being activated by the user. When using a mouse, "activation" typically starts when the user presses down the primary mouse button.
+
+- The [`:focus`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus) CSS pseudo-class represents an element (such as a form input) that has received focus. It is generally triggered when the user clicks or taps on an element or selects it with the keyboard's <kbk>kbk>Tab</kbk> key.
+
+- The [`:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) pseudo-class applies while an element matches the `:focus` pseudo-class and the UA (User Agent) determines via heuristics that the focus should be made evident on the element. (Many browsers show a "focus ring" by default in this case.)
+
+- The difference between `:focus` and `:focus-visible` lies in intent, not capability.
+Both target elements that currently have focus, but `:focus-visible` activates only when the browser determines the **user needs a visible cue—usually** when navigating with a **keyboard** or **assistive technology**.
+In contrast, `:focus` triggers for **any focused element**, regardless of how it was reached. This means `:focus` is best for behavior and logic (like showing a dropdown when an input gains focus), while `:focus-visible` is for visual indicators that help non-mouse users track their position without cluttering the interface for pointer

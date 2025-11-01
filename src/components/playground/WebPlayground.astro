@@ -12,6 +12,7 @@ interface Props {
     cssFileName?: string;
     js?: string;
     jsFileName?: string;
+    activeTab?: "html" | "css" | "js" | "preview";
 }
 
 const tabs: Tab[] = [];
@@ -83,10 +84,15 @@ tabs.push({
         },
     },
 });
+
+const activeTab =
+    props.activeTab && !tabs.find((item) => item.id === props.activeTab)
+        ? props.activeTab
+        : "preview";
 ---
 
 <astro-playground class="o--playground" data-cid={cid}>
-    <UITabs tabs={tabs} />
+    <UITabs tabs={tabs} activeId={activeTab} />
 </astro-playground>
 
 <script is:inline define:vars={{ cid, props }} data-cid={cid}>

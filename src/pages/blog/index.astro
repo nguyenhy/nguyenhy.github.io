@@ -9,9 +9,28 @@ import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 
-const posts = (await getCollection("blog")).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const blogs = await getCollection("blog");
+const stickies: typeof blogs = [];
+const normals: typeof blogs = [];
+
+for (let index = 0; index < blogs.length; index++) {
+    const element = blogs[index];
+    if (element.data.hidden) {
+        continue;
+    }
+    if (element.data.sticky) {
+        stickies.push(element);
+    } else {
+        normals.push(element);
+    }
+}
+
+stickies.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+normals.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const [newest, ...others] = normals;
+
+const posts: typeof blogs = [newest, ...stickies, ...others];
 ---
 
 <!doctype html>
@@ -25,56 +44,51 @@ const posts = (await getCollection("blog")).sort(
             <section>
                 <ul>
                     {
-                        posts.map(
-                            (post) =>
-                                !post.data.hidden && (
-                                    <li
-                                        class={
-                                            post.data.fullWidth
-                                                ? "full-width"
-                                                : ""
-                                        }
-                                    >
-                                        <a href={`/blog/${post.id}/`}>
-                                            {post.data.heroImage && (
-                                                <div class="image">
-                                                    <Image
-                                                        width={720}
-                                                        height={360}
-                                                        src={
-                                                            post.data.heroImage
-                                                        }
-                                                        alt=""
-                                                    />
-                                                </div>
-                                            )}
-                                            <h4 class="title">
-                                                {post.data.title}
-                                            </h4>
-                                            <p class="date">
+                        posts.map((post) => (
+                            <li class={post.data.fullWidth ? "full-width" : ""}>
+                                <a href={`/blog/${post.id}/`}>
+                                    {post.data.heroImage && (
+                                        <div class="image">
+                                            <Image
+                                                width={720}
+                                                height={360}
+                                                src={post.data.heroImage}
+                                                alt=""
+                                            />
+                                        </div>
+                                    )}
+                                    <h4 class="title">
+                                        {post.data.sticky && (
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                fill="#000000"
+                                                viewBox="0 0 256 256"
+                                            >
+                                                <path d="M235.33,104l-53.47,53.65c4.56,12.67,6.45,33.89-13.19,60A15.93,15.93,0,0,1,157,224c-.38,0-.75,0-1.13,0a16,16,0,0,1-11.32-4.69L96.29,171,53.66,213.66a8,8,0,0,1-11.32-11.32L85,159.71l-48.3-48.3A16,16,0,0,1,38,87.63c25.42-20.51,49.75-16.48,60.4-13.14L152,20.7a16,16,0,0,1,22.63,0l60.69,60.68A16,16,0,0,1,235.33,104Z" />
+                                            </svg>
+                                        )}
+                                        <span>{post.data.title}</span>
+                                    </h4>
+                                    <p class="date">
+                                        <FormattedDate
+                                            date={post.data.pubDate}
+                                        />
+                                        {post.data.updatedDate && (
+                                            <span class="date-updated">
+                                                (
+                                                <strong>Last updated on</strong>
                                                 <FormattedDate
-                                                    date={post.data.pubDate}
+                                                    date={post.data.updatedDate}
                                                 />
-                                                {post.data.updatedDate && (
-                                                    <span class="date-updated">
-                                                        (
-                                                        <strong>
-                                                            Last updated on
-                                                        </strong>
-                                                        <FormattedDate
-                                                            date={
-                                                                post.data
-                                                                    .updatedDate
-                                                            }
-                                                        />
-                                                        )
-                                                    </span>
-                                                )}
-                                            </p>
-                                        </a>
-                                    </li>
-                                ),
-                        )
+                                                )
+                                            </span>
+                                        )}
+                                    </p>
+                                </a>
+                            </li>
+                        ))
                     }
                 </ul>
             </section>
@@ -194,6 +208,10 @@ const posts = (await getCollection("blog")).sort(
                 line-height: 1;
                 padding-left: 10px;
                 padding-right: 10px;
+
+                svg {
+                    fill: rgba(var(--root--rgb), 0.7);
+                }
             }
             .date {
                 margin: 0;

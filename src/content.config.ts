@@ -21,6 +21,10 @@ const blog = defineCollection({
        * hidden item in list blogs
        */
       hidden: z.boolean().optional(),
+      /**
+       * hidden item in list blogs
+       */
+      sticky: z.boolean().optional(),
     }),
 });
 
