@@ -2,7 +2,7 @@
   "name": "hyn",
   "description": "Personal blog to explore fresh insights and elevate your tech skills daily with innovative articles and guidance",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "dev": "astro dev --force",
     "build": "astro build --force",

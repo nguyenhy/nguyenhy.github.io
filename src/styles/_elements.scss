@@ -1,0 +1,15 @@
+@mixin global_focus_visible {
+  outline-width: 2px;
+  outline-color: transparent;
+  outline-style: dashed;
+  outline-offset: 0px;
+  will-change: outline-offset, outline-color;
+  transition:
+    outline-color 50ms ease,
+    outline-offset 50ms ease;
+
+  &:focus-visible {
+    outline-offset: 2px;
+    outline-color: rgba(var(--root--rgb), 0.7);
+  }
+}
