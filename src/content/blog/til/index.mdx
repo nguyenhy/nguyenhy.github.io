@@ -2,12 +2,13 @@
 title: "Today I Learned"
 description: "Today I Learned"
 pubDate: "Nov 01 2025"
-updatedDate: "Nov 01 2025"
+updatedDate: "Nov 04 2025"
 heroImage: "./thumb.png"
 sticky: true
 ---
 
 import WebPlayground from "../../../components/playground/WebPlayground.astro";
+import Mermaid from "../../../components/Mermaid.astro";
 
 # Introduction
 I’ve noticed that the longer I write code, the more I bump into things I **"already know"** but never really understood.
@@ -17,7 +18,7 @@ They work, I use them, and then one day a tiny behavior or detail makes me stop 
 
 And of course, not everything here comes from experience. Some posts start with me realizing I actually don’t know how something works, then digging until it finally makes sense — and writing it down before I forget again.
 
-## Day 0
+## Day 0 - Simple css that anyone know
 
 1. [CSS] [`accent-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/accent-color)
 
@@ -136,3 +137,132 @@ Browsers that support `accent-color` currently apply it to the following HTML el
 - The difference between `:focus` and `:focus-visible` lies in intent, not capability.
 Both target elements that currently have focus, but `:focus-visible` activates only when the browser determines the **user needs a visible cue—usually** when navigating with a **keyboard** or **assistive technology**.
 In contrast, `:focus` triggers for **any focused element**, regardless of how it was reached. This means `:focus` is best for behavior and logic (like showing a dropdown when an input gains focus), while `:focus-visible` is for visual indicators that help non-mouse users track their position without cluttering the interface for pointer
+
+## Day 1 - TCP
+
+### Key TCP Concepts [(2.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-tcp-concepts)
+- TCP provides a reliable, in-order, byte-stream service to applications.
+
+- The application byte-stream is conveyed over the network via TCP segments, with each TCP segment sent as an Internet Protocol (IP) datagram.
+
+- TCP reliability consists of detecting packet losses (via sequence numbers) and errors (via per-segment checksums), as well as correction via retransmission.
+
+- TCP supports unicast delivery of data. There are anycast applications that can successfully use TCP without modifications, though there is some risk of instability due to changes of lower-layer forwarding behavior [[46]](https://datatracker.ietf.org/doc/html/rfc7094).
+
+- TCP is connection oriented, though it does not inherently include a liveness detection capability.
+
+- Data flow is supported bidirectionally over TCP connections, though applications are free to send data only unidirectionally, if they so choose.
+
+- TCP uses port numbers to identify application services and to multiplex distinct flows between hosts.
+
+
+### Key Connection State Variables [(3.3.1)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-connection-state-variab)
+Every active TCP connection has one TCB, which is a record in memory holding all the current state for that connection.
+It includes:
+- Local + remote IP + port
+- Buffers (send, receive, retransmit)
+- Sequence number tracking (the heart of reliability)
+- Control flags (urgent data, window size, etc.)
+When the connection closes, the TCB is destroyed — so no TCB means no connection.
+
+TCB has 3 group of variable
+- **Send-side variables [(SND.*)](https://datatracker.ietf.org/doc/html/rfc9293#name-send-sequence-variables)**:
+These describe what we’ve sent, what’s been ACKed, and what we can send next.
+In another words, outgoing (transmit) side of the state machine.
+- **Receive-side variables [(RCV.*)](https://datatracker.ietf.org/doc/html/rfc9293#name-receive-sequence-variables)**:
+These track what we’ve received, what we’re expecting next, and how much room we have left.
+This group governs incoming data handling.
+- **Current Segment variables [(SEG.*)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables)**:
+When a new TCP segment arrives, the implementation temporarily extracts its key header fields into these variables.
+These describe the current incoming packet during processing — they’re ephemeral, updated per segment.
+
+### State Machine Overview [(3.3.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables)
+
+A connection progresses through a series of states during its lifetime.
+The states are:
+1. Connection establishment (the 3-way handshake)
+```table showLineNumbers=false
+| State            | Who    | Meaning                                                        |
+| ---------------- | ------ | -------------------------------------------------------------- |
+| **LISTEN**       | server | Waiting for someone to knock (a SYN).                          |
+| **SYN-SENT**     | client | Sent SYN, waiting for SYN+ACK from the server.                 |
+| **SYN-RECEIVED** | server | Got SYN, sent SYN+ACK, now waiting for the client’s final ACK. |
+| **ESTABLISHED**  | both   | 3-way handshake complete — ready to exchange data.             |
+```
+
+
+2. Data transfer
+```table showLineNumbers=false
+| State           | Meaning                                                 |
+| --------------- | ------------------------------------------------------- |
+| **ESTABLISHED** | Active communication. Data can flow in both directions. |
+```
+
+3. Connection teardown (graceful close)
+```table showLineNumbers=false
+| State          | Who            | Meaning                                                                                          |
+| -------------- | -------------- | ------------------------------------------------------------------------------------------------ |
+| **FIN-WAIT-1** | active closer  | Sent FIN; waiting for ACK (and possibly FIN from the other side).                                |
+| **FIN-WAIT-2** | active closer  | Got ACK for our FIN; now just waiting for the peer’s FIN.                                        |
+| **CLOSE-WAIT** | passive closer | Got peer’s FIN; waiting for the app to call `close()`.                                           |
+| **CLOSING**    | rare           | Both sides sent FIN at nearly the same time; waiting for ACK.                                    |
+| **LAST-ACK**   | passive closer | Sent our FIN after receiving peer’s FIN; waiting for ACK of our FIN.                             |
+| **TIME-WAIT**  | active closer  | After both sides done, wait 2×MSL to ensure all stray packets have died before reusing the port. |
+| **CLOSED**     | —              | TCB removed, connection fully gone.                                                              |
+```
+
+Transitions happen because of events. These fall into three categories:
+```table showLineNumbers=false
+| Event Type            | Examples                                                                    |
+| --------------------- | --------------------------------------------------------------------------- |
+| **User actions**      | `OPEN` (connect), `SEND`, `RECEIVE`, `CLOSE`, `ABORT`, `STATUS`.            |
+| **Incoming segments** | TCP flags like `SYN`, `ACK`, `FIN`, or `RST`.                               |
+| **Timers / timeouts** | Retransmission timeout, delayed ACK timeout, 2×MSL timeout (for TIME-WAIT). |
+```
+
+
+<Mermaid code={`
+sequenceDiagram
+    participant Client
+    participant Server
+
+    %% --- CONNECTION SETUP ---
+    Note over Client,Server: Initial state: CLOSED (both sides)
+
+    Client->>Server: SYN
+    Note over Client: State: CLOSED → SYN-SENT
+    Note over Server: State: CLOSED → LISTEN → SYN-RECEIVED
+
+    Server-->>Client: SYN&#43;ACK
+    Note over Server: Sends SYN&#43;ACK, waiting for ACK
+
+    Client->>Server: ACK
+    Note over Client: State: SYN-SENT → ESTABLISHED
+    Note over Server: State: SYN-RECEIVED → ESTABLISHED
+
+    Note over Client,Server: Connection established — both sides in ESTABLISHED
+
+    %% --- CONNECTION TERMINATION ---
+    Client->>Server: FIN
+    Note over Client: State: ESTABLISHED → FIN-WAIT-1
+    Note over Server: State: ESTABLISHED → CLOSE-WAIT
+
+    Server-->>Client: ACK
+    Note over Client: State: FIN-WAIT-1 → FIN-WAIT-2
+    Note over Server: Still in CLOSE-WAIT
+
+    Server->>Client: FIN
+    Note over Server: State: CLOSE-WAIT → LAST-ACK
+
+    Client-->>Server: ACK
+    Note over Client: State: FIN-WAIT-2 → TIME-WAIT → CLOSED (after timeout)
+    Note over Server: State: LAST-ACK → CLOSED
+
+    Note over Client,Server: Connection fully terminated — both sides CLOSED
+`} />
+
+## Day 2 - TCP (continue)
+- Sequence Numbers [(3.4)](https://datatracker.ietf.org/doc/html/rfc9293#name-sequence-numbers)
+- Establishing a Connection [(3.5)](https://datatracker.ietf.org/doc/html/rfc9293#name-establishing-a-connection)
+- Closing a Connection [(3.6)](https://datatracker.ietf.org/doc/html/rfc9293#name-closing-a-connection)
+- Segmentation [(3.7)](https://datatracker.ietf.org/doc/html/rfc9293#name-segmentation)
