@@ -140,7 +140,7 @@ display:inline-block
 
 ## Day 1
 
-### TCP - Key TCP Concepts [(2.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-tcp-concepts)
+### [(2.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-tcp-concepts) TCP - Key TCP Concepts
 
 - TCP provides a reliable, in-order, byte-stream service to applications.
 
@@ -156,7 +156,7 @@ display:inline-block
 
 - TCP uses port numbers to identify application services and to multiplex distinct flows between hosts.
 
-### TCP - Key Connection State Variables [(3.3.1)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-connection-state-variab)
+### [(3.3.1)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-connection-state-variab) TCP - Key Connection State Variables
 
 Every active TCP connection has one TCB, which is a record in memory holding all the current state for that connection.
 It includes:
@@ -169,17 +169,17 @@ It includes:
 
 TCB has 3 group of variable
 
-- **Send-side variables [(SND.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-send-sequence-variables)**:
+- **S[(SND.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-send-sequence-variables)**: end-side variables
   These describe what we’ve sent, what’s been ACKed, and what we can send next.
   In another words, outgoing (transmit) side of the state machine.
-- **Receive-side variables [(RCV.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-receive-sequence-variables)**:
+- **R[(RCV.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-receive-sequence-variables)**: eceive-side variables
   These track what we’ve received, what we’re expecting next, and how much room we have left.
   This group governs incoming data handling.
-- **Current Segment variables [(SEG.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables)**:
+- **C[(SEG.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables)**: urrent Segment variables
   When a new TCP segment arrives, the implementation temporarily extracts its key header fields into these variables.
   These describe the current incoming packet during processing — they’re ephemeral, updated per segment.
 
-### TCP - State Machine Overview [(3.3.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables)
+### [(3.3.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables) TCP - State Machine Overview
 
 A connection progresses through a series of states during its lifetime.
 The states are:
@@ -362,7 +362,111 @@ js={`
 
 ## Day 2 - TCP (continue)
 
-- Sequence Numbers [(3.4)](https://datatracker.ietf.org/doc/html/rfc9293#name-sequence-numbers)
-- Establishing a Connection [(3.5)](https://datatracker.ietf.org/doc/html/rfc9293#name-establishing-a-connection)
-- Closing a Connection [(3.6)](https://datatracker.ietf.org/doc/html/rfc9293#name-closing-a-connection)
-- Segmentation [(3.7)](https://datatracker.ietf.org/doc/html/rfc9293#name-segmentation)
+### [(3.4)](https://datatracker.ietf.org/doc/html/rfc9293#name-sequence-numbers) Sequence Numbers
+##### 1. Every byte has a sequence number.
+TCP doesn’t number packets — it numbers bytes. Each byte sent has a unique sequence number.
+
+##### 2. Acknowledgments are cumulative.
+When the receiver sends ACK = X, it indicates that all octets up to but not including X have been received.
+
+##### 3. Sequence number space is finite.
+Sequence numbers go from **0 to 2<sup>32</sup>−1** and then **wrap around**. All comparisons (e.g., is this ACK valid?) use **modulo 2<sup>32</sup>** arithmetic to handle wraparound safely.
+
+##### 4. Sender-side logic:
+- `SND.UNA`: oldest unacknowledged byte
+- `SND.NXT`: next byte to send
+- `SEG.ACK`: the peer’s acknowledgment (next expected byte)
+- A valid ACK must satisfy: `SND.UNA < SEG.ACK ≤ SND.NXT`
+- A segment in the retransmission queue is fully acknowledged if:
+`SEG.SEQ + SEG.LEN ≤ SEG.ACK`
+
+##### 5. Receiver-side logic:
+- `RCV.NXT`: next expected byte
+- `RCV.WND`: current window size
+- Incoming segment is valid if it overlaps any part of `[RCV.NXT, RCV.NXT+RCV.WND)`.
+
+##### 6. Special cases for zero windows:
+
+```table showLineNumbers=false
+| Segment Length | Window | Acceptable Condition
+| -------------- | ------ | --------------------
+|  0             |  0     | SEG.SEQ = RCV.NXT
+|  0             | >0     | RCV.NXT ≤ SEG.SEQ < RCV.NXT+RCV.WND
+| >0             |  0     | Not acceptable
+| >0             | >0     | Either the start or end of the segment falls inside the window
+```
+
+Note:
+when the receive window is zero no segments should be acceptable except **ACK** segments.
+Thus, it is possible for a TCP implementation to maintain a zero receive window while transmitting data and receiving ACKs.
+A TCP receiver MUST process the **RST** and **URG** fields of all incoming segments, even when the receive window is zero.
+
+
+##### 7. Control flags also consume sequence space.
+
+- SYN counts as one byte before any data.
+- FIN counts as one byte after all data.
+This ensures SYN and FIN are acknowledged exactly once and can be retransmitted safely.
+
+##### 8. Why sequence number design matters
+
+TCP reuses connections (same IP/port pairs can reconnect), so there’s a risk that old packets from a previous connection (an earlier “incarnation”) might still be floating around and get mistaken as new.
+Two protections handle this:
+- **TIME-WAIT** state: delays reuse of a connection.
+- **Initial Sequence Number (ISN)** design: makes each new connection’s sequence numbers distinct.
+
+##### 9. How ISNs are chosen
+
+Each new TCP connection gets a unique 32-bit Initial Sequence Number (ISN) by using the expression:
+
+```table showLineNumbers=false
+ISN = M + F(localip, localport, remoteip, remoteport, secretkey)
+```
+- `M`: a fast “clock” that increases roughly every 4 microseconds.
+- `F()`: a pseudorandom function using connection info and a secret key.
+
+This ensures:
+  - ISNs steadily increase (so no reuse within a few hours).
+  - Attackers can’t predict sequence numbers.
+  - The counter wraps every ~4.55 hours, longer than the **Maximum Segment Lifetime** (MSL) (≈2 minutes), ensuring sequence uniqueness.
+
+At very high data rates, a TCP sender can cycle through all 2<sup>32</sup> sequence numbers faster than the MSL.
+That breaks the assumption that “old data drains before numbers repeat.”
+To fix this, the RFC points to two extra mechanisms:
+
+TCP Timestamps (RFC 1323) – every segment carries a monotonically increasing timestamp.
+
+PAWS (Protection Against Wrapped Sequence numbers) – the receiver uses timestamps to detect and discard stale duplicates even if the numeric sequence space has wrapped.
+
+##### 10. Why a three-way handshake (3WHS) is needed
+
+Each side must confirm both its own and the other’s ISN to avoid mistaking old SYNs for new ones.
+So, the handshake is:
+- A → B: `SYN, seq = X`
+- B → A: `SYN, ACK = X+1, seq = Y`
+- A → B: `ACK = Y+1`
+
+This 3WHS ensures both sides agree on valid, fresh sequence numbers.
+
+##### 11. “Quiet time” after reboot
+
+If a host loses memory (e.g., reboots), it can’t know which sequence numbers were recently used.
+To avoid reusing sequence numbers that might still exist in old packets, it should wait one MSL (~2 minutes) before sending any TCP segments.
+This pause gives old packets time to “drain” from the network.
+
+In modern networks, this is mostly unnecessary because:
+- ISNs and ports are randomized.
+- MSL is short due to faster links.
+- Reboots usually take longer than 2 minutes anyway.
+
+##### 12. Why it matters at high speeds
+
+At higher data rates, sequence numbers can wrap around quickly:
+- 1 Gbps → wrap in ~34 s
+- 10 Gbps → ~3 s
+- 100 Gbps → ~0.3 s
+At these speeds, TCP needs timestamps (PAWS) to distinguish new from old segments once sequence numbers start overlapping.
+
+### [(3.5)](https://datatracker.ietf.org/doc/html/rfc9293#name-establishing-a-connection) Establishing a Connection
+### [(3.6)](https://datatracker.ietf.org/doc/html/rfc9293#name-closing-a-connection) Closing a Connection
+### [(3.7)](https://datatracker.ietf.org/doc/html/rfc9293#name-segmentation Segmentation )
