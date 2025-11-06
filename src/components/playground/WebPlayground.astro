@@ -133,6 +133,15 @@ const activeTab =
                 if ($parent.scrollHeight > 0) {
                     iframe.height = $parent.scrollHeight.toString();
                 }
+
+                setTimeout(() => {
+                    const height =
+                        iframe.contentDocument?.documentElement.scrollHeight;
+                    if (height) {
+                        iframe.height = "";
+                        iframe.style.height = height.toString() + "px";
+                    }
+                }, 100);
             }
         }
     }
