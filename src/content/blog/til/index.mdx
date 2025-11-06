@@ -2,7 +2,7 @@
 title: "Today I Learned"
 description: "Today I Learned"
 pubDate: "Nov 01 2025"
-updatedDate: "Nov 04 2025"
+updatedDate: "Nov 05 2025"
 heroImage: "./thumb.png"
 sticky: true
 ---
@@ -11,10 +11,11 @@ import WebPlayground from "../../../components/playground/WebPlayground.astro";
 import Mermaid from "../../../components/Mermaid.astro";
 
 # Introduction
+
 I’ve noticed that the longer I write code, the more I bump into things I **"already know"** but never really understood.
 They work, I use them, and then one day a tiny behavior or detail makes me stop and dig deeper. Most of those discoveries never make it past a browser tab or a passing thought — which is a waste, because that’s where the real learning hides.
 
-**"Today I Learned"** doesn't always mean brand new. Sometimes it's something I've used for years but never stopped to read the spec, question the behavior, or write it down properly. This series is my way of slowing down just enough to capture those quiet **"oh, that's why"** moments — *not because they're groundbreaking, but because they're worth remembering*.
+**"Today I Learned"** doesn't always mean brand new. Sometimes it's something I've used for years but never stopped to read the spec, question the behavior, or write it down properly. This series is my way of slowing down just enough to capture those quiet **"oh, that's why"** moments — _not because they're groundbreaking, but because they're worth remembering_.
 
 And of course, not everything here comes from experience. Some posts start with me realizing I actually don’t know how something works, then digging until it finally makes sense — and writing it down before I forget again.
 
@@ -72,16 +73,16 @@ Browsers that support `accent-color` currently apply it to the following HTML el
   </div>
 `}
   css={`
-  .focus-within:focus-within {
-    font-weight: bold;
-  }
-  .focus-within:not(:focus-within) label:after {
-    content: ': false'
-  }
-  .focus-within:focus-within label:after {
-    content: ': true'
-  }
-`}
+    .focus-within:focus-within {
+      font-weight: bold;
+    }
+    .focus-within:not(:focus-within) label:after {
+      content: ": false";
+    }
+    .focus-within:focus-within label:after {
+      content: ": true";
+    }
+  `}
 />
 
 - The [:focus-within](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within) CSS pseudo-class matches an element **if the element or any of its descendants are focused**. In other words, it represents an element that is itself matched by the :focus pseudo-class or has a descendant that is matched by :focus. (This includes descendants in shadow trees.)
@@ -116,17 +117,16 @@ Browsers that support `accent-color` currently apply it to the following HTML el
     display:inline-block
   }
 
-  .pseudo_btn-span {
-    display: none;
-  }
-  .pseudo_btn-btn:active ~ .pseudo_btn-span--active,
-  .pseudo_btn-btn:focus ~ .pseudo_btn-span--focus,
-  .pseudo_btn-btn:focus-visible ~ .pseudo_btn-span--focus-visible {
-    display:inline-block
-  }
+.pseudo_btn-span {
+display: none;
+}
+.pseudo_btn-btn:active ~ .pseudo_btn-span--active,
+.pseudo_btn-btn:focus ~ .pseudo_btn-span--focus,
+.pseudo_btn-btn:focus-visible ~ .pseudo_btn-span--focus-visible {
+display:inline-block
+}
 `}
 />
-
 
 - The [`:active`](https://developer.mozilla.org/en-US/docs/Web/CSS/:active) CSS pseudo-class represents an element (such as a button) that is being activated by the user. When using a mouse, "activation" typically starts when the user presses down the primary mouse button.
 
@@ -135,12 +135,13 @@ Browsers that support `accent-color` currently apply it to the following HTML el
 - The [`:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) pseudo-class applies while an element matches the `:focus` pseudo-class and the UA (User Agent) determines via heuristics that the focus should be made evident on the element. (Many browsers show a "focus ring" by default in this case.)
 
 - The difference between `:focus` and `:focus-visible` lies in intent, not capability.
-Both target elements that currently have focus, but `:focus-visible` activates only when the browser determines the **user needs a visible cue—usually** when navigating with a **keyboard** or **assistive technology**.
-In contrast, `:focus` triggers for **any focused element**, regardless of how it was reached. This means `:focus` is best for behavior and logic (like showing a dropdown when an input gains focus), while `:focus-visible` is for visual indicators that help non-mouse users track their position without cluttering the interface for pointer
+  Both target elements that currently have focus, but `:focus-visible` activates only when the browser determines the **user needs a visible cue—usually** when navigating with a **keyboard** or **assistive technology**.
+  In contrast, `:focus` triggers for **any focused element**, regardless of how it was reached. This means `:focus` is best for behavior and logic (like showing a dropdown when an input gains focus), while `:focus-visible` is for visual indicators that help non-mouse users track their position without cluttering the interface for pointer
 
-## Day 1 - TCP
+## Day 1
 
-### Key TCP Concepts [(2.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-tcp-concepts)
+### TCP - Key TCP Concepts [(2.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-tcp-concepts)
+
 - TCP provides a reliable, in-order, byte-stream service to applications.
 
 - The application byte-stream is conveyed over the network via TCP segments, with each TCP segment sent as an Internet Protocol (IP) datagram.
@@ -155,32 +156,36 @@ In contrast, `:focus` triggers for **any focused element**, regardless of how it
 
 - TCP uses port numbers to identify application services and to multiplex distinct flows between hosts.
 
+### TCP - Key Connection State Variables [(3.3.1)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-connection-state-variab)
 
-### Key Connection State Variables [(3.3.1)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-connection-state-variab)
 Every active TCP connection has one TCB, which is a record in memory holding all the current state for that connection.
 It includes:
+
 - Local + remote IP + port
 - Buffers (send, receive, retransmit)
 - Sequence number tracking (the heart of reliability)
 - Control flags (urgent data, window size, etc.)
-When the connection closes, the TCB is destroyed — so no TCB means no connection.
+  When the connection closes, the TCB is destroyed — so no TCB means no connection.
 
 TCB has 3 group of variable
-- **Send-side variables [(SND.*)](https://datatracker.ietf.org/doc/html/rfc9293#name-send-sequence-variables)**:
-These describe what we’ve sent, what’s been ACKed, and what we can send next.
-In another words, outgoing (transmit) side of the state machine.
-- **Receive-side variables [(RCV.*)](https://datatracker.ietf.org/doc/html/rfc9293#name-receive-sequence-variables)**:
-These track what we’ve received, what we’re expecting next, and how much room we have left.
-This group governs incoming data handling.
-- **Current Segment variables [(SEG.*)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables)**:
-When a new TCP segment arrives, the implementation temporarily extracts its key header fields into these variables.
-These describe the current incoming packet during processing — they’re ephemeral, updated per segment.
 
-### State Machine Overview [(3.3.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables)
+- **Send-side variables [(SND.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-send-sequence-variables)**:
+  These describe what we’ve sent, what’s been ACKed, and what we can send next.
+  In another words, outgoing (transmit) side of the state machine.
+- **Receive-side variables [(RCV.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-receive-sequence-variables)**:
+  These track what we’ve received, what we’re expecting next, and how much room we have left.
+  This group governs incoming data handling.
+- **Current Segment variables [(SEG.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables)**:
+  When a new TCP segment arrives, the implementation temporarily extracts its key header fields into these variables.
+  These describe the current incoming packet during processing — they’re ephemeral, updated per segment.
+
+### TCP - State Machine Overview [(3.3.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables)
 
 A connection progresses through a series of states during its lifetime.
 The states are:
+
 1. Connection establishment (the 3-way handshake)
+
 ```table showLineNumbers=false
 | State            | Who    | Meaning                                                        |
 | ---------------- | ------ | -------------------------------------------------------------- |
@@ -190,8 +195,8 @@ The states are:
 | **ESTABLISHED**  | both   | 3-way handshake complete — ready to exchange data.             |
 ```
 
-
 2. Data transfer
+
 ```table showLineNumbers=false
 | State           | Meaning                                                 |
 | --------------- | ------------------------------------------------------- |
@@ -199,6 +204,7 @@ The states are:
 ```
 
 3. Connection teardown (graceful close)
+
 ```table showLineNumbers=false
 | State          | Who            | Meaning                                                                                          |
 | -------------- | -------------- | ------------------------------------------------------------------------------------------------ |
@@ -212,6 +218,7 @@ The states are:
 ```
 
 Transitions happen because of events. These fall into three categories:
+
 ```table showLineNumbers=false
 | Event Type            | Examples                                                                    |
 | --------------------- | --------------------------------------------------------------------------- |
@@ -219,7 +226,6 @@ Transitions happen because of events. These fall into three categories:
 | **Incoming segments** | TCP flags like `SYN`, `ACK`, `FIN`, or `RST`.                               |
 | **Timers / timeouts** | Retransmission timeout, delayed ACK timeout, 2×MSL timeout (for TIME-WAIT). |
 ```
-
 
 <Mermaid code={`
 sequenceDiagram
@@ -259,9 +265,103 @@ sequenceDiagram
     Note over Server: State: LAST-ACK → CLOSED
 
     Note over Client,Server: Connection fully terminated — both sides CLOSED
+
 `} />
 
+### HTML - `<dialog/>`
+
+Features:
+
+- Enable/Disable background interaction
+- Builtin backdrop
+- Tab focus stays inside the dialog.
+- Close and return value by integrate with `<form method="dialog">`
+- Handles ARIA roles and focus management by default.
+- Keyboard support: ESC key closes it automatically when modal.
+
+<WebPlayground
+  style="height: 30vh"
+  html={`
+  <button id="open-modal">Open Modal (blocks background)</button>
+  <button id="open-nonmodal">Open Non-modal (background clickable)</button>
+  <dialog id="modalDialog">
+    <h3>Modal Dialog</h3>
+    <p>
+      This one <b>blocks background</b> and traps focus inside.
+    </p>
+    <button id="close-modal">Close</button>
+  </dialog>
+  <dialog id="nonModalDialog">
+    <h3>Non-modal Dialog</h3>
+    <p>You can still click buttons in the background.</p>
+    <button id="close-nonmodal">Close</button>
+  </dialog>
+  <button id="open-form">Open Form Dialog</button>
+  <dialog id="formDialog">
+    <form method="dialog">
+      <h3>Choose your favorite color</h3>
+      <button value="red">Red</button>
+      <button value="blue">Blue</button>
+      <button value="cancel">Cancel</button>
+    </form>
+  </dialog>
+  <p id="chosen"></p>
+`}
+css={`
+body {
+  font-family: system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+dialog {
+  border: none;
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Built-in backdrop customization */
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+button {
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+`}
+js={`
+// Modal: background interaction disabled
+    const modal = document.getElementById("modalDialog");
+    document.getElementById("open-modal").onclick = () => modal.showModal();
+    document.getElementById("close-modal").onclick = () => modal.close();
+
+    // Non-modal: background still clickable
+    const nonModal = document.getElementById("nonModalDialog");
+    document.getElementById("open-nonmodal").onclick = () => nonModal.show();
+    document.getElementById("close-nonmodal").onclick = () => nonModal.close();
+
+    // Form dialog with return value
+    const formDialog = document.getElementById("formDialog");
+    const chosen = document.getElementById("chosen");
+    document.getElementById("open-form").onclick = () => formDialog.showModal();
+
+    formDialog.addEventListener("close", () => {
+      chosen.textContent =
+        formDialog.returnValue === "cancel"
+          ? "You cancelled the dialog."
+          : "You chose: " + formDialog.returnValue;
+    });
+`}
+/>
+
 ## Day 2 - TCP (continue)
+
 - Sequence Numbers [(3.4)](https://datatracker.ietf.org/doc/html/rfc9293#name-sequence-numbers)
 - Establishing a Connection [(3.5)](https://datatracker.ietf.org/doc/html/rfc9293#name-establishing-a-connection)
 - Closing a Connection [(3.6)](https://datatracker.ietf.org/doc/html/rfc9293#name-closing-a-connection)
