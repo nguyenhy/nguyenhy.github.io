@@ -1,11 +1,18 @@
-// @ts-check
-
+import path from "path"
+import { fileURLToPath } from "url";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 
 import expressiveCode from "astro-expressive-code";
 import tailwindcss from "@tailwindcss/vite";
+import dotenv from "dotenv"
+
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({
+  path: path.resolve(__dirname,'./.env')
+})
 
 // https://astro.build/config
 export default defineConfig({
