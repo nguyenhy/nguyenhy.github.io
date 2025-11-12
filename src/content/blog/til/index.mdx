@@ -107,24 +107,24 @@ Browsers that support `accent-color` currently apply it to the following HTML el
   </fieldset>
 </div>
 `}
-css={`
-.pseudo_input-span {
-  display: none;
-}
-.pseudo_input-input:active ~ .pseudo_input-span--active,
-.pseudo_input-input:focus ~ .pseudo_input-span--focus,
-.pseudo_input-input:focus-visible ~ .pseudo_input-span--focus-visible {
-  display: inline-block;
-}
-.pseudo_btn-span {
-  display: none;
-}
-.pseudo_btn-btn:active ~ .pseudo_btn-span--active,
-.pseudo_btn-btn:focus ~ .pseudo_btn-span--focus,
-.pseudo_btn-btn:focus-visible ~ .pseudo_btn-span--focus-visible {
-  display: inline-block;
-}
-`}
+  css={`
+    .pseudo_input-span {
+      display: none;
+    }
+    .pseudo_input-input:active ~ .pseudo_input-span--active,
+    .pseudo_input-input:focus ~ .pseudo_input-span--focus,
+    .pseudo_input-input:focus-visible ~ .pseudo_input-span--focus-visible {
+      display: inline-block;
+    }
+    .pseudo_btn-span {
+      display: none;
+    }
+    .pseudo_btn-btn:active ~ .pseudo_btn-span--active,
+    .pseudo_btn-btn:focus ~ .pseudo_btn-span--focus,
+    .pseudo_btn-btn:focus-visible ~ .pseudo_btn-span--focus-visible {
+      display: inline-block;
+    }
+  `}
 />
 
 - The [`:active`](https://developer.mozilla.org/en-US/docs/Web/CSS/:active) CSS pseudo-class represents an element (such as a button) that is being activated by the user. When using a mouse, "activation" typically starts when the user presses down the primary mouse button.
@@ -185,7 +185,7 @@ The states are:
 
 1. Connection establishment (the 3-way handshake)
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 | State            | Who    | Meaning                                                        |
 | ---------------- | ------ | -------------------------------------------------------------- |
 | **LISTEN**       | server | Waiting for someone to knock (a SYN).                          |
@@ -196,7 +196,7 @@ The states are:
 
 2. Data transfer
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 | State           | Meaning                                                 |
 | --------------- | ------------------------------------------------------- |
 | **ESTABLISHED** | Active communication. Data can flow in both directions. |
@@ -204,7 +204,7 @@ The states are:
 
 3. Connection teardown (graceful close)
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 | State          | Who            | Meaning                                                                                          |
 | -------------- | -------------- | ------------------------------------------------------------------------------------------------ |
 | **FIN-WAIT-1** | active closer  | Sent FIN; waiting for ACK (and possibly FIN from the other side).                                |
@@ -218,7 +218,7 @@ The states are:
 
 Transitions happen because of events. These fall into three categories:
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 | Event Type            | Examples                                                                    |
 | --------------------- | --------------------------------------------------------------------------- |
 | **User actions**      | `OPEN` (connect), `SEND`, `RECEIVE`, `CLOSE`, `ABORT`, `STATUS`.            |
@@ -390,7 +390,7 @@ The **problem is that TCP connections can be reused**. A new connection might ha
 
 Each connection starts with a 32-bit ISN chosen as:
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 ISN = M + F(localip, localport, remoteip, remoteport, secretkey)
 ```
 
@@ -417,6 +417,258 @@ Together, TIME-WAIT, randomized ISNs, and PAWS keep TCP’s sense of time and id
 ## Day 3 - TCP (continue)
 
 ### [(3.5)](https://datatracker.ietf.org/doc/html/rfc9293#name-establishing-a-connection) Establishing a Connection
+
+#### 1. Basic 3WHS for Connection Synchronization
+
+```plaintext showLineNumbers=false
+TCP Peer A                                                TCP Peer B
+1.  CLOSED                                                LISTEN
+2.  SYN-SENT    --> <SEQ=100><CTL=SYN>                --> SYN-RECEIVED
+3.  ESTABLISHED <-- <SEQ=300><ACK=101><CTL=SYN,ACK>   <-- SYN-RECEIVED
+4.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK>       --> ESTABLISHED
+5.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK><DATA> --> ESTABLISHED
+```
+
+- **Line 2:**
+  TCP Peer **A** begins by sending a **SYN** segment, indicating that it will use sequence numbers starting with **SEQ = 100**.
+
+- **Line 3:**
+  TCP Peer **B** responds with a **SYN** and an **ACK**, acknowledging the SYN it received from Peer A.
+  - The **ACK field = 101**, meaning Peer B is now expecting to receive sequence **101**,
+    which acknowledges the SYN that occupied sequence **100**.
+
+#### 2. Simultaneous Connection Synchronization
+
+Each TCP peer's connection state cycles from CLOSED to SYN-SENT to SYN-RECEIVED to ESTABLISHED.
+
+```plaintext showLineNumbers=false
+TCP Peer A                                           TCP Peer B
+1.  CLOSED                                           CLOSED
+2.  SYN-SENT     --> <SEQ=100><CTL=SYN>              ...
+3.  SYN-RECEIVED <-- <SEQ=300><CTL=SYN>              <-- SYN-SENT
+4.               ... <SEQ=100><CTL=SYN>              --> SYN-RECEIVED
+5.  SYN-RECEIVED --> <SEQ=100><ACK=301><CTL=SYN,ACK> ...
+6.  ESTABLISHED  <-- <SEQ=300><ACK=101><CTL=SYN,ACK> <-- SYN-RECEIVED
+7.               ... <SEQ=100><ACK=301><CTL=SYN,ACK> --> ESTABLISHED
+```
+
+##### 2.1. Notes
+
+- A TCP implementation **must track** whether a connection entered the **SYN-RECEIVED** state due to a
+  **passive OPEN** (server waiting for connections) or an **active OPEN** (client initiating a connection).
+
+---
+
+##### 2.2. Purpose of the Three-Way Handshake
+
+The **three-way handshake** exists mainly to **prevent old duplicate connection initiations** from causing confusion or unexpected connections.
+
+To handle this, TCP defines a special control message: **Reset (RST)**.
+
+---
+
+##### 2.3. Reset (RST) Behavior
+
+- If a TCP peer is in a **non-synchronized** state
+  (e.g., `SYN-SENT` or `SYN-RECEIVED`) and receives an acceptable **RST**,
+  → it **returns to LISTEN** (or CLOSED if it was actively opening).
+
+- If the TCP peer is in a **synchronized** state
+  (`ESTABLISHED`, `FIN-WAIT-1`, `FIN-WAIT-2`, `CLOSE-WAIT`, `CLOSING`, `LAST-ACK`, `TIME-WAIT`),
+  → it **aborts the connection** and **informs its user**.
+
+#### 3. Recovery from Old Duplicate SYN
+
+```plaintext showLineNumbers=false
+TCP Peer A                                               TCP Peer B
+1. CLOSED                                               LISTEN
+2. SYN-SENT    --> <SEQ=100><CTL=SYN>               ...
+3. (duplicate) ... <SEQ=90><CTL=SYN>                --> SYN-RECEIVED
+4. SYN-SENT    <-- <SEQ=300><ACK=91><CTL=SYN,ACK>   <-- SYN-RECEIVED
+5. SYN-SENT    --> <SEQ=91><CTL=RST>                --> LISTEN
+6.             ... <SEQ=100><CTL=SYN>               --> SYN-RECEIVED
+7. ESTABLISHED <-- <SEQ=400><ACK=101><CTL=SYN,ACK>  <-- SYN-RECEIVED
+8. ESTABLISHED --> <SEQ=101><ACK=401><CTL=ACK>      --> ESTABLISHED
+```
+
+---
+
+##### 3.1. Explanation
+
+- **Line 3:**
+  An **old duplicate SYN** (with `SEQ=90`) arrives at **TCP Peer B**.
+  Since B cannot distinguish it from a valid new SYN, it responds normally with a **SYN+ACK** (line 4).
+
+- **Line 5:**
+  **TCP Peer A** receives the SYN+ACK, but the **ACK field** is incorrect (it acknowledges sequence 91, not 101).
+  A detects this mismatch and sends a **RST** (`SEQ=91`) — chosen so it looks valid to B.
+
+  → On receiving this RST, **TCP Peer B** resets the half-open connection and returns to the **LISTEN** state.
+
+- **Line 6–8:**
+  When the **original SYN** (with `SEQ=100`) finally arrives, **Peer B** treats it as a normal new request.
+  The **three-way handshake** completes successfully, moving both peers to the **ESTABLISHED** state.
+
+---
+
+##### 3.2. Note
+
+If the **original SYN** (line 6) had arrived **before** the RST (line 5),
+a race condition could have occurred — with **RSTs sent in both directions**
+as each side misinterpreted the other's state.
+
+#### 4. Half-Open Connection Discovery
+
+A TCP connection is considered **half-open** when:
+
+- One peer has **closed or aborted** the connection without the other peer knowing, **or**
+- The peers have become **desynchronized** due to a **failure or reboot** that caused loss of connection state.
+
+When either side attempts to send data on a half-open connection, the other (no longer synchronized) endpoint will respond with a **Reset (RST)** — forcing both sides to abort and return to a clean state.
+
+> Half-open connections are rare but can occur after crashes or unexpected reboots.
+
+```plaintext showLineNumbers=false
+TCP Peer A                                           TCP Peer B
+1.  (REBOOT)                                         (send 300,receive 100)
+2.  CLOSED                                           ESTABLISHED
+3.  SYN-SENT --> <SEQ=400><CTL=SYN>              --> (??)
+4.  (!!)     <-- <SEQ=300><ACK=100><CTL=ACK>     <-- ESTABLISHED
+5.  SYN-SENT --> <SEQ=100><CTL=RST>              --> (Abort!!)
+6.  SYN-SENT                                         CLOSED
+7.  SYN-SENT --> <SEQ=400><CTL=SYN>              --> ...
+```
+
+##### 4.1. Explanation
+
+- **Line 1–2:**
+  **Peer A** reboots, losing all record of the existing connection.
+  Meanwhile, **Peer B** still believes the connection is **ESTABLISHED**.
+
+- **Line 3:**
+  After reboot, **Peer A** sends a new **SYN** (`SEQ=400`) to start a fresh connection.
+  **Peer B**, still synchronized, sees this segment as **out of window** and responds with an **ACK=100** (the next sequence it expects).
+
+- **Line 4–5:**
+  **Peer A** receives this ACK but realizes it doesn’t match any known state (since A’s memory was wiped).
+  Interpreting it as an invalid acknowledgment, A sends a **RST** (`SEQ=100`) to terminate what it sees as a corrupted session.
+  **Peer B** receives this RST and **aborts the old connection**.
+
+- **Line 6–7:**
+  The stale session is gone.
+  **Peer A** continues trying to establish a **new, clean connection** — which now proceeds like a normal **three-way handshake**.
+
+#### 5. Active Side Causes Half-Open Connection Discovery
+
+```plaintext showLineNumbers=false
+TCP Peer A                                                TCP Peer B
+1.  (REBOOT)                                              (send 300,receive 100)
+2.  (??)     <-- <SEQ=300><ACK=100><DATA=10><CTL=ACK> <-- ESTABLISHED
+3.           --> <SEQ=100><CTL=RST>                   --> (ABORT!!)
+```
+
+##### 5.1. Explanation
+
+- **Line 1:**
+  **TCP Peer A** reboots, losing all connection state.
+
+- **Line 2:**
+  **TCP Peer B** sends data on the old connection (thinking it’s still **ESTABLISHED**).
+  Since **Peer A** has no record of the connection, the segment is **unacceptable**.
+
+- **Line 3:**
+  **Peer A** responds with a **RST**, signaling that no such connection exists.
+  **Peer B** receives the RST, recognizes the problem, and **aborts the connection**.
+
+#### 6. Old Duplicate SYN Initiates a Reset on Two Passive Sockets
+
+```plaintext showLineNumbers=false
+TCP Peer A                                          TCP Peer B
+1.  LISTEN                                          LISTEN
+2.         ... <SEQ=Z><CTL=SYN>                -->  SYN-RECEIVED
+3.  (??)   <-- <SEQ=X><ACK=Z+1><CTL=SYN,ACK>   <--  SYN-RECEIVED
+4.         --> <SEQ=Z+1><CTL=RST>              -->  (return to LISTEN!)
+5.  LISTEN                                          LISTEN
+```
+
+---
+
+##### 6.1. Explanation
+
+- **Line 2:**
+  An **old duplicate SYN** arrives at **Peer B**, which is in **LISTEN**.
+  Peer B treats it as a new SYN and moves to **SYN-RECEIVED**.
+
+- **Line 3:**
+  Peer B responds with a **SYN+ACK**.
+  Peer A sees this segment but the **ACK field is not acceptable** (it doesn’t match any current connection state), so it sends a **RST**.
+
+- **Line 4:**
+  Peer B receives the **RST**, interprets it as an indication that the connection is invalid, and **returns to LISTEN**.
+
+- **Line 5:**
+  Both peers are back in **LISTEN**, ready for a legitimate new connection.
+
+### 7. Rule of Reset (RST)
+
+A **reset (RST)** is sent whenever a TCP segment arrives that **appears not intended for the current connection**.
+
+---
+
+#### 7.1. CLOSED State
+
+- If the connection **does not exist (CLOSED)**, a reset is sent in response to **any incoming segment** except another reset.
+  - This rejects any SYN or other segments that do not match an existing connection.
+- **Sequence/ACK handling:**
+  - If the incoming segment has the **ACK bit set**, the RST’s sequence number = incoming ACK.
+  - Otherwise, the RST sequence = **0**, and the ACK field = **incoming SEQ + segment length**.
+- The connection **remains CLOSED**.
+
+---
+
+#### 7.2. Non-Synchronized State
+
+- States: **LISTEN**, **SYN-SENT**, **SYN-RECEIVED**.
+- Send a reset if:
+  - The incoming segment **acknowledges something not yet sent** (unacceptable ACK), **or**
+  - The segment’s **security level/compartment** does not match the requested connection.
+- **Sequence/ACK handling:**
+  - If the segment has an **ACK field**, the RST sequence = incoming ACK.
+  - Otherwise, RST sequence = **0**, and ACK = **incoming SEQ + segment length**.
+- The connection **remains in the same state**.
+
+---
+
+#### 7.3. Synchronized State
+
+- States: **ESTABLISHED**, **FIN-WAIT-1**, **FIN-WAIT-2**, **CLOSE-WAIT**, **CLOSING**, **LAST-ACK**, **TIME-WAIT**.
+- For any **unacceptable segment** (out-of-window SEQ or unacceptable ACK):
+  - Respond with an **empty acknowledgment** (no user data) containing:
+    - **Send sequence number** = current send SEQ
+    - **ACK** = next expected receive SEQ
+  - Connection **remains in the same state**.
+- If the segment has a **mismatched security level/compartment**:
+  - Send a **RST** and transition the connection to **CLOSED**.
+  - RST sequence = **incoming ACK field**.
+
+### 8. Reset (RST) Processing
+
+- **Validation:**
+  - In **all states except SYN-SENT**, RST segments are validated by their **sequence number (SEQ)**.
+    - A reset is **valid** if its SEQ is within the current receive window.
+  - In **SYN-SENT** (waiting for SYN-ACK), a RST is valid if its **ACK field acknowledges the SYN**.
+
+- **State Transitions Upon Receiving a Valid RST:**
+  - **LISTEN:** Ignore the RST.
+  - **SYN-RECEIVED:**
+    - If previously in **LISTEN**, return to **LISTEN**.
+    - Otherwise, **abort** the connection → go to **CLOSED**.
+  - **All other states:**
+    - **Abort** the connection → go to **CLOSED** and **notify the user**.
+
+- **RST with Data:**
+  - TCP implementations **SHOULD** allow RST segments to carry data.
+  - This could include **diagnostic information** explaining the reason for the reset.
 
 ### [(3.6)](https://datatracker.ietf.org/doc/html/rfc9293#name-closing-a-connection) Closing a Connection
 
