@@ -8,6 +8,8 @@ import Footer from "../../components/Footer.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import GTMHead from "../../components/GTMHead.astro";
+import GTMBody from "../../components/GTMBody.astro";
 
 const blogs = await getCollection("blog");
 const stickies: typeof blogs = [];
@@ -31,14 +33,18 @@ normals.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const [newest, ...others] = normals;
 
 const posts: typeof blogs = [newest, ...stickies, ...others];
+
+const gtmId = import.meta.env.PUBLIC_APP_GTM_ID
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        {!!gtmId && <GTMHead id={gtmId} />}
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}/>
     </head>
     <body>
+        {!!gtmId && <GTMBody id={gtmId} />}
         <Header />
         <main>
             <section>
