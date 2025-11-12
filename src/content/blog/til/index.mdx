@@ -2,22 +2,24 @@
 title: "Today I Learned"
 description: "Today I Learned"
 pubDate: "Nov 01 2025"
-updatedDate: "Nov 01 2025"
+updatedDate: "Nov 05 2025"
 heroImage: "./thumb.png"
 sticky: true
 ---
 
 import WebPlayground from "../../../components/playground/WebPlayground.astro";
+import Mermaid from "../../../components/Mermaid.astro";
 
 # Introduction
+
 I’ve noticed that the longer I write code, the more I bump into things I **"already know"** but never really understood.
 They work, I use them, and then one day a tiny behavior or detail makes me stop and dig deeper. Most of those discoveries never make it past a browser tab or a passing thought — which is a waste, because that’s where the real learning hides.
 
-**"Today I Learned"** doesn't always mean brand new. Sometimes it's something I've used for years but never stopped to read the spec, question the behavior, or write it down properly. This series is my way of slowing down just enough to capture those quiet **"oh, that's why"** moments — *not because they're groundbreaking, but because they're worth remembering*.
+**"Today I Learned"** doesn't always mean brand new. Sometimes it's something I've used for years but never stopped to read the spec, question the behavior, or write it down properly. This series is my way of slowing down just enough to capture those quiet **"oh, that's why"** moments — _not because they're groundbreaking, but because they're worth remembering_.
 
 And of course, not everything here comes from experience. Some posts start with me realizing I actually don’t know how something works, then digging until it finally makes sense — and writing it down before I forget again.
 
-## Day 0
+## Day 0 - Simple css that anyone know
 
 1. [CSS] [`accent-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/accent-color)
 
@@ -71,61 +73,59 @@ Browsers that support `accent-color` currently apply it to the following HTML el
   </div>
 `}
   css={`
-  .focus-within:focus-within {
-    font-weight: bold;
-  }
-  .focus-within:not(:focus-within) label:after {
-    content: ': false'
-  }
-  .focus-within:focus-within label:after {
-    content: ': true'
-  }
-`}
+    .focus-within:focus-within {
+      font-weight: bold;
+    }
+    .focus-within:not(:focus-within) label:after {
+      content: ": false";
+    }
+    .focus-within:focus-within label:after {
+      content: ": true";
+    }
+  `}
 />
 
 - The [:focus-within](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within) CSS pseudo-class matches an element **if the element or any of its descendants are focused**. In other words, it represents an element that is itself matched by the :focus pseudo-class or has a descendant that is matched by :focus. (This includes descendants in shadow trees.)
 
 <WebPlayground
   html={`
-  <div>
-    <fieldset>
-      <legend>:active, :focus, :focus-visible</legend>
-      <div class="pseudo_input">
-        <input type="text" class="pseudo_input-input" placeholder="try me"/>
-        <span class="pseudo_input-span pseudo_input-span--active">active</span>
-        <span class="pseudo_input-span pseudo_input-span--focus">focus</span>
-        <span class="pseudo_input-span pseudo_input-span--focus-visible">focus-visible</span>
-      </div>
-      <div class="pseudo_btn">
-        <button class="pseudo_btn-btn">click or tab me</button>
-        <span class="pseudo_btn-span pseudo_btn-span--active">active</span>
-        <span class="pseudo_btn-span pseudo_btn-span--focus">focus</span>
-        <span class="pseudo_btn-span pseudo_btn-span--focus-visible">focus-visible</span>
-      </div>
-    </fieldset>
-  </div>
+<div>
+  <fieldset>
+    <legend>:active, :focus, :focus-visible</legend>
+    <div class="pseudo_input">
+      <input type="text" class="pseudo_input-input" placeholder="try me"/>
+      <span class="pseudo_input-span pseudo_input-span--active">active</span>
+      <span class="pseudo_input-span pseudo_input-span--focus">focus</span>
+      <span class="pseudo_input-span pseudo_input-span--focus-visible">focus-visible</span>
+    </div>
+    <div class="pseudo_btn">
+      <button class="pseudo_btn-btn">click or tab me</button>
+      <span class="pseudo_btn-span pseudo_btn-span--active">active</span>
+      <span class="pseudo_btn-span pseudo_btn-span--focus">focus</span>
+      <span class="pseudo_btn-span pseudo_btn-span--focus-visible">focus-visible</span>
+    </div>
+  </fieldset>
+</div>
 `}
-  css={`
-  .pseudo_input-span{
-    display: none;
-  }
-  .pseudo_input-input:active ~ .pseudo_input-span--active,
-  .pseudo_input-input:focus ~ .pseudo_input-span--focus,
-  .pseudo_input-input:focus-visible ~ .pseudo_input-span--focus-visible{
-    display:inline-block
-  }
-
-  .pseudo_btn-span {
-    display: none;
-  }
-  .pseudo_btn-btn:active ~ .pseudo_btn-span--active,
-  .pseudo_btn-btn:focus ~ .pseudo_btn-span--focus,
-  .pseudo_btn-btn:focus-visible ~ .pseudo_btn-span--focus-visible {
-    display:inline-block
-  }
+css={`
+.pseudo_input-span {
+  display: none;
+}
+.pseudo_input-input:active ~ .pseudo_input-span--active,
+.pseudo_input-input:focus ~ .pseudo_input-span--focus,
+.pseudo_input-input:focus-visible ~ .pseudo_input-span--focus-visible {
+  display: inline-block;
+}
+.pseudo_btn-span {
+  display: none;
+}
+.pseudo_btn-btn:active ~ .pseudo_btn-span--active,
+.pseudo_btn-btn:focus ~ .pseudo_btn-span--focus,
+.pseudo_btn-btn:focus-visible ~ .pseudo_btn-span--focus-visible {
+  display: inline-block;
+}
 `}
 />
-
 
 - The [`:active`](https://developer.mozilla.org/en-US/docs/Web/CSS/:active) CSS pseudo-class represents an element (such as a button) that is being activated by the user. When using a mouse, "activation" typically starts when the user presses down the primary mouse button.
 
@@ -134,5 +134,290 @@ Browsers that support `accent-color` currently apply it to the following HTML el
 - The [`:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) pseudo-class applies while an element matches the `:focus` pseudo-class and the UA (User Agent) determines via heuristics that the focus should be made evident on the element. (Many browsers show a "focus ring" by default in this case.)
 
 - The difference between `:focus` and `:focus-visible` lies in intent, not capability.
-Both target elements that currently have focus, but `:focus-visible` activates only when the browser determines the **user needs a visible cue—usually** when navigating with a **keyboard** or **assistive technology**.
-In contrast, `:focus` triggers for **any focused element**, regardless of how it was reached. This means `:focus` is best for behavior and logic (like showing a dropdown when an input gains focus), while `:focus-visible` is for visual indicators that help non-mouse users track their position without cluttering the interface for pointer
+  Both target elements that currently have focus, but `:focus-visible` activates only when the browser determines the **user needs a visible cue—usually** when navigating with a **keyboard** or **assistive technology**.
+  In contrast, `:focus` triggers for **any focused element**, regardless of how it was reached. This means `:focus` is best for behavior and logic (like showing a dropdown when an input gains focus), while `:focus-visible` is for visual indicators that help non-mouse users track their position without cluttering the interface for pointer
+
+## Day 1
+
+### [(2.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-tcp-concepts) TCP - Key TCP Concepts
+
+- TCP provides a reliable, in-order, byte-stream service to applications.
+
+- The application byte-stream is conveyed over the network via TCP segments, with each TCP segment sent as an Internet Protocol (IP) datagram.
+
+- TCP reliability consists of detecting packet losses (via sequence numbers) and errors (via per-segment checksums), as well as correction via retransmission.
+
+- TCP supports unicast delivery of data. There are anycast applications that can successfully use TCP without modifications, though there is some risk of instability due to changes of lower-layer forwarding behavior [[46]](https://datatracker.ietf.org/doc/html/rfc7094).
+
+- TCP is connection oriented, though it does not inherently include a liveness detection capability.
+
+- Data flow is supported bidirectionally over TCP connections, though applications are free to send data only unidirectionally, if they so choose.
+
+- TCP uses port numbers to identify application services and to multiplex distinct flows between hosts.
+
+### [(3.3.1)](https://datatracker.ietf.org/doc/html/rfc9293#name-key-connection-state-variab) TCP - Key Connection State Variables
+
+Every active TCP connection has one TCB, which is a record in memory holding all the current state for that connection.
+It includes:
+
+- Local + remote IP + port
+- Buffers (send, receive, retransmit)
+- Sequence number tracking (the heart of reliability)
+- Control flags (urgent data, window size, etc.)
+  When the connection closes, the TCB is destroyed — so no TCB means no connection.
+
+TCB has 3 group of variable
+
+- **S[(SND.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-send-sequence-variables)**: end-side variables
+  These describe what we’ve sent, what’s been ACKed, and what we can send next.
+  In another words, outgoing (transmit) side of the state machine.
+- **R[(RCV.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-receive-sequence-variables)**: eceive-side variables
+  These track what we’ve received, what we’re expecting next, and how much room we have left.
+  This group governs incoming data handling.
+- **C[(SEG.\*)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables)**: urrent Segment variables
+  When a new TCP segment arrives, the implementation temporarily extracts its key header fields into these variables.
+  These describe the current incoming packet during processing — they’re ephemeral, updated per segment.
+
+### [(3.3.2)](https://datatracker.ietf.org/doc/html/rfc9293#name-current-segment-variables) TCP - State Machine Overview
+
+A connection progresses through a series of states during its lifetime.
+The states are:
+
+1. Connection establishment (the 3-way handshake)
+
+```table showLineNumbers=false
+| State            | Who    | Meaning                                                        |
+| ---------------- | ------ | -------------------------------------------------------------- |
+| **LISTEN**       | server | Waiting for someone to knock (a SYN).                          |
+| **SYN-SENT**     | client | Sent SYN, waiting for SYN+ACK from the server.                 |
+| **SYN-RECEIVED** | server | Got SYN, sent SYN+ACK, now waiting for the client’s final ACK. |
+| **ESTABLISHED**  | both   | 3-way handshake complete — ready to exchange data.             |
+```
+
+2. Data transfer
+
+```table showLineNumbers=false
+| State           | Meaning                                                 |
+| --------------- | ------------------------------------------------------- |
+| **ESTABLISHED** | Active communication. Data can flow in both directions. |
+```
+
+3. Connection teardown (graceful close)
+
+```table showLineNumbers=false
+| State          | Who            | Meaning                                                                                          |
+| -------------- | -------------- | ------------------------------------------------------------------------------------------------ |
+| **FIN-WAIT-1** | active closer  | Sent FIN; waiting for ACK (and possibly FIN from the other side).                                |
+| **FIN-WAIT-2** | active closer  | Got ACK for our FIN; now just waiting for the peer’s FIN.                                        |
+| **CLOSE-WAIT** | passive closer | Got peer’s FIN; waiting for the app to call `close()`.                                           |
+| **CLOSING**    | rare           | Both sides sent FIN at nearly the same time; waiting for ACK.                                    |
+| **LAST-ACK**   | passive closer | Sent our FIN after receiving peer’s FIN; waiting for ACK of our FIN.                             |
+| **TIME-WAIT**  | active closer  | After both sides done, wait 2×MSL to ensure all stray packets have died before reusing the port. |
+| **CLOSED**     | —              | TCB removed, connection fully gone.                                                              |
+```
+
+Transitions happen because of events. These fall into three categories:
+
+```table showLineNumbers=false
+| Event Type            | Examples                                                                    |
+| --------------------- | --------------------------------------------------------------------------- |
+| **User actions**      | `OPEN` (connect), `SEND`, `RECEIVE`, `CLOSE`, `ABORT`, `STATUS`.            |
+| **Incoming segments** | TCP flags like `SYN`, `ACK`, `FIN`, or `RST`.                               |
+| **Timers / timeouts** | Retransmission timeout, delayed ACK timeout, 2×MSL timeout (for TIME-WAIT). |
+```
+
+<Mermaid code={`
+sequenceDiagram
+    participant Client
+    participant Server
+
+    %% --- CONNECTION SETUP ---
+    Note over Client,Server: Initial state: CLOSED (both sides)
+
+    Client->>Server: SYN
+    Note over Client: State: CLOSED → SYN-SENT
+    Note over Server: State: CLOSED → LISTEN → SYN-RECEIVED
+
+    Server-->>Client: SYN&#43;ACK
+    Note over Server: Sends SYN&#43;ACK, waiting for ACK
+
+    Client->>Server: ACK
+    Note over Client: State: SYN-SENT → ESTABLISHED
+    Note over Server: State: SYN-RECEIVED → ESTABLISHED
+
+    Note over Client,Server: Connection established — both sides in ESTABLISHED
+
+    %% --- CONNECTION TERMINATION ---
+    Client->>Server: FIN
+    Note over Client: State: ESTABLISHED → FIN-WAIT-1
+    Note over Server: State: ESTABLISHED → CLOSE-WAIT
+
+    Server-->>Client: ACK
+    Note over Client: State: FIN-WAIT-1 → FIN-WAIT-2
+    Note over Server: Still in CLOSE-WAIT
+
+    Server->>Client: FIN
+    Note over Server: State: CLOSE-WAIT → LAST-ACK
+
+    Client-->>Server: ACK
+    Note over Client: State: FIN-WAIT-2 → TIME-WAIT → CLOSED (after timeout)
+    Note over Server: State: LAST-ACK → CLOSED
+
+    Note over Client,Server: Connection fully terminated — both sides CLOSED
+
+`} />
+
+### HTML - `<dialog/>`
+
+Features:
+
+- Enable/Disable background interaction
+- Builtin backdrop
+- Tab focus stays inside the dialog.
+- Close and return value by integrate with `<form method="dialog">`
+- Handles ARIA roles and focus management by default.
+- Keyboard support: ESC key closes it automatically when modal.
+
+<WebPlayground
+  style="height: 30vh"
+  html={`
+<button id="open-modal">Open Modal (blocks background)</button>
+<button id="open-nonmodal">Open Non-modal (background clickable)</button>
+<dialog id="modalDialog">
+  <h3>Modal Dialog</h3>
+  <p>
+    This one <b>blocks background</b> and traps focus inside.
+  </p>
+  <button id="close-modal">Close</button>
+</dialog>
+<dialog id="nonModalDialog">
+  <h3>Non-modal Dialog</h3>
+  <p>You can still click buttons in the background.</p>
+  <button id="close-nonmodal">Close</button>
+</dialog>
+<button id="open-form">Open Form Dialog</button>
+<dialog id="formDialog">
+  <form method="dialog">
+    <h3>Choose your favorite color</h3>
+    <button value="red">Red</button>
+    <button value="blue">Blue</button>
+    <button value="cancel">Cancel</button>
+  </form>
+</dialog>
+<p id="chosen"></p>
+`}
+css={`
+body {
+  font-family: system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+dialog {
+  border: none;
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+/_ Built-in backdrop customization _/
+  dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+}
+button {
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+`}
+js={`
+// Modal: background interaction disabled
+const modal = document.getElementById("modalDialog");
+document.getElementById("open-modal").onclick = () => modal.showModal();
+document.getElementById("close-modal").onclick = () => modal.close();
+
+// Non-modal: background still clickable
+const nonModal = document.getElementById("nonModalDialog");
+document.getElementById("open-nonmodal").onclick = () => nonModal.show();
+document.getElementById("close-nonmodal").onclick = () => nonModal.close();
+
+// Form dialog with return value
+const formDialog = document.getElementById("formDialog");
+const chosen = document.getElementById("chosen");
+document.getElementById("open-form").onclick = () => formDialog.showModal();
+
+formDialog.addEventListener("close", () => {
+chosen.textContent =
+formDialog.returnValue === "cancel"
+? "You cancelled the dialog."
+: "You chose: " + formDialog.returnValue;
+});
+
+`}
+/>
+
+## Day 2 - TCP (continue)
+
+### [(3.4)](https://datatracker.ietf.org/doc/html/rfc9293#name-sequence-numbers) Sequence Numbers
+
+##### 1. Every byte has a sequence number.
+
+TCP doesn’t number packets — it numbers bytes. Each byte sent has a unique sequence number.
+
+##### 2. Acknowledgments are cumulative.
+
+When the receiver sends ACK = X, it indicates that all octets up to but not including X have been received.
+
+##### 3. Sequence number space is finite.
+
+Sequence numbers go from **0 to 2<sup>32</sup>−1** and then **wrap around**. All comparisons (e.g., is this ACK valid?) use **modulo 2<sup>32</sup>** arithmetic to handle wraparound safely.
+
+##### 4. Control flags also consume sequence space.
+
+- **SYN** counts as one byte before any data.
+- **FIN** counts as one byte after all data.
+  This ensures **SYN** and **FIN** are acknowledged exactly once and can be retransmitted safely.
+
+##### 5. Why sequence number design matters
+
+Every TCP byte on the wire has a sequence number. These numbers let each endpoint know which data is new, which is duplicate, and how to reorder or acknowledge what it receives. The system only works if each byte range is used once—no confusion between the past and the present.
+
+The **problem is that TCP connections can be reused**. A new connection might have the **same IP and port pair** as a recent one (“**another incarnation**”), while old segments from the first could still be lingering in the network. To prevent those ghosts from being mistaken for live data, TCP relies on two main safeguards:
+
+- **TIME-WAIT**: holds a closed connection for roughly one Maximum Segment Lifetime (MSL), long enough for stray packets to disappear.
+- **Initial Sequence Numbers (ISNs)**: make each new connection’s numbering unique.
+
+Each connection starts with a 32-bit ISN chosen as:
+
+```table showLineNumbers=false
+ISN = M + F(localip, localport, remoteip, remoteport, secretkey)
+```
+
+- `M`: a fast “clock” that increases roughly every 4 microseconds and wraps around after about **4.55 hours**
+- `F()`: a pseudorandom function using connection info and a secret key.
+
+This blend ensures two things:
+
+- **ISNs** grow monotonically so recent ones **don’t repeat for several hours**.
+- Attackers **can’t guess** the next ISN.
+
+If a host reboots and loses its memory of recent sequence numbers, it faces the same risk of overlap.
+To stay safe, it's recommended a brief “quiet time”—roughly one MSL—before sending any new segments. That pause gives any stragglers in the network time to drain.
+In practice, modern systems skip it because ISN randomization and faster links make collisions nearly impossible, and most reboots take longer than two minutes anyway.
+
+At **normal speeds**, the 32bit-wide sequence space is **large enough** that numbers never wrap before all old data drains—roughly four billion bytes per wrap.
+
+But at **very high data rates** (gigabits per second and beyond), that **assumption weakens**: `a sender could cycle through all sequence numbers in less than one MSL`.
+
+To defend against that, [TCP timestamps](https://datatracker.ietf.org/doc/html/rfc6191) and [PAWS](https://datatracker.ietf.org/doc/html/rfc7323) (Protection Against Wrapped Sequence numbers) extend the logic. Each segment carries a monotonically increasing timestamp, so even if numeric sequence numbers repeat, the receiver can still tell new data from old.
+
+Together, TIME-WAIT, randomized ISNs, and PAWS keep TCP’s sense of time and identity intact—ensuring that what you receive now truly belongs to the conversation you’re having.
+
+## Day 3 - TCP (continue)
+
+### [(3.5)](https://datatracker.ietf.org/doc/html/rfc9293#name-establishing-a-connection) Establishing a Connection
+
+### [(3.6)](https://datatracker.ietf.org/doc/html/rfc9293#name-closing-a-connection) Closing a Connection
+
+### [(3.7)](https://datatracker.ietf.org/doc/html/rfc9293#name-segmentation) Segmentation
