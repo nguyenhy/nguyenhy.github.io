@@ -1,0 +1,11 @@
+---
+import html from "./GTMHead.html?raw";
+
+interface Props {
+    id: string;
+}
+
+const code = html.replace("{{ID}}", Astro.props.id);
+---
+
+<Fragment set:html={code} />
