@@ -185,7 +185,7 @@ The states are:
 
 1. Connection establishment (the 3-way handshake)
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 | State            | Who    | Meaning                                                        |
 | ---------------- | ------ | -------------------------------------------------------------- |
 | **LISTEN**       | server | Waiting for someone to knock (a SYN).                          |
@@ -196,7 +196,7 @@ The states are:
 
 2. Data transfer
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 | State           | Meaning                                                 |
 | --------------- | ------------------------------------------------------- |
 | **ESTABLISHED** | Active communication. Data can flow in both directions. |
@@ -204,7 +204,7 @@ The states are:
 
 3. Connection teardown (graceful close)
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 | State          | Who            | Meaning                                                                                          |
 | -------------- | -------------- | ------------------------------------------------------------------------------------------------ |
 | **FIN-WAIT-1** | active closer  | Sent FIN; waiting for ACK (and possibly FIN from the other side).                                |
@@ -218,7 +218,7 @@ The states are:
 
 Transitions happen because of events. These fall into three categories:
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 | Event Type            | Examples                                                                    |
 | --------------------- | --------------------------------------------------------------------------- |
 | **User actions**      | `OPEN` (connect), `SEND`, `RECEIVE`, `CLOSE`, `ABORT`, `STATUS`.            |
@@ -390,7 +390,7 @@ The **problem is that TCP connections can be reused**. A new connection might ha
 
 Each connection starts with a 32-bit ISN chosen as:
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 ISN = M + F(localip, localport, remoteip, remoteport, secretkey)
 ```
 
@@ -420,7 +420,7 @@ Together, TIME-WAIT, randomized ISNs, and PAWS keep TCP’s sense of time and id
 
 #### 1. Basic 3WHS for Connection Synchronization
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 TCP Peer A                                                TCP Peer B
 1.  CLOSED                                                LISTEN
 2.  SYN-SENT    --> <SEQ=100><CTL=SYN>                --> SYN-RECEIVED
@@ -441,7 +441,7 @@ TCP Peer A                                                TCP Peer B
 
 Each TCP peer's connection state cycles from CLOSED to SYN-SENT to SYN-RECEIVED to ESTABLISHED.
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 TCP Peer A                                           TCP Peer B
 1.  CLOSED                                           CLOSED
 2.  SYN-SENT     --> <SEQ=100><CTL=SYN>              ...
@@ -479,7 +479,7 @@ To handle this, TCP defines a special control message: **Reset (RST)**.
 
 #### 3. Recovery from Old Duplicate SYN
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 TCP Peer A                                               TCP Peer B
 1. CLOSED                                               LISTEN
 2. SYN-SENT    --> <SEQ=100><CTL=SYN>               ...
@@ -528,7 +528,7 @@ When either side attempts to send data on a half-open connection, the other (no 
 
 > Half-open connections are rare but can occur after crashes or unexpected reboots.
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 TCP Peer A                                           TCP Peer B
 1.  (REBOOT)                                         (send 300,receive 100)
 2.  CLOSED                                           ESTABLISHED
@@ -560,7 +560,7 @@ TCP Peer A                                           TCP Peer B
 
 #### 5. Active Side Causes Half-Open Connection Discovery
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 TCP Peer A                                                TCP Peer B
 1.  (REBOOT)                                              (send 300,receive 100)
 2.  (??)     <-- <SEQ=300><ACK=100><DATA=10><CTL=ACK> <-- ESTABLISHED
@@ -582,7 +582,7 @@ TCP Peer A                                                TCP Peer B
 
 #### 6. Old Duplicate SYN Initiates a Reset on Two Passive Sockets
 
-```table showLineNumbers=false
+```plaintext showLineNumbers=false
 TCP Peer A                                          TCP Peer B
 1.  LISTEN                                          LISTEN
 2.         ... <SEQ=Z><CTL=SYN>                -->  SYN-RECEIVED
