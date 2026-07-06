@@ -3,6 +3,7 @@ layout: "../layouts/Page.astro"
 title: "Directus Schema Snapshot — git-diffable schema versioning"
 description: "A CLI tool that normalizes Directus (or any JSON) schema exports into a git-diffable, AI-readable format and computes structured diffs between versions."
 pubDate: "Jul 6 2026"
+heroImage: "../assets/blog-placeholder-about.jpg"
 ---
 
 ## What it is
