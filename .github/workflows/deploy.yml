@@ -1,18 +1,24 @@
-name: Jekyll site CI
+name: Build static pages
 
 on:
   push:
     branches:
       - master
 
+# Grant the page deployment permissions required by the native runner
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
 
     strategy:
       matrix:
@@ -33,9 +39,12 @@ jobs:
           VITE_GTM=${{ vars.VITE_GTM }} \
           npm run build
 
-      - name: Build and Deploy with JamesIves/github-pages-deploy-action@v4
-        uses: JamesIves/github-pages-deploy-action@v4
+      # 1. Upload the built 'dist' directory natively
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          ssh-key: ${{ secrets.GH_PAGE_DEPLOY_TOKEN }}
-          branch: gh-pages
-          folder: dist
+          path: dist
+
+      # 2. Trigger the official deployment engine
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
